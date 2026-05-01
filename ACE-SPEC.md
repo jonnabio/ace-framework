@@ -38,6 +38,7 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 │   │   └── entities.md        # Domain model definitions
 │   ├── prompts/               # Verified "Golden Prompts"
 │   │   ├── analyze-requirements.md
+│   │   ├── extract-transcript.md
 │   │   ├── generate-implementation-plan.md
 │   │   └── verify-implementation.md
 │   ├── roles/                 # BMAD Agentic Role definitions
@@ -50,7 +51,8 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 │   │   ├── migration-logic.md
 │   │   ├── refactoring.md
 │   │   ├── root-cause-analysis.md
-│   │   └── testing-strategy.md
+│   │   ├── testing-strategy.md
+│   │   └── transcript-analysis.md
 │   ├── standards/             # Immutable guardrails
 │   │   ├── coding.md
 │   │   ├── security.md
@@ -64,6 +66,8 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 │   │   └── ADR-XXX-*.md
 │   ├── context/               # Session state
 │   │   └── ACTIVE_CONTEXT.md
+│   ├── inputs/                # Raw unstructured data
+│   │   └── transcripts/       # Meeting/interview transcripts
 │   ├── planning/              # Implementation artifacts
 │   │   ├── implementation_plan.md
 │   │   ├── task_checklist.md
@@ -72,7 +76,7 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 │   │   ├── README.md
 │   │   ├── RCA-000-template.md
 │   │   └── regression-guards.yaml
-│   └── specs/                 # Specifications
+│   └── requirements/          # Specifications & extracted requirements
 │       ├── PRD-template.md
 │       └── TECH_SPEC-template.md
 ├── .aceconfig                 # Framework configuration
@@ -90,7 +94,8 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 | `.ace/knowledge/` | Domain context            | Evolving                 |
 | `.ace/prompts/`   | Tested prompt templates   | Versioned                |
 | `docs/context/`   | Session state             | Volatile                 |
-| `docs/specs/`     | Requirements              | Controlled               |
+| `docs/inputs/`    | Raw unstructured data     | Append-only              |
+| `docs/requirements/` | Specifications & requirements | Controlled          |
 | `docs/adr/`       | Decision history          | Append-only              |
 | `docs/rca/`       | Issue analysis            | Append-only              |
 | `docs/planning/`  | Implementation artifacts  | Per-task                 |
@@ -125,7 +130,7 @@ BMAD enforces **Analyze → Plan → Execute → Verify** to prevent premature i
 
 ```
 Role: Architect
-Input: docs/specs/*, docs/adr/*, .ace/knowledge/*
+Input: docs/requirements/*, docs/adr/*, .ace/knowledge/*
 Output: Understanding confirmation with extracted constraints
 
 Actions:
@@ -222,6 +227,7 @@ Skills are specialized instruction sets in `.ace/skills/` that grant deep techni
 - `migration-logic.md` - Safe data and schema migrations
 - `refactoring.md` - Code structure improvements
 - `root-cause-analysis.md` - Issue investigation methodology
+- `transcript-analysis.md` - Transcript to requirements extraction
 - `testing-strategy.md` - Test pyramid and coverage
 
 **Invocation:**
@@ -297,7 +303,7 @@ INCIDENT → Previous Mode
 ├─────────────────────────────────────────────────────────┤
 │                                                         │
 │              ┌─────────────────────┐                    │
-│              │   docs/specs/       │  Source of Truth   │
+│              │   docs/requirements/│  Source of Truth   │
 │              │   (WHAT to build)   │  [Static]          │
 │              └──────────┬──────────┘                    │
 │                         │                               │
@@ -327,7 +333,7 @@ INCIDENT → Previous Mode
 
 | Type          | Location          | Purpose              | Update Frequency      |
 | ------------- | ----------------- | -------------------- | --------------------- |
-| Specification | `docs/specs/`     | Define requirements  | Per feature           |
+| Specification | `docs/requirements/` | Define requirements  | Per feature           |
 | Standard      | `.ace/standards/` | Enforce constraints  | Rarely (ADR required) |
 | Decision      | `docs/adr/`       | Record choices       | Per decision          |
 | RCA           | `docs/rca/`       | Document issues      | Per incident          |
@@ -499,7 +505,7 @@ TIER 2: Task-Specific (loaded on demand)
 
 TIER 3: Deep Context (when referenced)
 ├── .ace/knowledge/* (domain)
-└── docs/specs/* (requirements)
+└── docs/requirements/* (requirements)
 ```
 
 ### Core Rules (.aceconfig)
@@ -640,7 +646,7 @@ Report any violations."
 
 ## Phase 4: First Task
 
-- [ ] Create spec in docs/specs/
+- [ ] Create spec in docs/requirements/
 - [ ] Initialize ACTIVE_CONTEXT.md
 - [ ] Run complete BMAD cycle
 ```
@@ -708,5 +714,5 @@ Then await further instructions."
 
 ---
 
-_ACE-Framework v2.1_
+_ACE-Framework v2.2_
 _Treat AI interactions as structured transactions, not casual conversations._

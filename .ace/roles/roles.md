@@ -12,6 +12,7 @@
 **Responsibilities**:
 
 - Analyzing requirements against `docs/context/`.
+- **Analyzing unstructured transcripts to extract formal requirements.**
 - **Conducting the Discuss Phase to capture soft requirements.**
 - Creating or updating `docs/planning/implementation_plan.md`.
 - Defining the "What" and "How" before "Do".
@@ -21,13 +22,13 @@
 - **Reviewing `docs/rca/regression-guards.yaml` for affected files.**
 - **Creating ADRs for significant pattern changes from RCAs.**
 
-**Output**: `implementation_plan.md`, `ADR-XXXX.md`.
+**Output**: `implementation_plan.md`, `ADR-XXXX.md`, Requirements Specifications.
 
 **Activation**:
 
 ```markdown
 "Assume the Architect role. Focus on system design, planning,
-and architectural decisions. Do not write implementation code."
+requirements extraction, and architectural decisions. Do not write implementation code."
 ```
 
 ---

@@ -1,10 +1,12 @@
-# ACE Framework v2.1
+# ACE Framework v2.2
 
 > **AI-assisted Code Engineering Framework**
 > A rigorous, IDE-agnostic standard for professional development teams using AI agents. Treats AI interactions as structured transactions, not casual conversations.
 
-## v2.1 Features
+## v2.2 Features
 
+- **Transcript Analysis**: Extract structured requirements from raw meeting transcripts.
+- **Requirements Directory**: Unified `docs/requirements/` replaces `docs/specs/`.
 - **Discuss Phase**: Pre-planning alignment to capture "soft" requirements.
 - **XML Tasks**: Structured implementation plans for better Agent adherence.
 - **Atomic Execution**: Enforced "One Task = One Commit" workflow.

@@ -86,7 +86,7 @@ Example: "Implement user registration API endpoint with email validation and pas
 
 ## Context Links
 
-- **Specification:** [docs/specs/SPEC_FILE.md]
+- **Specification:** [docs/requirements/SPEC_FILE.md]
 - **Implementation Plan:** [IMPLEMENTATION_PLAN.md]
 - **Related ADRs:** [docs/adr/ADR-###.md]
 

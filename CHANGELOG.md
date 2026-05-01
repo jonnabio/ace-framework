@@ -2,6 +2,28 @@
 
 All notable changes to the ACE Framework will be documented in this file.
 
+## [v2.2.0] - 2026-05-01
+
+### Added
+
+- **Transcript Analysis**: New golden prompt `.ace/prompts/extract-transcript.md` for extracting structured requirements from raw transcripts.
+- **Transcript Analysis Skill**: New skill `.ace/skills/transcript-analysis.md` defining the full ingest → extract → validate → iterate procedure.
+- **Input Directory**: `docs/inputs/transcripts/` as the designated drop zone for raw unstructured data.
+- **Requirements Directory**: `docs/requirements/` replaces `docs/specs/` as the unified home for specifications and extracted requirements.
+
+### Changed
+
+- **Architect Role**: Added transcript analysis responsibility, updated activation prompt to include "requirements extraction", expanded output to include Requirements Specifications.
+- **Directory Structure**: `docs/specs/` migrated to `docs/requirements/`; PRD and TECH_SPEC templates moved.
+- **Config Files**: `.aceconfig`, `.aiconfig`, `.cursorrules`, `CLAUDE.md` updated with transcript skill trigger and v2.2 version.
+- **ACE-SPEC.md**: Directory blueprint, skills listing, prompts listing, and all `docs/specs/` references updated.
+- **USER_GUIDE.md**: Skills table and keyword triggers updated with transcript-analysis.
+- **Scaffolding**: CLI (`create-ace-framework.js`), `init.sh`, and `validate.sh` updated for new directory structure.
+
+### Removed
+
+- **`docs/specs/` directory**: Superseded by `docs/requirements/`. Templates preserved and relocated.
+
 ## [v2.1.0] - 2026-02-01
 
 ### Added

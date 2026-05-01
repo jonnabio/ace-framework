@@ -3,7 +3,7 @@
 > **Status:** [Draft | In Review | Approved]
 > **Author:** [Name]
 > **Last Updated:** [YYYY-MM-DD]
-> **PRD Reference:** [docs/specs/PRD-xxx.md]
+> **PRD Reference:** [docs/requirements/PRD-xxx.md]
 
 ---
 

@@ -3,7 +3,7 @@
 > **Status:** [Draft | Approved | In Progress | Completed]
 > **Created:** [YYYY-MM-DD]
 > **Author:** [Role: Architect]
-> **PRD Reference:** [docs/specs/PRD-xxx.md]
+> **PRD Reference:** [docs/requirements/PRD-xxx.md]
 
 ---
 

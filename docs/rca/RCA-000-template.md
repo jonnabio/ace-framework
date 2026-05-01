@@ -161,7 +161,7 @@
 
 - **Related ADR:** [docs/adr/ADR-XXX.md]
 - **Related RCA:** [docs/rca/RCA-XXX.md]
-- **Specification:** [docs/specs/XXX.md]
+- **Specification:** [docs/requirements/XXX.md]
 - **External:** [links to relevant documentation]
 
 ---

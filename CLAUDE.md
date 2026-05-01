@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Primary Project
 
-The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.1).
+The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.2).
 
 ## Commands
 
@@ -74,6 +74,7 @@ Per `.cursorrules`, always read before any task:
 | migration | `.ace/skills/migration-logic.md` |
 | refactor | `.ace/skills/refactoring.md` |
 | bug/issue/incident | `.ace/skills/root-cause-analysis.md` |
+| transcript/meeting/interview | `.ace/skills/transcript-analysis.md` |
 
 ### Regression Guard Protocol
 

@@ -91,7 +91,8 @@ check_dir "docs/adr"
 check_dir "docs/context"
 check_dir "docs/planning"
 check_dir "docs/rca"
-check_dir "docs/specs"
+check_dir "docs/requirements"
+check_dir "docs/inputs"
 echo ""
 
 # Core files
@@ -131,8 +132,8 @@ echo ""
 echo "Templates:"
 check_file "docs/adr/ADR-000-template.md"
 check_file "docs/rca/RCA-000-template.md"
-check_file_warn "docs/specs/PRD-template.md"
-check_file_warn "docs/specs/TECH_SPEC-template.md"
+check_file_warn "docs/requirements/PRD-template.md"
+check_file_warn "docs/requirements/TECH_SPEC-template.md"
 echo ""
 
 # IDE configs

@@ -3,7 +3,7 @@
 
 ## Project Context
 
-This project uses the ACE-Framework (AI-assisted Code Engineering) v2.1.
+This project uses the ACE-Framework (AI-assisted Code Engineering) v2.2.
 All AI interactions should follow the BMAD methodology: Analyze → Discuss → Plan → Execute → Verify.
 
 ## Required Reading on Session Start
@@ -55,6 +55,7 @@ For specialized tasks, apply relevant skill:
 - .ace/skills/root-cause-analysis.md
 - .ace/skills/testing-strategy.md
 - .ace/skills/code-review.md
+- .ace/skills/transcript-analysis.md
 
 ## Before Modifying Files
 

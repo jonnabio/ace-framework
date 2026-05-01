@@ -1,7 +1,7 @@
 # .aceconfig - ACE Framework Configuration
-# Version: 2.1
+# Version: 2.2
 
-version: "2.1"
+version: "2.2"
 project_name: "ACE Framework Project"
 
 # Entry point for AI agents - files always loaded
@@ -34,6 +34,7 @@ skill_triggers:
   migration: .ace/skills/migration-logic.md
   refactor: .ace/skills/refactoring.md
   review: .ace/skills/code-review.md
+  transcript: .ace/skills/transcript-analysis.md
   issue: .ace/skills/root-cause-analysis.md
   bug: .ace/skills/root-cause-analysis.md
   incident: .ace/skills/root-cause-analysis.md

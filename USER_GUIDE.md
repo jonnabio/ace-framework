@@ -269,6 +269,7 @@ Skills are detailed procedures for specific tasks. They contain:
 | `refactoring.md`         | Improving code structure |
 | `root-cause-analysis.md` | Investigating issues     |
 | `testing-strategy.md`    | Writing tests            |
+| `transcript-analysis.md` | Extracting requirements  |
 | `code-review.md`         | Reviewing code           |
 
 ### Invoking a Skill
@@ -293,6 +294,7 @@ Some keywords automatically suggest skills:
 - "api", "endpoint", "REST" → `api-design.md`
 - "test", "coverage" → `testing-strategy.md`
 - "bug", "issue", "incident" → `root-cause-analysis.md`
+- "transcript", "meeting", "interview" → `transcript-analysis.md`
 - "refactor", "clean up" → `refactoring.md`
 
 ---
@@ -742,5 +744,5 @@ Which skill in .ace/skills/ would help with this?"
 
 ---
 
-_ACE-Framework User Guide v2.1_
+_ACE-Framework User Guide v2.2_
 _Treat AI interactions as structured transactions, not casual conversations._

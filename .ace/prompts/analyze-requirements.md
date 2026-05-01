@@ -18,7 +18,7 @@ comprehensive understanding of requirements before planning.
 ```markdown
 I need to analyze requirements before implementation. Please:
 
-1. **Read and summarize** the requirements in docs/specs/[SPEC_FILE].md
+1. **Read and summarize** the requirements in docs/requirements/[SPEC_FILE].md
    - What is the core objective?
    - Who are the stakeholders/users?
    - What are the success criteria?

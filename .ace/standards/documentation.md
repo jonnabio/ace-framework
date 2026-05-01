@@ -31,7 +31,7 @@
 
 | Type | Location | Format | Purpose |
 |------|----------|--------|---------|
-| Specification | `docs/specs/` | Markdown | Define requirements |
+| Specification | `docs/requirements/` | Markdown | Define requirements |
 | Decision | `docs/adr/` | Markdown | Record choices |
 | Context | `docs/context/` | Markdown | Session state |
 | Standard | `.ace/standards/` | Markdown | Enforce rules |
