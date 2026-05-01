@@ -160,4 +160,4 @@
 
 ---
 
-*Verification Walkthrough - ACE-Framework v2.0*
+*Verification Walkthrough - ACE-Framework v2.2*

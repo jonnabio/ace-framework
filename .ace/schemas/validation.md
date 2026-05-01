@@ -188,6 +188,67 @@ test_case:
     - "describe must name the unit being tested"
 ```
 
+### Requirements Specification Schema
+
+```yaml
+requirements_specification:
+  required:
+    - title: string
+    - metadata: object
+    - executive_summary: string
+    - functional_requirements: array<requirement>
+  optional:
+    - stakeholders: array<stakeholder>
+    - non_functional_requirements: array<nfr>
+    - constraints: array<constraint>
+    - assumptions: array<assumption>
+    - conflicts: array<conflict>
+    - out_of_scope: array<string>
+    - open_questions: array<string>
+
+  metadata:
+    required:
+      - source: string (transcript filename)
+      - extraction_date: string (format: YYYY-MM-DD)
+    optional:
+      - session_date: string
+      - participants: array<string>
+
+  requirement:
+    required:
+      - id: string (format: FR-###)
+      - description: string
+      - priority: enum[Must, Should, Could]
+      - confidence: enum[EXPLICIT, INFERRED, AMBIGUOUS]
+    optional:
+      - source_quote: string
+      - speaker: string
+
+  stakeholder:
+    required:
+      - name_or_role: string
+      - interest: string
+      - influence: enum[Decision maker, Contributor, Observer]
+
+  constraint:
+    required:
+      - id: string (format: CON-###)
+      - description: string
+      - type: enum[Technical, Business, Timeline, Budget]
+
+  conflict:
+    required:
+      - id: string (format: AMB-###)
+      - issue: string
+      - resolution_needed: string
+
+  constraints:
+    - "every requirement must have a unique ID"
+    - "every requirement must have a confidence rating"
+    - "no compound requirements (split into atomic statements)"
+    - "EXPLICIT requirements must have a source_quote"
+```
+
 ---
 
 ## Validation Commands

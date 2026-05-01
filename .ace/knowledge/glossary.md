@@ -124,6 +124,20 @@ A domain object defined by its attributes rather than identity. Immutable. Two v
 
 ---
 
+## ACE-Framework Terms
+
+**Confidence Rating**
+A classification assigned to each extracted requirement indicating how directly it was stated: EXPLICIT (directly stated), INFERRED (derived from context), or AMBIGUOUS (unclear intent, needs follow-up).
+
+**Golden Prompt**
+A tested, versioned prompt template stored in `.ace/prompts/` that produces reliable, structured output for a specific BMAD phase or task. Tracked with success rates.
+
+**Requirements Specification**
+A structured document produced by the transcript analysis skill, containing categorized functional requirements, non-functional requirements, constraints, assumptions, and conflicts — each with traceability back to source quotes.
+
+**Transcript Analysis**
+The process of extracting formal, structured requirements from raw unstructured transcripts (meetings, interviews, brainstorms). Executed by the Architect role using the `.ace/skills/transcript-analysis.md` skill.
+
 ## Project-Specific Terms
 
 > Add project-specific terminology below

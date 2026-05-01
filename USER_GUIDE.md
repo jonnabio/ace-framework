@@ -1,4 +1,4 @@
-# ACE-Framework User Guide v2.1
+# ACE-Framework User Guide v2.2
 
 > A practical guide to using the AI-assisted Code Engineering Framework.
 
@@ -196,8 +196,41 @@ Remember to check regression guards for any files we modify."
 ### Workflow D: Code Review
 
 ```markdown
-"Apply the code-review skill to review this PR/code change.
+"Review this code change.
 Check for standards compliance, security issues, and regression guards."
+```
+
+### Workflow E: Processing a Transcript
+
+**Step 1: Prepare the Transcript**
+
+Place your raw transcript (meeting notes, interview recording, etc.) in the input directory:
+
+```
+docs/inputs/transcripts/2026-05-01-kickoff-meeting.md
+```
+
+**Step 2: Extract Requirements**
+
+```markdown
+"Apply the transcript analysis skill from .ace/skills/transcript-analysis.md
+to process the transcript at docs/inputs/transcripts/2026-05-01-kickoff-meeting.md.
+Extract all requirements and save to docs/requirements/REQ-001-project-kickoff.md."
+```
+
+**Step 3: Review and Validate**
+
+```markdown
+"Review the extracted requirements in docs/requirements/REQ-001-project-kickoff.md.
+Identify any requirements marked AMBIGUOUS and suggest clarifying questions
+I should ask the stakeholders."
+```
+
+**Step 4: Feed into BMAD Analyze**
+
+```markdown
+"Requirements extraction complete. Use docs/requirements/REQ-001-project-kickoff.md
+as input for the Analyze phase. Apply the analyze-requirements prompt."
 ```
 
 ---
