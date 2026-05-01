@@ -2,7 +2,7 @@
 # Works with various AI assistants
 
 framework: ace
-version: "2.0"
+version: "2.1"
 
 # Context files to always include
 context:

@@ -133,21 +133,21 @@ Analyze requirements, then run the Discuss phase to align on preferences."
 Output tasks using the new XML format."
 ```
 
-**Step 2: Review the Plan**
+**Step 3: Review the Plan**
 The AI will create `docs/planning/implementation_plan.md`. Review it:
 
 - Are tasks correctly broken down?
 - Are dependencies in order?
 - Are acceptance criteria clear?
 
-**Step 3: Approve and Execute**
+**Step 4: Approve and Execute**
 
 ```markdown
 "The plan is approved. Switch to Developer role and EXECUTION mode.
 Commit effectively: One atomic commit per task. No batching."
 ```
 
-**Step 4: Verify**
+**Step 5: Verify**
 
 ```markdown
 "Switch to QA Engineer role and VERIFICATION mode.

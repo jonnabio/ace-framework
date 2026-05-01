@@ -1,7 +1,7 @@
 # .aceconfig - ACE Framework Configuration
-# Version: 2.0
+# Version: 2.1
 
-version: "2.0"
+version: "2.1"
 project_name: "ACE Framework Project"
 
 # Entry point for AI agents - files always loaded
@@ -19,7 +19,7 @@ core_rules:
   - "Update ACTIVE_CONTEXT.md after each session"
   - "Verify against .ace/standards/ before completing any task"
   - "Generate IMPLEMENTATION_PLAN.md before writing code"
-  - "Every task follows BMAD: Analyze → Plan → Execute → Verify"
+  - "Every task follows BMAD: Analyze → Discuss → Plan → Execute → Verify"
   - "Create ADR for any significant architectural decision"
   - "Atomic commits with clear, descriptive messages"
   - "No code generation without reading existing code first"
@@ -33,6 +33,7 @@ skill_triggers:
   testing: .ace/skills/testing-strategy.md
   migration: .ace/skills/migration-logic.md
   refactor: .ace/skills/refactoring.md
+  review: .ace/skills/code-review.md
   issue: .ace/skills/root-cause-analysis.md
   bug: .ace/skills/root-cause-analysis.md
   incident: .ace/skills/root-cause-analysis.md

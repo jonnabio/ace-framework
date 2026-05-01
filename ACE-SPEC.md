@@ -150,21 +150,7 @@ Actions:
 - Ensure "Soft Requirements" are explicit before planning
 ```
 
-#### Phase 2: DISCUSS
-
-```
-Role: Architect
-Input: Analysis output, User preferences
-Output: docs/context/PROJECT_CONTEXT.md
-
-Actions:
-- Present multiple options for "gray areas" (UI, API style, etc.)
-- Capture user preference on specific implementation details
-- Document decisions in PROJECT_CONTEXT.md
-- Ensure "Soft Requirements" are explicit before planning
-```
-
-#### Phase 2: PLAN
+#### Phase 3: PLAN
 
 ```
 Role: Architect
@@ -179,7 +165,7 @@ Actions:
 - Review against ADRs
 ```
 
-#### Phase 3: EXECUTE
+#### Phase 4: EXECUTE
 
 ```
 Role: Developer
@@ -194,7 +180,7 @@ Actions:
 - Commit after each task
 ```
 
-#### Phase 4: VERIFY
+#### Phase 5: VERIFY
 
 ```
 Role: QA Engineer
@@ -722,5 +708,5 @@ Then await further instructions."
 
 ---
 
-_ACE-Framework v2.0_
+_ACE-Framework v2.1_
 _Treat AI interactions as structured transactions, not casual conversations._

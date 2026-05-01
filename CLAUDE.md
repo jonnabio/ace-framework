@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Primary Project
 
-The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.0).
+The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.1).
 
 ## Commands
 
@@ -45,9 +45,10 @@ The `ace_framework` repo is a **documentation + tooling framework**, not a tradi
 
 ### BMAD Methodology
 
-Every task follows **Analyze → Plan → Execute → Verify**:
+Every task follows **Analyze → Discuss → Plan → Execute → Verify**:
 
 - **ANALYZE** (Architect role): Read specs, ADRs, and regression guards; identify constraints; list unknowns.
+- **DISCUSS** (Architect role): Capture user preferences on "gray areas"; update `docs/context/PROJECT_CONTEXT.md`.
 - **PLAN** (Architect role): Produce `docs/planning/implementation_plan.md` before writing code.
 - **EXECUTE** (Developer role): Implement atomically; check `docs/rca/regression-guards.yaml` before touching guarded files; commit after each task.
 - **VERIFY** (QA Engineer role): Run all tests; validate against acceptance criteria; produce `docs/planning/walkthrough.md`.

@@ -9,7 +9,7 @@
 
 - **Last Updated:** [YYYY-MM-DD HH:MM]
 - **Session ID:** [session-001]
-- **Active Persona:** [.ace/personas/engineer.md]
+- **Active Role:** [Architect | Developer | QA Engineer | Incident Responder]
 
 ---
 

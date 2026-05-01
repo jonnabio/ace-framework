@@ -289,4 +289,4 @@ When preparing for distribution, update these placeholders:
 
 ---
 
-*Distribution Guide - ACE-Framework v2.0*
+*Distribution Guide - ACE-Framework v2.1*
