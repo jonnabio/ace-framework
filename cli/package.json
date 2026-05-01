@@ -4,7 +4,8 @@
   "description": "CLI to scaffold projects with ACE-Framework (AI-assisted Code Engineering)",
   "main": "lib/index.js",
   "bin": {
-    "create-ace-framework": "./bin/create-ace-framework.js"
+    "create-ace-framework": "./bin/create-ace-framework.js",
+    "ace-framework": "./bin/ace-framework.js"
   },
   "scripts": {
     "test": "echo \"No tests yet\" && exit 0"
