@@ -9,7 +9,7 @@
 - **Requirements Directory**: Unified `docs/requirements/` replaces `docs/specs/`.
 - **Discuss Phase**: Pre-planning alignment to capture "soft" requirements.
 - **XML Tasks**: Structured implementation plans for better Agent adherence.
-- **Atomic Execution**: Enforced "One Task = One Commit" workflow.
+- **AgentSkills Standard**: Import community skills instantly via `npx ace-framework add-skill`.
 
 ## Core Pillars
 

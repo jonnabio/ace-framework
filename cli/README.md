@@ -17,6 +17,15 @@ npx create-ace-framework .
 npx create-ace-framework
 ```
 
+### Adding Third-Party Skills
+
+Once a project is scaffolded, you can use the companion `ace-framework` CLI to import community AgentSkills into your local `.ace/skills/` directory:
+
+```bash
+# Import the PDF parsing skill from Anthropic
+npx ace-framework add-skill anthropics/skills/skills/pdf
+```
+
 ### Global Installation
 
 ```bash
