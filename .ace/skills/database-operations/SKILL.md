@@ -1,3 +1,8 @@
+﻿---
+name: database-operations
+description: Procedural knowledge for database-related tasks including migrations, schema changes, and data operations.
+---
+
 # Skill: Database Operations
 
 > Procedural knowledge for database-related tasks including
@@ -159,7 +164,7 @@ After applying this skill, verify:
 ## Invocation
 
 ```markdown
-"Apply the database operations skill from .ace/skills/database-operations.md
+"Apply the database operations skill from .ace/skills/database-operations/SKILL.md
 for this [migration | schema change | optimization] task. Follow the
 checklist and validation steps."
 ```
@@ -167,3 +172,5 @@ checklist and validation steps."
 ---
 
 *Skill Version: 1.0*
+
+

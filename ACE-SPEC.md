@@ -233,7 +233,7 @@ Skills are specialized instruction sets in `.ace/skills/` that grant deep techni
 **Invocation:**
 
 ```markdown
-"Apply the skill in .ace/skills/[skill-name].md for this task.
+"Apply the skill in .ace/skills/[skill-name]/SKILL.md for this task.
 Follow the procedure exactly and report validation results."
 ```
 
@@ -680,7 +680,7 @@ Then await further instructions."
 | Check architectural decisions | `docs/adr/`                            |
 | Check regression guards       | `docs/rca/regression-guards.yaml`      |
 | Understand domain terms       | `.ace/knowledge/glossary.md`           |
-| Learn a specific skill        | `.ace/skills/[skill].md`               |
+| Learn a specific skill        | `.ace/skills/[skill]/SKILL.md`               |
 
 ---
 

@@ -1,4 +1,4 @@
-# Workflow Hooks
+﻿# Workflow Hooks
 
 > Automation hooks that trigger at specific points in the
 > AI-assisted development workflow.
@@ -290,7 +290,7 @@ AI agents should simulate hooks by:
    "Issue detected. Switching to INCIDENT mode:
    - Capturing symptoms and evidence
    - Creating RCA document
-   - Applying .ace/skills/root-cause-analysis.md"
+   - Applying .ace/skills/root-cause-analysis/SKILL.md"
    ```
 
 4. **Post-RCA**:
@@ -501,3 +501,4 @@ To resolve:
 ---
 
 *Last Updated: [DATE]*
+

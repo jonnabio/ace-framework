@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Primary Project
 
-The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.2).
+The main codebase lives at `~/code_projects/ace_framework/` â€” an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.2).
 
 ## Commands
 
@@ -37,15 +37,15 @@ npx create-ace-framework my-project
 
 The `ace_framework` repo is a **documentation + tooling framework**, not a traditional code project. It provides:
 
-- **`.ace/`** — The "AI Control Center" (Shared Brain): immutable standards, role definitions, skills, prompts, and schemas loaded by AI agents on demand.
-- **`docs/`** — Per-project living documents: ADRs, session context (`ACTIVE_CONTEXT.md`), planning artifacts, RCA records, and specs.
-- **`cli/`** — A Node.js CLI (`create-ace-framework`) that scaffolds the `.ace/` + `docs/` structure into any project, either from bundled templates or by cloning from GitHub.
-- **`.aceconfig`** — YAML config that defines core rules, skill triggers, role routing, validation hooks, and context paths. This is always loaded first by AI agents.
-- **`.cursorrules`** / **`.aiconfig`** — IDE-specific AI behavior configuration files that mirror `.aceconfig` for Cursor and other tools.
+- **`.ace/`** â€” The "AI Control Center" (Shared Brain): immutable standards, role definitions, skills, prompts, and schemas loaded by AI agents on demand.
+- **`docs/`** â€” Per-project living documents: ADRs, session context (`ACTIVE_CONTEXT.md`), planning artifacts, RCA records, and specs.
+- **`cli/`** â€” A Node.js CLI (`create-ace-framework`) that scaffolds the `.ace/` + `docs/` structure into any project, either from bundled templates or by cloning from GitHub.
+- **`.aceconfig`** â€” YAML config that defines core rules, skill triggers, role routing, validation hooks, and context paths. This is always loaded first by AI agents.
+- **`.cursorrules`** / **`.aiconfig`** â€” IDE-specific AI behavior configuration files that mirror `.aceconfig` for Cursor and other tools.
 
 ### BMAD Methodology
 
-Every task follows **Analyze → Discuss → Plan → Execute → Verify**:
+Every task follows **Analyze â†’ Discuss â†’ Plan â†’ Execute â†’ Verify**:
 
 - **ANALYZE** (Architect role): Read specs, ADRs, and regression guards; identify constraints; list unknowns.
 - **DISCUSS** (Architect role): Capture user preferences on "gray areas"; update `docs/context/PROJECT_CONTEXT.md`.
@@ -57,10 +57,10 @@ Every task follows **Analyze → Discuss → Plan → Execute → Verify**:
 ### Key Files to Load at Session Start
 
 Per `.cursorrules`, always read before any task:
-1. `.aceconfig` — core rules and skill routing
-2. `.ace/roles/roles.md` — available roles and responsibilities
-3. `docs/context/ACTIVE_CONTEXT.md` — current session state
-4. `docs/rca/regression-guards.yaml` — protected files and invariants
+1. `.aceconfig` â€” core rules and skill routing
+2. `.ace/roles/roles.md` â€” available roles and responsibilities
+3. `docs/context/ACTIVE_CONTEXT.md` â€” current session state
+4. `docs/rca/regression-guards.yaml` â€” protected files and invariants
 
 ### Skill-Triggered Loading
 
@@ -68,13 +68,24 @@ Per `.cursorrules`, always read before any task:
 
 | Keyword | Skill file |
 |---------|-----------|
-| database | `.ace/skills/database-operations.md` |
-| api | `.ace/skills/api-design.md` |
-| testing | `.ace/skills/testing-strategy.md` |
-| migration | `.ace/skills/migration-logic.md` |
-| refactor | `.ace/skills/refactoring.md` |
-| bug/issue/incident | `.ace/skills/root-cause-analysis.md` |
-| transcript/meeting/interview | `.ace/skills/transcript-analysis.md` |
+| database | `.ace/skills/database-operations/SKILL.md` |
+| api | `.ace/skills/api-design/SKILL.md` |
+| testing | `.ace/skills/testing-strategy/SKILL.md` |
+| migration | `.ace/skills/migration-logic/SKILL.md` |
+| refactor | `.ace/skills/refactoring/SKILL.md` |
+| bug/issue/incident | `.ace/skills/root-cause-analysis/SKILL.md` |
+| transcript/meeting/interview | `.ace/skills/transcript-analysis/SKILL.md` |
+
+### Third-Party Skills (Claude Code Marketplace)
+
+Because ACE uses the AgentSkills.io standard, you can instantly expand capabilities using Anthropic's native marketplace. 
+
+To give the Architect the ability to parse PDFs, Word docs, and Excel files:
+```bash
+/plugin marketplace add anthropics/skills
+/plugin install document-skills@anthropic-agent-skills
+```
+*Note: This allows you to directly pass binary documents into the `.ace/skills/transcript-analysis/SKILL.md` workflow or analyze-requirements prompt.*
 
 ### Regression Guard Protocol
 
@@ -85,7 +96,7 @@ Before modifying any file: check `docs/rca/regression-guards.yaml`. If guarded, 
 - Branch naming: `feature/short-description`, `fix/issue-number-description`, `docs/what-changed`
 - Commit format: `type(scope): description` (conventional commits)
 - All code must pass linting before commit
-- Atomic commits — one logical change per commit
+- Atomic commits â€” one logical change per commit
 
 ### ADR Protocol
 
@@ -93,4 +104,5 @@ Create an ADR (`docs/adr/ADR-###-description.md`) for any significant architectu
 
 ### Session End
 
-Always update `docs/context/ACTIVE_CONTEXT.md` with completed work, blockers, and next steps (1–3 specific tasks).
+Always update `docs/context/ACTIVE_CONTEXT.md` with completed work, blockers, and next steps (1â€“3 specific tasks).
+

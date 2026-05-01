@@ -1,3 +1,8 @@
+﻿---
+name: code-review
+description: Procedural knowledge for conducting thorough, constructive code reviews that improve quality and share knowledge.
+---
+
 # Skill: Code Review
 
 > Procedural knowledge for conducting thorough, constructive
@@ -29,22 +34,22 @@ Enable effective code reviews that:
 ## Review Process
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                   CODE REVIEW FLOW                      │
-├─────────────────────────────────────────────────────────┤
-│                                                         │
-│   ┌──────────┐    ┌──────────┐    ┌──────────┐         │
-│   │ CONTEXT  │───▶│  REVIEW  │───▶│ FEEDBACK │         │
-│   │  GATHER  │    │   CODE   │    │  SUBMIT  │         │
-│   └──────────┘    └──────────┘    └──────────┘         │
-│                         │                               │
-│                         ▼                               │
-│                   ┌──────────┐                          │
-│                   │  VERIFY  │                          │
-│                   │  FIXES   │                          │
-│                   └──────────┘                          │
-│                                                         │
-└─────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                   CODE REVIEW FLOW                      â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                                                         â”‚
+â”‚   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”         â”‚
+â”‚   â”‚ CONTEXT  â”‚â”€â”€â”€â–¶â”‚  REVIEW  â”‚â”€â”€â”€â–¶â”‚ FEEDBACK â”‚         â”‚
+â”‚   â”‚  GATHER  â”‚    â”‚   CODE   â”‚    â”‚  SUBMIT  â”‚         â”‚
+â”‚   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜         â”‚
+â”‚                         â”‚                               â”‚
+â”‚                         â–¼                               â”‚
+â”‚                   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                          â”‚
+â”‚                   â”‚  VERIFY  â”‚                          â”‚
+â”‚                   â”‚  FIXES   â”‚                          â”‚
+â”‚                   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                          â”‚
+â”‚                                                         â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Phase 1: Context Gathering
@@ -313,7 +318,7 @@ After author addresses feedback:
 ## Invocation
 
 ```markdown
-"Apply the code review skill from .ace/skills/code-review.md
+"Apply the code review skill from .ace/skills/code-review/SKILL.md
 for this PR/code change. Follow the review checklist and provide
 structured feedback. Check regression guards for modified files."
 ```
@@ -321,3 +326,5 @@ structured feedback. Check regression guards for modified files."
 ---
 
 *Skill Version: 1.0*
+
+

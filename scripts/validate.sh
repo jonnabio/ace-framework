@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 #
 # ACE-Framework Validation Script
 # Validates that the framework structure is correct
@@ -119,13 +119,13 @@ echo ""
 
 # Skills
 echo "Skills:"
-check_file ".ace/skills/api-design.md"
-check_file ".ace/skills/database-operations.md"
-check_file ".ace/skills/testing-strategy.md"
-check_file ".ace/skills/root-cause-analysis.md"
-check_file_warn ".ace/skills/refactoring.md"
-check_file_warn ".ace/skills/migration-logic.md"
-check_file_warn ".ace/skills/code-review.md"
+check_file ".ace/skills/api-design/SKILL.md"
+check_file ".ace/skills/database-operations/SKILL.md"
+check_file ".ace/skills/testing-strategy/SKILL.md"
+check_file ".ace/skills/root-cause-analysis/SKILL.md"
+check_file_warn ".ace/skills/refactoring/SKILL.md"
+check_file_warn ".ace/skills/migration-logic/SKILL.md"
+check_file_warn ".ace/skills/code-review/SKILL.md"
 echo ""
 
 # Templates
@@ -157,3 +157,4 @@ else
     echo -e "${RED}Failed with $ERRORS error(s) and $WARNINGS warning(s)${NC}"
     exit 1
 fi
+

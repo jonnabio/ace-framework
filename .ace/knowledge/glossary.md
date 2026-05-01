@@ -1,4 +1,4 @@
-# Domain Glossary
+﻿# Domain Glossary
 
 > Canonical definitions of domain terminology.
 > AI agents should use these terms consistently.
@@ -133,10 +133,10 @@ A classification assigned to each extracted requirement indicating how directly 
 A tested, versioned prompt template stored in `.ace/prompts/` that produces reliable, structured output for a specific BMAD phase or task. Tracked with success rates.
 
 **Requirements Specification**
-A structured document produced by the transcript analysis skill, containing categorized functional requirements, non-functional requirements, constraints, assumptions, and conflicts — each with traceability back to source quotes.
+A structured document produced by the transcript analysis skill, containing categorized functional requirements, non-functional requirements, constraints, assumptions, and conflicts â€” each with traceability back to source quotes.
 
 **Transcript Analysis**
-The process of extracting formal, structured requirements from raw unstructured transcripts (meetings, interviews, brainstorms). Executed by the Architect role using the `.ace/skills/transcript-analysis.md` skill.
+The process of extracting formal, structured requirements from raw unstructured transcripts (meetings, interviews, brainstorms). Executed by the Architect role using the `.ace/skills/transcript-analysis/SKILL.md` skill.
 
 ## Project-Specific Terms
 
@@ -161,3 +161,4 @@ When modifying terms:
 ---
 
 *Last Updated: [DATE]*
+

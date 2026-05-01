@@ -1,4 +1,4 @@
-# Active Context: [Task Name]
+﻿# Active Context: [Task Name]
 
 > This file maintains the current state of work.
 > Update after each session or significant change.
@@ -59,7 +59,7 @@ Example: "Implement user registration API endpoint with email validation and pas
 - .ace/standards/security.md
 
 ### Skills
-- [.ace/skills/relevant-skill.md if applicable]
+- [.ace/skills/relevant-skill/SKILL.md if applicable]
 
 ### ADRs
 - [docs/adr/ADR-###-relevant-decision.md]
@@ -93,3 +93,4 @@ Example: "Implement user registration API endpoint with email validation and pas
 ---
 
 *Remember: Update this file at the end of every session!*
+

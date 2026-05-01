@@ -1,3 +1,8 @@
+﻿---
+name: root-cause-analysis
+description: Procedural knowledge for investigating issues, identifying root causes, and implementing prevention measures.
+---
+
 # Skill: Root Cause Analysis
 
 > Procedural knowledge for investigating issues, identifying
@@ -54,19 +59,19 @@ Purpose: Drill down from symptom to root cause
 
 Example:
 1. Why did the user see an error?
-   → The API returned a 500 status
+   â†’ The API returned a 500 status
 
 2. Why did the API return 500?
-   → An unhandled exception in the service layer
+   â†’ An unhandled exception in the service layer
 
 3. Why was the exception unhandled?
-   → No try-catch around the database call
+   â†’ No try-catch around the database call
 
 4. Why was there no try-catch?
-   → The error handling pattern wasn't followed
+   â†’ The error handling pattern wasn't followed
 
 5. Why wasn't the pattern followed?
-   → ROOT CAUSE: No automated check enforcing error handling
+   â†’ ROOT CAUSE: No automated check enforcing error handling
 
 Continue asking "Why?" until you reach a systemic cause
 that can be fixed with process/tooling changes.
@@ -235,7 +240,7 @@ After completing RCA:
 ## Invocation
 
 ```markdown
-"Apply the root cause analysis skill from .ace/skills/root-cause-analysis.md
+"Apply the root cause analysis skill from .ace/skills/root-cause-analysis/SKILL.md
 for this issue. Perform 5 Whys analysis, identify the root cause,
 and create a complete RCA document with regression prevention."
 ```
@@ -243,3 +248,5 @@ and create a complete RCA document with regression prevention."
 ---
 
 *Skill Version: 1.0*
+
+

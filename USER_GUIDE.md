@@ -37,21 +37,21 @@ ACE-Framework (AI-assisted Code Engineering) is a structured methodology for wor
 Every task follows four phases:
 
 ```
-┌───────────────────────────────────────────────────────────────────────┐
-│                          BMAD Cycle                                   │
-├───────────────────────────────────────────────────────────────────────┤
-│                                                                       │
-│   ┌───────┐    ┌───────┐    ┌──────┐    ┌───────┐    ┌──────┐         │
-│   │ANALYZE│───▶│DISCUSS│───▶│ PLAN │───▶│EXECUTE│───▶│VERIFY│         │
-│   └───────┘    └───────┘    └──────┘    └───────┘    └──────┘         │
-│       │                                                   │           │
-│       └──────────────◀────────────────────────────────────┘           │
-│                    (Feedback Loop)                                    │
-│                           │                                           │
-│                    ┌──────┴──────┐                                    │
-│                    │  INCIDENT   │ (When issues found)                │
-│                    └─────────────┘                                    │
-└───────────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                          BMAD Cycle                                   â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                                                                       â”‚
+â”‚   â”Œâ”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”         â”‚
+â”‚   â”‚ANALYZEâ”‚â”€â”€â”€â–¶â”‚DISCUSSâ”‚â”€â”€â”€â–¶â”‚ PLAN â”‚â”€â”€â”€â–¶â”‚EXECUTEâ”‚â”€â”€â”€â–¶â”‚VERIFYâ”‚         â”‚
+â”‚   â””â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”˜         â”‚
+â”‚       â”‚                                                   â”‚           â”‚
+â”‚       â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â—€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜           â”‚
+â”‚                    (Feedback Loop)                                    â”‚
+â”‚                           â”‚                                           â”‚
+â”‚                    â”Œâ”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”                                    â”‚
+â”‚                    â”‚  INCIDENT   â”‚ (When issues found)                â”‚
+â”‚                    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                                    â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 **Never skip steps.** This prevents costly mistakes and rework.
@@ -213,7 +213,7 @@ docs/inputs/transcripts/2026-05-01-kickoff-meeting.md
 **Step 2: Extract Requirements**
 
 ```markdown
-"Apply the transcript analysis skill from .ace/skills/transcript-analysis.md
+"Apply the transcript analysis skill from .ace/skills/transcript-analysis/SKILL.md
 to process the transcript at docs/inputs/transcripts/2026-05-01-kickoff-meeting.md.
 Extract all requirements and save to docs/requirements/REQ-001-project-kickoff.md."
 ```
@@ -268,13 +268,13 @@ Roles follow a natural flow:
 
 ```
 Feature Development:
-Architect → Developer → QA Engineer
+Architect â†’ Developer â†’ QA Engineer
 
 Bug Investigation:
-Any Role → Incident Responder → Previous Role
+Any Role â†’ Incident Responder â†’ Previous Role
 
 Research:
-AI Expert → Data Scientist → Scientific Editor
+AI Expert â†’ Data Scientist â†’ Scientific Editor
 ```
 
 **Important:** Complete one role's work before switching. Update `ACTIVE_CONTEXT.md` at transitions.
@@ -296,19 +296,29 @@ Skills are detailed procedures for specific tasks. They contain:
 
 | Skill                    | Use For                  |
 | ------------------------ | ------------------------ |
-| `api-design.md`          | Creating REST APIs       |
-| `database-operations.md` | Schema changes, queries  |
-| `migration-logic.md`     | Data/schema migrations   |
-| `refactoring.md`         | Improving code structure |
-| `root-cause-analysis.md` | Investigating issues     |
-| `testing-strategy.md`    | Writing tests            |
-| `transcript-analysis.md` | Extracting requirements  |
-| `code-review.md`         | Reviewing code           |
+| `api-design/SKILL.md`          | Creating REST APIs       |
+| `database-operations/SKILL.md` | Schema changes, queries  |
+| `migration-logic/SKILL.md`     | Data/schema migrations   |
+| `refactoring/SKILL.md`         | Improving code structure |
+| `root-cause-analysis/SKILL.md` | Investigating issues     |
+| `testing-strategy/SKILL.md`    | Writing tests            |
+| `transcript-analysis/SKILL.md` | Extracting requirements  |
+| `code-review/SKILL.md`         | Reviewing code           |
+
+### Third-Party Skills (Marketplace)
+
+ACE Framework uses the **AgentSkills.io** standard, which means you can install external, executable skills directly from the community. If you are using Claude Code, you can instantly add document parsing capabilities:
+
+```bash
+/plugin marketplace add anthropics/skills
+/plugin install document-skills@anthropic-agent-skills
+```
+*After installation, you can ask the agent to "Use the PDF skill to extract requirements from docs/inputs/spec.pdf".*
 
 ### Invoking a Skill
 
 ```markdown
-"Apply the [skill-name] skill from .ace/skills/[skill-name].md
+"Apply the [skill-name] skill from .ace/skills/[skill-name]/SKILL.md
 for this task. Follow the procedure and checklist."
 ```
 
@@ -323,12 +333,12 @@ Follow the pre-migration checklist and create a rollback plan."
 
 Some keywords automatically suggest skills:
 
-- "database", "migration", "schema" → `database-operations.md`
-- "api", "endpoint", "REST" → `api-design.md`
-- "test", "coverage" → `testing-strategy.md`
-- "bug", "issue", "incident" → `root-cause-analysis.md`
-- "transcript", "meeting", "interview" → `transcript-analysis.md`
-- "refactor", "clean up" → `refactoring.md`
+- "database", "migration", "schema" â†’ `database-operations.md`
+- "api", "endpoint", "REST" â†’ `api-design.md`
+- "test", "coverage" â†’ `testing-strategy.md`
+- "bug", "issue", "incident" â†’ `root-cause-analysis.md`
+- "transcript", "meeting", "interview" â†’ `transcript-analysis.md`
+- "refactor", "clean up" â†’ `refactoring.md`
 
 ---
 
@@ -550,64 +560,64 @@ Analyze trade-offs and create an ADR with the recommendation."
 
 ### Do's
 
-✅ **Start every session by reading context**
+âœ… **Start every session by reading context**
 
 ```markdown
 "Read .aceconfig and ACTIVE_CONTEXT.md before we begin."
 ```
 
-✅ **Use roles appropriately**
+âœ… **Use roles appropriately**
 
 - Architect for planning
 - Developer for coding
 - QA for verification
 
-✅ **Check guards before modifying files**
+âœ… **Check guards before modifying files**
 
 ```markdown
 "Check regression guards for files I'm about to modify."
 ```
 
-✅ **Update context frequently**
+âœ… **Update context frequently**
 
 - After completing tasks
 - When encountering blockers
 - At end of session
 
-✅ **Create ADRs for decisions**
+âœ… **Create ADRs for decisions**
 
 ```markdown
 "Create an ADR for the decision to use [technology/pattern]."
 ```
 
-✅ **Follow BMAD**
+âœ… **Follow BMAD**
 
-- Analyze → Plan → Execute → Verify
+- Analyze â†’ Plan â†’ Execute â†’ Verify
 - Never skip phases
 
 ### Don'ts
 
-❌ **Don't skip planning**
+âŒ **Don't skip planning**
 
 - "Just write the code" leads to rework
 
-❌ **Don't ignore standards**
+âŒ **Don't ignore standards**
 
 - Standards exist for good reasons
 
-❌ **Don't modify guarded files without checking**
+âŒ **Don't modify guarded files without checking**
 
 - Guards prevent regressions
 
-❌ **Don't forget to update context**
+âŒ **Don't forget to update context**
 
 - Future sessions depend on it
 
-❌ **Don't mix roles**
+âŒ **Don't mix roles**
 
 - Complete one role's work before switching
 
-❌ **Don't skip verification**
+âŒ **Don't skip verification**
 
 - Testing catches issues early
 
@@ -764,7 +774,7 @@ Which skill in .ace/skills/ would help with this?"
 | ADR template        | `docs/adr/ADR-000-template.md`         |
 | RCA template        | `docs/rca/RCA-000-template.md`         |
 | Regression guards   | `docs/rca/regression-guards.yaml`      |
-| Skills              | `.ace/skills/*.md`                     |
+| Skills              | `.ace/skills/*/SKILL.md`                     |
 
 ---
 
@@ -779,3 +789,4 @@ Which skill in .ace/skills/ would help with this?"
 
 _ACE-Framework User Guide v2.2_
 _Treat AI interactions as structured transactions, not casual conversations._
+

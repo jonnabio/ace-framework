@@ -1,10 +1,10 @@
-# ACE-Framework Cursor Rules
+﻿# ACE-Framework Cursor Rules
 # This file configures AI behavior in Cursor IDE
 
 ## Project Context
 
 This project uses the ACE-Framework (AI-assisted Code Engineering) v2.2.
-All AI interactions should follow the BMAD methodology: Analyze → Discuss → Plan → Execute → Verify.
+All AI interactions should follow the BMAD methodology: Analyze â†’ Discuss â†’ Plan â†’ Execute â†’ Verify.
 
 ## Required Reading on Session Start
 
@@ -22,7 +22,7 @@ Before any task, read these files:
 4. Update ACTIVE_CONTEXT.md after each session
 5. Verify against .ace/standards/ before completing any task
 6. Generate IMPLEMENTATION_PLAN.md before writing code
-7. Every task follows BMAD: Analyze → Discuss → Plan → Execute → Verify
+7. Every task follows BMAD: Analyze â†’ Discuss â†’ Plan â†’ Execute â†’ Verify
 8. Create ADR for any significant architectural decision
 9. Atomic commits with clear, descriptive messages
 10. No code generation without reading existing code first
@@ -48,14 +48,14 @@ Activate appropriate role for the task:
 ## Skills
 
 For specialized tasks, apply relevant skill:
-- .ace/skills/api-design.md
-- .ace/skills/database-operations.md
-- .ace/skills/migration-logic.md
-- .ace/skills/refactoring.md
-- .ace/skills/root-cause-analysis.md
-- .ace/skills/testing-strategy.md
-- .ace/skills/code-review.md
-- .ace/skills/transcript-analysis.md
+- .ace/skills/api-design/SKILL.md
+- .ace/skills/database-operations/SKILL.md
+- .ace/skills/migration-logic/SKILL.md
+- .ace/skills/refactoring/SKILL.md
+- .ace/skills/root-cause-analysis/SKILL.md
+- .ace/skills/testing-strategy/SKILL.md
+- .ace/skills/code-review/SKILL.md
+- .ace/skills/transcript-analysis/SKILL.md
 
 ## Before Modifying Files
 
@@ -75,3 +75,4 @@ End: "Update ACTIVE_CONTEXT.md with completed work and next steps"
 - Reference relevant standards/ADRs
 - Follow established code patterns in docs/context/system_patterns.md
 - Update ACTIVE_CONTEXT.md when significant progress is made
+

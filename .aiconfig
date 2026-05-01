@@ -1,4 +1,4 @@
-# Generic AI Configuration
+﻿# Generic AI Configuration
 # Works with various AI assistants
 
 framework: ace
@@ -19,7 +19,7 @@ context:
 
 # Core rules
 rules:
-  - "Follow BMAD: Analyze → Plan → Execute → Verify"
+  - "Follow BMAD: Analyze â†’ Plan â†’ Execute â†’ Verify"
   - "Check regression guards before modifying files"
   - "Create ADR for architectural decisions"
   - "Update ACTIVE_CONTEXT.md after each session"
@@ -34,14 +34,14 @@ roles:
 
 # Skill triggers
 skills:
-  database: .ace/skills/database-operations.md
-  api: .ace/skills/api-design.md
-  testing: .ace/skills/testing-strategy.md
-  migration: .ace/skills/migration-logic.md
-  refactor: .ace/skills/refactoring.md
-  review: .ace/skills/code-review.md
-  incident: .ace/skills/root-cause-analysis.md
-  transcript: .ace/skills/transcript-analysis.md
+  database: .ace/skills/database-operations/SKILL.md
+  api: .ace/skills/api-design/SKILL.md
+  testing: .ace/skills/testing-strategy/SKILL.md
+  migration: .ace/skills/migration-logic/SKILL.md
+  refactor: .ace/skills/refactoring/SKILL.md
+  review: .ace/skills/code-review/SKILL.md
+  incident: .ace/skills/root-cause-analysis/SKILL.md
+  transcript: .ace/skills/transcript-analysis/SKILL.md
 
 # Standards to enforce
 standards:
@@ -54,3 +54,4 @@ standards:
     - .ace/standards/git-workflow.md
     - .ace/standards/environment.md
     - .ace/standards/observability.md
+

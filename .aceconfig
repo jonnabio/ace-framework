@@ -1,4 +1,4 @@
-# .aceconfig - ACE Framework Configuration
+﻿# .aceconfig - ACE Framework Configuration
 # Version: 2.2
 
 version: "2.2"
@@ -19,7 +19,7 @@ core_rules:
   - "Update ACTIVE_CONTEXT.md after each session"
   - "Verify against .ace/standards/ before completing any task"
   - "Generate IMPLEMENTATION_PLAN.md before writing code"
-  - "Every task follows BMAD: Analyze → Discuss → Plan → Execute → Verify"
+  - "Every task follows BMAD: Analyze â†’ Discuss â†’ Plan â†’ Execute â†’ Verify"
   - "Create ADR for any significant architectural decision"
   - "Atomic commits with clear, descriptive messages"
   - "No code generation without reading existing code first"
@@ -28,16 +28,16 @@ core_rules:
 
 # Task-to-skill mapping (auto-load relevant skill)
 skill_triggers:
-  database: .ace/skills/database-operations.md
-  api: .ace/skills/api-design.md
-  testing: .ace/skills/testing-strategy.md
-  migration: .ace/skills/migration-logic.md
-  refactor: .ace/skills/refactoring.md
-  review: .ace/skills/code-review.md
-  transcript: .ace/skills/transcript-analysis.md
-  issue: .ace/skills/root-cause-analysis.md
-  bug: .ace/skills/root-cause-analysis.md
-  incident: .ace/skills/root-cause-analysis.md
+  database: .ace/skills/database-operations/SKILL.md
+  api: .ace/skills/api-design/SKILL.md
+  testing: .ace/skills/testing-strategy/SKILL.md
+  migration: .ace/skills/migration-logic/SKILL.md
+  refactor: .ace/skills/refactoring/SKILL.md
+  review: .ace/skills/code-review/SKILL.md
+  transcript: .ace/skills/transcript-analysis/SKILL.md
+  issue: .ace/skills/root-cause-analysis/SKILL.md
+  bug: .ace/skills/root-cause-analysis/SKILL.md
+  incident: .ace/skills/root-cause-analysis/SKILL.md
 
 # Role routing based on mode
 role_routing:
@@ -96,3 +96,4 @@ feedback:
   track_prompt_success: true
   track_violations: true
   track_regressions: true
+

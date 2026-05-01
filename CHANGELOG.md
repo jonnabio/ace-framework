@@ -1,4 +1,4 @@
-# Changelog
+﻿# Changelog
 
 All notable changes to the ACE Framework will be documented in this file.
 
@@ -7,7 +7,7 @@ All notable changes to the ACE Framework will be documented in this file.
 ### Added
 
 - **Transcript Analysis**: New golden prompt `.ace/prompts/extract-transcript.md` for extracting structured requirements from raw transcripts.
-- **Transcript Analysis Skill**: New skill `.ace/skills/transcript-analysis.md` defining the full ingest → extract → validate → iterate procedure.
+- **Transcript Analysis Skill**: New skill `.ace/skills/transcript-analysis/SKILL.md` defining the full ingest â†’ extract â†’ validate â†’ iterate procedure.
 - **Input Directory**: `docs/inputs/transcripts/` as the designated drop zone for raw unstructured data.
 - **Requirements Directory**: `docs/requirements/` replaces `docs/specs/` as the unified home for specifications and extracted requirements.
 
@@ -44,7 +44,7 @@ All notable changes to the ACE Framework will be documented in this file.
 
 ### Added
 
-- **BMAD Methodology**: The core "Analyze → Plan → Execute → Verify" loop.
+- **BMAD Methodology**: The core "Analyze â†’ Plan â†’ Execute â†’ Verify" loop.
 - **Directory Setup**: Standardized `.ace/` directory structure for Agent knowledge.
 - **Agentic Roles**: Definition of 7 key roles (Architect, Developer, QA, etc.).
 - **Active Context**: Protocol for maintaining session state in `ACTIVE_CONTEXT.md`.
@@ -62,3 +62,4 @@ All notable changes to the ACE Framework will be documented in this file.
   - No defined roles or responsibilities.
   - Fragile, non-reproducible outputs.
 - **Note**: There are no files or specs for v1.0; it serves as the "dark age" baseline that v2.0 standardizes.
+

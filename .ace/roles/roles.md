@@ -1,4 +1,4 @@
-# BMAD Agentic Roles
+﻿# BMAD Agentic Roles
 
 **Status**: Active
 **Philosophy**: Specialized personas for distinct phases of work.
@@ -131,18 +131,18 @@ Verify all regression guards are satisfied."
 **RCA Process**:
 
 ```markdown
-1. Document → Capture symptoms, evidence, timeline
-2. Analyze → 5 Whys to root cause
-3. Fix → Immediate + Permanent fixes
-4. Prevent → Tests + Guards + Standards
-5. Verify → Confirm fix and prevention
+1. Document â†’ Capture symptoms, evidence, timeline
+2. Analyze â†’ 5 Whys to root cause
+3. Fix â†’ Immediate + Permanent fixes
+4. Prevent â†’ Tests + Guards + Standards
+5. Verify â†’ Confirm fix and prevention
 ```
 
 **Activation**:
 
 ```markdown
 "Assume the Incident Responder role. Focus on root cause analysis
-using the skill in .ace/skills/root-cause-analysis.md. Create a
+using the skill in .ace/skills/root-cause-analysis/SKILL.md. Create a
 complete RCA with regression prevention measures."
 ```
 
@@ -224,34 +224,34 @@ into compelling narratives."
 
 ## Role Transitions
 
-### PLANNING → EXECUTION
+### PLANNING â†’ EXECUTION
 
 ```
-Architect completes → Developer begins
+Architect completes â†’ Developer begins
 Handoff: implementation_plan.md approved
 Pre-check: Regression guards reviewed
 ```
 
-### EXECUTION → VERIFICATION
+### EXECUTION â†’ VERIFICATION
 
 ```
-Developer completes → QA Engineer begins
+Developer completes â†’ QA Engineer begins
 Handoff: Code committed, tests written
 Pre-check: Regression tests identified
 ```
 
-### Issue Discovered → INCIDENT
+### Issue Discovered â†’ INCIDENT
 
 ```
-Any Role → Incident Responder
+Any Role â†’ Incident Responder
 Trigger: Bug, failure, or vulnerability discovered
 Output: RCA document with prevention measures
 ```
 
-### INCIDENT → Return to Previous Mode
+### INCIDENT â†’ Return to Previous Mode
 
 ```
-Incident Responder completes → Previous Role resumes
+Incident Responder completes â†’ Previous Role resumes
 Handoff: RCA closed, guards in place
 Pre-check: Regression tests passing
 ```
@@ -259,7 +259,7 @@ Pre-check: Regression tests passing
 ### Research Workflow
 
 ```
-AI Expert (theory) → Data Scientist (experiments) → Scientific Editor (publication)
+AI Expert (theory) â†’ Data Scientist (experiments) â†’ Scientific Editor (publication)
 ```
 
 ---
@@ -319,3 +319,4 @@ AI Expert (theory) → Data Scientist (experiments) → Scientific Editor (publi
 ---
 
 _BMAD Agentic Roles - ACE-Framework v2.1_
+

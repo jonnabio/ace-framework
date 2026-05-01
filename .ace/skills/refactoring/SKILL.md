@@ -1,3 +1,8 @@
+﻿---
+name: refactoring
+description: Procedural knowledge for safe code refactoring that improves structure without changing behavior.
+---
+
 # Skill: Refactoring
 
 > Procedural knowledge for safe code refactoring that
@@ -38,26 +43,26 @@ Enable safe refactoring that:
 ## Refactoring Workflow
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                 REFACTORING CYCLE                       │
-├─────────────────────────────────────────────────────────┤
-│                                                         │
-│   ┌──────────┐    ┌──────────┐    ┌──────────┐         │
-│   │  TEST    │───▶│ REFACTOR │───▶│  TEST    │         │
-│   │ (Green)  │    │ (Small)  │    │ (Green)  │         │
-│   └──────────┘    └──────────┘    └────┬─────┘         │
-│        ▲                               │               │
-│        │                               │               │
-│        └───────────────────────────────┘               │
-│              (Repeat until done)                        │
-└─────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                 REFACTORING CYCLE                       â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                                                         â”‚
+â”‚   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”         â”‚
+â”‚   â”‚  TEST    â”‚â”€â”€â”€â–¶â”‚ REFACTOR â”‚â”€â”€â”€â–¶â”‚  TEST    â”‚         â”‚
+â”‚   â”‚ (Green)  â”‚    â”‚ (Small)  â”‚    â”‚ (Green)  â”‚         â”‚
+â”‚   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜         â”‚
+â”‚        â–²                               â”‚               â”‚
+â”‚        â”‚                               â”‚               â”‚
+â”‚        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜               â”‚
+â”‚              (Repeat until done)                        â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Step-by-Step Process
 
 ```markdown
 1. VERIFY BASELINE
-   - Run all tests → Must be GREEN
+   - Run all tests â†’ Must be GREEN
    - Note current test count and coverage
    - Commit current state
 
@@ -68,8 +73,8 @@ Enable safe refactoring that:
 
 3. RUN TESTS
    - All tests must pass
-   - If tests fail → UNDO and retry
-   - If tests pass → Continue
+   - If tests fail â†’ UNDO and retry
+   - If tests pass â†’ Continue
 
 4. COMMIT
    - Commit the single refactoring
@@ -368,12 +373,14 @@ No functional changes.
 ## Invocation
 
 ```markdown
-"Apply the refactoring skill from .ace/skills/refactoring.md
+"Apply the refactoring skill from .ace/skills/refactoring/SKILL.md
 for this code improvement. Follow the refactoring cycle:
-test → refactor → test → commit. Make small, incremental
+test â†’ refactor â†’ test â†’ commit. Make small, incremental
 changes with tests passing at each step."
 ```
 
 ---
 
 *Skill Version: 1.0*
+
+
