@@ -79,6 +79,13 @@ Per `.cursorrules`, always read before any task:
 | prompt/llm/ai | `.ace/skills/prompt-engineering/SKILL.md` |
 | model/evaluation/ml | `.ace/skills/model-evaluation/SKILL.md` |
 | feature/engineering | `.ace/skills/feature-engineering/SKILL.md` |
+| security/audit | `.ace/skills/security-audit/SKILL.md` |
+| performance/optimize | `.ace/skills/performance-optimization/SKILL.md` |
+| accessibility/a11y | `.ace/skills/accessibility-audit/SKILL.md` |
+| ci/cd/deploy | `.ace/skills/ci-cd-pipeline/SKILL.md` |
+| error/exception | `.ace/skills/error-handling/SKILL.md` |
+| documentation/docs | `.ace/skills/documentation-generation/SKILL.md` |
+| state/redux/context | `.ace/skills/state-management/SKILL.md` |
 
 ### Third-Party Skills (Claude Code Marketplace)
 

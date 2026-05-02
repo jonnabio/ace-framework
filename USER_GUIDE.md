@@ -308,6 +308,13 @@ Skills are detailed procedures for specific tasks. They contain:
 | `prompt-engineering/SKILL.md`  | Building LLM prompts     |
 | `model-evaluation/SKILL.md`    | Testing ML models        |
 | `feature-engineering/SKILL.md` | Transforming ML data     |
+| `security-audit/SKILL.md`      | Security reviews         |
+| `performance-optimization/SKILL.md` | Profiling/optimization |
+| `accessibility-audit/SKILL.md` | WCAG compliance          |
+| `ci-cd-pipeline/SKILL.md`      | DevOps & deployments     |
+| `error-handling/SKILL.md`      | Exception strategies     |
+| `documentation-generation/SKILL.md`| Auto-generating docs |
+| `state-management/SKILL.md`    | App state & flow         |
 
 ### Third-Party Skills (Marketplace)
 
@@ -360,6 +367,13 @@ Some keywords automatically suggest skills:
 - "prompt", "llm" → `prompt-engineering/SKILL.md`
 - "model", "evaluation" → `model-evaluation/SKILL.md`
 - "feature", "engineering" → `feature-engineering/SKILL.md`
+- "security", "vulnerability", "audit" → `security-audit/SKILL.md`
+- "performance", "optimize", "speed" → `performance-optimization/SKILL.md`
+- "accessibility", "wcag", "a11y" → `accessibility-audit/SKILL.md`
+- "ci", "cd", "pipeline", "deploy" → `ci-cd-pipeline/SKILL.md`
+- "error", "exception", "logging" → `error-handling/SKILL.md`
+- "documentation", "docs", "readme" → `documentation-generation/SKILL.md`
+- "state", "redux", "context" → `state-management/SKILL.md`
 
 ---
 

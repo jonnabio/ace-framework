@@ -42,6 +42,13 @@ skill_triggers:
   prompt: .ace/skills/prompt-engineering/SKILL.md
   model: .ace/skills/model-evaluation/SKILL.md
   feature: .ace/skills/feature-engineering/SKILL.md
+  security: .ace/skills/security-audit/SKILL.md
+  performance: .ace/skills/performance-optimization/SKILL.md
+  accessibility: .ace/skills/accessibility-audit/SKILL.md
+  cicd: .ace/skills/ci-cd-pipeline/SKILL.md
+  error: .ace/skills/error-handling/SKILL.md
+  documentation: .ace/skills/documentation-generation/SKILL.md
+  state: .ace/skills/state-management/SKILL.md
 
 # Role routing based on mode
 role_routing:

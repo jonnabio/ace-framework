@@ -131,6 +131,13 @@ check_file_warn ".ace/skills/data-pipeline-design/SKILL.md"
 check_file_warn ".ace/skills/prompt-engineering/SKILL.md"
 check_file_warn ".ace/skills/model-evaluation/SKILL.md"
 check_file_warn ".ace/skills/feature-engineering/SKILL.md"
+check_file_warn ".ace/skills/security-audit/SKILL.md"
+check_file_warn ".ace/skills/performance-optimization/SKILL.md"
+check_file_warn ".ace/skills/accessibility-audit/SKILL.md"
+check_file_warn ".ace/skills/ci-cd-pipeline/SKILL.md"
+check_file_warn ".ace/skills/error-handling/SKILL.md"
+check_file_warn ".ace/skills/documentation-generation/SKILL.md"
+check_file_warn ".ace/skills/state-management/SKILL.md"
 echo ""
 
 # Templates
