@@ -283,6 +283,8 @@ AI Expert â†’ Data Scientist â†’ Scientific Editor
 
 ## 5. Using Skills
 
+> **Note:** For a complete deep-dive into all 19 skills, how to invoke them, and how to import third-party skills via the CLI, please see the dedicated [SKILLS_GUIDE.md](SKILLS_GUIDE.md).
+
 ### What Are Skills?
 
 Skills are detailed procedures for specific tasks. They contain:
@@ -817,6 +819,7 @@ Which skill in .ace/skills/ would help with this?"
 
 - **Full specification:** `ACE-SPEC.md`
 - **Quick start:** `README.md`
+- **Skills Guide:** `SKILLS_GUIDE.md`
 - **Role details:** `.ace/roles/roles.md`
 - **Runbooks:** `docs/runbooks/`
 

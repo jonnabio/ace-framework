@@ -20,4 +20,5 @@
 
 ## Getting Started
 
-See [USER_GUIDE.md](USER_GUIDE.md) for detailed instructions.
+- [USER_GUIDE.md](USER_GUIDE.md) - For daily workflow and phase execution.
+- [SKILLS_GUIDE.md](SKILLS_GUIDE.md) - For a deep dive into the 19 core skills and how to invoke them.
