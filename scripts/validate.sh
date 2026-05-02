@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 #
 # ACE-Framework Validation Script
 # Validates that the framework structure is correct
@@ -126,6 +126,11 @@ check_file ".ace/skills/root-cause-analysis/SKILL.md"
 check_file_warn ".ace/skills/refactoring/SKILL.md"
 check_file_warn ".ace/skills/migration-logic/SKILL.md"
 check_file_warn ".ace/skills/code-review/SKILL.md"
+check_file_warn ".ace/skills/transcript-analysis/SKILL.md"
+check_file_warn ".ace/skills/data-pipeline-design/SKILL.md"
+check_file_warn ".ace/skills/prompt-engineering/SKILL.md"
+check_file_warn ".ace/skills/model-evaluation/SKILL.md"
+check_file_warn ".ace/skills/feature-engineering/SKILL.md"
 echo ""
 
 # Templates

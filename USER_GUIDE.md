@@ -304,6 +304,10 @@ Skills are detailed procedures for specific tasks. They contain:
 | `testing-strategy/SKILL.md`    | Writing tests            |
 | `transcript-analysis/SKILL.md` | Extracting requirements  |
 | `code-review/SKILL.md`         | Reviewing code           |
+| `data-pipeline-design/SKILL.md`| Designing ETL/ELT flows  |
+| `prompt-engineering/SKILL.md`  | Building LLM prompts     |
+| `model-evaluation/SKILL.md`    | Testing ML models        |
+| `feature-engineering/SKILL.md` | Transforming ML data     |
 
 ### Third-Party Skills (Marketplace)
 
@@ -346,12 +350,16 @@ Follow the pre-migration checklist and create a rollback plan."
 
 Some keywords automatically suggest skills:
 
-- "database", "migration", "schema" â†’ `database-operations.md`
-- "api", "endpoint", "REST" â†’ `api-design.md`
-- "test", "coverage" â†’ `testing-strategy.md`
-- "bug", "issue", "incident" â†’ `root-cause-analysis.md`
-- "transcript", "meeting", "interview" â†’ `transcript-analysis.md`
-- "refactor", "clean up" â†’ `refactoring.md`
+- "database", "migration", "schema" → `database-operations/SKILL.md`
+- "api", "endpoint", "REST" → `api-design/SKILL.md`
+- "test", "coverage" → `testing-strategy/SKILL.md`
+- "bug", "issue", "incident" → `root-cause-analysis/SKILL.md`
+- "transcript", "meeting", "interview" → `transcript-analysis/SKILL.md`
+- "refactor", "clean up" → `refactoring/SKILL.md`
+- "pipeline", "etl" → `data-pipeline-design/SKILL.md`
+- "prompt", "llm" → `prompt-engineering/SKILL.md`
+- "model", "evaluation" → `model-evaluation/SKILL.md`
+- "feature", "engineering" → `feature-engineering/SKILL.md`
 
 ---
 

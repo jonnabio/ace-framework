@@ -1,4 +1,4 @@
-﻿# Generic AI Configuration
+# Generic AI Configuration
 # Works with various AI assistants
 
 framework: ace
@@ -42,6 +42,10 @@ skills:
   review: .ace/skills/code-review/SKILL.md
   incident: .ace/skills/root-cause-analysis/SKILL.md
   transcript: .ace/skills/transcript-analysis/SKILL.md
+  pipeline: .ace/skills/data-pipeline-design/SKILL.md
+  prompt: .ace/skills/prompt-engineering/SKILL.md
+  model: .ace/skills/model-evaluation/SKILL.md
+  feature: .ace/skills/feature-engineering/SKILL.md
 
 # Standards to enforce
 standards:

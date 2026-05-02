@@ -75,6 +75,10 @@ Per `.cursorrules`, always read before any task:
 | refactor | `.ace/skills/refactoring/SKILL.md` |
 | bug/issue/incident | `.ace/skills/root-cause-analysis/SKILL.md` |
 | transcript/meeting/interview | `.ace/skills/transcript-analysis/SKILL.md` |
+| pipeline/etl/data | `.ace/skills/data-pipeline-design/SKILL.md` |
+| prompt/llm/ai | `.ace/skills/prompt-engineering/SKILL.md` |
+| model/evaluation/ml | `.ace/skills/model-evaluation/SKILL.md` |
+| feature/engineering | `.ace/skills/feature-engineering/SKILL.md` |
 
 ### Third-Party Skills (Claude Code Marketplace)
 

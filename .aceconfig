@@ -1,4 +1,4 @@
-﻿# .aceconfig - ACE Framework Configuration
+# .aceconfig - ACE Framework Configuration
 # Version: 2.2
 
 version: "2.2"
@@ -38,6 +38,10 @@ skill_triggers:
   issue: .ace/skills/root-cause-analysis/SKILL.md
   bug: .ace/skills/root-cause-analysis/SKILL.md
   incident: .ace/skills/root-cause-analysis/SKILL.md
+  pipeline: .ace/skills/data-pipeline-design/SKILL.md
+  prompt: .ace/skills/prompt-engineering/SKILL.md
+  model: .ace/skills/model-evaluation/SKILL.md
+  feature: .ace/skills/feature-engineering/SKILL.md
 
 # Role routing based on mode
 role_routing:
