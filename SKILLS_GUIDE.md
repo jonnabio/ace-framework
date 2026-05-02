@@ -42,7 +42,7 @@ Inside the `SKILL.md`, you will find:
 
 ## 2. The Skill Catalog
 
-The framework comes with 19 core skills covering the entire Software Development Life Cycle.
+The framework comes with 22 core skills covering the entire Software Development Life Cycle.
 
 ### Core Engineering
 | Skill | Trigger Keywords | Description |

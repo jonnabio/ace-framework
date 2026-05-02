@@ -283,7 +283,7 @@ AI Expert â†’ Data Scientist â†’ Scientific Editor
 
 ## 5. Using Skills
 
-> **Note:** For a complete deep-dive into all 19 skills, how to invoke them, and how to import third-party skills via the CLI, please see the dedicated [SKILLS_GUIDE.md](SKILLS_GUIDE.md).
+> **Note:** For a complete deep-dive into all 22 skills, how to invoke them, and how to import third-party skills via the CLI, please see the dedicated [SKILLS_GUIDE.md](SKILLS_GUIDE.md).
 
 ### What Are Skills?
 

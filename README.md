@@ -5,11 +5,10 @@
 
 ## v2.3 Features
 
-- **Transcript Analysis**: Extract structured requirements from raw meeting transcripts.
-- **Requirements Directory**: Unified `docs/requirements/` replaces `docs/specs/`.
-- **Discuss Phase**: Pre-planning alignment to capture "soft" requirements.
-- **XML Tasks**: Structured implementation plans for better Agent adherence.
-- **AgentSkills Standard**: Import community skills instantly via `npx ace-framework add-skill`.
+- **AgentSkills Standard**: Migrated all skills to the universal AgentSkills.io format with YAML frontmatter.
+- **22 Core Skills**: Vastly expanded the default library with new domains: Agentic Design, Data Pipelines, MCP Implementation, CI/CD, Accessibility, and more.
+- **Skill Import CLI**: Instantly import open-source community skills via `npx ace-framework add-skill <url>`.
+- **SKILLS_GUIDE.md**: Dedicated deep-dive documentation for explicit skill invocation and custom creation.
 
 ## Core Pillars
 
