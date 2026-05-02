@@ -1,9 +1,9 @@
-# ACE Framework v2.2
+# ACE Framework v2.3
 
 > **AI-assisted Code Engineering Framework**
 > A rigorous, IDE-agnostic standard for professional development teams using AI agents. Treats AI interactions as structured transactions, not casual conversations.
 
-## v2.2 Features
+## v2.3 Features
 
 - **Transcript Analysis**: Extract structured requirements from raw meeting transcripts.
 - **Requirements Directory**: Unified `docs/requirements/` replaces `docs/specs/`.

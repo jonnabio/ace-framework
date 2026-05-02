@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Primary Project
 
-The main codebase lives at `~/code_projects/ace_framework/` â€” an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.2).
+The main codebase lives at `~/code_projects/ace_framework/` â€” an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.3).
 
 ## Commands
 

@@ -1,9 +1,27 @@
-﻿# Changelog
+# Changelog
 
 All notable changes to the ACE Framework will be documented in this file.
 
-## [v2.2.0] - 2026-05-01
+## [v2.3.0] - 2026-05-01
 
+### Added
+
+- **AgentSkills Standard Migration**: Upgraded all legacy flat `.md` skills into the robust AgentSkills folder standard (with `SKILL.md` and YAML frontmatter).
+- **Expanded Core Skills**: Grew the default skills library from 8 to 19, adding massive coverage for Data Engineering, AI Development, and DevOps.
+  - *Data/AI*: `data-pipeline-design`, `prompt-engineering`, `model-evaluation`, `feature-engineering`
+  - *Agentic*: `agent-design`, `a2a-communication`, `mcp-implementation`
+  - *Engineering*: `security-audit`, `performance-optimization`, `accessibility-audit`, `ci-cd-pipeline`, `error-handling`, `documentation-generation`, `state-management`
+- **Skill Import CLI Tool**: Built `ace-framework add-skill <url>` to natively import open-source skills via `degit` and auto-register them in `.aceconfig`.
+- **SKILLS_GUIDE.md**: Created a dedicated, comprehensive guide at the root explaining how to build, use, and explicitly invoke skills.
+- **Claude Code Native Plugins**: Added documentation for leveraging the `document-skills` plugin via Claude Marketplace.
+
+### Changed
+
+- **Configuration Wiring**: `.aceconfig` and `.aiconfig` updated with 11 new trigger keywords.
+- **Validation**: Expanded `scripts/validate.sh` to enforce the existence of the new `SKILL.md` hierarchy.
+- **Documentation**: Fully upgraded `USER_GUIDE.md`, `CLAUDE.md`, and `README.md` to point to the new AgentSkills structures and the `SKILLS_GUIDE.md`.
+
+## [v2.2.0] - 2026-05-01
 ### Added
 
 - **Transcript Analysis**: New golden prompt `.ace/prompts/extract-transcript.md` for extracting structured requirements from raw transcripts.

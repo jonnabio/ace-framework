@@ -92,4 +92,4 @@ Compliance will be verified through:
 
 ---
 
-*First ADR - ACE-Framework v2.2*
+*First ADR - ACE-Framework v2.3*

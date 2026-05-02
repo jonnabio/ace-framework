@@ -92,4 +92,4 @@ Before marking feature complete:
 
 ---
 
-*Task Checklist - ACE-Framework v2.2*
+*Task Checklist - ACE-Framework v2.3*

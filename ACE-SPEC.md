@@ -1,4 +1,4 @@
-# ACE-Framework v2.2
+# ACE-Framework v2.3
 
 ## AI-assisted Code Engineering
 
@@ -714,5 +714,5 @@ Then await further instructions."
 
 ---
 
-_ACE-Framework v2.2_
+_ACE-Framework v2.3_
 _Treat AI interactions as structured transactions, not casual conversations._

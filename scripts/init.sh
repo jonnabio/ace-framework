@@ -27,7 +27,7 @@ print_banner() {
     echo " / ___ \ |___| |___  |  _|| | | (_| | | | | | |  __/\ V  V / (_) | |  |   < "
     echo "/_/   \_\____|_____| |_|  |_|  \__,_|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\\"
     echo -e "${NC}"
-    echo -e "${GREEN}AI-assisted Code Engineering Framework v2.2${NC}"
+    echo -e "${GREEN}AI-assisted Code Engineering Framework v2.3${NC}"
     echo ""
 }
 

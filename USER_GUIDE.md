@@ -1,4 +1,4 @@
-# ACE-Framework User Guide v2.2
+# ACE-Framework User Guide v2.3
 
 > A practical guide to using the AI-assisted Code Engineering Framework.
 
@@ -831,6 +831,6 @@ Which skill in .ace/skills/ would help with this?"
 
 ---
 
-_ACE-Framework User Guide v2.2_
+_ACE-Framework User Guide v2.3_
 _Treat AI interactions as structured transactions, not casual conversations._
 

@@ -67,4 +67,4 @@ What checks or reviews ensure compliance?]
 
 ---
 
-*ADR Template - ACE-Framework v2.2*
+*ADR Template - ACE-Framework v2.3*
