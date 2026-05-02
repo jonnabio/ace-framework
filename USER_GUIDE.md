@@ -317,6 +317,9 @@ Skills are detailed procedures for specific tasks. They contain:
 | `error-handling/SKILL.md`      | Exception strategies     |
 | `documentation-generation/SKILL.md`| Auto-generating docs |
 | `state-management/SKILL.md`    | App state & flow         |
+| `agent-design/SKILL.md`        | Autonomous AI agents     |
+| `a2a-communication/SKILL.md`   | Multi-agent protocols    |
+| `mcp-implementation/SKILL.md`  | Model Context Protocol   |
 
 ### Third-Party Skills (Marketplace)
 
@@ -376,6 +379,9 @@ Some keywords automatically suggest skills:
 - "error", "exception", "logging" → `error-handling/SKILL.md`
 - "documentation", "docs", "readme" → `documentation-generation/SKILL.md`
 - "state", "redux", "context" → `state-management/SKILL.md`
+- "agent", "autonomous", "tools" → `agent-design/SKILL.md`
+- "a2a", "multi-agent", "handoff" → `a2a-communication/SKILL.md`
+- "mcp", "protocol", "server" → `mcp-implementation/SKILL.md`
 
 ---
 

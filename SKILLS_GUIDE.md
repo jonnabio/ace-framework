@@ -59,6 +59,9 @@ The framework comes with 19 core skills covering the entire Software Development
 | `prompt-engineering` | prompt, llm, ai | Structuring zero-shot and few-shot LLM prompts. |
 | `model-evaluation` | model, evaluation, ml | Designing metrics and golden datasets for ML. |
 | `feature-engineering` | feature, engineering | Handling nulls, outliers, and data encoding. |
+| `agent-design` | agent, autonomous, tools | Designing autonomous AI agents and execution loops. |
+| `a2a-communication` | a2a, multi-agent | Orchestrating multi-agent systems and handoffs. |
+| `mcp-implementation` | mcp, protocol, server | Implementing Model Context Protocol servers. |
 
 ### Code Quality & Review
 | Skill | Trigger Keywords | Description |

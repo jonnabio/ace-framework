@@ -138,6 +138,9 @@ check_file_warn ".ace/skills/ci-cd-pipeline/SKILL.md"
 check_file_warn ".ace/skills/error-handling/SKILL.md"
 check_file_warn ".ace/skills/documentation-generation/SKILL.md"
 check_file_warn ".ace/skills/state-management/SKILL.md"
+check_file_warn ".ace/skills/agent-design/SKILL.md"
+check_file_warn ".ace/skills/a2a-communication/SKILL.md"
+check_file_warn ".ace/skills/mcp-implementation/SKILL.md"
 echo ""
 
 # Templates

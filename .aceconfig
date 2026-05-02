@@ -49,6 +49,9 @@ skill_triggers:
   error: .ace/skills/error-handling/SKILL.md
   documentation: .ace/skills/documentation-generation/SKILL.md
   state: .ace/skills/state-management/SKILL.md
+  agent: .ace/skills/agent-design/SKILL.md
+  a2a: .ace/skills/a2a-communication/SKILL.md
+  mcp: .ace/skills/mcp-implementation/SKILL.md
 
 # Role routing based on mode
 role_routing:
