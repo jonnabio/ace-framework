@@ -40,7 +40,7 @@ ${colors.cyan}    _    ____ _____   _____                                       
  / ___ \\ |___| |___  |  _|| | | (_| | | | | | |  __/\\ V  V / (_) | |  |   <
 /_/   \\_\\____|_____| |_|  |_|  \\__,_|_| |_| |_|\\___| \\_/\\_/ \\___/|_|  |_|\\_\\
 ${colors.reset}
-${colors.green}AI-assisted Code Engineering Framework v2.3${colors.reset}
+${colors.green}AI-assisted Code Engineering Framework v2.5.0${colors.reset}
 `);
 }
 
