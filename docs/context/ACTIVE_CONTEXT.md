@@ -1,54 +1,52 @@
-﻿# Active Context: [Task Name]
-
-> This file maintains the current state of work.
-> Update after each session or significant change.
-
----
+# Active Context: v2.5.0 Expansion Pack Release
 
 ## Session Metadata
 
-- **Last Updated:** [YYYY-MM-DD HH:MM]
-- **Session ID:** [session-001]
-- **Active Role:** [Architect | Developer | QA Engineer | Incident Responder]
+- **Last Updated:** 2026-05-03 19:12
+- **Session ID:** release-v2.5.0
+- **Active Role:** Scientific Editor
 
 ---
 
 ## Current Objective
 
-[Specific, measurable goal for the current session]
-
-Example: "Implement user registration API endpoint with email validation and password hashing"
+Finalize and document the ACE Framework v2.5.0 "Expansion Pack" release, integrating the Scientific and AI Research packs.
 
 ---
 
 ## Current State
 
 ### Working
-- [Component or feature that is functional]
-- [Another working item]
+- **Expansion Pack Architecture**: Modular config loading via `includes` in `.aceconfig`.
+- **Scientific Expansion Pack**: Bundled with 135+ skills and 3 new roles.
+- **AI Research Expansion Pack**: Bundled with 98+ skills and 2 new roles.
+- **CLI v2.5.0**: Supports `--pack` flag and automated installers.
+- **Version Unification**: v2.5.0 across all core documents and CLI.
 
 ### In Progress
-- [Component or feature currently being worked on]
+- Final release verification.
 
 ### Blocked
-- [Item]: **Blocker:** [Description of what's blocking]
+- None
 
 ---
 
 ## Completed This Session
 
-- [x] [Task that was completed]
-- [x] [Another completed task]
+- [x] Implemented modular configuration loading in `.aceconfig`.
+- [x] Integrated and bundled Scientific Expansion Pack.
+- [x] Integrated and bundled AI Research Expansion Pack (Orchestra).
+- [x] Upgraded CLI to v2.5.0 with automated expansion pack support.
+- [x] Updated `CLAUDE.md` and `.cursorrules` for v2.5.0 standards.
+- [x] Produced ACE Standard Documentation (`v2.5.0_expansion_pack_release_walkthrough.md`).
 
 ---
 
 ## Next Steps
 
-1. [ ] [Immediate next task - should be atomic and testable]
-2. [ ] [Following task]
-3. [ ] [Third task if applicable]
-
-> Keep to 1-3 concrete next steps. Add more as these complete.
+1. [ ] Perform a clean scaffold test of v2.5.0 with both packs.
+2. [ ] Publish CLI v2.5.0 to npm registry.
+3. [ ] Socialize release via the new ACE Framework blog post.
 
 ---
 
@@ -59,38 +57,18 @@ Example: "Implement user registration API endpoint with email validation and pas
 - .ace/standards/security.md
 
 ### Skills
-- [.ace/skills/relevant-skill/SKILL.md if applicable]
-
-### ADRs
-- [docs/adr/ADR-###-relevant-decision.md]
-
----
-
-## Open Questions
-
-- [ ] [Question requiring human decision]
-- [ ] [Technical question needing research]
+- .ace/skills/documentation-generation/SKILL.md
 
 ---
 
 ## Session Notes
 
-[Any context that would be lost without documentation]
-
-- Key decisions made this session
-- Discoveries or learnings
-- Things to remember for next session
-- Commit hashes for reference
+- This session marked a major leap in ACE's capability, transforming it into a specialized platform for Science and AI Engineering.
+- The use of the `Scientific Editor` role to produce the release walkthrough demonstrated the effectiveness of the new documentation pipeline.
 
 ---
 
 ## Context Links
 
-- **Specification:** [docs/requirements/SPEC_FILE.md]
-- **Implementation Plan:** [IMPLEMENTATION_PLAN.md]
-- **Related ADRs:** [docs/adr/ADR-###.md]
-
----
-
-*Remember: Update this file at the end of every session!*
-
+- **Walkthrough:** [docs/planning/v2.5.0_expansion_pack_release_walkthrough.md](file:///c:/Users/jonna/Github/ace-framework/docs/planning/v2.5.0_expansion_pack_release_walkthrough.md)
+- **Integration Plan:** [docs/planning/scientific_skills_integration_plan.md](file:///c:/Users/jonna/Github/ace-framework/docs/planning/scientific_skills_integration_plan.md)
