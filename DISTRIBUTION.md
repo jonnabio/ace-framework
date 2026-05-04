@@ -101,10 +101,10 @@ curl -fsSL https://...init.sh | bash -s -- my-project
 
 ```bash
 # Create zip
-git archive --format=zip --prefix=ace-framework/ HEAD -o ace-framework-v2.3.0.zip
+git archive --format=zip --prefix=ace-framework/ HEAD -o ace-framework-v2.5.0.zip
 
 # Create tarball
-git archive --format=tar.gz --prefix=ace-framework/ HEAD -o ace-framework-v2.3.0.tar.gz
+git archive --format=tar.gz --prefix=ace-framework/ HEAD -o ace-framework-v2.5.0.tar.gz
 ```
 
 #### User Experience
@@ -130,8 +130,8 @@ git archive --format=tar.gz --prefix=ace-framework/ HEAD -o ace-framework-v2.3.0
 
 - [ ] Update version numbers
 - [ ] Update CHANGELOG.md
-- [ ] Create git tag (`git tag v2.3.0`)
-- [ ] Push tag (`git push origin v2.3.0`)
+- [ ] Create git tag (`git tag v2.5.0`)
+- [ ] Push tag (`git push origin v2.5.0`)
 - [ ] GitHub Actions will create release
 - [ ] Update npm package (`cd cli && npm publish`)
 
@@ -289,4 +289,4 @@ When preparing for distribution, update these placeholders:
 
 ---
 
-*Distribution Guide - ACE-Framework v2.3*
+*Distribution Guide - ACE-Framework v2.5.0*

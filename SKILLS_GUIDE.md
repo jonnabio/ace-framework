@@ -42,7 +42,7 @@ Inside the `SKILL.md`, you will find:
 
 ## 2. The Skill Catalog
 
-The framework comes with 22 core skills covering the entire Software Development Life Cycle.
+The framework comes with **22 core skills** covering the entire Software Development Life Cycle, plus **230+ additional skills** available through domain-specific Expansion Packs.
 
 ### Core Engineering
 | Skill | Trigger Keywords | Description |
@@ -85,6 +85,14 @@ The framework comes with 22 core skills covering the entire Software Development
 | `root-cause-analysis` | bug, issue, incident | Running a 5-Whys analysis on production bugs. |
 | `ci-cd-pipeline` | ci, cd, pipeline, deploy | Building GitHub Actions and deployment flows. |
 | `documentation-generation`| documentation, docs, readme | Generating JSDoc, OpenAPI specs, and diagrams. |
+
+### Domain Expansion Packs (v2.5.0+)
+Expansion Packs provide massive collections of specialized skills for specific fields. They are activated via the `includes` directive in `.aceconfig`.
+
+| Pack | Skill Count | Focus Areas |
+|------|-------------|-------------|
+| **Scientific Pack** | 135+ | Bioinformatics (Scanpy), Chemistry (RDKit), Clinical Data, Statsmodels. |
+| **AI Research Pack**| 98+ | LLM Lifecycles, vLLM, DeepSpeed, Axolotl, TRL, Transformers. |
 
 ---
 

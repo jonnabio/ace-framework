@@ -1,4 +1,4 @@
-# ACE-Framework v2.3
+# ACE-Framework v2.5.0
 
 ## AI-assisted Code Engineering
 
@@ -36,23 +36,24 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 │   │   ├── glossary.md        # Domain terminology
 │   │   ├── business-rules.md  # Core business logic
 │   │   └── entities.md        # Domain model definitions
+│   ├── packs/                 # Domain-specific Expansion Packs
+│   │   ├── scientific/        # Scientific Expansion Pack (135+ skills)
+│   │   └── ai-research/       # AI Research Expansion Pack (98+ skills)
 │   ├── prompts/               # Verified "Golden Prompts"
 │   │   ├── analyze-requirements.md
 │   │   ├── extract-transcript.md
 │   │   ├── generate-implementation-plan.md
 │   │   └── verify-implementation.md
 │   ├── roles/                 # BMAD Agentic Role definitions
-│   │   └── roles.md           # All 7 roles in one file
+│   │   └── roles.md           # All 9 roles in one file
 │   ├── schemas/               # Validation definitions
 │   │   └── validation.md
-│   ├── skills/                # Task-specific procedural knowledge
-│   │   ├── api-design.md
-│   │   ├── database-operations.md
-│   │   ├── migration-logic.md
-│   │   ├── refactoring.md
-│   │   ├── root-cause-analysis.md
-│   │   ├── testing-strategy.md
-│   │   └── transcript-analysis.md
+│   ├── skills/                # Task-specific procedural knowledge (AgentSkills.io standard)
+│   │   ├── api-design/
+│   │   │   └── SKILL.md
+│   │   ├── database-operations/
+│   │   │   └── SKILL.md
+│   │   └── ... (22 core skills)
 │   ├── standards/             # Immutable guardrails
 │   │   ├── coding.md
 │   │   ├── security.md
@@ -218,17 +219,10 @@ Actions:
 
 ### B. Skill-Augmentation
 
-Skills are specialized instruction sets in `.ace/skills/` that grant deep technical capabilities.
+ACE provides **22 core skills** covering API design, database operations, testing, and more. Domain-specific capabilities are extended via **Expansion Packs** (Scientific & AI Research), adding **230+ specialized skills**.
 
-**Available Skills:**
-
-- `api-design.md` - REST API conventions and patterns
-- `database-operations.md` - Schema changes and queries
-- `migration-logic.md` - Safe data and schema migrations
-- `refactoring.md` - Code structure improvements
-- `root-cause-analysis.md` - Issue investigation methodology
-- `transcript-analysis.md` - Transcript to requirements extraction
-- `testing-strategy.md` - Test pyramid and coverage
+- Core Skills: `api-design`, `database-operations`, `testing-strategy`, `root-cause-analysis`, etc.
+- Expansion Packs: bioinformatics, chemistry, LLM optimization, MLOps.
 
 **Invocation:**
 
@@ -251,9 +245,11 @@ Seven specialized roles for distinct phases of work. Defined in `.ace/roles/role
 | Developer          | EXECUTION    | Implementation, tests   |
 | QA Engineer        | VERIFICATION | Testing, validation     |
 | Incident Responder | INCIDENT     | RCA, fixes, guards      |
-| Data Scientist     | RESEARCH     | Statistics, experiments |
-| AI Expert          | RESEARCH     | Algorithms, models      |
-| Scientific Editor  | PUBLICATION  | Papers, documentation   |
+| Data Scientist     | RESEARCH     | Statistics, experiments (Scientific Pack) |
+| AI Expert          | RESEARCH     | Algorithms, models (Scientific Pack)      |
+| Scientific Editor  | PUBLICATION  | Papers, documentation (Scientific Pack)   |
+| AI Researcher      | RESEARCH     | Model architecture (AI Research Pack)     |
+| MLOps Engineer     | RESEARCH     | Deployment & serving (AI Research Pack)   |
 
 ### Role Activation
 
@@ -714,5 +710,5 @@ Then await further instructions."
 
 ---
 
-_ACE-Framework v2.3_
+_ACE-Framework v2.5.0_
 _Treat AI interactions as structured transactions, not casual conversations._

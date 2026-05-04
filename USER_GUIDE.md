@@ -1,4 +1,4 @@
-# ACE-Framework User Guide v2.3
+# ACE-Framework User Guide v2.5.0
 
 > A practical guide to using the AI-assisted Code Engineering Framework.
 
@@ -245,9 +245,11 @@ as input for the Analyze phase. Apply the analyze-requirements prompt."
 | **Developer**          | Writing code, implementing features     | Clean code, tests, standards |
 | **QA Engineer**        | Testing, verification                   | Edge cases, regression       |
 | **Incident Responder** | Fixing bugs, investigating issues       | RCA, prevention              |
-| **Data Scientist**     | Analysis, experiments                   | Statistics, rigor            |
-| **AI Expert**          | Algorithm design, model work            | Theory, optimization         |
-| **Scientific Editor**  | Writing papers, documentation           | Clarity, precision           |
+| **Data Scientist**     | Analysis, experiments (Scientific Pack) | Statistics, rigor            |
+| **AI Expert**          | Algorithm design (Scientific Pack)      | Theory, optimization         |
+| **Scientific Editor**  | Writing papers (Scientific Pack)        | Clarity, precision           |
+| **AI Researcher**      | Model architecture (AI Research Pack)   | SOTA, theory, evaluation     |
+| **MLOps Engineer**     | Deployment & serving (AI Research Pack) | vLLM, DeepSpeed, performance |
 
 ### Activating a Role
 
@@ -283,7 +285,7 @@ AI Expert â†’ Data Scientist â†’ Scientific Editor
 
 ## 5. Using Skills
 
-> **Note:** For a complete deep-dive into all 22 skills, how to invoke them, and how to import third-party skills via the CLI, please see the dedicated [SKILLS_GUIDE.md](SKILLS_GUIDE.md).
+> **Note:** For a complete deep-dive into the core skills, expansion pack skills (Scientific & AI Research), how to invoke them, and how to import third-party skills via the CLI, please see the dedicated [SKILLS_GUIDE.md](SKILLS_GUIDE.md).
 
 ### What Are Skills?
 
