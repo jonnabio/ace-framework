@@ -2,7 +2,7 @@
 
 ## Session Metadata
 
-- **Last Updated:** 2026-05-03 19:12
+- **Last Updated:** 2026-05-04 09:20
 - **Session ID:** release-v2.5.0
 - **Active Role:** Scientific Editor
 
@@ -22,9 +22,10 @@ Finalize and document the ACE Framework v2.5.0 "Expansion Pack" release, integra
 - **AI Research Expansion Pack**: Bundled with 98+ skills and 2 new roles.
 - **CLI v2.5.0**: Supports `--pack` flag and automated installers.
 - **Version Unification**: v2.5.0 across all core documents and CLI.
+- **Documentation**: CHANGELOG.md and .aceconfig fully updated for v2.5.0.
 
 ### In Progress
-- Final release verification.
+- None
 
 ### Blocked
 - None
@@ -39,12 +40,15 @@ Finalize and document the ACE Framework v2.5.0 "Expansion Pack" release, integra
 - [x] Upgraded CLI to v2.5.0 with automated expansion pack support.
 - [x] Updated `CLAUDE.md` and `.cursorrules` for v2.5.0 standards.
 - [x] Produced ACE Standard Documentation (`v2.5.0_expansion_pack_release_walkthrough.md`).
+- [x] Updated `CHANGELOG.md` with v2.4.0 and v2.5.0 entries.
+- [x] Fixed `.aceconfig` version and AI Research pack includes.
+- [x] Final release verification and documentation cleanup.
 
 ---
 
 ## Next Steps
 
-1. [ ] Perform a clean scaffold test of v2.5.0 with both packs.
+1. [x] Perform a clean scaffold test of v2.5.0 with both packs.
 2. [ ] Publish CLI v2.5.0 to npm registry.
 3. [ ] Socialize release via the new ACE Framework blog post.
 

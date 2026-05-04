@@ -2,6 +2,27 @@
 
 All notable changes to the ACE Framework will be documented in this file.
 
+## [v2.5.0] - 2026-05-03
+
+### Added
+
+- **AI Research Expansion Pack**: Integrated and bundled 98+ AI engineering skills (vLLM, DeepSpeed, RLHF) from the Orchestra Research collection.
+- **Modular Architecture**: Implemented the `includes` directive in `.aceconfig` for dynamic configuration loading of Expansion Packs.
+- **Role Augmentation**: Added *AI Researcher* and *MLOps Engineer* roles.
+- **Version Unification**: Unified all framework components, CLI, and documentation to v2.5.0.
+
+### Changed
+
+- **CLI v2.5.0**: Enhanced `create-ace-framework` with automated pack installers and configuration wiring.
+
+## [v2.4.0] - 2026-05-03
+
+### Added
+
+- **Scientific Expansion Pack**: Integrated 135+ scientific skills (bioinformatics, chemistry, clinical data) and PhD-level personas.
+- **New Scientific Roles**: Introduced *Data Scientist*, *AI Expert*, and *Scientific Editor* roles.
+- **Expansion Pack Standard**: Defined the `.ace/packs/` directory structure for domain-specific skillsets.
+
 ## [v2.3.0] - 2026-05-01
 
 ### Added
