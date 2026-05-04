@@ -7,8 +7,8 @@ triggers:
   chemistry: .ace/packs/scientific/rdkit/SKILL.md
   docking: .ace/packs/scientific/diffdock/SKILL.md
   literature: .ace/packs/scientific/paper-lookup/SKILL.md
-  document: .ace/packs/scientific/documentation-generation/SKILL.md
-  clinical: .ace/packs/scientific/clinical-trials/SKILL.md
+  document: .ace/skills/documentation-generation/SKILL.md
+  clinical: .ace/packs/scientific/clinical-decision-support/SKILL.md
   statistics: .ace/packs/scientific/statsmodels/SKILL.md
   database: .ace/packs/scientific/database-lookup/SKILL.md
 
