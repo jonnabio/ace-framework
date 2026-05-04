@@ -277,12 +277,40 @@ ${colors.blue}Happy coding with ACE-Framework!${colors.reset}
 `);
 }
 
+// Install an Expansion Pack
+function installExpansionPack(targetDir, packName) {
+  if (packName.toLowerCase() === 'scientific') {
+    log.info('Installing Scientific Expansion Pack...');
+    try {
+      execSync('npx skills add K-Dense-AI/scientific-agent-skills', { 
+        cwd: targetDir, 
+        stdio: 'inherit' 
+      });
+      log.success('Scientific Expansion Pack installed successfully.');
+    } catch (error) {
+      log.error(`Failed to install expansion pack: ${error.message}`);
+    }
+  } else {
+    log.warn(`Unknown expansion pack: ${packName}. Please install it manually.`);
+  }
+}
+
 // Main function
 async function main() {
   printBanner();
 
-  // Get target directory
-  let targetDir = process.argv[2];
+  // Parse arguments
+  let targetDir = null;
+  let packName = null;
+  
+  for (let i = 2; i < process.argv.length; i++) {
+    const arg = process.argv[i];
+    if (arg === '--pack' && i + 1 < process.argv.length) {
+      packName = process.argv[++i];
+    } else if (!arg.startsWith('-') && !targetDir) {
+      targetDir = arg;
+    }
+  }
 
   if (!targetDir) {
     targetDir = await prompt('Enter project directory (default: ./ace-project): ');
@@ -331,6 +359,11 @@ async function main() {
 
   // Create .gitignore
   createGitignore(targetDir);
+
+  // Install expansion pack if specified
+  if (packName) {
+    installExpansionPack(targetDir, packName);
+  }
 
   // Print next steps
   printNextSteps(targetDir, projectName);

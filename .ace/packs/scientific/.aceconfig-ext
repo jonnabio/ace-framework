@@ -1,0 +1,18 @@
+# .ace/packs/scientific/.aceconfig-ext
+# Scientific Expansion Pack Configuration
+
+triggers:
+  genomics: .ace/packs/scientific/scanpy/SKILL.md
+  bioinformatics: .ace/packs/scientific/biopython/SKILL.md
+  chemistry: .ace/packs/scientific/rdkit/SKILL.md
+  docking: .ace/packs/scientific/diffdock/SKILL.md
+  literature: .ace/packs/scientific/paper-lookup/SKILL.md
+  document: .ace/packs/scientific/documentation-generation/SKILL.md
+  clinical: .ace/packs/scientific/clinical-trials/SKILL.md
+  statistics: .ace/packs/scientific/statsmodels/SKILL.md
+  database: .ace/packs/scientific/database-lookup/SKILL.md
+
+roles_augmented:
+  - Data Scientist
+  - AI Expert
+  - Scientific Editor

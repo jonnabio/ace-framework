@@ -50,6 +50,35 @@ Step 2: Architectural Diagrams
 - Keep ADRs (Architecture Decision Records) updated for major changes.
 ```
 
+### 3. ACE Standard Documentation Pipeline
+
+When prompted to "Document as per the ACE standard", execute this structured pipeline:
+
+```markdown
+Step 1: Context Aggregation
+- Read `docs/context/ACTIVE_CONTEXT.md` to understand the completed task.
+- Ingest relevant raw outputs, logs, or Jupyter notebooks generated during EXECUTION.
+
+Step 2: Scientific Translation (Requires Scientific Expansion Pack)
+- Activate the *Scientific Editor* role.
+- Convert raw experimental results into academic-toned, publication-ready text.
+- If external citations are needed, invoke `Paper Lookup` and `Citation Management` skills to find and properly format references.
+
+Step 3: Visual & Structural Generation
+- Use Mermaid.js to generate architectural, pipeline, or network diagrams.
+- If data was analyzed, structure the results visually.
+
+Step 4: Artifact Production
+- Write the final output to the appropriate ACE standard artifact:
+  - Task completion: `docs/planning/walkthrough.md`
+  - Issue resolution: `docs/rca/RCA-XXX.md`
+  - Experiment conclusion: `docs/research/experiment_results.md`
+
+Step 5: Session Wrap-Up
+- Update `docs/context/ACTIVE_CONTEXT.md` indicating documentation is complete.
+- Request the user to review the generated artifact.
+```
+
 ---
 
 ## Invocation
@@ -57,4 +86,9 @@ Step 2: Architectural Diagrams
 ```markdown
 "Apply the documentation-generation skill from .ace/skills/documentation-generation/SKILL.md
 to add JSDoc comments and generate a Mermaid diagram for this module."
+```
+
+Or for the full pipeline:
+```markdown
+"Document as per the ACE standard."
 ```

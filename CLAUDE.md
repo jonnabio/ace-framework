@@ -101,6 +101,16 @@ To give the Architect the ability to parse PDFs, Word docs, and Excel files:
 ```
 *Note: This allows you to directly pass binary documents into the `.ace/skills/transcript-analysis/SKILL.md` workflow or analyze-requirements prompt.*
 
+### Expansion Packs
+
+To keep the core framework lightweight, large domain-specific skill collections are managed as **Expansion Packs**.
+
+**Scientific Expansion Pack**: Enables the *Data Scientist*, *AI Expert*, and *Scientific Editor* roles with 135+ scientific skills (e.g., bioinformatics, chemistry, clinical data).
+```bash
+npx skills add K-Dense-AI/scientific-agent-skills
+```
+*Note: Installing this pack dynamically loads `.ace/packs/scientific/.aceconfig-ext` into your core `.aceconfig`.*
+
 ### Regression Guard Protocol
 
 Before modifying any file: check `docs/rca/regression-guards.yaml`. If guarded, read the associated RCA, understand the invariants, and run the specified regression tests after modification.

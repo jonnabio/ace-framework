@@ -1,8 +1,12 @@
 # .aceconfig - ACE Framework Configuration
 # Version: 2.2
 
-version: "2.2"
+version: "2.3"
 project_name: "ACE Framework Project"
+
+# Expansion Packs (Modular config loading)
+includes:
+  - .ace/packs/scientific/.aceconfig-ext
 
 # Entry point for AI agents - files always loaded
 entry:

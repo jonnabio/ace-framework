@@ -1,4 +1,4 @@
-﻿# ACE-Framework Cursor Rules
+# ACE-Framework Cursor Rules
 # This file configures AI behavior in Cursor IDE
 
 ## Project Context
@@ -45,6 +45,10 @@ Activate appropriate role for the task:
 - QA Engineer (VERIFICATION) - Testing and validation
 - Incident Responder (INCIDENT) - RCA and fixes
 
+## Expansion Packs
+
+This framework supports modular Expansion Packs. The primary supported pack is the **Scientific Expansion Pack** (`K-Dense-AI/scientific-agent-skills`), which enables the **Data Scientist**, **AI Expert**, and **Scientific Editor** roles. Install using: `npx skills add K-Dense-AI/scientific-agent-skills`.
+
 ## Skills
 
 For specialized tasks, apply relevant skill:
@@ -56,6 +60,8 @@ For specialized tasks, apply relevant skill:
 - .ace/skills/testing-strategy/SKILL.md
 - .ace/skills/code-review/SKILL.md
 - .ace/skills/transcript-analysis/SKILL.md
+
+**(If Expansion Packs are installed, their skills are also available in `.ace/packs/`)**
 
 ## Before Modifying Files
 
