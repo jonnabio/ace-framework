@@ -290,6 +290,17 @@ function installExpansionPack(targetDir, packName) {
     } catch (error) {
       log.error(`Failed to install expansion pack: ${error.message}`);
     }
+  } else if (packName.toLowerCase() === 'ai-research') {
+    log.info('Installing AI Research Expansion Pack...');
+    try {
+      execSync('npx @orchestra-research/ai-research-skills', { 
+        cwd: targetDir, 
+        stdio: 'inherit' 
+      });
+      log.success('AI Research Expansion Pack installed successfully.');
+    } catch (error) {
+      log.error(`Failed to install expansion pack: ${error.message}`);
+    }
   } else {
     log.warn(`Unknown expansion pack: ${packName}. Please install it manually.`);
   }

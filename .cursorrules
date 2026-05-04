@@ -47,7 +47,9 @@ Activate appropriate role for the task:
 
 ## Expansion Packs
 
-This framework supports modular Expansion Packs. The primary supported pack is the **Scientific Expansion Pack** (`K-Dense-AI/scientific-agent-skills`), which enables the **Data Scientist**, **AI Expert**, and **Scientific Editor** roles. Install using: `npx skills add K-Dense-AI/scientific-agent-skills`.
+This framework supports modular Expansion Packs. Supported packs include:
+1. **Scientific Expansion Pack** (`K-Dense-AI/scientific-agent-skills`): Enables the **Data Scientist**, **AI Expert**, and **Scientific Editor** roles. Install using: `npx skills add K-Dense-AI/scientific-agent-skills`.
+2. **AI Research Expansion Pack** (`Orchestra-Research/AI-research-SKILLs`): Enables the **AI Researcher** and **MLOps Engineer** roles with 98+ AI engineering skills. Install using: `npx @orchestra-research/ai-research-skills`.
 
 ## Skills
 

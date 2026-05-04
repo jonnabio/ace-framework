@@ -1,0 +1,20 @@
+# .ace/packs/ai-research/.aceconfig-ext
+# AI Research Expansion Pack Configuration
+
+triggers:
+  fine-tuning: .ace/packs/ai-research/axolotl/SKILL.md
+  rlhf: .ace/packs/ai-research/trl-fine-tuning/SKILL.md
+  post-training: .ace/packs/ai-research/openrlhf/SKILL.md
+  inference: .ace/packs/ai-research/vllm/SKILL.md
+  distributed-training: .ace/packs/ai-research/deepspeed/SKILL.md
+  mechanistic-interp: .ace/packs/ai-research/transformer-lens/SKILL.md
+  rag: .ace/packs/ai-research/chroma/SKILL.md
+  agents: .ace/packs/ai-research/langchain/SKILL.md
+  evaluation: .ace/packs/ai-research/lm-evaluation-harness/SKILL.md
+  optimization: .ace/packs/ai-research/flash-attention/SKILL.md
+  architecture: .ace/packs/ai-research/litgpt/SKILL.md
+
+roles_augmented:
+  - AI Researcher
+  - Machine Learning Engineer
+  - MLOps Engineer

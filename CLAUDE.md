@@ -111,6 +111,12 @@ npx skills add K-Dense-AI/scientific-agent-skills
 ```
 *Note: Installing this pack dynamically loads `.ace/packs/scientific/.aceconfig-ext` into your core `.aceconfig`.*
 
+**AI Research Expansion Pack**: Enables the *AI Researcher* and *MLOps Engineer* roles with 98+ AI engineering skills (e.g., vLLM, DeepSpeed, RLHF, Axolotl).
+```bash
+npx @orchestra-research/ai-research-skills
+```
+*Note: Installing this pack dynamically loads `.ace/packs/ai-research/.aceconfig-ext` into your core `.aceconfig`.*
+
 ### Regression Guard Protocol
 
 Before modifying any file: check `docs/rca/regression-guards.yaml`. If guarded, read the associated RCA, understand the invariants, and run the specified regression tests after modification.
