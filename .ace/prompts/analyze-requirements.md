@@ -38,7 +38,11 @@ I need to analyze requirements before implementation. Please:
    - What decisions need to be made?
    - What dependencies are unclear?
 
-5. **Summarize in this format**:
+5. **Generate a `docs/progress/tasks.json` file**:
+   - Break down the implementation into atomic tasks.
+   - Format: `[{"id": "T1", "description": "...", "status": "pending", "criteria": "..."}]`
+
+6. **Summarize in this format**:
 
    ## Analysis Summary
 
@@ -62,7 +66,7 @@ I need to analyze requirements before implementation. Please:
    [Yes/No - with blockers if No]
 
 Do not proceed to implementation planning until I confirm the
-analysis is complete and accurate.
+analysis is complete and accurate. You MUST output the `tasks.json` file as part of your analysis.
 ```
 
 ---

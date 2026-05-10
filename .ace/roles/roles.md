@@ -1,4 +1,4 @@
-﻿# BMAD Agentic Roles
+# BMAD Agentic Roles
 
 **Status**: Active
 **Philosophy**: Specialized personas for distinct phases of work.
@@ -40,14 +40,16 @@ requirements extraction, and architectural decisions. Do not write implementatio
 **Responsibilities**:
 
 - Writing code that strictly follows the Architect's plan.
-- Updating `docs/planning/task_checklist.md` iteratively.
+- Reading the first `pending` task from `docs/progress/tasks.json` and marking it `in_progress`.
 - Adhering to `docs/context/system_patterns.md`.
 - Writing unit tests for new code.
 - Following `.ace/standards/coding.md` and `.ace/standards/security.md`.
+- **Executing `.ace/scripts/verify.sh` before modifying any code to ensure a clean state.**
 - **Committing immediately after each atomic task (No batching).**
 - **Checking `docs/rca/regression-guards.yaml` before modifying any file.**
 - **Ensuring guarded file invariants are maintained.**
 - **Running regression tests for any guarded files modified.**
+- **Updating `docs/progress/tasks.json` to `done` and logging output to `docs/progress/task_[ID]_result.md` only if `verify.sh` passes.**
 
 **Output**: Source code, Unit Tests.
 
@@ -87,6 +89,7 @@ Check regression guards before modifying files."
 - **Verifying all regression guards for modified files.**
 - **Running all regression tests from `regression-guards.yaml`.**
 - **Flagging potential guard violations.**
+- **Modifying `.ace/prompts/` or `.ace/standards/` dynamically if a recurring failure indicates the harness needs improvement.**
 
 **Output**: `walkthrough.md`, Bug Reports, Test Results.
 
@@ -228,16 +231,18 @@ into compelling narratives."
 
 ```
 Architect completes â†’ Developer begins
-Handoff: implementation_plan.md approved
+Handoff: implementation_plan.md and docs/progress/tasks.json approved
 Pre-check: Regression guards reviewed
+Protocol: START A NEW LLM SESSION (Context Flush). Only load the specific task and implementation_plan.md.
 ```
 
 ### EXECUTION â†’ VERIFICATION
 
 ```
 Developer completes â†’ QA Engineer begins
-Handoff: Code committed, tests written
-Pre-check: Regression tests identified
+Handoff: Code committed, tests written, task_[ID]_result.md generated
+Pre-check: verify.sh executes successfully
+Protocol: START A NEW LLM SESSION (Context Flush). Do not inherit Developer context.
 ```
 
 ### Issue Discovered â†’ INCIDENT
