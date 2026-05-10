@@ -1,7 +1,15 @@
-# ACE Framework v2.5.0
+# ACE Framework v2.6.0
 
 > **AI-assisted Code Engineering Framework**
 > A rigorous, IDE-agnostic standard for professional development teams using AI agents. Treats AI interactions as structured transactions, not casual conversations.
+
+## v2.6.0 Features: The Harness Engineering Update
+
+- **Context Flushing (Clean Slate)**: Strict protocols to start fresh LLM sessions between roles to prevent context degradation and hallucinations.
+- **File-Based State Tracking**: Replaced conversational context with explicit, atomic task queues (`tasks.json`) and progress logs to avoid the "broken telephone" problem.
+- **Multi-Agent Orchestration**: Refined role boundaries separating the Architect (Planner) from isolated Developer (Implementer) and QA executions.
+- **Pre/Post-Flight Validation**: Mandatory gatekeeping via `verify.sh` to programmatically prove code health before an agent starts working and before marking a task complete.
+- **Self-Improving Harness**: Empowered QA/Reviewer roles to dynamically update prompts and standards to permanently eliminate friction.
 
 ## v2.5.0 Features: The Expansion Pack Update
 
