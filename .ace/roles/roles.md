@@ -89,7 +89,8 @@ Check regression guards before modifying files."
 - **Verifying all regression guards for modified files.**
 - **Running all regression tests from `regression-guards.yaml`.**
 - **Flagging potential guard violations.**
-- **Modifying `.ace/prompts/` or `.ace/standards/` dynamically if a recurring failure indicates the harness needs improvement.**
+- **Assuming the Reflector role to distill failures into generalizable natural language lessons.**
+- **Appending to `.ace/prompts/` or `.ace/standards/` via `.ace/scripts/update_harness.sh` if a recurring failure indicates the harness needs improvement. DO NOT rewrite files.**
 
 **Output**: `walkthrough.md`, Bug Reports, Test Results.
 
@@ -127,7 +128,8 @@ Verify all regression guards are satisfied."
 - **Implementing permanent fix.**
 - **Adding regression tests.**
 - **Creating regression guard in `regression-guards.yaml`.**
-- **Updating `.ace/standards/` if new rule needed.**
+- **Assuming the Reflector role to distill the root cause into a generalized lesson.**
+- **Appending to `.ace/standards/` using `.ace/scripts/update_harness.sh` if a new rule is needed. DO NOT rewrite files.**
 
 **Output**: `RCA-XXX.md`, Regression Tests, Regression Guard, Standard Updates.
 
