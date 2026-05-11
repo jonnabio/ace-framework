@@ -1,16 +1,18 @@
-# ACE Framework v2.6.1
+# ACE Framework v2.6.2
 
 > **AI-assisted Code Engineering Framework**
 > A rigorous, IDE-agnostic standard for professional development teams using AI agents. Treats AI interactions as structured transactions, not casual conversations.
 
-## v2.6.1 Features: The Harness Engineering Update
+## v2.6.2 Features: The Agentic Context Engineering (ACE) Update
 
 - **Context Flushing (Clean Slate)**: Strict protocols to start fresh LLM sessions between roles to prevent context degradation and hallucinations.
-- **File-Based State Tracking**: Replaced conversational context with explicit, atomic task queues (`tasks.json`) and progress logs to avoid the "broken telephone" problem.
-- **Multi-Agent Orchestration**: Refined role boundaries separating the Architect (Planner) from isolated Developer (Implementer) and QA executions.
-- **Pre/Post-Flight Validation**: Mandatory gatekeeping via `verify.sh` to programmatically prove code health before an agent starts working and before marking a task complete.
-- **The Reflector Step**: Agents must distill raw execution failures into generalized natural language lessons before attempting fixes.
+- **The Triad (Generator, Reflector, Curator)**: Formalized the ACE paper's modular cycle:
+  1. **Generator**: Developer agent executes the task using explicit **ReAct** (Reason+Act) traces.
+  2. **Reflector**: QA agent distills natural language lessons from dense ReAct feedback.
+  3. **Curator**: Integrates insights into the evolving playbook to manage redundancy.
+- **File-Based State Tracking**: Replaced conversational context with explicit, atomic task queues (`tasks.json`) and progress logs.
 - **Anti-Collapse Appends**: To prevent "Brevity Bias," agents are forbidden from rewriting standard files, updating them deterministically via `update_harness.sh` instead.
+- **White-Box Auditing**: Playbooks (`.ace/standards/`) can be manually reviewed and sanitized by human domain experts to ensure compliance without requiring ML fine-tuning.
 
 ## v2.5.0 Features: The Expansion Pack Update
 

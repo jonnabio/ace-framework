@@ -33,7 +33,7 @@ requirements extraction, and architectural decisions. Do not write implementatio
 
 ---
 
-## 2. The Developer
+## 2. The Developer (The Generator)
 
 **Trigger**: `Mode` is EXECUTION.
 
@@ -41,6 +41,7 @@ requirements extraction, and architectural decisions. Do not write implementatio
 
 - Writing code that strictly follows the Architect's plan.
 - Reading the first `pending` task from `docs/progress/tasks.json` and marking it `in_progress`.
+- Acting as the **Generator**, explicitly producing an action trace (Thought -> Action -> Observation) in `docs/progress/task_[ID]_result.md`.
 - Adhering to `docs/context/system_patterns.md`.
 - Writing unit tests for new code.
 - Following `.ace/standards/coding.md` and `.ace/standards/security.md`.
@@ -89,8 +90,8 @@ Check regression guards before modifying files."
 - **Verifying all regression guards for modified files.**
 - **Running all regression tests from `regression-guards.yaml`.**
 - **Flagging potential guard violations.**
-- **Assuming the Reflector role to distill failures into generalizable natural language lessons.**
-- **Appending to `.ace/prompts/` or `.ace/standards/` via `.ace/scripts/update_harness.sh` if a recurring failure indicates the harness needs improvement. DO NOT rewrite files.**
+- **Assuming the Reflector role to distill failures from the Generator's trace into generalizable natural language lessons.**
+- **Assuming the Curator role to append insights to `.ace/prompts/` or `.ace/standards/` via `.ace/scripts/update_harness.sh`, explicitly managing redundancy. DO NOT rewrite files.**
 
 **Output**: `walkthrough.md`, Bug Reports, Test Results.
 
@@ -129,7 +130,7 @@ Verify all regression guards are satisfied."
 - **Adding regression tests.**
 - **Creating regression guard in `regression-guards.yaml`.**
 - **Assuming the Reflector role to distill the root cause into a generalized lesson.**
-- **Appending to `.ace/standards/` using `.ace/scripts/update_harness.sh` if a new rule is needed. DO NOT rewrite files.**
+- **Assuming the Curator role to integrate insights to `.ace/standards/` using `.ace/scripts/update_harness.sh`, managing playbook redundancy. DO NOT rewrite files.**
 
 **Output**: `RCA-XXX.md`, Regression Tests, Regression Guard, Standard Updates.
 

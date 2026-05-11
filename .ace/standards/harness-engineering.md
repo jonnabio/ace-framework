@@ -1,7 +1,7 @@
 # Harness Engineering Standard
 
 **Status**: Active
-**Version**: 2.6.1
+**Version**: 2.6.2
 **Philosophy**: The AI is not just a chatbot; the repository itself is the "harness" that controls, validates, and empowers the AI.
 
 ---
@@ -30,9 +30,9 @@ Monolithic agents given overly broad tasks perform poorly. Complex tasks must be
 
 **Standard:**
 - **The Architect (Leader)** creates the `tasks.json` queue and sets the architecture. They do not write production code.
-- **The Developer (Subagent)** is spun up specifically to pick up a single task from `tasks.json`. Once the task is completed and verified, the Developer's session is terminated.
-- **The QA Engineer / Reviewer (Subagent)** acts as an independent verifier. 
-- **The Reflector (Distillation)** is a mandatory step when failures occur. Before attempting a fix, the agent must distill the raw failure into a *generalizable natural language lesson* rather than a hyper-specific code patch.
+- **The Generator (Developer Subagent)** is spun up specifically to pick up a single task from `tasks.json`, execute it, and produce an action trace. Once verified, their session is terminated.
+- **The Reflector (QA/Incident Subagent)** analyzes feedback from the Generator (success/failure) to distill raw execution traces into *generalizable natural language lessons*.
+- **The Curator (Gatekeeper)** takes the distilled lessons and safely integrates them into the evolving playbook (standards/prompts) using incremental, deterministic updates to control redundancy.
 
 ## 4. Pre-Flight & Post-Flight Validation
 
@@ -48,7 +48,7 @@ An AI's assertion that "the code works" is insufficient. The harness must prove 
 The `.ace/` directory and its contents are just code, which means the AI can improve its own operating system.
 
 **Standard:**
-- If an agent identifies a recurring failure pattern, it must first distill the failure into a generalizable rule (Reflector step).
-- To prevent **Context Collapse** and **Brevity Bias**, agents are **strictly forbidden** from rewriting entire prompt or standard files. 
+- If the Generator identifies a recurring failure pattern, the Reflector must first distill the failure into a generalizable rule.
+- To prevent **Context Collapse** and **Brevity Bias**, the Curator is **strictly forbidden** from rewriting entire prompt or standard files. 
 - Updates to the harness must be applied using a deterministic append operation (e.g., executing `.ace/scripts/update_harness.sh`) which safely concatenates the new rule to the bottom of the target file.
-- The framework evolves dynamically and permanently via cumulative learning, without losing previously distilled domain knowledge.
+- The Curator is responsible for managing redundancy by categorizing insights, ensuring the framework evolves dynamically and permanently via cumulative learning.
