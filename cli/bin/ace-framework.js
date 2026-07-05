@@ -50,6 +50,7 @@ Commands:
 
 Loop options:
   --dry-run             Report queue state and next action; change nothing.
+  --report              Print the telemetry report and exit.
   --max-iterations N    Stop after N attempts this run.
   --runner NAME         Override defaults.runner from tasks.json.
   --no-reflect          Skip the Reflector step on failures.
@@ -118,10 +119,11 @@ function cmdAddSkill(args) {
 // --- loop ---
 
 function parseLoopArgs(args) {
-  const opts = { dryRun: false, maxIterations: undefined, runnerName: undefined, reflect: true };
+  const opts = { dryRun: false, maxIterations: undefined, runnerName: undefined, reflect: true, report: false };
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (arg === '--dry-run') opts.dryRun = true;
+    else if (arg === '--report') opts.report = true;
     else if (arg === '--no-reflect') opts.reflect = false;
     else if (arg === '--max-iterations') {
       opts.maxIterations = Number.parseInt(args[++i], 10);
@@ -151,6 +153,14 @@ async function cmdLoop(args) {
   }
 
   const projectDir = process.cwd();
+  const telemetry = require('../lib/telemetry');
+  const metricsPath = path.join(projectDir, telemetry.DEFAULT_LOG_REL);
+
+  if (opts.report) {
+    console.log(telemetry.formatReport(telemetry.computeReport(telemetry.readEvents(metricsPath))));
+    process.exit(0);
+  }
+
   const queuePath = path.join(projectDir, 'docs', 'progress', 'tasks.json');
   if (!fs.existsSync(queuePath)) {
     log.error('No task queue found at docs/progress/tasks.json.');
@@ -205,6 +215,7 @@ async function cmdLoop(args) {
     dryRun: opts.dryRun,
     maxIterations: opts.maxIterations,
     reflect: reflectFn,
+    onEvent: telemetry.createEmitter(metricsPath, log),
     log: console,
   });
   process.exit(result.exitCode);

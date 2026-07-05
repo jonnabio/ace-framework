@@ -38,6 +38,23 @@ exhausted, or stall detected). `skipped` marks tasks descoped by the Architect.
 
 ## Telemetry
 
-Loop telemetry lands in `.ace/feedback/loop-metrics.jsonl` (one JSON line per
-attempt). The format is defined in v2.7 task T009 and documented here once it
-ships.
+Loop telemetry lands in `.ace/feedback/loop-metrics.jsonl` — one JSON object
+per line, append-only, **metadata only** (never prompts, code, or trace
+contents). View the summary with `ace-framework loop --report`.
+
+Events and their fields (all events carry `ts` ISO timestamp):
+
+| event | fields |
+| ----- | ------ |
+| `attempt_start` | `task`, `attempt`, `runner` |
+| `attempt_verified` | `task`, `attempt`, `duration_ms` |
+| `attempt_failed` | `task`, `attempt`, `fingerprint`, `decision` (retry\|block), `duration_ms` |
+| `task_blocked` | `task`, `attempt`, `fingerprint` |
+| `runner_error` | `task`, `attempt`, `detail` (error message head) |
+| `loop_complete` | — |
+
+The report computes tasks touched, total attempts, first-pass rate, average
+attempts per verified task, blocked count, and repeat failure fingerprints
+(the same fingerprint failing more than once marks a playbook-rule
+candidate). A rising first-pass rate over time is the evidence that the
+self-improving harness is actually improving.
