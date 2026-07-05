@@ -120,6 +120,9 @@ init_new_project() {
         cp "$target/.ace-temp/ACE-SPEC.md" "$target/" 2>/dev/null || true
         cp "$target/.ace-temp/USER_GUIDE.md" "$target/" 2>/dev/null || true
 
+        # Ensure task-state directory exists (v2.7 Loop Engineering)
+        mkdir -p "$target/docs/progress"
+
         # Cleanup
         rm -rf "$target/.ace-temp"
         print_success "Framework files copied"

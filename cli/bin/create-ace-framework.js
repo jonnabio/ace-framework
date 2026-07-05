@@ -198,6 +198,28 @@ Initialize and configure the ACE-Framework for ${projectName}.
   }
 }
 
+// Ensure docs/progress/ exists with its README (v2.7 Loop Engineering).
+// The clone path copies it with docs/, but bundled templates may predate it.
+function ensureProgressDir(targetDir) {
+  const progressDir = path.join(targetDir, 'docs', 'progress');
+  fs.mkdirSync(progressDir, { recursive: true });
+
+  const readmePath = path.join(progressDir, 'README.md');
+  if (!fs.existsSync(readmePath)) {
+    fs.writeFileSync(readmePath, `# docs/progress/ — File-Based Task State
+
+Working memory of the ACE loop. The task queue lives in \`tasks.json\`
+(schema: \`.ace/schemas/tasks.schema.json\`); Generators write
+\`task_<ID>_result.md\` progress logs here so state survives context flushes.
+
+Validate the queue with:
+
+    node cli/lib/validate-tasks.js docs/progress/tasks.json
+`);
+    log.success('Created docs/progress/');
+  }
+}
+
 // Create .gitignore if not exists
 function createGitignore(targetDir) {
   const gitignorePath = path.join(targetDir, '.gitignore');
@@ -400,6 +422,9 @@ async function main() {
 
   // Customize project
   customizeProject(targetDir, projectName);
+
+  // Ensure the task-state directory exists (v2.7)
+  ensureProgressDir(targetDir);
 
   // Create .gitignore
   createGitignore(targetDir);

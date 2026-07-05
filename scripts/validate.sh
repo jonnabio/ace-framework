@@ -23,14 +23,17 @@ print_ok() {
     echo -e "${GREEN}OK${NC}"
 }
 
+# Note: ERRORS=$((ERRORS+1)) rather than ((ERRORS++)) — the latter returns
+# exit status 1 when the pre-increment value is 0, which kills the script
+# under `set -e` before the summary is printed.
 print_fail() {
     echo -e "${RED}FAIL${NC}"
-    ((ERRORS++))
+    ERRORS=$((ERRORS+1))
 }
 
 print_warn() {
     echo -e "${YELLOW}WARN${NC}"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS+1))
 }
 
 # Check directory exists
@@ -93,6 +96,25 @@ check_dir "docs/planning"
 check_dir "docs/rca"
 check_dir "docs/requirements"
 check_dir "docs/inputs"
+check_dir "docs/progress"
+echo ""
+
+# Task queue (v2.7 Loop Engineering)
+echo "Task Queue:"
+check_file ".ace/schemas/tasks.schema.json"
+check_file "docs/progress/README.md"
+if [ -f "docs/progress/tasks.json" ]; then
+    print_check "tasks.json against schema"
+    if ! command -v node > /dev/null 2>&1; then
+        print_warn
+        echo "  node not found; cannot validate docs/progress/tasks.json"
+    elif node cli/lib/validate-tasks.js docs/progress/tasks.json > /dev/null 2>&1; then
+        print_ok
+    else
+        print_fail
+        node cli/lib/validate-tasks.js docs/progress/tasks.json 2>&1 | sed 's/^/  /' || true
+    fi
+fi
 echo ""
 
 # Core files

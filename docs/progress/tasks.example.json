@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "plan_ref": "docs/planning/implementation_plan_v2.7_loop_engineering.md",
+  "created": "2026-07-04T10:00:00Z",
+  "updated": "2026-07-04T14:32:10Z",
+  "defaults": {
+    "max_attempts": 3,
+    "runner": "claude-code",
+    "verify_cmd": ".ace/scripts/verify.sh"
+  },
+  "tasks": [
+    {
+      "id": "T001",
+      "name": "Add pagination to /api/users",
+      "objective": "GET /api/users accepts ?page and ?limit query params, returns X-Total-Count header, and existing unpaginated callers keep working via defaults (page=1, limit=50).",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "modify": ["src/routes/users.ts", "src/services/user-service.ts"],
+        "create": ["tests/api/users-pagination.test.ts"]
+      },
+      "depends_on": [],
+      "complexity": "M",
+      "acceptance_cmd": "npm test -- users-pagination",
+      "attempts": 1,
+      "result_file": "docs/progress/task_T001_result.md",
+      "failures": []
+    },
+    {
+      "id": "T002",
+      "name": "Paginated user list in frontend",
+      "objective": "UserList component consumes the paginated endpoint from T001, renders pager controls, and preserves the current sort order across page changes.",
+      "status": "blocked",
+      "role": "Developer",
+      "files": {
+        "modify": ["web/src/components/UserList.tsx"]
+      },
+      "depends_on": ["T001"],
+      "complexity": "M",
+      "attempts": 2,
+      "failures": [
+        {
+          "at": "2026-07-04T13:05:44Z",
+          "summary": "UserList.test.tsx fails: pager resets sort order to default on page change.",
+          "fingerprint": "9f3ac1d20b47",
+          "trace_ref": "docs/progress/task_T002_attempt1_trace.md"
+        },
+        {
+          "at": "2026-07-04T14:31:58Z",
+          "summary": "Identical failure: pager resets sort order to default on page change.",
+          "fingerprint": "9f3ac1d20b47",
+          "trace_ref": "docs/progress/task_T002_attempt2_trace.md"
+        }
+      ],
+      "blocked_reason": "Stall detected: same failure fingerprint on two consecutive attempts. Human decision needed: sort state may belong in URL params (architectural choice, candidate ADR) rather than component state."
+    },
+    {
+      "id": "T003",
+      "name": "Document pagination contract",
+      "objective": "docs/requirements/ and the API reference describe the pagination params, defaults, and X-Total-Count header introduced in T001.",
+      "status": "pending",
+      "role": "Developer",
+      "depends_on": ["T001", "T002"],
+      "complexity": "S",
+      "attempts": 0
+    }
+  ]
+}
