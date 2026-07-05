@@ -1,78 +1,101 @@
-# Active Context: v2.5.0 Expansion Pack Release
+# Active Context: v2.7 Loop Engineering — M1 Complete
 
 ## Session Metadata
 
-- **Last Updated:** 2026-05-04 09:20
-- **Session ID:** release-v2.5.0
-- **Active Role:** Scientific Editor
+- **Last Updated:** 2026-07-05
+- **Session ID:** v2.7-loop-engineering-m1
+- **Active Role:** Developer
+- **Mode:** EXECUTION
 
 ---
 
 ## Current Objective
 
-Finalize and document the ACE Framework v2.5.0 "Expansion Pack" release, integrating the Scientific and AI Research packs.
+Execute the approved v2.7 Loop Engineering implementation plan
+(docs/planning/implementation_plan_v2.7_loop_engineering.md), turning the
+v2.6 Triad theory into an executable, bounded loop.
 
 ---
 
 ## Current State
 
 ### Working
-- **Expansion Pack Architecture**: Modular config loading via `includes` in `.aceconfig`.
-- **Scientific Expansion Pack**: Bundled with 135+ skills and 3 new roles.
-- **AI Research Expansion Pack**: Bundled with 98+ skills and 2 new roles.
-- **CLI v2.5.0**: Supports `--pack` flag and automated installers.
-- **Version Unification**: v2.5.0 across all core documents and CLI.
-- **Documentation**: CHANGELOG.md and .aceconfig fully updated for v2.5.0.
+
+- **Branch**: `feature/v2.7-loop-engineering-m1` (branched from main after
+  committing the pre-existing v2.6.2 version-sync WIP found in the tree).
+- **T001 (done)**: `.ace/schemas/tasks.schema.json` (JSON Schema 2020-12) +
+  `docs/progress/` (README, tasks.example.json) + zero-dependency validator
+  `cli/lib/validate-tasks.js` enforcing schema and cross-field loop
+  invariants; wired into `scripts/validate.sh`, CLI scaffold, and init.sh.
+- **T002 (done)**: `.ace/scripts/verify.sh` is a real gate — runs commands
+  from `.aceconfig`'s new `verify:` block, exits non-zero on failure,
+  fails when unconfigured, emits `VERIFY_RESULT=pass|fail gate=<name>`.
+- **T003 (done)**: `cli/lib/loop-guards.js` — pure retry/block decisions
+  (budget exhaustion + consecutive-fingerprint stall detection) with
+  normalized failure fingerprinting.
+- **Tests**: 31 passing via `npm test` in cli/ (also the configured verify
+  gate). `scripts/validate.sh` passes.
 
 ### In Progress
-- None
+
+- None — M1 milestone complete.
 
 ### Blocked
-- None
+
+- None.
 
 ---
 
 ## Completed This Session
 
-- [x] Implemented modular configuration loading in `.aceconfig`.
-- [x] Integrated and bundled Scientific Expansion Pack.
-- [x] Integrated and bundled AI Research Expansion Pack (Orchestra).
-- [x] Upgraded CLI to v2.5.0 with automated expansion pack support.
-- [x] Updated `CLAUDE.md` and `.cursorrules` for v2.5.0 standards.
-- [x] Produced ACE Standard Documentation (`v2.5.0_expansion_pack_release_walkthrough.md`).
-- [x] Updated `CHANGELOG.md` with v2.4.0 and v2.5.0 entries.
-- [x] Fixed `.aceconfig` version and AI Research pack includes.
-- [x] Final release verification and documentation cleanup.
+- [x] Analyzed v2.6.2 gaps (placeholder verify, simulated hooks, missing progress tooling, unbounded appends).
+- [x] Drafted and approved v2.7 Loop Engineering implementation plan (10 tasks, 4 milestones).
+- [x] T001: task queue schema, progress directory, validator (16 tests).
+- [x] T002: honest verification gate (pass/fail/unconfigured paths proven).
+- [x] T003: loop guards — retry budgets, stall detection, fingerprinting (15 tests).
+- [x] Fixed latent `((ERRORS++))`/`set -e` bug in scripts/validate.sh.
+- [x] Committed pre-existing v2.6.2 version-sync WIP as its own commit on main.
 
 ---
 
 ## Next Steps
 
-1. [x] Perform a clean scaffold test of v2.5.0 with both packs.
-2. [ ] Publish CLI v2.5.0 to npm registry.
-3. [ ] Socialize release via the new ACE Framework blog post.
+1. [ ] **ADR for the runner adapter interface** (required before T005; see plan Open Items).
+2. [ ] **T004**: `ace loop` orchestrator — state machine over tasks.json (depends on T001–T003, all done).
+3. [ ] **T005/T006**: runner adapters (claude-code, manual) + enforced Claude Code hooks adapter.
 
 ---
 
 ## Active Constraints
 
 ### Standards
+- .ace/standards/harness-engineering.md (loop semantics; section 5 extended in T008)
 - .ace/standards/coding.md
-- .ace/standards/security.md
 
-### Skills
-- .ace/skills/documentation-generation/SKILL.md
+### Plan
+- docs/planning/implementation_plan_v2.7_loop_engineering.md (Approved 2026-07-04)
+
+### Guards
+- docs/rca/regression-guards.yaml (no guarded files touched this session)
 
 ---
 
 ## Session Notes
 
-- This session marked a major leap in ACE's capability, transforming it into a specialized platform for Science and AI Engineering.
-- The use of the `Scientific Editor` role to produce the release walkthrough demonstrated the effectiveness of the new documentation pipeline.
+- Loop invariants that JSON Schema cannot express (single in_progress,
+  dependency gating/cycles, attempt ceiling) are enforced by
+  `cli/lib/validate-tasks.js`, not just documented — the schema file remains
+  the source-of-truth spec.
+- `verify:` block in `.aceconfig` is constrained to flat `key: "value"`
+  lines so bash can parse it without a YAML parser (plan risk mitigation).
+- Loop-guard decisions are pure functions; T004's orchestrator owns all I/O.
+- M4 (T010) must sync versions across `.aceconfig`, cli/package.json,
+  ACE-SPEC.md, README.md in one commit set to avoid repeating v2.6.x drift.
 
 ---
 
 ## Context Links
 
-- **Walkthrough:** [docs/planning/v2.5.0_expansion_pack_release_walkthrough.md](file:///c:/Users/jonna/Github/ace-framework/docs/planning/v2.5.0_expansion_pack_release_walkthrough.md)
-- **Integration Plan:** [docs/planning/scientific_skills_integration_plan.md](file:///c:/Users/jonna/Github/ace-framework/docs/planning/scientific_skills_integration_plan.md)
+- **Plan:** docs/planning/implementation_plan_v2.7_loop_engineering.md
+- **Schema:** .ace/schemas/tasks.schema.json
+- **Example queue:** docs/progress/tasks.example.json
