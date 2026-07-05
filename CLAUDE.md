@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Primary Project
 
-The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.5.0).
+The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.6.2).
 
 ## Commands
 
@@ -103,19 +103,21 @@ To give the Architect the ability to parse PDFs, Word docs, and Excel files:
 
 ### Expansion Packs
 
-To keep the core framework lightweight, large domain-specific skill collections are managed as **Expansion Packs**.
+To keep the core framework lightweight, large domain-specific skill collections are managed as **Expansion Packs** and are only vendored into a project when requested at scaffold time via the `create-ace-framework` CLI's `--pack` flag.
 
 **Scientific Expansion Pack**: Enables the *Data Scientist*, *AI Expert*, and *Scientific Editor* roles with 135+ scientific skills (e.g., bioinformatics, chemistry, clinical data).
 ```bash
-npx skills add K-Dense-AI/scientific-agent-skills
+npx create-ace-framework my-project --pack scientific
 ```
-*Note: Installing this pack dynamically loads `.ace/packs/scientific/.aceconfig-ext` into your core `.aceconfig`.*
+*Note: This copies `.ace/packs/scientific/` into the new project and registers `.ace/packs/scientific/.aceconfig-ext` under `includes:` in `.aceconfig`.*
 
 **AI Research Expansion Pack**: Enables the *AI Researcher* and *MLOps Engineer* roles with 98+ AI engineering skills (e.g., vLLM, DeepSpeed, RLHF, Axolotl).
 ```bash
-npx @orchestra-research/ai-research-skills
+npx create-ace-framework my-project --pack ai-research
 ```
-*Note: Installing this pack dynamically loads `.ace/packs/ai-research/.aceconfig-ext` into your core `.aceconfig`.*
+*Note: This copies `.ace/packs/ai-research/` into the new project and registers `.ace/packs/ai-research/.aceconfig-ext` under `includes:` in `.aceconfig`.*
+
+If no `--pack` flag is given, no expansion pack is installed and `includes:` is left empty (`includes: []`).
 
 ### Regression Guard Protocol
 

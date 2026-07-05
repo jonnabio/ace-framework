@@ -40,7 +40,7 @@ ${colors.cyan}    _    ____ _____   _____                                       
  / ___ \\ |___| |___  |  _|| | | (_| | | | | | |  __/\\ V  V / (_) | |  |   <
 /_/   \\_\\____|_____| |_|  |_|  \\__,_|_| |_| |_|\\___| \\_/\\_/ \\___/|_|  |_|\\_\\
 ${colors.reset}
-${colors.green}AI-assisted Code Engineering Framework v2.5.0${colors.reset}
+${colors.green}AI-assisted Code Engineering Framework v2.6.2${colors.reset}
 `);
 }
 
@@ -277,33 +277,66 @@ ${colors.blue}Happy coding with ACE-Framework!${colors.reset}
 `);
 }
 
-// Install an Expansion Pack
-function installExpansionPack(targetDir, packName) {
-  if (packName.toLowerCase() === 'scientific') {
-    log.info('Installing Scientific Expansion Pack...');
-    try {
-      execSync('npx skills add K-Dense-AI/scientific-agent-skills', { 
-        cwd: targetDir, 
-        stdio: 'inherit' 
-      });
-      log.success('Scientific Expansion Pack installed successfully.');
-    } catch (error) {
-      log.error(`Failed to install expansion pack: ${error.message}`);
-    }
-  } else if (packName.toLowerCase() === 'ai-research') {
-    log.info('Installing AI Research Expansion Pack...');
-    try {
-      execSync('npx @orchestra-research/ai-research-skills', { 
-        cwd: targetDir, 
-        stdio: 'inherit' 
-      });
-      log.success('AI Research Expansion Pack installed successfully.');
-    } catch (error) {
-      log.error(`Failed to install expansion pack: ${error.message}`);
-    }
-  } else {
-    log.warn(`Unknown expansion pack: ${packName}. Please install it manually.`);
+// Keep only the requested expansion pack (if any) out of the packs bundled/cloned into targetDir
+function pruneExpansionPacks(targetDir, packName) {
+  const packsDir = path.join(targetDir, '.ace', 'packs');
+  if (!fs.existsSync(packsDir)) {
+    return null;
   }
+
+  const available = fs
+    .readdirSync(packsDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
+
+  let installed = null;
+  if (packName) {
+    const normalized = packName.toLowerCase();
+    if (available.includes(normalized)) {
+      installed = normalized;
+    } else {
+      log.warn(`Unknown expansion pack "${packName}". Available packs: ${available.join(', ')}`);
+    }
+  }
+
+  for (const pack of available) {
+    if (pack !== installed) {
+      fs.rmSync(path.join(packsDir, pack), { recursive: true, force: true });
+    }
+  }
+
+  if (!installed) {
+    fs.rmSync(packsDir, { recursive: true, force: true });
+  }
+
+  return installed;
+}
+
+// Reconcile .aceconfig's `includes:` list with the expansion pack actually installed
+function updateAceConfigIncludes(targetDir, packName) {
+  const aceconfigPath = path.join(targetDir, '.aceconfig');
+  if (!fs.existsSync(aceconfigPath)) {
+    return;
+  }
+
+  let content = fs.readFileSync(aceconfigPath, 'utf8');
+  const usesCrlf = content.includes('\r\n');
+  const includesBlock = /includes:\r?\n(?:[ \t]*-[ \t]+.*\r?\n)*/;
+
+  if (!includesBlock.test(content)) {
+    return;
+  }
+
+  let replacement = packName
+    ? `includes:\n  - .ace/packs/${packName}/.aceconfig-ext\n`
+    : 'includes: []\n';
+  if (usesCrlf) {
+    replacement = replacement.replace(/\n/g, '\r\n');
+  }
+
+  content = content.replace(includesBlock, replacement);
+
+  fs.writeFileSync(aceconfigPath, content);
 }
 
 // Main function
@@ -371,9 +404,11 @@ async function main() {
   // Create .gitignore
   createGitignore(targetDir);
 
-  // Install expansion pack if specified
-  if (packName) {
-    installExpansionPack(targetDir, packName);
+  // Keep only the requested expansion pack and reconcile .aceconfig
+  const installedPack = pruneExpansionPacks(targetDir, packName);
+  updateAceConfigIncludes(targetDir, installedPack);
+  if (installedPack) {
+    log.success(`Installed "${installedPack}" expansion pack`);
   }
 
   // Print next steps

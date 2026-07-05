@@ -1,11 +1,11 @@
 {
   "name": "create-ace-framework",
-  "version": "2.5.0",
+  "version": "2.6.2",
   "description": "CLI to scaffold projects with ACE-Framework (AI-assisted Code Engineering)",
   "main": "lib/index.js",
   "bin": {
-    "create-ace-framework": "./bin/create-ace-framework.js",
-    "ace-framework": "./bin/ace-framework.js"
+    "create-ace-framework": "bin/create-ace-framework.js",
+    "ace-framework": "bin/ace-framework.js"
   },
   "scripts": {
     "test": "echo \"No tests yet\" && exit 0"
@@ -27,7 +27,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jonnabio/ace-framework.git"
+    "url": "git+https://github.com/jonnabio/ace-framework.git"
   },
   "homepage": "https://github.com/jonnabio/ace-framework#readme",
   "bugs": {

@@ -2,6 +2,31 @@
 
 All notable changes to the ACE Framework will be documented in this file.
 
+## [v2.6.2] - 2026-07-04
+
+### Changed
+
+- **Version Sync**: Bumped `cli/package.json` and `.aceconfig`'s `version` field from a stale `2.5.x` to `2.6.2`. The 2.6.0/2.6.1/2.6.2 releases below only touched `.ace/roles/`, `.ace/scripts/`, `.ace/standards/harness-engineering.md`, and `README.md` — neither `cli/` nor `.aceconfig` were bumped alongside them, so the npm package and the in-repo config both under-reported the framework's actual version. This release (npm `create-ace-framework@2.6.2`) supersedes the same-day `2.5.1` publish, which contained the CLI expansion-pack fix below but predated this sync.
+
+## [v2.6.1] - 2026-05-10
+
+### Added
+
+- **Anti-Collapse Appends and Reflector Distillation**: extended `.ace/standards/harness-engineering.md` and `.ace/scripts/update_harness.sh` with reflector-distillation guidance and anti-collapse append handling; updated role responsibilities in `.ace/roles/roles.md`.
+
+## [v2.6.0] - 2026-05-10
+
+### Added
+
+- **Harness Engineering, Context Flushing, State Tracking, and Validation**: introduced the harness-engineering standard and supporting scripts governing context flushing and state tracking across role transitions.
+
+## [v2.5.1] - 2026-07-04 (npm only, superseded by v2.6.2)
+
+### Fixed
+
+- **CLI Expansion Pack Installer**: `create-ace-framework --pack <name>` now installs the actual vendored skills from `.ace/packs/` instead of shelling out to unrelated third-party packages (`K-Dense-AI/scientific-agent-skills`, `@orchestra-research/ai-research-skills`). The requested pack is kept, all others are pruned, and `.aceconfig`'s `includes:` list is reconciled to match (`includes: []` when no pack is requested).
+- **npm README**: Added a dedicated "Skill Expansion Kits" section with copy-paste `--pack scientific` / `--pack ai-research` commands.
+
 ## [v2.5.0] - 2026-05-03
 
 ### Added

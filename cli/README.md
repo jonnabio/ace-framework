@@ -26,6 +26,20 @@ Once a project is scaffolded, you can use the companion `ace-framework` CLI to i
 npx ace-framework add-skill anthropics/skills/skills/pdf
 ```
 
+### Skill Expansion Kits
+
+Scaffold a new project with a full domain-specific skill kit pre-installed:
+
+```bash
+# Scientific Expansion Kit (biopython, rdkit, scanpy, clinical, and more)
+npx create-ace-framework my-project --pack scientific
+```
+
+```bash
+# AI Research Expansion Kit (vLLM, DeepSpeed, RLHF, Axolotl, and more)
+npx create-ace-framework my-project --pack ai-research
+```
+
 ### Global Installation
 
 ```bash
