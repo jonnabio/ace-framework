@@ -75,6 +75,20 @@ test('manual runner is always available', () => {
   assert.deepStrictEqual(manual.isAvailable(), { ok: true });
 });
 
+test('manual runner reports a runner failure when stdin closes before Enter', async () => {
+  const input = new PassThrough();
+  const output = new PassThrough();
+  output.resume();
+  const runner = manual._create({ input, output });
+  const pending = runner.run({
+    prompt: 'x', taskId: 'T001', attempt: 1, cwd: process.cwd(), traceFile: tmpTrace(),
+  });
+  input.end(); // stdin exhausted without a newline
+  const result = await pending;
+  assert.strictEqual(result.ok, false);
+  assert.ok(result.output.includes('stdin closed'), result.output);
+});
+
 // --- claude-code runner ---
 
 test('claude-code builds the headless invocation with the prompt on stdin', async () => {

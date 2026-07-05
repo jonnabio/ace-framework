@@ -31,13 +31,27 @@ function create(io) {
       output.write(`${request.prompt}\n`);
       output.write('\n--------------------------------------------------\n');
 
-      await new Promise((resolve) => {
+      const answered = await new Promise((resolve) => {
         const rl = readline.createInterface({ input, output });
+        let done = false;
         rl.question('Press Enter when the session is complete... ', () => {
+          done = true;
           rl.close();
-          resolve();
+          resolve(true);
         });
+        // If stdin closes before Enter (piped input exhausted, Ctrl+D),
+        // resolving as a runner failure halts the loop predictably instead
+        // of letting node exit silently mid-loop with code 0.
+        rl.on('close', () => { if (!done) resolve(false); });
       });
+
+      if (!answered) {
+        return {
+          ok: false,
+          output: 'stdin closed before the manual session was confirmed - cannot continue unattended. '
+            + 'Run ace-framework loop from an interactive terminal when using the manual runner.',
+        };
+      }
 
       fs.writeFileSync(request.traceFile,
         `# Manual session: ${request.taskId} attempt ${request.attempt}\n\n`
