@@ -1,0 +1,26 @@
+{
+  "$comment": "ACE-Framework enforced hooks adapter for Claude Code (v2.7). Installed to .claude/settings.json by `create-ace-framework --adapter claude-code`. PreToolUse blocks edits to regression-guarded files; Stop runs the verify gate before the agent may finish.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh .ace/adapters/claude-code/guard-check.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh .ace/adapters/claude-code/stop-verify.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

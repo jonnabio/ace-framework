@@ -220,6 +220,33 @@ Validate the queue with:
   }
 }
 
+// Install an enforced-hooks adapter (v2.7): copies the adapter's settings
+// template into the tool's config location so hooks are enforced by the
+// harness instead of simulated by the model.
+function installAdapter(targetDir, adapterName) {
+  if (!adapterName) return;
+  const normalized = adapterName.toLowerCase();
+  const templatePath = path.join(targetDir, '.ace', 'adapters', normalized, 'settings-template.json');
+  if (!fs.existsSync(templatePath)) {
+    log.warn(`Unknown adapter "${adapterName}" (no ${templatePath}). Skipping.`);
+    return;
+  }
+  if (normalized === 'claude-code') {
+    const claudeDir = path.join(targetDir, '.claude');
+    const settingsPath = path.join(claudeDir, 'settings.json');
+    if (fs.existsSync(settingsPath)) {
+      log.warn('.claude/settings.json already exists; not overwriting.');
+      log.info(`Merge the hooks from ${templatePath} manually.`);
+      return;
+    }
+    fs.mkdirSync(claudeDir, { recursive: true });
+    fs.copyFileSync(templatePath, settingsPath);
+    log.success('Installed claude-code enforced hooks adapter (.claude/settings.json)');
+  } else {
+    log.warn(`Adapter "${adapterName}" ships a template but no install rule; see ${templatePath}.`);
+  }
+}
+
 // Create .gitignore if not exists
 function createGitignore(targetDir) {
   const gitignorePath = path.join(targetDir, '.gitignore');
@@ -368,11 +395,14 @@ async function main() {
   // Parse arguments
   let targetDir = null;
   let packName = null;
-  
+  let adapterName = null;
+
   for (let i = 2; i < process.argv.length; i++) {
     const arg = process.argv[i];
     if (arg === '--pack' && i + 1 < process.argv.length) {
       packName = process.argv[++i];
+    } else if (arg === '--adapter' && i + 1 < process.argv.length) {
+      adapterName = process.argv[++i];
     } else if (!arg.startsWith('-') && !targetDir) {
       targetDir = arg;
     }
@@ -425,6 +455,9 @@ async function main() {
 
   // Ensure the task-state directory exists (v2.7)
   ensureProgressDir(targetDir);
+
+  // Install enforced-hooks adapter if requested (v2.7)
+  installAdapter(targetDir, adapterName);
 
   // Create .gitignore
   createGitignore(targetDir);
