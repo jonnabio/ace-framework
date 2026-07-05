@@ -27,7 +27,7 @@ print_banner() {
     echo " / ___ \ |___| |___  |  _|| | | (_| | | | | | |  __/\ V  V / (_) | |  |   < "
     echo "/_/   \_\____|_____| |_|  |_|  \__,_|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\\"
     echo -e "${NC}"
-    echo -e "${GREEN}AI-assisted Code Engineering Framework v2.3${NC}"
+    echo -e "${GREEN}AI-assisted Code Engineering Framework v2.7.0${NC}"
     echo ""
 }
 
@@ -119,6 +119,9 @@ init_new_project() {
         # Copy docs but not the full README (they'll create their own)
         cp "$target/.ace-temp/ACE-SPEC.md" "$target/" 2>/dev/null || true
         cp "$target/.ace-temp/USER_GUIDE.md" "$target/" 2>/dev/null || true
+
+        # Ensure task-state directory exists (v2.7 Loop Engineering)
+        mkdir -p "$target/docs/progress"
 
         # Cleanup
         rm -rf "$target/.ace-temp"

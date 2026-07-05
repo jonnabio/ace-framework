@@ -249,6 +249,26 @@ requirements_specification:
     - "EXPLICIT requirements must have a source_quote"
 ```
 
+### Task Queue Schema (docs/progress/tasks.json)
+
+Unlike the schemas above, the task queue has a **machine-enforced** schema:
+
+- **Source of truth:** `.ace/schemas/tasks.schema.json` (JSON Schema draft 2020-12)
+- **Validator:** `node cli/lib/validate-tasks.js docs/progress/tasks.json` — zero-dependency, also enforces cross-field loop invariants the JSON Schema cannot express
+- **Enforced automatically** by `scripts/validate.sh` whenever `docs/progress/tasks.json` exists
+
+```yaml
+task_queue:
+  source_of_truth: .ace/schemas/tasks.schema.json
+
+  loop_invariants:  # enforced by the validator, beyond JSON Schema
+    - "at most one task has status in_progress"
+    - "depends_on ids reference existing tasks; no self- or cyclic dependencies"
+    - "attempts never exceeds effective max_attempts (task-level, else defaults)"
+    - "blocked requires blocked_reason (>= 10 chars); verified requires result_file matching the task id"
+    - "started tasks (in_progress/verified/failed) have attempts >= 1"
+```
+
 ---
 
 ## Validation Commands

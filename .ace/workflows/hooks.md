@@ -262,7 +262,37 @@ post_rca:
 
 ## Hook Implementation
 
-### For AI Agents
+Hooks come in two tiers. **Enforced** hooks are executed by the agent
+harness or CI system — the model cannot skip them. **Simulated** hooks are
+checklist recitations by the model itself — a fallback for platforms
+without hook support. Prefer enforced hooks wherever the platform allows;
+a simulated hook is a promise, an enforced hook is a gate.
+
+| Platform | Status | Mechanism |
+| -------- | ------ | --------- |
+| Claude Code | **Enforced** | `.ace/adapters/claude-code/` (PreToolUse + Stop hooks) |
+| CI/CD | **Enforced** | Pipeline stages (see below) |
+| Git | **Enforced** | Pre-commit hooks via Husky (see below) |
+| Cursor / other IDEs | Simulated | Model recites the checklists below |
+
+### Enforced: Claude Code Adapter (v2.7)
+
+Install at scaffold time with `npx create-ace-framework my-project --adapter claude-code`,
+or copy `.ace/adapters/claude-code/settings-template.json` to `.claude/settings.json`
+in an existing project. Two hooks ship:
+
+- **PreToolUse → `guard-check.sh`**: blocks any Edit/Write to a file listed in
+  `docs/rca/regression-guards.yaml`, feeding the guard entry and RCA pointer
+  back to the agent. The edit proceeds only after the agent has engaged with
+  the guard context (implements `check_regression_guards` above as a hard gate).
+- **Stop → `stop-verify.sh`**: runs `.ace/scripts/verify.sh` when the agent
+  tries to finish; a failing gate blocks the stop and returns the failure
+  output, so the agent cannot report success over a red build (implements
+  `run_tests`/`validate_against_standards` as a hard gate).
+
+Both scripts are POSIX sh with no dependencies beyond grep/sed.
+
+### Simulated (fallback): For AI Agents without hook support
 
 AI agents should simulate hooks by:
 

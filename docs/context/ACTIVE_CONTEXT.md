@@ -1,78 +1,88 @@
-# Active Context: v2.5.0 Expansion Pack Release
+# Active Context: v2.7.0 Loop Engineering — Release Complete
 
 ## Session Metadata
 
-- **Last Updated:** 2026-05-04 09:20
-- **Session ID:** release-v2.5.0
-- **Active Role:** Scientific Editor
+- **Last Updated:** 2026-07-05
+- **Session ID:** v2.7-loop-engineering
+- **Active Role:** QA Engineer
+- **Mode:** VERIFICATION (complete)
 
 ---
 
 ## Current Objective
 
-Finalize and document the ACE Framework v2.5.0 "Expansion Pack" release, integrating the Scientific and AI Research packs.
+v2.7.0 "Loop Engineering" executed end to end: all 10 plan tasks (M1–M4),
+both ADRs, all documentation, and all verification drills. Ready for push,
+merge, tag, and npm publish.
 
 ---
 
 ## Current State
 
 ### Working
-- **Expansion Pack Architecture**: Modular config loading via `includes` in `.aceconfig`.
-- **Scientific Expansion Pack**: Bundled with 135+ skills and 3 new roles.
-- **AI Research Expansion Pack**: Bundled with 98+ skills and 2 new roles.
-- **CLI v2.5.0**: Supports `--pack` flag and automated installers.
-- **Version Unification**: v2.5.0 across all core documents and CLI.
-- **Documentation**: CHANGELOG.md and .aceconfig fully updated for v2.5.0.
+
+- **Branch**: `feature/v2.7-loop-engineering-m1` — one commit per task, all
+  gated by the repo's own verify gate (cli test suite, 89 tests passing).
+- **M1 Honest Gate**: tasks.json schema + validator, real verify.sh, loop guards.
+- **M2 Loop Runner**: `ace-framework loop` orchestrator; claude-code + manual
+  runners (ADR-002); enforced Claude Code hooks (`--adapter claude-code`).
+- **M3 Learning Loop** *(experimental)*: auto-Reflector with strict output
+  contract; Curator staged→promoted|expired lifecycle (ADR-003);
+  `ace-framework curate`; JSONL telemetry + `loop --report`.
+- **M4 Release**: ACE-SPEC §13, USER_GUIDE §13, README, CHANGELOG, CLAUDE.md,
+  version 2.7.0 synced everywhere, validate.sh extended, .gitattributes
+  eol=lf for .sh, walkthrough with drill evidence
+  (docs/planning/v2.7.0_loop_engineering_walkthrough.md).
 
 ### In Progress
-- None
+
+- None.
 
 ### Blocked
-- None
+
+- None.
 
 ---
 
-## Completed This Session
+## Next Steps (human actions)
 
-- [x] Implemented modular configuration loading in `.aceconfig`.
-- [x] Integrated and bundled Scientific Expansion Pack.
-- [x] Integrated and bundled AI Research Expansion Pack (Orchestra).
-- [x] Upgraded CLI to v2.5.0 with automated expansion pack support.
-- [x] Updated `CLAUDE.md` and `.cursorrules` for v2.5.0 standards.
-- [x] Produced ACE Standard Documentation (`v2.5.0_expansion_pack_release_walkthrough.md`).
-- [x] Updated `CHANGELOG.md` with v2.4.0 and v2.5.0 entries.
-- [x] Fixed `.aceconfig` version and AI Research pack includes.
-- [x] Final release verification and documentation cleanup.
+1. [ ] Review the branch; merge to main; tag `v2.7.0`.
+2. [ ] Publish `create-ace-framework@2.7.0` to npm.
+3. [ ] Post-push smoke test: `npx create-ace-framework tmp --adapter claude-code`
+       then `ace-framework loop --dry-run` in it (scaffolder clones GitHub main,
+       so this only works after the merge).
 
----
+## v2.8 Candidates
 
-## Next Steps
-
-1. [x] Perform a clean scaffold test of v2.5.0 with both packs.
-2. [ ] Publish CLI v2.5.0 to npm registry.
-3. [ ] Socialize release via the new ACE Framework blog post.
+- Parallel Generators (needs a lock protocol; deferred per plan Open Items).
+- Live headless claude-code session in CI.
+- Configurable promotion thresholds/expiry in `.aceconfig` (deferred per ADR-003).
 
 ---
 
 ## Active Constraints
 
 ### Standards
-- .ace/standards/coding.md
-- .ace/standards/security.md
+- .ace/standards/harness-engineering.md v2.7.0 (§5.1 rule lifecycle)
 
-### Skills
-- .ace/skills/documentation-generation/SKILL.md
+### Plan / ADRs
+- docs/planning/implementation_plan_v2.7_loop_engineering.md (all tasks done)
+- ADR-002 (runner interface), ADR-003 (rule promotion)
 
 ---
 
 ## Session Notes
 
-- This session marked a major leap in ACE's capability, transforming it into a specialized platform for Science and AI Engineering.
-- The use of the `Scientific Editor` role to produce the release walkthrough demonstrated the effectiveness of the new documentation pipeline.
+- The E2E dogfood drill caught a real bug (manual runner hanging on closed
+  stdin → silent exit 0 mid-loop) — fixed and regression-tested. The drill
+  earned its place in the release checklist.
+- The repo now dogfoods its own machinery: verify.sh runs the CLI suite,
+  and every release commit passed through it.
 
 ---
 
 ## Context Links
 
-- **Walkthrough:** [docs/planning/v2.5.0_expansion_pack_release_walkthrough.md](file:///c:/Users/jonna/Github/ace-framework/docs/planning/v2.5.0_expansion_pack_release_walkthrough.md)
-- **Integration Plan:** [docs/planning/scientific_skills_integration_plan.md](file:///c:/Users/jonna/Github/ace-framework/docs/planning/scientific_skills_integration_plan.md)
+- **Walkthrough:** docs/planning/v2.7.0_loop_engineering_walkthrough.md
+- **Plan:** docs/planning/implementation_plan_v2.7_loop_engineering.md
+- **Spec:** ACE-SPEC.md §13 (Loop Engineering)

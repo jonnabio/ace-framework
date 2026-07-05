@@ -2,6 +2,35 @@
 
 All notable changes to the ACE Framework will be documented in this file.
 
+## [v2.7.0] - 2026-07-05
+
+### Added — The Loop Engineering Update
+
+Executes the approved plan in `docs/planning/implementation_plan_v2.7_loop_engineering.md` (10 tasks, 4 milestones). Turns the v2.6 Triad from documented protocol into an executable, bounded loop.
+
+- **M1 — The Honest Gate**
+  - `.ace/schemas/tasks.schema.json`: JSON Schema (2020-12) for the `docs/progress/tasks.json` task queue; six-state machine with conditional requirements.
+  - `cli/lib/validate-tasks.js`: zero-dependency validator enforcing the schema plus cross-field loop invariants (single `in_progress`, dependency existence/cycles, attempt ceiling); wired into `scripts/validate.sh`.
+  - `.ace/scripts/verify.sh` rewritten as a real gate: runs `verify:` block commands from `.aceconfig`, exits non-zero on failure or when unconfigured, emits `VERIFY_RESULT=pass|fail gate=<name>`.
+  - `cli/lib/loop-guards.js`: pure retry/block decisions — budget exhaustion and stall detection via normalized failure fingerprints.
+- **M2 — The Loop Runner**
+  - `cli/lib/loop.js` + `ace-framework loop`: thin state machine over the queue; fresh runner session per attempt; atomic saves; crash resume; runner failures never burn retry budget (ADR-002).
+  - Runner adapters (`cli/lib/runners/`): `claude-code` (headless `claude -p`, prompt via stdin, transcript to trace file) and `manual` (any tool, zero lock-in); file-drop registry.
+  - Enforced hooks adapter (`.ace/adapters/claude-code/`): PreToolUse regression-guard blocking + Stop-hook verify gate; installed via `create-ace-framework --adapter claude-code`; `hooks.md` repositioned enforced-first.
+- **M3 — The Learning Loop** *(experimental)*
+  - `cli/lib/reflector.js` + `.ace/prompts/reflect-on-trace.md`: automatic Reflector session on failed attempts with a strict output contract; malformed output rejected.
+  - `cli/lib/curator.js` + `ace-framework curate`: staged → promoted | expired rule lifecycle per ADR-003 (dedup by identity, hit counts, human-confirmed append-only promotion, 30-day expiry to archive); `update_harness.sh --from-staging`.
+  - `cli/lib/telemetry.js` + `ace-framework loop --report`: metadata-only JSONL metrics; first-pass rate and repeat-fingerprint reporting.
+- **ADRs**: ADR-002 (runner adapter interface), ADR-003 (rule promotion policy).
+- **Tests**: CLI test suite introduced — 88 tests, zero dependencies (`npm test` in `cli/`), which is also the framework repo's own verify gate.
+
+### Changed
+
+- `scripts/validate.sh`: validates `tasks.json` when present; fixed `((ERRORS++))` aborting under `set -e` before the summary.
+- `.ace/standards/harness-engineering.md` §5.1: distilled rule lifecycle.
+- Version sync: `.aceconfig`, `cli/package.json`, `ACE-SPEC.md`, `README.md`, CLI banners → 2.7.0 in one release (per the v2.6.2 drift lesson).
+- `.gitattributes` added: `*.sh` forced to LF so hooks survive Windows checkouts.
+
 ## [v2.6.2] - 2026-07-04
 
 ### Changed

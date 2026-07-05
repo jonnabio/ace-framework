@@ -1,7 +1,7 @@
 # .aceconfig - ACE Framework Configuration
-# Version: 2.6.2
+# Version: 2.7.0
 
-version: "2.6.2"
+version: "2.7.0"
 project_name: "ACE Framework Project"
 
 # Expansion Packs (Modular config loading)
@@ -66,6 +66,16 @@ role_routing:
   INCIDENT: Incident Responder
   RESEARCH: Data Scientist
   PUBLICATION: Scientific Editor
+
+# Verification gate (v2.7 Loop Engineering)
+# Read by .ace/scripts/verify.sh. Constraint: flat `key: "value"` lines only
+# (parsed from bash with sed, no YAML parser). Empty values are skipped;
+# if ALL commands are empty/missing, verify.sh fails - an unconfigured
+# gate must never silently pass.
+verify:
+  test_cmd: "cd cli && npm test"
+  lint_cmd: ""
+  typecheck_cmd: ""
 
 # Validation hooks
 hooks:
