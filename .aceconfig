@@ -67,6 +67,16 @@ role_routing:
   RESEARCH: Data Scientist
   PUBLICATION: Scientific Editor
 
+# Verification gate (v2.7 Loop Engineering)
+# Read by .ace/scripts/verify.sh. Constraint: flat `key: "value"` lines only
+# (parsed from bash with sed, no YAML parser). Empty values are skipped;
+# if ALL commands are empty/missing, verify.sh fails - an unconfigured
+# gate must never silently pass.
+verify:
+  test_cmd: "cd cli && npm test"
+  lint_cmd: ""
+  typecheck_cmd: ""
+
 # Validation hooks
 hooks:
   pre_generation:
