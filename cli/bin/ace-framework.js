@@ -37,12 +37,16 @@ ${colors.cyan}ACE Framework CLI${colors.reset}
 Usage:
   ace-framework add-skill <source>
   ace-framework loop [--dry-run] [--max-iterations N] [--runner NAME] [--no-reflect]
+  ace-framework curate <list | promote <RULE-id> --to <standard.md> | expire [--days N]>
 
 Commands:
   add-skill   Import an open-source skill into .ace/skills/ and register it.
   loop        Drive the ACE loop: pick eligible tasks from
               docs/progress/tasks.json, spawn a fresh agent session per
               attempt, gate on verify, retry or block per loop guards.
+  curate      Manage distilled rules (ADR-003): list staged rules with
+              eligibility, promote into a standard (append-only), expire
+              stale rules to the archive.
 
 Loop options:
   --dry-run             Report queue state and next action; change nothing.
@@ -50,9 +54,16 @@ Loop options:
   --runner NAME         Override defaults.runner from tasks.json.
   --no-reflect          Skip the Reflector step on failures.
 
+Curate options:
+  promote --auto        Promote ALL eligible rules except reserved
+                        categories (Security/Data-Loss/Compliance).
+  expire --days N       Expiry window (default 30).
+
 Examples:
   ace-framework add-skill anthropics/skills/skills/document-skills
   ace-framework loop --dry-run
+  ace-framework curate list
+  ace-framework curate promote RULE-9f3ac1d20b47 --to .ace/standards/coding.md
   `);
 }
 
@@ -166,16 +177,119 @@ async function cmdLoop(args) {
     process.exit(2);
   }
 
+  // Reflector -> Curator wiring (T007/T008): on every failed attempt, a fresh
+  // Reflector session distills a lesson into the Curator staging file.
+  let reflectFn;
+  if (opts.reflect && !opts.dryRun) {
+    const { reflect } = require('../lib/reflector');
+    const curator = require('../lib/curator');
+    const stagingPath = path.join(projectDir, '.ace', 'standards', 'distilled-staging.md');
+    reflectFn = ({ task, failure, traceFile }) => reflect({
+      task,
+      failure,
+      traceFile,
+      projectDir,
+      runner,
+      sink: async (lesson) => {
+        const { id, action } = curator.addLesson(stagingPath, lesson);
+        log.info(`Curator: ${action} ${id} [${lesson.category}] (see .ace/standards/distilled-staging.md)`);
+      },
+      log: console,
+    });
+  }
+
   const result = await runLoop({
     projectDir,
     queuePath,
     runner,
     dryRun: opts.dryRun,
     maxIterations: opts.maxIterations,
-    reflect: undefined, // wired by the Reflector integration when enabled
+    reflect: reflectFn,
     log: console,
   });
   process.exit(result.exitCode);
+}
+
+// --- curate ---
+
+async function cmdCurate(args) {
+  const curator = require('../lib/curator');
+  const readline = require('readline');
+  const projectDir = process.cwd();
+  const stagingPath = path.join(projectDir, '.ace', 'standards', 'distilled-staging.md');
+  const archivePath = path.join(projectDir, '.ace', 'standards', 'distilled-archive.md');
+  const sub = args[0];
+
+  if (sub === 'list' || sub === undefined) {
+    const rules = fs.existsSync(stagingPath) ? curator.listRules(stagingPath) : [];
+    if (rules.length === 0) {
+      log.info('No staged rules. The Reflector adds them when loop attempts fail.');
+      return;
+    }
+    for (const r of rules) {
+      const marks = [
+        r.status,
+        r.eligible ? `${colors.green}eligible${colors.reset}` : `hits ${r.hit_count}/${curator.PROMOTION_THRESHOLD}`,
+        r.reserved ? `${colors.yellow}reserved${colors.reset}` : null,
+      ].filter(Boolean).join(', ');
+      console.log(`${colors.cyan}${r.id}${colors.reset} [${r.category}] (${marks})`);
+      console.log(`  ${r.lesson}`);
+    }
+    return;
+  }
+
+  if (sub === 'promote') {
+    const auto = args.includes('--auto');
+    const yes = args.includes('--yes');
+    const toIdx = args.indexOf('--to');
+    const target = toIdx !== -1 ? args[toIdx + 1] : null;
+    const id = args.slice(1).find((a) => a.startsWith('RULE-'));
+
+    const confirm = (question) => new Promise((resolve) => {
+      if (yes) return resolve(true);
+      const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+      rl.question(`${question} (y/N): `, (answer) => {
+        rl.close();
+        resolve(answer.trim().toLowerCase() === 'y');
+      });
+    });
+
+    if (auto) {
+      const eligible = curator.listRules(stagingPath).filter((r) => r.eligible && !r.reserved);
+      if (eligible.length === 0) { log.info('No eligible, non-reserved rules to auto-promote.'); return; }
+      if (!target) { log.error('--auto requires --to <standard.md>'); process.exit(2); }
+      for (const rule of eligible) {
+        curator.promote(stagingPath, rule.id, path.resolve(projectDir, target), { auto: true });
+        log.success(`Promoted ${rule.id} [${rule.category}] -> ${target}`);
+      }
+      return;
+    }
+
+    if (!id || !target) {
+      log.error('Usage: ace-framework curate promote <RULE-id> --to <standard.md> [--yes]');
+      process.exit(2);
+    }
+    const rule = curator.listRules(stagingPath).find((r) => r.id === id);
+    if (!rule) { log.error(`No staged rule ${id}`); process.exit(1); }
+    console.log(`\n${rule.id} [${rule.category}] hit_count ${rule.hit_count}`);
+    console.log(`  ${rule.lesson}\n`);
+    if (!(await confirm(`Append this rule to ${target}?`))) { log.warn('Aborted.'); return; }
+    curator.promote(stagingPath, id, path.resolve(projectDir, target), {});
+    log.success(`Promoted ${id} -> ${target}`);
+    return;
+  }
+
+  if (sub === 'expire') {
+    const daysIdx = args.indexOf('--days');
+    const days = daysIdx !== -1 ? Number.parseInt(args[daysIdx + 1], 10) : undefined;
+    const expired = curator.expire(stagingPath, archivePath, { days });
+    if (expired.length === 0) log.info('Nothing to expire.');
+    else log.success(`Expired to archive: ${expired.join(', ')}`);
+    return;
+  }
+
+  log.error(`Unknown curate subcommand: ${sub}`);
+  process.exit(2);
 }
 
 // --- dispatch ---
@@ -188,6 +302,8 @@ async function main() {
     cmdAddSkill(args.slice(1));
   } else if (command === 'loop') {
     await cmdLoop(args.slice(1));
+  } else if (command === 'curate') {
+    await cmdCurate(args.slice(1));
   } else {
     printUsage();
     process.exit(command ? 1 : 0);

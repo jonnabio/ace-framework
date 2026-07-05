@@ -52,3 +52,27 @@ The `.ace/` directory and its contents are just code, which means the AI can imp
 - To prevent **Context Collapse** and **Brevity Bias**, the Curator is **strictly forbidden** from rewriting entire prompt or standard files. 
 - Updates to the harness must be applied using a deterministic append operation (e.g., executing `.ace/scripts/update_harness.sh`) which safely concatenates the new rule to the bottom of the target file.
 - The Curator is responsible for managing redundancy by categorizing insights, ensuring the framework evolves dynamically and permanently via cumulative learning.
+
+### 5.1 Distilled Rule Lifecycle (v2.7, ADR-003)
+
+Lessons no longer accumulate unboundedly. Every distilled rule moves through
+an explicit lifecycle: **staged → promoted | expired**.
+
+- **Staged**: Reflector lessons land in `.ace/standards/distilled-staging.md`
+  with provenance (source task, failure fingerprint, trace) and a hit count.
+  Equivalent lessons deduplicate by identity — a re-occurrence increments
+  `hit_count` instead of appending a duplicate.
+- **Promoted**: a rule enters a real standard only via
+  `ace-framework curate promote <RULE-id> --to <standard.md>` (or
+  `update_harness.sh --from-staging`). Promotion is append-only in the
+  established Distilled Rule format, carries provenance, and is
+  human-confirmed by default. Eligibility threshold: `hit_count >= 2`.
+  Auto-promotion (`--auto`) is opt-in and always refuses the reserved
+  categories Security, Data-Loss, and Compliance.
+- **Expired**: staged rules that do not re-fire within 30 days move to
+  `.ace/standards/distilled-archive.md` (append-only; nothing is deleted).
+  Promoted rules never expire automatically — removing one from a standard
+  requires an ADR like any standards change.
+
+This closes the outer loop with evidence: a rule earns permanence by
+preventing repeat failures, not by existing.
