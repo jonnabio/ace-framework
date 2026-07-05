@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Primary Project
 
-The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.6.2).
+The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.7.0).
 
 ## Commands
 
@@ -31,6 +31,24 @@ node ~/code_projects/ace_framework/cli/bin/create-ace-framework.js <target-dir>
 ### Scaffold a new project via npx
 ```bash
 npx create-ace-framework my-project
+```
+
+### Run the CLI test suite (also the repo's verify gate)
+```bash
+cd cli && npm test
+```
+
+### Run the ACE loop (v2.7)
+```bash
+node cli/bin/ace-framework.js loop --dry-run   # preview queue state
+node cli/bin/ace-framework.js loop             # drive docs/progress/tasks.json
+node cli/bin/ace-framework.js loop --report    # telemetry summary
+node cli/bin/ace-framework.js curate list      # staged distilled rules
+```
+
+### Run the verify gate directly
+```bash
+bash .ace/scripts/verify.sh
 ```
 
 ## Architecture

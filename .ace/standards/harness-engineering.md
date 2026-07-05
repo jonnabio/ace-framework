@@ -1,7 +1,7 @@
 # Harness Engineering Standard
 
 **Status**: Active
-**Version**: 2.6.2
+**Version**: 2.7.0
 **Philosophy**: The AI is not just a chatbot; the repository itself is the "harness" that controls, validates, and empowers the AI.
 
 ---

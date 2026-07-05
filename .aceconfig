@@ -1,7 +1,7 @@
 # .aceconfig - ACE Framework Configuration
-# Version: 2.6.2
+# Version: 2.7.0
 
-version: "2.6.2"
+version: "2.7.0"
 project_name: "ACE Framework Project"
 
 # Expansion Packs (Modular config loading)

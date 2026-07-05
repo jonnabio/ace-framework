@@ -1,19 +1,19 @@
-# Active Context: v2.7 Loop Engineering — M1 Complete
+# Active Context: v2.7.0 Loop Engineering — Release Complete
 
 ## Session Metadata
 
 - **Last Updated:** 2026-07-05
-- **Session ID:** v2.7-loop-engineering-m1
-- **Active Role:** Developer
-- **Mode:** EXECUTION
+- **Session ID:** v2.7-loop-engineering
+- **Active Role:** QA Engineer
+- **Mode:** VERIFICATION (complete)
 
 ---
 
 ## Current Objective
 
-Execute the approved v2.7 Loop Engineering implementation plan
-(docs/planning/implementation_plan_v2.7_loop_engineering.md), turning the
-v2.6 Triad theory into an executable, bounded loop.
+v2.7.0 "Loop Engineering" executed end to end: all 10 plan tasks (M1–M4),
+both ADRs, all documentation, and all verification drills. Ready for push,
+merge, tag, and npm publish.
 
 ---
 
@@ -21,24 +21,22 @@ v2.6 Triad theory into an executable, bounded loop.
 
 ### Working
 
-- **Branch**: `feature/v2.7-loop-engineering-m1` (branched from main after
-  committing the pre-existing v2.6.2 version-sync WIP found in the tree).
-- **T001 (done)**: `.ace/schemas/tasks.schema.json` (JSON Schema 2020-12) +
-  `docs/progress/` (README, tasks.example.json) + zero-dependency validator
-  `cli/lib/validate-tasks.js` enforcing schema and cross-field loop
-  invariants; wired into `scripts/validate.sh`, CLI scaffold, and init.sh.
-- **T002 (done)**: `.ace/scripts/verify.sh` is a real gate — runs commands
-  from `.aceconfig`'s new `verify:` block, exits non-zero on failure,
-  fails when unconfigured, emits `VERIFY_RESULT=pass|fail gate=<name>`.
-- **T003 (done)**: `cli/lib/loop-guards.js` — pure retry/block decisions
-  (budget exhaustion + consecutive-fingerprint stall detection) with
-  normalized failure fingerprinting.
-- **Tests**: 31 passing via `npm test` in cli/ (also the configured verify
-  gate). `scripts/validate.sh` passes.
+- **Branch**: `feature/v2.7-loop-engineering-m1` — one commit per task, all
+  gated by the repo's own verify gate (cli test suite, 89 tests passing).
+- **M1 Honest Gate**: tasks.json schema + validator, real verify.sh, loop guards.
+- **M2 Loop Runner**: `ace-framework loop` orchestrator; claude-code + manual
+  runners (ADR-002); enforced Claude Code hooks (`--adapter claude-code`).
+- **M3 Learning Loop** *(experimental)*: auto-Reflector with strict output
+  contract; Curator staged→promoted|expired lifecycle (ADR-003);
+  `ace-framework curate`; JSONL telemetry + `loop --report`.
+- **M4 Release**: ACE-SPEC §13, USER_GUIDE §13, README, CHANGELOG, CLAUDE.md,
+  version 2.7.0 synced everywhere, validate.sh extended, .gitattributes
+  eol=lf for .sh, walkthrough with drill evidence
+  (docs/planning/v2.7.0_loop_engineering_walkthrough.md).
 
 ### In Progress
 
-- None — M1 milestone complete.
+- None.
 
 ### Blocked
 
@@ -46,56 +44,45 @@ v2.6 Triad theory into an executable, bounded loop.
 
 ---
 
-## Completed This Session
+## Next Steps (human actions)
 
-- [x] Analyzed v2.6.2 gaps (placeholder verify, simulated hooks, missing progress tooling, unbounded appends).
-- [x] Drafted and approved v2.7 Loop Engineering implementation plan (10 tasks, 4 milestones).
-- [x] T001: task queue schema, progress directory, validator (16 tests).
-- [x] T002: honest verification gate (pass/fail/unconfigured paths proven).
-- [x] T003: loop guards — retry budgets, stall detection, fingerprinting (15 tests).
-- [x] Fixed latent `((ERRORS++))`/`set -e` bug in scripts/validate.sh.
-- [x] Committed pre-existing v2.6.2 version-sync WIP as its own commit on main.
+1. [ ] Review the branch; merge to main; tag `v2.7.0`.
+2. [ ] Publish `create-ace-framework@2.7.0` to npm.
+3. [ ] Post-push smoke test: `npx create-ace-framework tmp --adapter claude-code`
+       then `ace-framework loop --dry-run` in it (scaffolder clones GitHub main,
+       so this only works after the merge).
 
----
+## v2.8 Candidates
 
-## Next Steps
-
-1. [ ] **ADR for the runner adapter interface** (required before T005; see plan Open Items).
-2. [ ] **T004**: `ace loop` orchestrator — state machine over tasks.json (depends on T001–T003, all done).
-3. [ ] **T005/T006**: runner adapters (claude-code, manual) + enforced Claude Code hooks adapter.
+- Parallel Generators (needs a lock protocol; deferred per plan Open Items).
+- Live headless claude-code session in CI.
+- Configurable promotion thresholds/expiry in `.aceconfig` (deferred per ADR-003).
 
 ---
 
 ## Active Constraints
 
 ### Standards
-- .ace/standards/harness-engineering.md (loop semantics; section 5 extended in T008)
-- .ace/standards/coding.md
+- .ace/standards/harness-engineering.md v2.7.0 (§5.1 rule lifecycle)
 
-### Plan
-- docs/planning/implementation_plan_v2.7_loop_engineering.md (Approved 2026-07-04)
-
-### Guards
-- docs/rca/regression-guards.yaml (no guarded files touched this session)
+### Plan / ADRs
+- docs/planning/implementation_plan_v2.7_loop_engineering.md (all tasks done)
+- ADR-002 (runner interface), ADR-003 (rule promotion)
 
 ---
 
 ## Session Notes
 
-- Loop invariants that JSON Schema cannot express (single in_progress,
-  dependency gating/cycles, attempt ceiling) are enforced by
-  `cli/lib/validate-tasks.js`, not just documented — the schema file remains
-  the source-of-truth spec.
-- `verify:` block in `.aceconfig` is constrained to flat `key: "value"`
-  lines so bash can parse it without a YAML parser (plan risk mitigation).
-- Loop-guard decisions are pure functions; T004's orchestrator owns all I/O.
-- M4 (T010) must sync versions across `.aceconfig`, cli/package.json,
-  ACE-SPEC.md, README.md in one commit set to avoid repeating v2.6.x drift.
+- The E2E dogfood drill caught a real bug (manual runner hanging on closed
+  stdin → silent exit 0 mid-loop) — fixed and regression-tested. The drill
+  earned its place in the release checklist.
+- The repo now dogfoods its own machinery: verify.sh runs the CLI suite,
+  and every release commit passed through it.
 
 ---
 
 ## Context Links
 
+- **Walkthrough:** docs/planning/v2.7.0_loop_engineering_walkthrough.md
 - **Plan:** docs/planning/implementation_plan_v2.7_loop_engineering.md
-- **Schema:** .ace/schemas/tasks.schema.json
-- **Example queue:** docs/progress/tasks.example.json
+- **Spec:** ACE-SPEC.md §13 (Loop Engineering)

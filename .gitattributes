@@ -1,2 +1,10 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Shell scripts must stay LF in the working tree too: the v2.7 enforced
+# hooks and verify gate run under sh/bash, which chokes on CRLF line
+# endings after a Windows checkout with autocrlf.
+*.sh text eol=lf
+
+# JSON schemas and queue files are consumed by tooling on every platform.
+*.json text eol=lf

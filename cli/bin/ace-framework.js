@@ -163,6 +163,12 @@ async function cmdLoop(args) {
 
   const queuePath = path.join(projectDir, 'docs', 'progress', 'tasks.json');
   if (!fs.existsSync(queuePath)) {
+    if (opts.dryRun) {
+      log.info('No task queue at docs/progress/tasks.json — nothing to loop over.');
+      log.info('The Architect creates it from the approved implementation plan;');
+      log.info('see .ace/schemas/tasks.schema.json and docs/progress/tasks.example.json.');
+      process.exit(0);
+    }
     log.error('No task queue found at docs/progress/tasks.json.');
     log.info('The Architect creates it from the approved implementation plan;');
     log.info('see .ace/schemas/tasks.schema.json and docs/progress/tasks.example.json.');

@@ -1,4 +1,4 @@
-# ACE-Framework User Guide v2.5.0
+# ACE-Framework User Guide v2.7.0
 
 > A practical guide to using the AI-assisted Code Engineering Framework.
 
@@ -18,6 +18,7 @@
 10. [Best Practices](#10-best-practices)
 11. [Troubleshooting](#11-troubleshooting)
 12. [Quick Reference](#12-quick-reference)
+13. [Running the ACE Loop](#13-running-the-ace-loop)
 
 ---
 
@@ -805,6 +806,78 @@ Which skill in .ace/skills/ would help with this?"
 
 ---
 
+## 13. Running the ACE Loop
+
+> New in v2.7. The loop automates EXECUTE/VERIFY: fresh agent session per
+> task attempt, honest verification, bounded retries, and (experimentally)
+> a self-improving playbook. See ACE-SPEC.md §13 for the full model.
+
+### One-time setup
+
+1. **Configure the verify gate** in `.aceconfig` (flat quoted values only):
+
+   ```yaml
+   verify:
+     test_cmd: "npm test"
+     lint_cmd: "npm run lint"
+     typecheck_cmd: ""
+   ```
+
+   Sanity-check it: `.ace/scripts/verify.sh` must pass on a clean tree and
+   fail when you break a test. An unconfigured gate always fails.
+
+2. **(Claude Code users)** install the enforced hooks:
+   `npx create-ace-framework . --adapter claude-code` at scaffold time, or
+   copy `.ace/adapters/claude-code/settings-template.json` to
+   `.claude/settings.json`.
+
+### Per feature
+
+1. Run the normal BMAD phases through PLAN (Architect produces the approved
+   `implementation_plan.md`).
+2. Ask the Architect to translate the plan into `docs/progress/tasks.json`
+   (schema: `.ace/schemas/tasks.schema.json`; example:
+   `docs/progress/tasks.example.json`). Validate it:
+
+   ```bash
+   node cli/lib/validate-tasks.js docs/progress/tasks.json   # framework repo
+   # or scripts/validate.sh, which validates it when present
+   ```
+
+3. Preview, then run:
+
+   ```bash
+   npx ace-framework loop --dry-run     # shows queue state and next task
+   npx ace-framework loop               # runs until done or blocked
+   ```
+
+   Useful flags: `--runner manual` (any agent tool, zero lock-in),
+   `--max-iterations 3` (bounded experiment), `--no-reflect` (skip the
+   learning loop).
+
+### When a task blocks
+
+The loop halts (exit 1) with a human-actionable `blocked_reason` in
+`tasks.json` — retry budget exhausted, or the same failure fingerprint twice
+in a row (stall). Read the attempt traces in `docs/progress/`, fix the
+underlying issue (or split/descope the task, raising `max_attempts` only
+with a rationale), set the task's status back to `"pending"`, and rerun the
+loop.
+
+### Reviewing what the loop learned (experimental)
+
+```bash
+npx ace-framework curate list                                  # staged rules + eligibility
+npx ace-framework curate promote RULE-xxxx --to .ace/standards/coding.md
+npx ace-framework curate expire                                # archive stale rules
+npx ace-framework loop --report                                # first-pass rate, repeat failures
+```
+
+Promotion is append-only and human-confirmed (ADR-003). A rising first-pass
+rate across features is the signal that the playbook is actually working.
+
+---
+
 ## Appendix: File Locations
 
 | Need                | Location                               |
@@ -833,6 +906,6 @@ Which skill in .ace/skills/ would help with this?"
 
 ---
 
-_ACE-Framework User Guide v2.3_
+_ACE-Framework User Guide v2.7.0_
 _Treat AI interactions as structured transactions, not casual conversations._
 

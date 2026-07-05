@@ -1,4 +1,4 @@
-# ACE-Framework v2.5.0
+# ACE-Framework v2.7.0
 
 ## AI-assisted Code Engineering
 
@@ -20,6 +20,7 @@
 10. [Multi-Agent Coordination](#10-multi-agent-coordination)
 11. [Validation & Schemas](#11-validation--schemas)
 12. [Getting Started](#12-getting-started)
+13. [Loop Engineering](#13-loop-engineering)
 
 ---
 
@@ -30,8 +31,11 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 ```
 /
 ├── .ace/                      # AI Control Center (Knowledge Layer)
+│   ├── adapters/              # Enforced-hooks adapters per agent platform (v2.7)
+│   │   └── claude-code/       # PreToolUse guard-check + Stop verify hooks
 │   ├── feedback/              # Incident logs and improvement tracking
-│   │   └── log.md
+│   │   ├── log.md
+│   │   └── loop-metrics.jsonl # Loop telemetry (v2.7, generated)
 │   ├── knowledge/             # Domain-specific context
 │   │   ├── glossary.md        # Domain terminology
 │   │   ├── business-rules.md  # Core business logic
@@ -47,7 +51,8 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 │   ├── roles/                 # BMAD Agentic Role definitions
 │   │   └── roles.md           # All 9 roles in one file
 │   ├── schemas/               # Validation definitions
-│   │   └── validation.md
+│   │   ├── validation.md
+│   │   └── tasks.schema.json  # Task queue JSON Schema (v2.7, machine-enforced)
 │   ├── skills/                # Task-specific procedural knowledge (AgentSkills.io standard)
 │   │   ├── api-design/
 │   │   │   └── SKILL.md
@@ -58,7 +63,10 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 │   │   ├── coding.md
 │   │   ├── security.md
 │   │   ├── architecture.md
-│   │   └── documentation.md
+│   │   ├── documentation.md
+│   │   ├── harness-engineering.md   # Loop + Triad standard (v2.6+)
+│   │   ├── distilled-staging.md     # Curator staging (v2.7, rule lifecycle)
+│   │   └── distilled-archive.md     # Expired rules (v2.7, generated)
 │   └── workflows/             # Automation hooks
 │       └── hooks.md
 ├── docs/
@@ -73,6 +81,10 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 │   │   ├── implementation_plan.md
 │   │   ├── task_checklist.md
 │   │   └── walkthrough.md
+│   ├── progress/              # File-based task state (v2.7)
+│   │   ├── README.md
+│   │   ├── tasks.json         # The task queue (schema-enforced)
+│   │   └── task_*_result.md   # Generator progress logs (generated)
 │   ├── rca/                   # Root Cause Analysis
 │   │   ├── README.md
 │   │   ├── RCA-000-template.md
@@ -100,6 +112,8 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 | `docs/adr/`       | Decision history          | Append-only              |
 | `docs/rca/`       | Issue analysis            | Append-only              |
 | `docs/planning/`  | Implementation artifacts  | Per-task                 |
+| `docs/progress/`  | Task queue & state (v2.7) | Orchestrator-owned       |
+| `.ace/adapters/`  | Enforced hooks (v2.7)     | Versioned                |
 
 ---
 
@@ -663,6 +677,81 @@ Then await further instructions."
 
 ---
 
+## 13. Loop Engineering
+
+> Introduced in v2.7. Turns the v2.6 Triad (Generator/Reflector/Curator)
+> from documented protocol into an executable, *bounded* loop. The
+> Reflector/Curator automation (13.4) is **Experimental** in this release.
+
+ACE defines three nested loops, each with a real gate and a hard stop:
+
+```
+┌────────────────────────────────────────────────────────────────────┐
+│ OUTER LOOP — Playbook evolution (Reflector → Curator)              │
+│  ┌──────────────────────────────────────────────────────────────┐  │
+│  │ MIDDLE LOOP — Task queue (ace-framework loop)                │  │
+│  │  ┌────────────────────────────────────────────────────────┐  │  │
+│  │  │ INNER LOOP — Task convergence                          │  │  │
+│  │  │   fresh session → work → verify gate → verified        │  │  │
+│  │  │                     │ fail                             │  │  │
+│  │  │                     ▼                                  │  │  │
+│  │  │   record failure (fingerprint) → loop guards           │  │  │
+│  │  │     retry (budget left, new signature)                 │  │  │
+│  │  │     BLOCK (budget exhausted OR stall) → human          │  │  │
+│  │  └────────────────────────────────────────────────────────┘  │  │
+│  │  next eligible task from docs/progress/tasks.json            │  │
+│  └──────────────────────────────────────────────────────────────┘  │
+│  failure traces → distilled lessons → staged rules → standards     │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+### 13.1 The Honest Gate
+
+`.ace/scripts/verify.sh` runs the commands configured in `.aceconfig`'s
+`verify:` block (flat `key: "value"` lines: `test_cmd`, `lint_cmd`,
+`typecheck_cmd`) and is the **only** authority on task success. It exits
+non-zero on any failure, fails when unconfigured (silence never passes),
+and ends with a machine-parseable line: `VERIFY_RESULT=pass|fail gate=<name>`.
+
+### 13.2 The Task Queue
+
+`docs/progress/tasks.json` is the file-based state machine
+(`pending → in_progress → verified | failed → blocked`, plus `skipped`),
+validated against `.ace/schemas/tasks.schema.json`. Loop invariants: at most
+one task `in_progress`; a task is eligible only when its `depends_on` are
+all verified; `attempts` never exceeds `max_attempts`; every `blocked` task
+carries a human-actionable `blocked_reason`.
+
+### 13.3 The Orchestrator and Runners
+
+`ace-framework loop` drives the middle loop: validate queue → pick eligible
+task → spawn a **fresh agent session** (mechanical context flushing) via a
+runner adapter (ADR-002: `claude-code` headless, or `manual` for any tool) →
+run the verify gate → update state atomically. Loop guards (retry budgets +
+stall detection on identical failure fingerprints) guarantee bounded
+iteration — the loop escalates to a human instead of burning budget on
+repeats. Enforced hooks (`.ace/adapters/`) replace simulated hooks where the
+platform supports them.
+
+### 13.4 The Learning Loop (Experimental)
+
+On every failed attempt, a fresh Reflector session distills the trace into a
+one-line lesson (strict output contract; malformed output is rejected).
+Lessons land in `.ace/standards/distilled-staging.md` with provenance and
+hit counts. Rules are promoted into real standards only through
+`ace-framework curate promote` (human-confirmed; eligible at hit_count >= 2;
+append-only; reserved categories never auto-promote) and expire to the
+archive after 30 days without re-firing (ADR-003).
+
+### 13.5 Telemetry
+
+Every attempt appends one metadata-only JSON line to
+`.ace/feedback/loop-metrics.jsonl`. `ace-framework loop --report` computes
+first-pass rate, attempts per verified task, and repeat failure
+fingerprints — the evidence that the self-improving harness improves.
+
+---
+
 ## Appendix A: File Quick Reference
 
 | Need To...                    | Look In...                             |
@@ -677,6 +766,9 @@ Then await further instructions."
 | Check regression guards       | `docs/rca/regression-guards.yaml`      |
 | Understand domain terms       | `.ace/knowledge/glossary.md`           |
 | Learn a specific skill        | `.ace/skills/[skill]/SKILL.md`               |
+| See the task queue            | `docs/progress/tasks.json`             |
+| Review distilled rules        | `.ace/standards/distilled-staging.md`  |
+| Check loop metrics            | `ace-framework loop --report`          |
 
 ---
 
@@ -707,8 +799,13 @@ Then await further instructions."
 | **RCA**           | Root Cause Analysis                                 |
 | **Role**          | A defined agent persona with specific expertise     |
 | **Skill**         | Procedural knowledge for a specific task type       |
+| **Fingerprint**   | Normalized identity of a failure (stall detection)  |
+| **Loop Guard**    | Retry budget / stall rule bounding the loop (v2.7)  |
+| **Runner**        | Adapter that spawns fresh agent sessions (ADR-002)  |
+| **Staged Rule**   | Distilled lesson awaiting promotion (ADR-003)       |
+| **Verify Gate**   | `verify.sh` — sole authority on task success        |
 
 ---
 
-_ACE-Framework v2.5.0_
+_ACE-Framework v2.7.0_
 _Treat AI interactions as structured transactions, not casual conversations._

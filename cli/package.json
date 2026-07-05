@@ -1,6 +1,6 @@
 {
   "name": "create-ace-framework",
-  "version": "2.6.2",
+  "version": "2.7.0",
   "description": "CLI to scaffold projects with ACE-Framework (AI-assisted Code Engineering)",
   "main": "lib/index.js",
   "bin": {

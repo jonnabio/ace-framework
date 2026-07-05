@@ -99,10 +99,15 @@ check_dir "docs/inputs"
 check_dir "docs/progress"
 echo ""
 
-# Task queue (v2.7 Loop Engineering)
-echo "Task Queue:"
+# Task queue & loop (v2.7 Loop Engineering)
+echo "Task Queue & Loop:"
 check_file ".ace/schemas/tasks.schema.json"
 check_file "docs/progress/README.md"
+check_file ".ace/scripts/verify.sh"
+check_file ".ace/scripts/update_harness.sh"
+check_file_warn ".ace/prompts/reflect-on-trace.md"
+check_file_warn ".ace/standards/distilled-staging.md"
+check_file_warn ".ace/adapters/claude-code/settings-template.json"
 if [ -f "docs/progress/tasks.json" ]; then
     print_check "tasks.json against schema"
     if ! command -v node > /dev/null 2>&1; then
