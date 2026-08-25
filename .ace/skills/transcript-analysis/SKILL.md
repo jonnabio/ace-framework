@@ -13,7 +13,7 @@ description: Procedural knowledge for transforming raw, unstructured transcripts
 ## Purpose
 
 Enable the Architect to convert meeting recordings, interview notes, and
-brainstorming transcripts into structured, traceable requirements â€” feeding
+brainstorming transcripts into structured, traceable requirements — feeding
 high-quality input into the BMAD Analyze phase.
 
 ---
@@ -34,9 +34,9 @@ high-quality input into the BMAD Analyze phase.
 
 ```markdown
 Step 1: Acquire the raw transcript
-- Meeting recording â†’ run through transcription service
-- Manual notes â†’ type up in plain text
-- Existing document â†’ copy as-is
+- Meeting recording → run through transcription service
+- Manual notes → type up in plain text
+- Existing document → copy as-is
 
 Step 2: Place in designated directory
 - Save to: docs/inputs/transcripts/[filename].md
@@ -62,7 +62,7 @@ Step 2: Configure variables
 
 Step 3: Run the extraction
 - Apply the prompt against the full transcript
-- Do NOT truncate or summarize the input â€” feed the complete text
+- Do NOT truncate or summarize the input — feed the complete text
 - Allow the LLM to process the entire document before output
 
 Step 4: Save the output
@@ -134,30 +134,30 @@ If conflicts are found:
 ## Integration with BMAD
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                  TRANSCRIPT â†’ BMAD PIPELINE                  â”‚
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚                                                              â”‚
-â”‚   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”           â”‚
-â”‚   â”‚ TRANSCRIPTâ”‚â”€â”€â”€â–¶â”‚  EXTRACT  â”‚â”€â”€â”€â–¶â”‚REQUIREMENTSâ”‚          â”‚
-â”‚   â”‚  (raw)    â”‚    â”‚  (skill)  â”‚    â”‚  (formal)  â”‚          â”‚
-â”‚   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜           â”‚
-â”‚                                           â”‚                  â”‚
-â”‚                                           â–¼                  â”‚
-â”‚                                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”            â”‚
-â”‚                                    â”‚  ANALYZE  â”‚            â”‚
-â”‚                                    â”‚ (BMAD P1) â”‚            â”‚
-â”‚                                    â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜            â”‚
-â”‚                                          â”‚                   â”‚
-â”‚                                          â–¼                   â”‚
-â”‚                                   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”             â”‚
-â”‚                                   â”‚  DISCUSS  â”‚             â”‚
-â”‚                                   â”‚ (BMAD P2) â”‚             â”‚
-â”‚                                   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜             â”‚
-â”‚                                          â”‚                   â”‚
-â”‚                                          â–¼                   â”‚
-â”‚                                      ... PLAN â†’ EXECUTE ...  â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌──────────────────────────────────────────────────────────────┐
+│                  TRANSCRIPT → BMAD PIPELINE                  │
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│   ┌───────────┐    ┌───────────┐    ┌───────────┐           │
+│   │ TRANSCRIPT│───▶│  EXTRACT  │───▶│REQUIREMENTS│          │
+│   │  (raw)    │    │  (skill)  │    │  (formal)  │          │
+│   └───────────┘    └───────────┘    └─────┬─────┘           │
+│                                           │                  │
+│                                           ▼                  │
+│                                    ┌───────────┐            │
+│                                    │  ANALYZE  │            │
+│                                    │ (BMAD P1) │            │
+│                                    └─────┬─────┘            │
+│                                          │                   │
+│                                          ▼                   │
+│                                   ┌───────────┐             │
+│                                   │  DISCUSS  │             │
+│                                   │ (BMAD P2) │             │
+│                                   └───────────┘             │
+│                                          │                   │
+│                                          ▼                   │
+│                                      ... PLAN → EXECUTE ...  │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 This skill is a **pre-BMAD** activity. It produces the input that feeds Phase 1 (Analyze).
@@ -166,13 +166,13 @@ This skill is a **pre-BMAD** activity. It produces the input that feeds Phase 1 
 
 ## Common Pitfalls
 
-1. **Truncating the transcript** â€” LLMs may miss requirements in truncated input. Feed the full text.
-2. **Accepting INFERRED as fact** â€” Inferred requirements must be validated by stakeholders before becoming firm.
-3. **Skipping the re-read** â€” Always re-read the original transcript after extraction to catch misses.
-4. **Over-engineering priorities** â€” Let speaker language drive priority. Don't impose MoSCoW unless speakers used it.
-5. **Ignoring off-topic segments** â€” Requirements often appear in tangential discussions. Process everything.
-6. **Merging without dedup** â€” When iterating, check for duplicate requirement IDs before merging.
-7. **Single-pass assumption** â€” Complex transcripts (>30 min) may need multiple extraction passes for completeness.
+1. **Truncating the transcript** — LLMs may miss requirements in truncated input. Feed the full text.
+2. **Accepting INFERRED as fact** — Inferred requirements must be validated by stakeholders before becoming firm.
+3. **Skipping the re-read** — Always re-read the original transcript after extraction to catch misses.
+4. **Over-engineering priorities** — Let speaker language drive priority. Don't impose MoSCoW unless speakers used it.
+5. **Ignoring off-topic segments** — Requirements often appear in tangential discussions. Process everything.
+6. **Merging without dedup** — When iterating, check for duplicate requirement IDs before merging.
+7. **Single-pass assumption** — Complex transcripts (>30 min) may need multiple extraction passes for completeness.
 
 ---
 

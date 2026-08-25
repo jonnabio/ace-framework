@@ -24,7 +24,7 @@ core_rules:
   - "Update ACTIVE_CONTEXT.md after each session"
   - "Verify against .ace/standards/ before completing any task"
   - "Generate IMPLEMENTATION_PLAN.md before writing code"
-  - "Every task follows BMAD: Analyze â†’ Discuss â†’ Plan â†’ Execute â†’ Verify"
+  - "Every task follows BMAD: Analyze → Discuss → Plan → Execute → Verify"
   - "Create ADR for any significant architectural decision"
   - "Atomic commits with clear, descriptive messages"
   - "No code generation without reading existing code first"

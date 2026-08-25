@@ -131,33 +131,33 @@ Error:
 
 ### Resource Collection
 ```
-GET    /users           â†’ List users (paginated)
-POST   /users           â†’ Create user
-GET    /users/{id}      â†’ Get single user
-PUT    /users/{id}      â†’ Replace user
-PATCH  /users/{id}      â†’ Update user fields
-DELETE /users/{id}      â†’ Delete user
+GET    /users           → List users (paginated)
+POST   /users           → Create user
+GET    /users/{id}      → Get single user
+PUT    /users/{id}      → Replace user
+PATCH  /users/{id}      → Update user fields
+DELETE /users/{id}      → Delete user
 ```
 
 ### Nested Resources
 ```
-GET    /users/{userId}/orders     â†’ User's orders
-POST   /users/{userId}/orders     â†’ Create order for user
-GET    /users/{userId}/orders/{orderId}  â†’ Specific order
+GET    /users/{userId}/orders     → User's orders
+POST   /users/{userId}/orders     → Create order for user
+GET    /users/{userId}/orders/{orderId}  → Specific order
 ```
 
 ### Actions (Non-CRUD)
 ```
-POST   /users/{id}/activate       â†’ Action on resource
-POST   /orders/{id}/cancel        â†’ Action on resource
+POST   /users/{id}/activate       → Action on resource
+POST   /orders/{id}/cancel        → Action on resource
 ```
 
 ### Filtering & Search
 ```
-GET /users?status=active&role=admin      â†’ Filter
-GET /users?q=john                        â†’ Search
-GET /users?sort=-createdAt               â†’ Sort (- = desc)
-GET /users?fields=id,name,email          â†’ Sparse fields
+GET /users?status=active&role=admin      → Filter
+GET /users?q=john                        → Search
+GET /users?sort=-createdAt               → Sort (- = desc)
+GET /users?fields=id,name,email          → Sparse fields
 ```
 
 ---

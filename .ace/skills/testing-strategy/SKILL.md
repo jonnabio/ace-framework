@@ -83,7 +83,7 @@ Naming Convention:
 
 ```markdown
 Focus areas:
-- API endpoints (request â†’ response)
+- API endpoints (request → response)
 - Database operations (CRUD)
 - External service interactions
 - Message queue handling
@@ -118,7 +118,7 @@ describe('POST /api/users', () => {
 
 ```markdown
 Focus on critical user journeys:
-- User registration â†’ login â†’ main action
+- User registration → login → main action
 - Complete purchase flow
 - Core business workflows
 
@@ -215,21 +215,21 @@ Don't obsess over:
 
 ```
 src/
-â”œâ”€â”€ features/
-â”‚   â””â”€â”€ user/
-â”‚       â”œâ”€â”€ user.service.ts
-â”‚       â””â”€â”€ __tests__/
-â”‚           â”œâ”€â”€ user.service.test.ts    # Unit tests
-â”‚           â””â”€â”€ user.fixtures.ts        # Test data
-â””â”€â”€ tests/
-    â”œâ”€â”€ integration/
-    â”‚   â””â”€â”€ api/
-    â”‚       â””â”€â”€ users.test.ts           # API tests
-    â”œâ”€â”€ e2e/
-    â”‚   â””â”€â”€ user-journey.test.ts        # E2E tests
-    â””â”€â”€ helpers/
-        â”œâ”€â”€ database.ts                 # Test DB helpers
-        â””â”€â”€ factories.ts                # Data factories
+├── features/
+│   └── user/
+│       ├── user.service.ts
+│       └── __tests__/
+│           ├── user.service.test.ts    # Unit tests
+│           └── user.fixtures.ts        # Test data
+└── tests/
+    ├── integration/
+    │   └── api/
+    │       └── users.test.ts           # API tests
+    ├── e2e/
+    │   └── user-journey.test.ts        # E2E tests
+    └── helpers/
+        ├── database.ts                 # Test DB helpers
+        └── factories.ts                # Data factories
 ```
 
 ---

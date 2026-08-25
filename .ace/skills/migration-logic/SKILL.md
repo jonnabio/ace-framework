@@ -53,28 +53,28 @@ Moving between servers, clouds, or environments.
 ```markdown
 Before any migration:
 
-â–¡ Backup
+□ Backup
   - [ ] Full database backup completed
   - [ ] Backup verified (test restore)
   - [ ] Backup stored in separate location
 
-â–¡ Documentation
+□ Documentation
   - [ ] Current state documented
   - [ ] Target state documented
   - [ ] Migration steps documented
   - [ ] Rollback steps documented
 
-â–¡ Testing
+□ Testing
   - [ ] Migration tested on copy of production data
   - [ ] Rollback tested
   - [ ] Performance impact assessed
 
-â–¡ Communication
+□ Communication
   - [ ] Stakeholders notified
   - [ ] Maintenance window scheduled (if needed)
   - [ ] Support team briefed
 
-â–¡ Monitoring
+□ Monitoring
   - [ ] Alerts configured
   - [ ] Health checks ready
   - [ ] Logs accessible
@@ -138,42 +138,42 @@ ALTER TABLE orders RENAME COLUMN amount_decimal TO amount;
 
 ```markdown
 Phase 1: PREPARE
-â”œâ”€â”€ Document source schema
-â”œâ”€â”€ Document target schema
-â”œâ”€â”€ Create mapping specification
-â”œâ”€â”€ Write transformation logic
-â””â”€â”€ Create validation queries
+├── Document source schema
+├── Document target schema
+├── Create mapping specification
+├── Write transformation logic
+└── Create validation queries
 
 Phase 2: EXTRACT
-â”œâ”€â”€ Create extraction query/script
-â”œâ”€â”€ Test on subset of data
-â”œâ”€â”€ Validate extracted data
-â””â”€â”€ Store in staging area
+├── Create extraction query/script
+├── Test on subset of data
+├── Validate extracted data
+└── Store in staging area
 
 Phase 3: TRANSFORM
-â”œâ”€â”€ Apply transformation logic
-â”œâ”€â”€ Handle edge cases
-â”œâ”€â”€ Validate transformed data
-â””â”€â”€ Log transformation errors
+├── Apply transformation logic
+├── Handle edge cases
+├── Validate transformed data
+└── Log transformation errors
 
 Phase 4: LOAD
-â”œâ”€â”€ Load to target in batches
-â”œâ”€â”€ Verify row counts
-â”œâ”€â”€ Validate data integrity
-â””â”€â”€ Run consistency checks
+├── Load to target in batches
+├── Verify row counts
+├── Validate data integrity
+└── Run consistency checks
 
 Phase 5: VERIFY
-â”œâ”€â”€ Compare source vs target counts
-â”œâ”€â”€ Spot-check random records
-â”œâ”€â”€ Run business logic validation
-â””â”€â”€ Get stakeholder sign-off
+├── Compare source vs target counts
+├── Spot-check random records
+├── Run business logic validation
+└── Get stakeholder sign-off
 
 Phase 6: CUTOVER
-â”œâ”€â”€ Stop writes to source
-â”œâ”€â”€ Final sync (if applicable)
-â”œâ”€â”€ Switch application to target
-â”œâ”€â”€ Monitor for issues
-â””â”€â”€ Keep source available for rollback
+├── Stop writes to source
+├── Final sync (if applicable)
+├── Switch application to target
+├── Monitor for issues
+└── Keep source available for rollback
 ```
 
 ### 4. Zero-Downtime Migration

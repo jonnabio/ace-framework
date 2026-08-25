@@ -19,7 +19,7 @@ context:
 
 # Core rules
 rules:
-  - "Follow BMAD: Analyze â†’ Plan â†’ Execute â†’ Verify"
+  - "Follow BMAD: Analyze → Plan → Execute → Verify"
   - "Check regression guards before modifying files"
   - "Create ADR for architectural decisions"
   - "Update ACTIVE_CONTEXT.md after each session"

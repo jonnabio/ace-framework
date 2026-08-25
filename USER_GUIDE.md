@@ -38,21 +38,21 @@ ACE-Framework (AI-assisted Code Engineering) is a structured methodology for wor
 Every task follows four phases:
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                          BMAD Cycle                                   â”‚
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚                                                                       â”‚
-â”‚   â”Œâ”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”         â”‚
-â”‚   â”‚ANALYZEâ”‚â”€â”€â”€â–¶â”‚DISCUSSâ”‚â”€â”€â”€â–¶â”‚ PLAN â”‚â”€â”€â”€â–¶â”‚EXECUTEâ”‚â”€â”€â”€â–¶â”‚VERIFYâ”‚         â”‚
-â”‚   â””â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”˜         â”‚
-â”‚       â”‚                                                   â”‚           â”‚
-â”‚       â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â—€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜           â”‚
-â”‚                    (Feedback Loop)                                    â”‚
-â”‚                           â”‚                                           â”‚
-â”‚                    â”Œâ”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”                                    â”‚
-â”‚                    â”‚  INCIDENT   â”‚ (When issues found)                â”‚
-â”‚                    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                                    â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌───────────────────────────────────────────────────────────────────────┐
+│                          BMAD Cycle                                   │
+├───────────────────────────────────────────────────────────────────────┤
+│                                                                       │
+│   ┌───────┐    ┌───────┐    ┌──────┐    ┌───────┐    ┌──────┐         │
+│   │ANALYZE│───▶│DISCUSS│───▶│ PLAN │───▶│EXECUTE│───▶│VERIFY│         │
+│   └───────┘    └───────┘    └──────┘    └───────┘    └──────┘         │
+│       │                                                   │           │
+│       └──────────────◀────────────────────────────────────┘           │
+│                    (Feedback Loop)                                    │
+│                           │                                           │
+│                    ┌──────┴──────┐                                    │
+│                    │  INCIDENT   │ (When issues found)                │
+│                    └─────────────┘                                    │
+└───────────────────────────────────────────────────────────────────────┘
 ```
 
 **Never skip steps.** This prevents costly mistakes and rework.
@@ -271,13 +271,13 @@ Roles follow a natural flow:
 
 ```
 Feature Development:
-Architect â†’ Developer â†’ QA Engineer
+Architect → Developer → QA Engineer
 
 Bug Investigation:
-Any Role â†’ Incident Responder â†’ Previous Role
+Any Role → Incident Responder → Previous Role
 
 Research:
-AI Expert â†’ Data Scientist â†’ Scientific Editor
+AI Expert → Data Scientist → Scientific Editor
 ```
 
 **Important:** Complete one role's work before switching. Update `ACTIVE_CONTEXT.md` at transitions.
@@ -606,64 +606,64 @@ Analyze trade-offs and create an ADR with the recommendation."
 
 ### Do's
 
-âœ… **Start every session by reading context**
+✅ **Start every session by reading context**
 
 ```markdown
 "Read .aceconfig and ACTIVE_CONTEXT.md before we begin."
 ```
 
-âœ… **Use roles appropriately**
+✅ **Use roles appropriately**
 
 - Architect for planning
 - Developer for coding
 - QA for verification
 
-âœ… **Check guards before modifying files**
+✅ **Check guards before modifying files**
 
 ```markdown
 "Check regression guards for files I'm about to modify."
 ```
 
-âœ… **Update context frequently**
+✅ **Update context frequently**
 
 - After completing tasks
 - When encountering blockers
 - At end of session
 
-âœ… **Create ADRs for decisions**
+✅ **Create ADRs for decisions**
 
 ```markdown
 "Create an ADR for the decision to use [technology/pattern]."
 ```
 
-âœ… **Follow BMAD**
+✅ **Follow BMAD**
 
-- Analyze â†’ Plan â†’ Execute â†’ Verify
+- Analyze → Plan → Execute → Verify
 - Never skip phases
 
 ### Don'ts
 
-âŒ **Don't skip planning**
+❌ **Don't skip planning**
 
 - "Just write the code" leads to rework
 
-âŒ **Don't ignore standards**
+❌ **Don't ignore standards**
 
 - Standards exist for good reasons
 
-âŒ **Don't modify guarded files without checking**
+❌ **Don't modify guarded files without checking**
 
 - Guards prevent regressions
 
-âŒ **Don't forget to update context**
+❌ **Don't forget to update context**
 
 - Future sessions depend on it
 
-âŒ **Don't mix roles**
+❌ **Don't mix roles**
 
 - Complete one role's work before switching
 
-âŒ **Don't skip verification**
+❌ **Don't skip verification**
 
 - Testing catches issues early
 
