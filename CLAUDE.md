@@ -4,28 +4,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Primary Project
 
-The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.7.0).
+This repository is the codebase — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.7.0).
+
+All commands below are run from the repository root.
 
 ## Commands
 
 ### Validate framework structure
 ```bash
-cd ~/code_projects/ace_framework && ./scripts/validate.sh
+./scripts/validate.sh
 ```
 
 ### Test scaffold in a new project
 ```bash
-cd ~/code_projects/ace_framework && ./scripts/init.sh ../test-project
+./scripts/init.sh ../test-project
 ```
 
 ### Lint markdown files
 ```bash
-cd ~/code_projects/ace_framework && npx markdownlint '**/*.md'
+npx markdownlint '**/*.md'
 ```
 
 ### Run CLI locally
 ```bash
-node ~/code_projects/ace_framework/cli/bin/create-ace-framework.js <target-dir>
+node cli/bin/create-ace-framework.js <target-dir>
 ```
 
 ### Scaffold a new project via npx
@@ -53,7 +55,7 @@ bash .ace/scripts/verify.sh
 
 ## Architecture
 
-The `ace_framework` repo is a **documentation + tooling framework**, not a traditional code project. It provides:
+The `ace-framework` repo is a **documentation + tooling framework**, not a traditional code project. It provides:
 
 - **`.ace/`** â€” The "AI Control Center" (Shared Brain): immutable standards, role definitions, skills, prompts, and schemas loaded by AI agents on demand.
 - **`docs/`** â€” Per-project living documents: ADRs, session context (`ACTIVE_CONTEXT.md`), planning artifacts, RCA records, and specs.
