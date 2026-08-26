@@ -41,11 +41,9 @@ jobs:
           echo "✅ Framework structure is valid!"
 
       - name: Validate Markdown
+        # No globs or config inputs: the action reads .markdownlint-cli2.jsonc,
+        # so CI runs exactly what `npx markdownlint-cli2` runs locally.
         uses: DavidAnson/markdownlint-cli2-action@v16
-        with:
-          globs: '**/*.md'
-          config: '.markdownlint.json'
-        continue-on-error: true
 
       - name: Check YAML Syntax
         run: |
