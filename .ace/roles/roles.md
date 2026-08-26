@@ -137,11 +137,11 @@ Verify all regression guards are satisfied."
 **RCA Process**:
 
 ```markdown
-1. Document â†’ Capture symptoms, evidence, timeline
-2. Analyze â†’ 5 Whys to root cause
-3. Fix â†’ Immediate + Permanent fixes
-4. Prevent â†’ Tests + Guards + Standards
-5. Verify â†’ Confirm fix and prevention
+1. Document → Capture symptoms, evidence, timeline
+2. Analyze → 5 Whys to root cause
+3. Fix → Immediate + Permanent fixes
+4. Prevent → Tests + Guards + Standards
+5. Verify → Confirm fix and prevention
 ```
 
 **Activation**:
@@ -230,36 +230,36 @@ into compelling narratives."
 
 ## Role Transitions
 
-### PLANNING â†’ EXECUTION
+### PLANNING → EXECUTION
 
 ```
-Architect completes â†’ Developer begins
+Architect completes → Developer begins
 Handoff: implementation_plan.md and docs/progress/tasks.json approved
 Pre-check: Regression guards reviewed
 Protocol: START A NEW LLM SESSION (Context Flush). Only load the specific task and implementation_plan.md.
 ```
 
-### EXECUTION â†’ VERIFICATION
+### EXECUTION → VERIFICATION
 
 ```
-Developer completes â†’ QA Engineer begins
+Developer completes → QA Engineer begins
 Handoff: Code committed, tests written, task_[ID]_result.md generated
 Pre-check: verify.sh executes successfully
 Protocol: START A NEW LLM SESSION (Context Flush). Do not inherit Developer context.
 ```
 
-### Issue Discovered â†’ INCIDENT
+### Issue Discovered → INCIDENT
 
 ```
-Any Role â†’ Incident Responder
+Any Role → Incident Responder
 Trigger: Bug, failure, or vulnerability discovered
 Output: RCA document with prevention measures
 ```
 
-### INCIDENT â†’ Return to Previous Mode
+### INCIDENT → Return to Previous Mode
 
 ```
-Incident Responder completes â†’ Previous Role resumes
+Incident Responder completes → Previous Role resumes
 Handoff: RCA closed, guards in place
 Pre-check: Regression tests passing
 ```
@@ -267,7 +267,7 @@ Pre-check: Regression tests passing
 ### Research Workflow
 
 ```
-AI Expert (theory) â†’ Data Scientist (experiments) â†’ Scientific Editor (publication)
+AI Expert (theory) → Data Scientist (experiments) → Scientific Editor (publication)
 ```
 
 ---

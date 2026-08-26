@@ -4,28 +4,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Primary Project
 
-The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.7.0).
+This repository is the codebase — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.7.0).
+
+All commands below are run from the repository root.
 
 ## Commands
 
 ### Validate framework structure
 ```bash
-cd ~/code_projects/ace_framework && ./scripts/validate.sh
+./scripts/validate.sh
 ```
 
 ### Test scaffold in a new project
 ```bash
-cd ~/code_projects/ace_framework && ./scripts/init.sh ../test-project
+./scripts/init.sh ../test-project
 ```
 
 ### Lint markdown files
 ```bash
-cd ~/code_projects/ace_framework && npx markdownlint '**/*.md'
+npx markdownlint '**/*.md'
 ```
 
 ### Run CLI locally
 ```bash
-node ~/code_projects/ace_framework/cli/bin/create-ace-framework.js <target-dir>
+node cli/bin/create-ace-framework.js <target-dir>
 ```
 
 ### Scaffold a new project via npx
@@ -53,17 +55,17 @@ bash .ace/scripts/verify.sh
 
 ## Architecture
 
-The `ace_framework` repo is a **documentation + tooling framework**, not a traditional code project. It provides:
+The `ace-framework` repo is a **documentation + tooling framework**, not a traditional code project. It provides:
 
-- **`.ace/`** â€” The "AI Control Center" (Shared Brain): immutable standards, role definitions, skills, prompts, and schemas loaded by AI agents on demand.
-- **`docs/`** â€” Per-project living documents: ADRs, session context (`ACTIVE_CONTEXT.md`), planning artifacts, RCA records, and specs.
-- **`cli/`** â€” A Node.js CLI (`create-ace-framework`) that scaffolds the `.ace/` + `docs/` structure into any project, either from bundled templates or by cloning from GitHub.
-- **`.aceconfig`** â€” YAML config that defines core rules, skill triggers, role routing, validation hooks, and context paths. This is always loaded first by AI agents.
-- **`.cursorrules`** / **`.aiconfig`** â€” IDE-specific AI behavior configuration files that mirror `.aceconfig` for Cursor and other tools.
+- **`.ace/`** — The "AI Control Center" (Shared Brain): immutable standards, role definitions, skills, prompts, and schemas loaded by AI agents on demand.
+- **`docs/`** — Per-project living documents: ADRs, session context (`ACTIVE_CONTEXT.md`), planning artifacts, RCA records, and specs.
+- **`cli/`** — A Node.js CLI (`create-ace-framework`) that scaffolds the `.ace/` + `docs/` structure into any project, either from bundled templates or by cloning from GitHub.
+- **`.aceconfig`** — YAML config that defines core rules, skill triggers, role routing, validation hooks, and context paths. This is always loaded first by AI agents.
+- **`.cursorrules`** / **`.aiconfig`** — IDE-specific AI behavior configuration files that mirror `.aceconfig` for Cursor and other tools.
 
 ### BMAD Methodology
 
-Every task follows **Analyze â†’ Discuss â†’ Plan â†’ Execute â†’ Verify**:
+Every task follows **Analyze → Discuss → Plan → Execute → Verify**:
 
 - **ANALYZE** (Architect role): Read specs, ADRs, and regression guards; identify constraints; list unknowns.
 - **DISCUSS** (Architect role): Capture user preferences on "gray areas"; update `docs/context/PROJECT_CONTEXT.md`.
@@ -75,10 +77,10 @@ Every task follows **Analyze â†’ Discuss â†’ Plan â†’ Execute â�
 ### Key Files to Load at Session Start
 
 Per `.cursorrules`, always read before any task:
-1. `.aceconfig` â€” core rules and skill routing
-2. `.ace/roles/roles.md` â€” available roles and responsibilities
-3. `docs/context/ACTIVE_CONTEXT.md` â€” current session state
-4. `docs/rca/regression-guards.yaml` â€” protected files and invariants
+1. `.aceconfig` — core rules and skill routing
+2. `.ace/roles/roles.md` — available roles and responsibilities
+3. `docs/context/ACTIVE_CONTEXT.md` — current session state
+4. `docs/rca/regression-guards.yaml` — protected files and invariants
 
 ### Skill-Triggered Loading
 
@@ -146,7 +148,7 @@ Before modifying any file: check `docs/rca/regression-guards.yaml`. If guarded, 
 - Branch naming: `feature/short-description`, `fix/issue-number-description`, `docs/what-changed`
 - Commit format: `type(scope): description` (conventional commits)
 - All code must pass linting before commit
-- Atomic commits â€” one logical change per commit
+- Atomic commits — one logical change per commit
 
 ### ADR Protocol
 
@@ -154,5 +156,5 @@ Create an ADR (`docs/adr/ADR-###-description.md`) for any significant architectu
 
 ### Session End
 
-Always update `docs/context/ACTIVE_CONTEXT.md` with completed work, blockers, and next steps (1â€“3 specific tasks).
+Always update `docs/context/ACTIVE_CONTEXT.md` with completed work, blockers, and next steps (1–3 specific tasks).
 

@@ -59,19 +59,19 @@ Purpose: Drill down from symptom to root cause
 
 Example:
 1. Why did the user see an error?
-   â†’ The API returned a 500 status
+   → The API returned a 500 status
 
 2. Why did the API return 500?
-   â†’ An unhandled exception in the service layer
+   → An unhandled exception in the service layer
 
 3. Why was the exception unhandled?
-   â†’ No try-catch around the database call
+   → No try-catch around the database call
 
 4. Why was there no try-catch?
-   â†’ The error handling pattern wasn't followed
+   → The error handling pattern wasn't followed
 
 5. Why wasn't the pattern followed?
-   â†’ ROOT CAUSE: No automated check enforcing error handling
+   → ROOT CAUSE: No automated check enforcing error handling
 
 Continue asking "Why?" until you reach a systemic cause
 that can be fixed with process/tooling changes.
