@@ -323,4 +323,4 @@ After all tasks complete:
 
 ---
 
-_Implementation Plan — ACE-Framework v2.7 (Approved 2026-07-04)_
+*Implementation Plan — ACE-Framework v2.7 (Approved 2026-07-04)*

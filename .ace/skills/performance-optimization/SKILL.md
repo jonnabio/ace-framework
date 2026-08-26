@@ -5,7 +5,7 @@ description: Procedural knowledge for identifying bottlenecks and optimizing sys
 
 # Skill: Performance Optimization
 
-> Procedural knowledge for identifying bottlenecks 
+> Procedural knowledge for identifying bottlenecks
 > and optimizing system performance.
 
 ---

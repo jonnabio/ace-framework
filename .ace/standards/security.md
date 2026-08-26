@@ -9,6 +9,7 @@
 ## Secrets Management
 
 ### NEVER in Code
+
 ```
 FORBIDDEN:
 - API keys
@@ -21,6 +22,7 @@ FORBIDDEN:
 ```
 
 ### Required Approach
+
 ```
 - Environment variables for runtime secrets
 - Secret management service (Vault, AWS Secrets Manager, etc.)
@@ -29,6 +31,7 @@ FORBIDDEN:
 ```
 
 ### Detection
+
 - Pre-commit hooks must scan for secrets
 - CI pipeline must fail on detected secrets
 - Regular repository audits
@@ -38,6 +41,7 @@ FORBIDDEN:
 ## Input Validation
 
 ### All External Input is Untrusted
+
 ```
 Sources requiring validation:
 - User input (forms, parameters)
@@ -50,6 +54,7 @@ Sources requiring validation:
 ```
 
 ### Validation Rules
+
 1. **Whitelist over blacklist** - Define what's allowed
 2. **Validate type, length, format, range**
 3. **Sanitize before use**
@@ -60,6 +65,7 @@ Sources requiring validation:
 ## OWASP Top 10 Protections
 
 ### 1. Injection Prevention
+
 ```
 REQUIRED:
 - Parameterized queries (never string concatenation)
@@ -69,6 +75,7 @@ REQUIRED:
 ```
 
 ### 2. Authentication
+
 ```
 REQUIRED:
 - Secure password hashing (bcrypt, Argon2)
@@ -78,6 +85,7 @@ REQUIRED:
 ```
 
 ### 3. Sensitive Data Exposure
+
 ```
 REQUIRED:
 - HTTPS everywhere
@@ -87,6 +95,7 @@ REQUIRED:
 ```
 
 ### 4. XML External Entities (XXE)
+
 ```
 REQUIRED:
 - Disable DTD processing
@@ -95,6 +104,7 @@ REQUIRED:
 ```
 
 ### 5. Access Control
+
 ```
 REQUIRED:
 - Deny by default
@@ -104,6 +114,7 @@ REQUIRED:
 ```
 
 ### 6. Security Misconfiguration
+
 ```
 REQUIRED:
 - Remove default credentials
@@ -113,6 +124,7 @@ REQUIRED:
 ```
 
 ### 7. Cross-Site Scripting (XSS)
+
 ```
 REQUIRED:
 - Output encoding
@@ -122,6 +134,7 @@ REQUIRED:
 ```
 
 ### 8. Insecure Deserialization
+
 ```
 REQUIRED:
 - Validate serialized data
@@ -130,6 +143,7 @@ REQUIRED:
 ```
 
 ### 9. Vulnerable Components
+
 ```
 REQUIRED:
 - Regular dependency updates
@@ -139,6 +153,7 @@ REQUIRED:
 ```
 
 ### 10. Logging & Monitoring
+
 ```
 REQUIRED:
 - Security event logging
@@ -152,16 +167,19 @@ REQUIRED:
 ## API Security
 
 ### Authentication
+
 - Token-based authentication (JWT, OAuth2)
 - API keys for service-to-service
 - Token expiration and refresh
 
 ### Authorization
+
 - Verify permissions on every endpoint
 - Resource-level access control
 - Rate limiting
 
 ### Transport
+
 - TLS 1.2+ required
 - Certificate validation
 - HSTS enabled
@@ -171,6 +189,7 @@ REQUIRED:
 ## File Handling
 
 ### Uploads
+
 ```
 REQUIRED:
 - Validate file type (magic bytes, not extension)
@@ -181,6 +200,7 @@ REQUIRED:
 ```
 
 ### Downloads
+
 ```
 REQUIRED:
 - Path traversal prevention
@@ -193,11 +213,13 @@ REQUIRED:
 ## Database Security
 
 ### Queries
+
 - Parameterized queries only
 - Least privilege database accounts
 - No direct SQL string building
 
 ### Storage
+
 - Encryption at rest for sensitive data
 - Secure connection strings
 - Regular backups (encrypted)
@@ -207,6 +229,7 @@ REQUIRED:
 ## Security Headers
 
 ### Required Headers
+
 ```http
 Strict-Transport-Security: max-age=31536000; includeSubDomains
 Content-Security-Policy: [appropriate policy]

@@ -143,9 +143,11 @@ The process of extracting formal, structured requirements from raw unstructured 
 > Add project-specific terminology below
 
 ### [Term]
+
 [Definition]
 
 ### [Term]
+
 [Definition]
 
 ---
@@ -153,6 +155,7 @@ The process of extracting formal, structured requirements from raw unstructured 
 ## Term Changes
 
 When modifying terms:
+
 1. Update this glossary
 2. Update code to match
 3. Update documentation
@@ -161,4 +164,3 @@ When modifying terms:
 ---
 
 *Last Updated: [DATE]*
-

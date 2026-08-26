@@ -56,40 +56,50 @@ Verify the implementation just completed against project standards.
 ## Report Format
 
 ```
+
 # Verification Report: [Task Name]
 
 ## Standards Compliance
 
 ### Coding Standards
+
 - Status: [PASS/FAIL]
 - Issues: [None or list]
 
 ### Security Standards
+
 - Status: [PASS/FAIL]
 - Issues: [None or list]
 
 ### Architecture Standards
+
 - Status: [PASS/FAIL]
 - Issues: [None or list]
 
 ### ADR Compliance
+
 - Status: [PASS/FAIL]
 - Issues: [None or list]
 
 ### Business Rules
+
 - Status: [PASS/FAIL]
 - Issues: [None or list]
 
 ### Test Coverage
+
 - Status: [PASS/FAIL]
 - Coverage: [X%]
 - Issues: [None or list]
 
 ## Overall Status
+
 [APPROVED / NEEDS REVISION]
 
 ## Required Actions
+
 - [Action if any issues found]
+
 ```
 
 If any issues are found, do not proceed to the next task.
@@ -110,6 +120,7 @@ Fix issues first and re-verify.
 ## Expected Output
 
 A verification report that:
+
 - Shows pass/fail for each category
 - Lists specific issues found
 - Provides overall approval status
@@ -142,6 +153,7 @@ After fixes:
 ## Follow-up Prompts
 
 After successful verification:
+
 ```markdown
 "Verification passed.
 - Commit changes with appropriate message
@@ -150,6 +162,7 @@ After successful verification:
 ```
 
 If verification reveals need for ADR:
+
 ```markdown
 "The implementation introduces a new pattern that should be documented.
 Create ADR-[###]-[description].md to record this decision."

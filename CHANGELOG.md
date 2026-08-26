@@ -97,6 +97,7 @@ Executes the approved plan in `docs/planning/implementation_plan_v2.7_loop_engin
 - **Documentation**: Fully upgraded `USER_GUIDE.md`, `CLAUDE.md`, and `README.md` to point to the new AgentSkills structures and the `SKILLS_GUIDE.md`.
 
 ## [v2.2.0] - 2026-05-01
+
 ### Added
 
 - **Transcript Analysis**: New golden prompt `.ace/prompts/extract-transcript.md` for extracting structured requirements from raw transcripts.
@@ -155,4 +156,3 @@ Executes the approved plan in `docs/planning/implementation_plan_v2.7_loop_engin
   - No defined roles or responsibilities.
   - Fragile, non-reproducible outputs.
 - **Note**: There are no files or specs for v1.0; it serves as the "dark age" baseline that v2.0 standardizes.
-

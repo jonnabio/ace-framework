@@ -326,7 +326,7 @@ Skills are detailed procedures for specific tasks. They contain:
 
 ### Third-Party Skills (Marketplace)
 
-ACE Framework uses the **AgentSkills.io** standard, which means you can install external, executable skills directly from the community. 
+ACE Framework uses the **AgentSkills.io** standard, which means you can install external, executable skills directly from the community.
 
 **Option 1: Using the ACE CLI (Recommended)**
 You can easily import any skill from a GitHub repository directly into your project using the ACE CLI:
@@ -334,7 +334,9 @@ You can easily import any skill from a GitHub repository directly into your proj
 ```bash
 npx ace-framework add-skill anthropics/skills/skills/pdf
 ```
+
 This command will:
+
 1. Download the skill folder into `.ace/skills/pdf`
 2. Automatically register it in your `.aceconfig` under `skill_triggers`
 
@@ -345,6 +347,7 @@ If you are using Claude Code, you can instantly add document parsing capabilitie
 /plugin marketplace add anthropics/skills
 /plugin install document-skills@anthropic-agent-skills
 ```
+
 *After installation, you can ask the agent to "Use the PDF skill to extract requirements from docs/inputs/spec.pdf".*
 
 ### Invoking a Skill
@@ -906,6 +909,5 @@ rate across features is the signal that the playbook is actually working.
 
 ---
 
-_ACE-Framework User Guide v2.7.0_
-_Treat AI interactions as structured transactions, not casual conversations._
-
+*ACE-Framework User Guide v2.7.0*
+*Treat AI interactions as structured transactions, not casual conversations.*

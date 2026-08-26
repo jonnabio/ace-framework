@@ -27,6 +27,7 @@ This document explains how to distribute and deploy ACE-Framework to other devel
 ```
 
 #### Pros
+
 - No dependencies required
 - Preserves full structure
 - Works with any tech stack
@@ -74,6 +75,7 @@ npx create-ace-framework
 #### Hosting the Script
 
 Host `scripts/init.sh` at a stable URL:
+
 ```
 https://raw.githubusercontent.com/jonnabio/ace-framework/main/scripts/init.sh
 ```

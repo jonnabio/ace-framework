@@ -5,7 +5,7 @@ description: Procedural knowledge for standardizing error boundaries, logging, a
 
 # Skill: Error Handling
 
-> Procedural knowledge for standardizing error boundaries, 
+> Procedural knowledge for standardizing error boundaries,
 > logging, and graceful degradation.
 
 ---

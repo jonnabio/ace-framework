@@ -5,7 +5,7 @@ description: Procedural knowledge for designing, evaluating, and versioning robu
 
 # Skill: Prompt Engineering
 
-> Procedural knowledge for designing, evaluating, and 
+> Procedural knowledge for designing, evaluating, and
 > versioning robust LLM prompts.
 
 ---

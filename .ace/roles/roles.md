@@ -327,4 +327,3 @@ AI Expert (theory) → Data Scientist (experiments) → Scientific Editor (publi
 ---
 
 _BMAD Agentic Roles - ACE-Framework v2.1_
-

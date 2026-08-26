@@ -130,6 +130,7 @@ Error:
 ## Patterns
 
 ### Resource Collection
+
 ```
 GET    /users           → List users (paginated)
 POST   /users           → Create user
@@ -140,6 +141,7 @@ DELETE /users/{id}      → Delete user
 ```
 
 ### Nested Resources
+
 ```
 GET    /users/{userId}/orders     → User's orders
 POST   /users/{userId}/orders     → Create order for user
@@ -147,12 +149,14 @@ GET    /users/{userId}/orders/{orderId}  → Specific order
 ```
 
 ### Actions (Non-CRUD)
+
 ```
 POST   /users/{id}/activate       → Action on resource
 POST   /orders/{id}/cancel        → Action on resource
 ```
 
 ### Filtering & Search
+
 ```
 GET /users?status=active&role=admin      → Filter
 GET /users?q=john                        → Search
@@ -209,6 +213,7 @@ GET /users?fields=id,name,email          → Sparse fields
 ### Response
 
 **Success (2XX):**
+
 ```json
 {
   "data": {}
@@ -216,8 +221,10 @@ GET /users?fields=id,name,email          → Sparse fields
 ```
 
 **Errors:**
+
 | Status | Code | When |
 |--------|------|------|
+
 ```
 
 ---
@@ -260,5 +267,3 @@ complete documentation."
 ---
 
 *Skill Version: 1.0*
-
-

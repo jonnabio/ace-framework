@@ -8,6 +8,7 @@
 ## Purpose
 
 Define automated checks and actions that run:
+
 - Before AI generates code
 - After AI generates code
 - Before commits
@@ -297,6 +298,7 @@ Both scripts are POSIX sh with no dependencies beyond grep/sed.
 AI agents should simulate hooks by:
 
 1. **Pre-Generation**: Always start with
+
    ```markdown
    "Before generating code, I'll verify:
    - ACTIVE_CONTEXT.md is current
@@ -306,6 +308,7 @@ AI agents should simulate hooks by:
    ```
 
 2. **Post-Generation**: Always end with
+
    ```markdown
    "After generating, I'll:
    - Validate against .ace/standards/
@@ -316,6 +319,7 @@ AI agents should simulate hooks by:
    ```
 
 3. **On Issue Detection**:
+
    ```markdown
    "Issue detected. Switching to INCIDENT mode:
    - Capturing symptoms and evidence
@@ -324,6 +328,7 @@ AI agents should simulate hooks by:
    ```
 
 4. **Post-RCA**:
+
    ```markdown
    "RCA complete. Finalizing:
    - Creating regression guard
@@ -531,4 +536,3 @@ To resolve:
 ---
 
 *Last Updated: [DATE]*
-

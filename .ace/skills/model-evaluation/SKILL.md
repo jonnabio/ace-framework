@@ -5,7 +5,7 @@ description: Procedural knowledge for evaluating machine learning models and AI 
 
 # Skill: Model Evaluation
 
-> Procedural knowledge for evaluating machine learning 
+> Procedural knowledge for evaluating machine learning
 > models and AI systems systematically.
 
 ---

@@ -78,6 +78,7 @@
 [What was done to resolve the immediate issue]
 
 **Files Changed:**
+
 - [file path]: [what changed]
 
 **Commit:** [commit hash or PR link]
@@ -87,6 +88,7 @@
 [Long-term solution to prevent recurrence]
 
 **Files Changed:**
+
 - [file path]: [what changed]
 
 **Commit:** [commit hash or PR link]
@@ -146,12 +148,15 @@
 ## Lessons Learned
 
 ### What went well
+
 - [Positive aspect of the response]
 
 ### What could improve
+
 - [Area for improvement]
 
 ### Action items
+
 - [ ] [Action to improve process]
 - [ ] [Action to prevent similar issues]
 

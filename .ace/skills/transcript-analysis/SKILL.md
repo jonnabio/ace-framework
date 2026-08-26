@@ -201,5 +201,3 @@ Extract all requirements and save to docs/requirements/[OUTPUT_NAME].md."
 ---
 
 *Skill Version: 1.0*
-
-

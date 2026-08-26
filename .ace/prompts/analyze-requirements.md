@@ -89,6 +89,7 @@ analysis is complete and accurate. You MUST output the `tasks.json` file as part
 ## Expected Output
 
 A structured analysis document that:
+
 - Confirms understanding of requirements
 - Lists all applicable constraints
 - Identifies gaps requiring clarification
@@ -99,6 +100,7 @@ A structured analysis document that:
 ## Follow-up Prompts
 
 If analysis reveals questions:
+
 ```markdown
 "Before proceeding, I need clarification on:
 1. [Question 1]
@@ -108,6 +110,7 @@ Please provide answers or point me to relevant documentation."
 ```
 
 After analysis is confirmed:
+
 ```markdown
 "Analysis confirmed. Proceed to BMAD Phase 2: Planning.
 Generate an IMPLEMENTATION_PLAN.md based on this analysis."

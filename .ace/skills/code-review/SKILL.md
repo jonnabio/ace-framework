@@ -13,6 +13,7 @@ description: Procedural knowledge for conducting thorough, constructive code rev
 ## Purpose
 
 Enable effective code reviews that:
+
 - Catch bugs and issues before merge
 - Ensure standards compliance
 - Share knowledge across the team
@@ -326,5 +327,3 @@ structured feedback. Check regression guards for modified files."
 ---
 
 *Skill Version: 1.0*
-
-

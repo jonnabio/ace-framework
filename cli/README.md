@@ -68,6 +68,7 @@ create-ace-framework my-project
    - Edit `.ace/standards/security.md`
 
 3. **Start your first AI session:**
+
    ```
    "Read .aceconfig and ACTIVE_CONTEXT.md to begin."
    ```

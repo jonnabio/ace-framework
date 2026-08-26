@@ -5,7 +5,7 @@ description: Procedural knowledge for conducting focused security reviews and en
 
 # Skill: Security Audit
 
-> Procedural knowledge for conducting focused security 
+> Procedural knowledge for conducting focused security
 > reviews and enforcing secure coding practices.
 
 ---

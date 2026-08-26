@@ -7,6 +7,7 @@
 ## Purpose
 
 Runbooks provide:
+
 - Consistent response to incidents
 - Reduced time to resolution
 - Knowledge sharing across team
@@ -106,6 +107,7 @@ If issue persists:
 ### Updating Runbooks
 
 After each incident:
+
 - Was the runbook helpful?
 - What was missing?
 - What was incorrect?

@@ -13,6 +13,7 @@ description: Procedural knowledge for safe data and schema migrations across env
 ## Purpose
 
 Enable safe, reversible migrations that:
+
 - Preserve data integrity
 - Minimize downtime
 - Support rollback at any stage
@@ -33,15 +34,19 @@ Enable safe, reversible migrations that:
 ## Migration Types
 
 ### 1. Database Schema Migration
+
 Changes to table structure, columns, indexes, constraints.
 
 ### 2. Data Migration
+
 Moving or transforming data between schemas or systems.
 
 ### 3. Application Migration
+
 Moving application state, configuration, or dependencies.
 
 ### 4. Infrastructure Migration
+
 Moving between servers, clouds, or environments.
 
 ---
@@ -83,6 +88,7 @@ Before any migration:
 ### 2. Schema Migration Patterns
 
 #### Adding a Column (Safe)
+
 ```sql
 -- Step 1: Add column as nullable
 ALTER TABLE users ADD COLUMN phone VARCHAR(20) NULL;
@@ -95,6 +101,7 @@ ALTER TABLE users ALTER COLUMN phone SET NOT NULL;
 ```
 
 #### Removing a Column (Safe)
+
 ```sql
 -- Step 1: Stop writing to column (deploy code change)
 -- Step 2: Wait for all reads to stop
@@ -103,6 +110,7 @@ ALTER TABLE users DROP COLUMN deprecated_field;
 ```
 
 #### Renaming a Column (Safe)
+
 ```sql
 -- Step 1: Add new column
 ALTER TABLE users ADD COLUMN full_name VARCHAR(255);
@@ -118,6 +126,7 @@ ALTER TABLE users DROP COLUMN name;
 ```
 
 #### Changing Column Type (Safe)
+
 ```sql
 -- Step 1: Add new column with new type
 ALTER TABLE orders ADD COLUMN amount_decimal DECIMAL(10,2);
@@ -305,16 +314,19 @@ After migration:
 ## Environment-Specific Notes
 
 ### Development
+
 - Can be destructive
 - Fast iteration
 - Use seed data
 
 ### Staging
+
 - Must mirror production process
 - Test with production-like data
 - Verify timing estimates
 
 ### Production
+
 - Zero tolerance for data loss
 - Minimize downtime
 - Full rollback capability
@@ -334,5 +346,3 @@ rollback procedures."
 ---
 
 *Skill Version: 1.0*
-
-

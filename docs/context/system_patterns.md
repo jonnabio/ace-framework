@@ -8,6 +8,7 @@
 ## Purpose
 
 This document captures:
+
 - Patterns already established in the codebase
 - Conventions that should be followed
 - Anti-patterns to avoid
@@ -59,6 +60,7 @@ This document captures:
 ### Dependency Direction
 
 Dependencies flow **inward** toward the domain layer:
+
 - Presentation depends on Application
 - Application depends on Domain
 - Infrastructure depends on Domain

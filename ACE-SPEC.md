@@ -807,5 +807,5 @@ fingerprints — the evidence that the self-improving harness improves.
 
 ---
 
-_ACE-Framework v2.7.0_
-_Treat AI interactions as structured transactions, not casual conversations._
+*ACE-Framework v2.7.0*
+*Treat AI interactions as structured transactions, not casual conversations.*

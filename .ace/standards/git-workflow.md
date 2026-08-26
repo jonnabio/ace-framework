@@ -42,25 +42,29 @@ hotfix/456 ───────────────────────
 ### Branch Rules
 
 #### main
+
 - Always deployable
 - Protected: no direct commits
 - Requires PR with approvals
 - All tests must pass
-- Only merge from release/* or hotfix/*
+- Only merge from release/*or hotfix/*
 
 #### develop
+
 - Integration of features
 - Protected: no direct commits
 - Requires PR with approvals
 - Tests should pass
 
 #### feature/*
+
 - Branch from: develop
 - Merge to: develop
 - Delete after merge
 - Keep up-to-date with develop
 
 #### hotfix/*
+
 - Branch from: main
 - Merge to: main AND develop
 - For critical production issues only
@@ -97,6 +101,7 @@ hotfix/456 ───────────────────────
 ### Scope
 
 Optional, describes the affected module:
+
 - `api`, `auth`, `db`, `ui`, `core`, etc.
 
 ### Subject

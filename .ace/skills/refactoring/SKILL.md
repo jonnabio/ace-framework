@@ -13,6 +13,7 @@ description: Procedural knowledge for safe code refactoring that improves struct
 ## Purpose
 
 Enable safe refactoring that:
+
 - Preserves existing behavior (no functional changes)
 - Improves code quality and maintainability
 - Reduces technical debt
@@ -35,6 +36,7 @@ Enable safe refactoring that:
 > **Refactoring changes structure, not behavior.**
 >
 > If tests fail after refactoring, either:
+>
 > 1. The refactoring changed behavior (bug)
 > 2. The tests were testing implementation, not behavior (fix tests)
 
@@ -91,6 +93,7 @@ Enable safe refactoring that:
 ## Refactoring Catalog
 
 ### Extract Method
+
 **When:** Function is too long or does multiple things.
 
 ```python
@@ -134,6 +137,7 @@ def apply_discount(order, discount):
 ```
 
 ### Extract Variable
+
 **When:** Expression is complex or used multiple times.
 
 ```python
@@ -151,6 +155,7 @@ if is_adult and is_allowed_country and is_verified:
 ```
 
 ### Rename
+
 **When:** Name doesn't clearly express intent.
 
 ```python
@@ -164,6 +169,7 @@ def calculate_commission(sale_amount, commission_rate):
 ```
 
 ### Replace Conditional with Polymorphism
+
 **When:** Type-checking conditionals scattered throughout code.
 
 ```python
@@ -195,6 +201,7 @@ cost = shipping_strategy.calculate(order)
 ```
 
 ### Extract Class
+
 **When:** Class has too many responsibilities.
 
 ```python
@@ -230,6 +237,7 @@ class User:
 ```
 
 ### Replace Magic Number with Constant
+
 **When:** Literal values without context.
 
 ```python
@@ -245,6 +253,7 @@ if user.login_attempts > MAX_LOGIN_ATTEMPTS:
 ```
 
 ### Introduce Parameter Object
+
 **When:** Multiple parameters travel together.
 
 ```python
@@ -265,6 +274,7 @@ def create_report(config: ReportConfig):
 ```
 
 ### Replace Nested Conditionals with Guard Clauses
+
 **When:** Deep nesting reduces readability.
 
 ```python
@@ -298,18 +308,21 @@ def process_payment(payment):
 ## Refactoring Safety Checklist
 
 Before refactoring:
+
 - [ ] All tests pass
 - [ ] Test coverage adequate for refactored code
 - [ ] No pending changes to same code
 - [ ] Regression guards reviewed
 
 During refactoring:
+
 - [ ] One refactoring at a time
 - [ ] Tests after each change
 - [ ] Commit after each successful refactoring
 - [ ] No functional changes mixed in
 
 After refactoring:
+
 - [ ] All tests still pass
 - [ ] Coverage maintained or improved
 - [ ] Code review requested
@@ -358,6 +371,7 @@ No functional changes.
 ```
 
 Example:
+
 ```
 refactor(user-service): extract address handling to separate class
 
@@ -382,5 +396,3 @@ changes with tests passing at each step."
 ---
 
 *Skill Version: 1.0*
-
-

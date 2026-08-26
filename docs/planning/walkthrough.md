@@ -29,6 +29,7 @@
 ### Functional Testing
 
 #### Test Case 1: [Name]
+
 - **Requirement:** [FR-XXX from spec]
 - **Steps:**
   1. [Step 1]
@@ -40,6 +41,7 @@
 - **Evidence:** [Screenshot/log reference]
 
 #### Test Case 2: [Name]
+
 - **Requirement:** [FR-XXX]
 - **Steps:**
   1. [Step 1]
@@ -54,12 +56,14 @@
 ### Edge Cases
 
 #### Edge Case 1: [Description]
+
 - **Scenario:** [What was tested]
 - **Expected:** [Expected behavior]
 - **Actual:** [Actual behavior]
 - **Status:** [PASS | FAIL]
 
 #### Edge Case 2: [Description]
+
 - **Scenario:** [What was tested]
 - **Expected:** [Expected behavior]
 - **Actual:** [Actual behavior]
@@ -111,6 +115,7 @@
 ## Issues Found
 
 ### Issue 1: [Title]
+
 - **Severity:** [Critical | High | Medium | Low]
 - **Description:** [What's wrong]
 - **Steps to Reproduce:**
@@ -126,10 +131,9 @@
 ## Evidence
 
 ### Screenshots
-- [Screenshot 1 description]: [link/path]
-- [Screenshot 2 description]: [link/path]
 
 ### Logs
+
 ```
 [Relevant log output]
 ```
@@ -144,6 +148,7 @@
 [Brief summary of verification results]
 
 **Recommendation:**
+
 - [ ] Ready for release
 - [ ] Requires fixes (see Issues)
 - [ ] Requires re-verification after fixes

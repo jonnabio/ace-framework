@@ -8,12 +8,14 @@
 ## Core Principles
 
 ### 1. Separation of Concerns
+
 - Each module has one clear responsibility
 - Business logic separated from infrastructure
 - UI separated from data management
 - Cross-cutting concerns handled via middleware/decorators
 
 ### 2. Dependency Direction
+
 ```
 ┌─────────────────────────────────────────┐
 │           Presentation Layer            │
@@ -43,11 +45,13 @@ Domain has NO external dependencies
 ```
 
 ### 3. Interface Segregation
+
 - Small, focused interfaces
 - Clients depend only on what they use
 - Prefer composition over inheritance
 
 ### 4. Explicit Dependencies
+
 - No hidden dependencies
 - Constructor/parameter injection
 - Dependencies declared, not discovered
@@ -57,6 +61,7 @@ Domain has NO external dependencies
 ## Directory Structure
 
 ### Feature-Based Organization
+
 ```
 src/
 ├── features/
@@ -76,6 +81,7 @@ src/
 ```
 
 ### Rules
+
 - Features are independent modules
 - Cross-feature communication via events or shared kernel
 - No circular dependencies between features
@@ -86,6 +92,7 @@ src/
 ## API Design
 
 ### REST Conventions
+
 ```
 GET    /resources          # List
 GET    /resources/:id      # Get one
@@ -99,6 +106,7 @@ GET    /users/:userId/orders
 ```
 
 ### Response Format
+
 ```json
 {
   "data": {},
@@ -111,6 +119,7 @@ GET    /users/:userId/orders
 ```
 
 ### Error Response
+
 ```json
 {
   "errors": [
@@ -125,6 +134,7 @@ GET    /users/:userId/orders
 ```
 
 ### Versioning
+
 - URL versioning: `/api/v1/resources`
 - Major versions only
 - Deprecation notices before removal
@@ -134,6 +144,7 @@ GET    /users/:userId/orders
 ## Data Management
 
 ### Repository Pattern
+
 ```
 ┌───────────────┐     ┌───────────────┐     ┌───────────────┐
 │   Service     │────▶│  Repository   │────▶│   Database    │
@@ -148,12 +159,14 @@ GET    /users/:userId/orders
 ```
 
 ### Rules
+
 - Repositories handle persistence only
 - Business logic stays in domain/services
 - One repository per aggregate root
 - Query methods return domain objects
 
 ### Database Transactions
+
 - Transaction per use case
 - Explicit transaction boundaries
 - Rollback on any failure
@@ -163,6 +176,7 @@ GET    /users/:userId/orders
 ## Error Handling Architecture
 
 ### Error Hierarchy
+
 ```
 BaseError
 ├── DomainError (business rule violations)
@@ -178,6 +192,7 @@ BaseError
 ```
 
 ### Error Flow
+
 ```
 Domain Layer → throws DomainError
      ↓
@@ -193,12 +208,14 @@ Client → receives standardized error response
 ## Event-Driven Patterns
 
 ### When to Use Events
+
 - Cross-feature communication
 - Decoupled side effects
 - Audit logging
 - Async processing
 
 ### Event Structure
+
 ```typescript
 interface DomainEvent {
   eventId: string;
@@ -210,6 +227,7 @@ interface DomainEvent {
 ```
 
 ### Rules
+
 - Events are immutable
 - Events are past tense (UserCreated, OrderPlaced)
 - Handlers are idempotent
@@ -220,22 +238,26 @@ interface DomainEvent {
 ## Caching Strategy
 
 ### Cache Layers
+
 ```
 Request → Local Cache → Distributed Cache → Database
 ```
 
 ### Cache Rules
+
 - Cache at the highest appropriate level
 - Clear invalidation strategy required
 - TTL based on data volatility
 - Cache keys must be deterministic
 
 ### What to Cache
+
 - Expensive computations
 - Frequently accessed data
 - Rarely changing reference data
 
 ### What NOT to Cache
+
 - User-specific sensitive data
 - Rapidly changing data
 - Data requiring real-time accuracy
@@ -245,6 +267,7 @@ Request → Local Cache → Distributed Cache → Database
 ## Configuration Management
 
 ### Configuration Hierarchy
+
 ```
 1. Default values (code)
 2. Configuration files (per environment)
@@ -253,6 +276,7 @@ Request → Local Cache → Distributed Cache → Database
 ```
 
 ### Rules
+
 - All config externalized
 - Secrets via environment variables only
 - Feature flags for gradual rollouts
@@ -263,6 +287,7 @@ Request → Local Cache → Distributed Cache → Database
 ## Testing Architecture
 
 ### Test Pyramid
+
 ```
         ┌───────────┐
         │   E2E     │  Few, critical paths
@@ -274,6 +299,7 @@ Request → Local Cache → Distributed Cache → Database
 ```
 
 ### Test Location
+
 ```
 src/
 ├── features/
@@ -290,12 +316,14 @@ src/
 ## Deployment Architecture
 
 ### Requirements
+
 - Containerized applications
 - Environment parity (dev ≈ staging ≈ prod)
 - Immutable deployments
 - Health checks exposed
 
 ### Health Endpoints
+
 ```
 GET /health        # Basic liveness
 GET /health/ready  # Readiness (dependencies up)

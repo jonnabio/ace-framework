@@ -5,7 +5,7 @@ description: Procedural knowledge for ensuring frontend interfaces comply with W
 
 # Skill: Accessibility Audit
 
-> Procedural knowledge for ensuring frontend interfaces 
+> Procedural knowledge for ensuring frontend interfaces
 > comply with WCAG standards and are usable by everyone.
 
 ---

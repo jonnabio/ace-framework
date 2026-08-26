@@ -108,6 +108,7 @@ When optimizing queries:
 ## Patterns
 
 ### Safe Column Addition
+
 ```sql
 -- Always provide default for existing rows
 ALTER TABLE users
@@ -118,6 +119,7 @@ CREATE INDEX CONCURRENTLY idx_users_status ON users(status);
 ```
 
 ### Safe Column Removal
+
 ```sql
 -- Step 1: Remove from code first (deploy)
 -- Step 2: Wait for traffic to clear
@@ -126,6 +128,7 @@ ALTER TABLE users DROP COLUMN deprecated_field;
 ```
 
 ### Safe Table Rename
+
 ```sql
 -- Step 1: Create new table
 -- Step 2: Dual-write to both
@@ -172,5 +175,3 @@ checklist and validation steps."
 ---
 
 *Skill Version: 1.0*
-
-

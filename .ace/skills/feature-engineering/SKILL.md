@@ -5,7 +5,7 @@ description: Procedural knowledge for transforming raw data into high-value feat
 
 # Skill: Feature Engineering
 
-> Procedural knowledge for transforming raw data into 
+> Procedural knowledge for transforming raw data into
 > high-value features for machine learning models.
 
 ---

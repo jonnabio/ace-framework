@@ -45,10 +45,10 @@ npx ace-framework curate list
 
 ## Core Pillars
 
-1.  **BMAD Cycle**: Analyze → Discuss → Plan → Execute → Verify.
-2.  **Agentic Roles**: 7 specialized personas (Architect, Developer, QA, etc.).
-3.  **Active Context**: Persistent session management via `ACTIVE_CONTEXT.md`.
-4.  **Regression Guards**: Proactive protection against regressions.
+1. **BMAD Cycle**: Analyze → Discuss → Plan → Execute → Verify.
+2. **Agentic Roles**: 7 specialized personas (Architect, Developer, QA, etc.).
+3. **Active Context**: Persistent session management via `ACTIVE_CONTEXT.md`.
+4. **Regression Guards**: Proactive protection against regressions.
 
 ## Getting Started
 

@@ -66,4 +66,4 @@
 
 ---
 
-*Update this file during the Discuss Phase. Reference it as a constraint during Plan and Execute phases.*
+_Update this file during the Discuss Phase. Reference it as a constraint during Plan and Execute phases._

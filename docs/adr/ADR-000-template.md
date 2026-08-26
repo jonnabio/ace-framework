@@ -24,13 +24,17 @@ Use active voice: "We will..." or "The system will..."]
 ## Alternatives Considered
 
 ### Alternative 1: [Name]
+
 [Description]
+
 - **Pros:** [Benefits]
 - **Cons:** [Drawbacks]
 - **Why Rejected:** [Reason]
 
 ### Alternative 2: [Name]
+
 [Description]
+
 - **Pros:** [Benefits]
 - **Cons:** [Drawbacks]
 - **Why Rejected:** [Reason]
@@ -40,14 +44,17 @@ Use active voice: "We will..." or "The system will..."]
 ## Consequences
 
 ### Positive
+
 - [Benefit 1]
 - [Benefit 2]
 
 ### Negative
+
 - [Trade-off 1]
 - [Trade-off 2]
 
 ### Neutral
+
 - [Side effect that is neither good nor bad]
 
 ---

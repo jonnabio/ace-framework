@@ -8,17 +8,20 @@
 ## General Principles
 
 ### 1. Readability First
+
 - Code is read more than written
 - Prefer explicit over implicit
 - Self-documenting code over comments
 - Comments explain "why", not "what"
 
 ### 2. Consistency
+
 - Follow established patterns in the codebase
 - When in doubt, match surrounding code style
 - New patterns require ADR approval
 
 ### 3. Simplicity
+
 - Solve the problem at hand, nothing more
 - Avoid premature optimization
 - Avoid premature abstraction
@@ -29,6 +32,7 @@
 ## Naming Conventions
 
 ### Variables & Functions
+
 ```
 - Use descriptive, meaningful names
 - Avoid abbreviations unless universally understood
@@ -37,6 +41,7 @@
 ```
 
 ### Files & Directories
+
 ```
 - Use kebab-case for file names: user-service.ts
 - Use PascalCase for component files: UserProfile.tsx
@@ -45,6 +50,7 @@
 ```
 
 ### Constants
+
 ```
 - SCREAMING_SNAKE_CASE for true constants
 - Prefer const objects over multiple exports
@@ -56,6 +62,7 @@
 ## Code Structure
 
 ### Functions
+
 - Single responsibility
 - Maximum 30 lines (soft limit)
 - Maximum 4 parameters (use object for more)
@@ -63,12 +70,14 @@
 - Early returns over nested conditions
 
 ### Classes
+
 - Single responsibility
 - Composition over inheritance
 - Keep state minimal
 - Explicit dependency injection
 
 ### Modules
+
 - Clear public API via index exports
 - Internal implementation details stay private
 - Circular dependencies are forbidden
@@ -78,12 +87,14 @@
 ## Error Handling
 
 ### Principles
+
 - Fail fast, fail loud
 - Never swallow errors silently
 - Provide actionable error messages
 - Include context in error messages
 
 ### Patterns
+
 ```
 DO:
 - Validate inputs at boundaries
@@ -103,11 +114,13 @@ DON'T:
 ## Testing Requirements
 
 ### Coverage
+
 - New code requires tests
 - Bug fixes require regression tests
 - Critical paths require integration tests
 
 ### Test Quality
+
 - Tests are documentation
 - One assertion concept per test
 - Descriptive test names
@@ -118,12 +131,14 @@ DON'T:
 ## Documentation
 
 ### Required Documentation
+
 - Public API functions
 - Complex algorithms
 - Non-obvious business logic
 - Configuration options
 
 ### Format
+
 - JSDoc/docstrings for public APIs
 - Inline comments for complex logic
 - README for module-level overview
@@ -150,18 +165,21 @@ The following are **never acceptable**:
 > Add language-specific rules below as needed
 
 ### TypeScript
+
 - Strict mode enabled
 - No `any` type without ADR justification
 - Prefer interfaces over types for objects
 - Use enums sparingly, prefer union types
 
 ### Python
+
 - Type hints required for public functions
 - Follow PEP 8
 - Use dataclasses for data structures
 - Prefer pathlib over os.path
 
 ### Go
+
 - Follow Effective Go guidelines
 - Error handling explicit
 - Use context for cancellation
