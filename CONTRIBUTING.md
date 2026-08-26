@@ -122,7 +122,7 @@ Before submitting:
 
 3. **Check markdown:**
    ```bash
-   npx markdownlint '**/*.md'
+   npx markdownlint-cli2
    ```
 
 ---

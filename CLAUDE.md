@@ -22,7 +22,7 @@ All commands below are run from the repository root.
 
 ### Lint markdown files
 ```bash
-npx markdownlint '**/*.md'
+npx markdownlint-cli2
 ```
 
 ### Run CLI locally
