@@ -1,0 +1,11 @@
+{
+  "name": "ace-framework",
+  "private": true,
+  "description": "Tooling used to validate the ACE-Framework repository itself. Not published, and not copied into scaffolded projects.",
+  "scripts": {
+    "lint:md": "markdownlint-cli2"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "0.23.2"
+  }
+}

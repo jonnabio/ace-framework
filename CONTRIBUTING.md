@@ -128,6 +128,7 @@ Before submitting:
 3. **Check markdown:**
 
    ```bash
+   npm ci                  # once, pins markdownlint-cli2 via package-lock.json
    npx markdownlint-cli2
    ```
 

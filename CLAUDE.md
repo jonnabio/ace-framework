@@ -25,6 +25,7 @@ All commands below are run from the repository root.
 ### Lint markdown files
 
 ```bash
+npm ci                  # once, pins markdownlint-cli2 via package-lock.json
 npx markdownlint-cli2
 ```
 

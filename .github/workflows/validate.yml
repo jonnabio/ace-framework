@@ -40,10 +40,22 @@ jobs:
 
           echo "✅ Framework structure is valid!"
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install lint tooling
+        run: npm ci
+
       - name: Validate Markdown
-        # No globs or config inputs: the action reads .markdownlint-cli2.jsonc,
-        # so CI runs exactly what `npx markdownlint-cli2` runs locally.
-        uses: DavidAnson/markdownlint-cli2-action@v16
+        # Runs the pinned markdownlint-cli2 from package-lock.json, reading
+        # globs and rules from .markdownlint-cli2.jsonc. Identical to what
+        # `npx markdownlint-cli2` runs locally and to the verify gate's
+        # lint_cmd. The marketplace action was dropped because it bundles its
+        # own version, which the lockfile cannot pin.
+        run: npx markdownlint-cli2
 
       - name: Check YAML Syntax
         run: |
