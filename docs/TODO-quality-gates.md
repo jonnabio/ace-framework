@@ -4,9 +4,10 @@ Status: open. Nothing in this document has been applied; the repository is
 unchanged. Findings were produced on 2026-08-24 against commit `f2e4ced` by
 running the tooling, not only by reading it.
 
-Related: [TODO-markdown-lint.md](TODO-markdown-lint.md) covers the markdown
-lint gate specifically. Findings 1, 2 and 4 below are the same failure mode —
-a gate that exists but cannot fail.
+Related: [TODO-markdown-lint.md](TODO-markdown-lint.md) covered the markdown
+lint gate specifically, and is now resolved — that closes the markdown half of
+finding 2. Findings 1, 2 and 4 below are the same failure mode: a gate that
+exists but cannot fail.
 
 ## Summary
 
@@ -44,11 +45,11 @@ grep -n "npm\|verify.sh\|validate.sh" .github/workflows/validate.yml
 - [ ] Consider calling `.ace/scripts/verify.sh` so CI and the local gate share
       one definition of "passing"
 
-## 2. Four of the five CI steps cannot fail
+## 2. Three of the five CI steps cannot fail
 
 | Step | Why it cannot fail |
 | --- | --- |
-| Validate Markdown | `continue-on-error: true` |
+| Validate Markdown | ~~`continue-on-error: true`~~ — resolved, now gates |
 | Check YAML Syntax | `cmd && echo ok \|\| echo bad` never exits non-zero |
 | Validate Links | `fail: false` |
 | Validate Structure | none — this one does fail correctly (`exit 1`) |
