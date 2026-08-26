@@ -104,4 +104,5 @@ Compliance will be verified through:
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *First ADR - ACE-Framework v2.3*

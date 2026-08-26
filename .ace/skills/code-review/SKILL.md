@@ -326,4 +326,5 @@ structured feedback. Check regression guards for modified files."
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Skill Version: 1.0*

@@ -74,4 +74,5 @@ What checks or reviews ensure compliance?]
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *ADR Template - ACE-Framework v2.3*

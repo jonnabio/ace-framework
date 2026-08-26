@@ -119,7 +119,7 @@ Summarize ACTIVE_CONTEXT.md and any pending tasks."
 
 ### Workflow A: Starting a New Feature
 
-**Step 1: Analyze & Discuss**
+#### Step 1: Analyze & Discuss
 
 ```markdown
 "Set mode to ANALYZE with Architect role.
@@ -127,28 +127,29 @@ I need to implement [feature description].
 Analyze requirements, then run the Discuss phase to align on preferences."
 ```
 
-**Step 2: Plan**
+#### Step 2: Plan
 
 ```markdown
 "Use the preferences in PROJECT_CONTEXT.md to create an implementation plan.
 Output tasks using the new XML format."
 ```
 
-**Step 3: Review the Plan**
+#### Step 3: Review the Plan
+
 The AI will create `docs/planning/implementation_plan.md`. Review it:
 
 - Are tasks correctly broken down?
 - Are dependencies in order?
 - Are acceptance criteria clear?
 
-**Step 4: Approve and Execute**
+#### Step 4: Approve and Execute
 
 ```markdown
 "The plan is approved. Switch to Developer role and EXECUTION mode.
 Commit effectively: One atomic commit per task. No batching."
 ```
 
-**Step 5: Verify**
+#### Step 5: Verify
 
 ```markdown
 "Switch to QA Engineer role and VERIFICATION mode.
@@ -157,21 +158,21 @@ Verify the implementation against the acceptance criteria."
 
 ### Workflow B: Fixing a Bug
 
-**Step 1: Investigate**
+#### Step 1: Investigate
 
 ```markdown
 "I found a bug: [description].
 Investigate the issue and identify potential causes."
 ```
 
-**Step 2: If Simple Fix**
+#### Step 2: If Simple Fix
 
 ```markdown
 "This is a simple fix. Implement the fix following coding standards.
 Write a test that would have caught this bug."
 ```
 
-**Step 3: If Complex or Recurring**
+#### Step 3: If Complex or Recurring
 
 ```markdown
 "This needs root cause analysis.
@@ -180,14 +181,14 @@ Switch to INCIDENT mode and apply the RCA skill."
 
 ### Workflow C: Continuing Previous Work
 
-**Step 1: Load Context**
+#### Step 1: Load Context
 
 ```markdown
 "Read ACTIVE_CONTEXT.md and continue from where we left off.
 What are the next steps?"
 ```
 
-**Step 2: Resume Work**
+#### Step 2: Resume Work
 
 ```markdown
 "Continue with [next task from context].
@@ -203,7 +204,7 @@ Check for standards compliance, security issues, and regression guards."
 
 ### Workflow E: Processing a Transcript
 
-**Step 1: Prepare the Transcript**
+#### Step 1: Prepare the Transcript
 
 Place your raw transcript (meeting notes, interview recording, etc.) in the input directory:
 
@@ -211,7 +212,7 @@ Place your raw transcript (meeting notes, interview recording, etc.) in the inpu
 docs/inputs/transcripts/2026-05-01-kickoff-meeting.md
 ```
 
-**Step 2: Extract Requirements**
+#### Step 2: Extract Requirements
 
 ```markdown
 "Apply the transcript analysis skill from .ace/skills/transcript-analysis/SKILL.md
@@ -219,7 +220,7 @@ to process the transcript at docs/inputs/transcripts/2026-05-01-kickoff-meeting.
 Extract all requirements and save to docs/requirements/REQ-001-project-kickoff.md."
 ```
 
-**Step 3: Review and Validate**
+#### Step 3: Review and Validate
 
 ```markdown
 "Review the extracted requirements in docs/requirements/REQ-001-project-kickoff.md.
@@ -227,7 +228,7 @@ Identify any requirements marked AMBIGUOUS and suggest clarifying questions
 I should ask the stakeholders."
 ```
 
-**Step 4: Feed into BMAD Analyze**
+#### Step 4: Feed into BMAD Analyze
 
 ```markdown
 "Requirements extraction complete. Use docs/requirements/REQ-001-project-kickoff.md
@@ -447,14 +448,14 @@ This file is the "memory" between sessions. It contains:
 
 ### When You Find a Bug
 
-**Step 1: Document It**
+#### Step 1: Document It
 
 ```markdown
 "I found an issue: [description]
 Document the symptoms and how to reproduce."
 ```
 
-**Step 2: Assess Severity**
+#### Step 2: Assess Severity
 
 | Severity | Criteria               | Response        |
 | -------- | ---------------------- | --------------- |
@@ -463,7 +464,7 @@ Document the symptoms and how to reproduce."
 | Medium   | Feature degraded       | Fix this sprint |
 | Low      | Minor issue            | Backlog         |
 
-**Step 3: For Medium+ Issues, Create RCA**
+#### Step 3: For Medium+ Issues, Create RCA
 
 ```markdown
 "Switch to INCIDENT mode.

@@ -1,8 +1,7 @@
 # Skill: Phantom Link Receiver
 
-# Version: 1.0.0
-
-# Description: Reconstructs ACE framework files from serialized text packets in internet-isolated environments
+- **Version:** 1.0.0
+- **Description:** Reconstructs ACE framework files from serialized text packets in internet-isolated environments
 
 ## Procedures
 

@@ -99,4 +99,5 @@ Before marking feature complete:
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Task Checklist - ACE-Framework v2.3*

@@ -99,6 +99,7 @@ interface ComponentName {
 - [Dependency 1]
 - [Dependency 2]
 
+<!-- markdownlint-disable-next-line MD024 -- placeholder heading, repeated on purpose in this template -->
 ### Component: [Name]
 
 [Repeat for each component]
@@ -323,4 +324,5 @@ CREATE TABLE table_name (
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *This Tech Spec follows ACE-Framework documentation standards*

@@ -176,4 +176,5 @@ Create ADR-[###]-[description].md to record this decision."
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Track usage and update success rate*

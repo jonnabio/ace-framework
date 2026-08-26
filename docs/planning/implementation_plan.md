@@ -91,4 +91,5 @@ After all tasks complete:
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 _Implementation Plan - ACE-Framework v2.3_

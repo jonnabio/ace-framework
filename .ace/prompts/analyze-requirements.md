@@ -124,4 +124,5 @@ Generate an IMPLEMENTATION_PLAN.md based on this analysis."
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Track usage and update success rate*

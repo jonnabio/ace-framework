@@ -155,4 +155,5 @@ Track RCA effectiveness:
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *RCA System - ACE-Framework v2.3*

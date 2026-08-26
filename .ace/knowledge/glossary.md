@@ -146,6 +146,7 @@ The process of extracting formal, structured requirements from raw unstructured 
 
 [Definition]
 
+<!-- markdownlint-disable-next-line MD024 -- placeholder heading, repeated on purpose in this template -->
 ### [Term]
 
 [Definition]

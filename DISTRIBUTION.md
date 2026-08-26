@@ -8,7 +8,7 @@ This document explains how to distribute and deploy ACE-Framework to other devel
 
 ### Method 1: GitHub Template (Recommended)
 
-**For new projects - one click setup**
+For new projects — one click setup.
 
 #### Setup as Template Repository
 
@@ -37,7 +37,7 @@ This document explains how to distribute and deploy ACE-Framework to other devel
 
 ### Method 2: CLI Tool (npx)
 
-**For developers who prefer command line**
+For developers who prefer command line.
 
 #### Publishing to npm
 
@@ -70,7 +70,7 @@ npx create-ace-framework
 
 ### Method 3: Init Script
 
-**For quick setup in existing projects**
+For quick setup in existing projects.
 
 #### Hosting the Script
 
@@ -97,7 +97,7 @@ curl -fsSL https://...init.sh | bash -s -- my-project
 
 ### Method 4: Manual Download
 
-**For offline or restricted environments**
+For offline or restricted environments.
 
 #### Creating Release Archives
 
@@ -291,4 +291,5 @@ When preparing for distribution, update these placeholders:
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Distribution Guide - ACE-Framework v2.5.0*

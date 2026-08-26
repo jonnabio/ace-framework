@@ -326,4 +326,5 @@ AI Expert (theory) → Data Scientist (experiments) → Scientific Editor (publi
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 _BMAD Agentic Roles - ACE-Framework v2.1_
