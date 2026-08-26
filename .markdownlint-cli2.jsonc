@@ -1,0 +1,26 @@
+{
+  // Single source of truth for markdown linting.
+  //
+  // Local, CI and the ACE verify gate all invoke the same bare command:
+  //     npx markdownlint-cli2
+  // Globs and rules live here so those three can never drift apart.
+  "globs": ["**/*.md"],
+
+  // .ace/packs/** is vendored third-party skills, not maintained in this
+  // repository. Reformatting it would diverge from upstream.
+  "ignores": [".ace/packs/**", "**/node_modules/**"],
+
+  "config": {
+    "default": true,
+
+    "MD013": false,
+    "MD033": false,
+    "MD041": false,
+
+    // MD060 autofix strips table padding, so every table in the docs stops
+    // being aligned in the source while rendering identically.
+    "MD060": false,
+
+    "MD024": { "siblings_only": true }
+  }
+}
