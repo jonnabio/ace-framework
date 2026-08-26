@@ -134,7 +134,7 @@
 
 ### Logs
 
-```
+```text
 [Relevant log output]
 ```
 

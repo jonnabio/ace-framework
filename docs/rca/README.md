@@ -32,25 +32,25 @@ Create an RCA for:
 
 ### 1. Immediate Response
 
-```
+```text
 Issue Detected → Document symptoms → Apply immediate fix
 ```
 
 ### 2. Root Cause Analysis
 
-```
+```text
 Use 5 Whys method → Identify root cause → Document contributing factors
 ```
 
 ### 3. Prevention
 
-```
+```text
 Add tests → Update standards → Create regression guard
 ```
 
 ### 4. Verification
 
-```
+```text
 Verify fix → Verify tests → Verify guards → Close RCA
 ```
 
@@ -68,7 +68,7 @@ Verify fix → Verify tests → Verify guards → Close RCA
 
 ## Naming Convention
 
-```
+```text
 RCA-[NUMBER]-[short-description].md
 
 Examples:

@@ -10,7 +10,7 @@
 
 ### NEVER in Code
 
-```
+```text
 FORBIDDEN:
 - API keys
 - Passwords
@@ -23,7 +23,7 @@ FORBIDDEN:
 
 ### Required Approach
 
-```
+```text
 - Environment variables for runtime secrets
 - Secret management service (Vault, AWS Secrets Manager, etc.)
 - .env files in .gitignore (never committed)
@@ -42,7 +42,7 @@ FORBIDDEN:
 
 ### All External Input is Untrusted
 
-```
+```text
 Sources requiring validation:
 - User input (forms, parameters)
 - API request bodies
@@ -66,7 +66,7 @@ Sources requiring validation:
 
 ### 1. Injection Prevention
 
-```
+```text
 REQUIRED:
 - Parameterized queries (never string concatenation)
 - ORM with parameterization
@@ -76,7 +76,7 @@ REQUIRED:
 
 ### 2. Authentication
 
-```
+```text
 REQUIRED:
 - Secure password hashing (bcrypt, Argon2)
 - Multi-factor authentication for sensitive operations
@@ -86,7 +86,7 @@ REQUIRED:
 
 ### 3. Sensitive Data Exposure
 
-```
+```text
 REQUIRED:
 - HTTPS everywhere
 - Sensitive data encrypted at rest
@@ -96,7 +96,7 @@ REQUIRED:
 
 ### 4. XML External Entities (XXE)
 
-```
+```text
 REQUIRED:
 - Disable DTD processing
 - Use JSON over XML when possible
@@ -105,7 +105,7 @@ REQUIRED:
 
 ### 5. Access Control
 
-```
+```text
 REQUIRED:
 - Deny by default
 - Principle of least privilege
@@ -115,7 +115,7 @@ REQUIRED:
 
 ### 6. Security Misconfiguration
 
-```
+```text
 REQUIRED:
 - Remove default credentials
 - Disable unnecessary features
@@ -125,7 +125,7 @@ REQUIRED:
 
 ### 7. Cross-Site Scripting (XSS)
 
-```
+```text
 REQUIRED:
 - Output encoding
 - Content Security Policy (CSP)
@@ -135,7 +135,7 @@ REQUIRED:
 
 ### 8. Insecure Deserialization
 
-```
+```text
 REQUIRED:
 - Validate serialized data
 - Use safe serialization formats
@@ -144,7 +144,7 @@ REQUIRED:
 
 ### 9. Vulnerable Components
 
-```
+```text
 REQUIRED:
 - Regular dependency updates
 - Vulnerability scanning in CI
@@ -154,7 +154,7 @@ REQUIRED:
 
 ### 10. Logging & Monitoring
 
-```
+```text
 REQUIRED:
 - Security event logging
 - No sensitive data in logs
@@ -190,7 +190,7 @@ REQUIRED:
 
 ### Uploads
 
-```
+```text
 REQUIRED:
 - Validate file type (magic bytes, not extension)
 - Size limits enforced
@@ -201,7 +201,7 @@ REQUIRED:
 
 ### Downloads
 
-```
+```text
 REQUIRED:
 - Path traversal prevention
 - Access control verification

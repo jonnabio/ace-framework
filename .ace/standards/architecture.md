@@ -16,7 +16,7 @@
 
 ### 2. Dependency Direction
 
-```
+```text
 ┌─────────────────────────────────────────┐
 │           Presentation Layer            │
 │         (UI, API Controllers)           │
@@ -62,7 +62,7 @@ Domain has NO external dependencies
 
 ### Feature-Based Organization
 
-```
+```text
 src/
 ├── features/
 │   ├── user/
@@ -93,7 +93,7 @@ src/
 
 ### REST Conventions
 
-```
+```text
 GET    /resources          # List
 GET    /resources/:id      # Get one
 POST   /resources          # Create
@@ -145,7 +145,7 @@ GET    /users/:userId/orders
 
 ### Repository Pattern
 
-```
+```text
 ┌───────────────┐     ┌───────────────┐     ┌───────────────┐
 │   Service     │────▶│  Repository   │────▶│   Database    │
 │               │     │  (Interface)  │     │               │
@@ -177,7 +177,7 @@ GET    /users/:userId/orders
 
 ### Error Hierarchy
 
-```
+```text
 BaseError
 ├── DomainError (business rule violations)
 │   ├── ValidationError
@@ -193,7 +193,7 @@ BaseError
 
 ### Error Flow
 
-```
+```text
 Domain Layer → throws DomainError
      ↓
 Application Layer → catches, wraps if needed
@@ -239,7 +239,7 @@ interface DomainEvent {
 
 ### Cache Layers
 
-```
+```text
 Request → Local Cache → Distributed Cache → Database
 ```
 
@@ -268,7 +268,7 @@ Request → Local Cache → Distributed Cache → Database
 
 ### Configuration Hierarchy
 
-```
+```text
 1. Default values (code)
 2. Configuration files (per environment)
 3. Environment variables (runtime override)
@@ -288,7 +288,7 @@ Request → Local Cache → Distributed Cache → Database
 
 ### Test Pyramid
 
-```
+```text
         ┌───────────┐
         │   E2E     │  Few, critical paths
         ├───────────┤
@@ -300,7 +300,7 @@ Request → Local Cache → Distributed Cache → Database
 
 ### Test Location
 
-```
+```text
 src/
 ├── features/
 │   └── user/
@@ -324,7 +324,7 @@ src/
 
 ### Health Endpoints
 
-```
+```text
 GET /health        # Basic liveness
 GET /health/ready  # Readiness (dependencies up)
 GET /health/live   # Liveness (app responsive)

@@ -102,7 +102,7 @@
 
 ### User Flow
 
-```
+```text
 [Step 1: User action]
     ↓
 [Step 2: System response]

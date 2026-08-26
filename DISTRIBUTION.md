@@ -19,7 +19,7 @@ This document explains how to distribute and deploy ACE-Framework to other devel
 
 #### User Experience
 
-```
+```text
 1. Go to https://github.com/jonnabio/ace-framework
 2. Click "Use this template" → "Create a new repository"
 3. Name your project
@@ -76,7 +76,7 @@ npx create-ace-framework
 
 Host `scripts/init.sh` at a stable URL:
 
-```
+```text
 https://raw.githubusercontent.com/jonnabio/ace-framework/main/scripts/init.sh
 ```
 
@@ -161,7 +161,7 @@ When users install the framework, they should customize:
 
 ### Semantic Versioning
 
-```
+```text
 MAJOR.MINOR.PATCH
 
 MAJOR: Breaking changes to framework structure
@@ -183,7 +183,7 @@ The framework is language-agnostic, but users may want language-specific standar
 
 ### Approach 1: Separate Branches
 
-```
+```text
 main           - Generic framework
 typescript     - TypeScript-specific standards
 python         - Python-specific standards
@@ -192,7 +192,7 @@ go             - Go-specific standards
 
 ### Approach 2: Template Variants
 
-```
+```bash
 npx create-ace-framework my-project --template typescript
 npx create-ace-framework my-project --template python
 ```

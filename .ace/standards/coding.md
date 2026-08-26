@@ -33,7 +33,7 @@
 
 ### Variables & Functions
 
-```
+```text
 - Use descriptive, meaningful names
 - Avoid abbreviations unless universally understood
 - Boolean variables: use is*, has*, can*, should* prefixes
@@ -42,7 +42,7 @@
 
 ### Files & Directories
 
-```
+```text
 - Use kebab-case for file names: user-service.ts
 - Use PascalCase for component files: UserProfile.tsx
 - Group by feature, not by type
@@ -51,7 +51,7 @@
 
 ### Constants
 
-```
+```text
 - SCREAMING_SNAKE_CASE for true constants
 - Prefer const objects over multiple exports
 - Colocate with usage when single-use
@@ -95,7 +95,7 @@
 
 ### Patterns
 
-```
+```text
 DO:
 - Validate inputs at boundaries
 - Use typed errors/exceptions

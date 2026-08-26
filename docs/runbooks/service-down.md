@@ -39,7 +39,7 @@
 
 ### Step 1: Acknowledge and Communicate
 
-```
+```text
 1. Acknowledge the alert
 2. Join incident channel
 3. Post initial status:
@@ -274,7 +274,7 @@ kubectl top nodes
 
 Post updates every 10-15 minutes:
 
-```
+```text
 [INCIDENT UPDATE] [TIME]
 Status: Still investigating / Identified cause / Implementing fix
 Impact: [Current user impact]
@@ -283,7 +283,7 @@ ETA: [Estimated time if known]
 
 ### After Resolution
 
-```
+```text
 [INCIDENT RESOLVED] [TIME]
 Service [name] is restored.
 Duration: [X minutes]

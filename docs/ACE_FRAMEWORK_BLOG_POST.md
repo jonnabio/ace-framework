@@ -117,11 +117,13 @@ After execution, the AI assumes the role of **The QA Engineer**. This adversaria
 ## How Different Roles Benefit from ACE
 
 ### For Developers and Engineers
+
 * **Reduced Cognitive Load:** Developers no longer spend hours explaining architecture to their AI tools. The `.ace/` directory handles onboarding.
 * **Safer Refactoring:** With Regression Guards, developers can instruct AI to refactor complex modules without fear of breaking critical invariants.
 * **Automated Documentation:** The framework naturally generates ADRs, RCAs, and implementation plans as a byproduct of doing the work.
 
 ### For Non-Developers (Founders, Product Managers, Designers)
+
 * **Translating Ideas into Reality:** Non-technical users can securely guide the AI to build complex applications by acting as the human counterpart during the "Analyze" and "Discuss" phases.
 * **Predictable Outcomes:** Because the AI must create a plan and seek approval before executing, you are never left guessing what the AI is building.
 * **Enterprise-Grade Quality:** Intrinsic skills and QA personas ensure best practices (like unit testing) are applied automatically.

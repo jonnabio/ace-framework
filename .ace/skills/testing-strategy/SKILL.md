@@ -216,7 +216,7 @@ Don't obsess over:
 
 ## Test Organization
 
-```
+```text
 src/
 ├── features/
 │   └── user/

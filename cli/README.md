@@ -69,7 +69,7 @@ create-ace-framework my-project
 
 3. **Start your first AI session:**
 
-   ```
+   ```text
    "Read .aceconfig and ACTIVE_CONTEXT.md to begin."
    ```
 

@@ -20,7 +20,7 @@ This document captures:
 
 ### Layer Structure
 
-```
+```text
 ┌─────────────────────────────────────────┐
 │           Presentation Layer            │
 │      (Controllers, API Handlers)        │
@@ -336,7 +336,7 @@ const user = createTestUser({ status: 'pending' });
 
 ### Feature-Based Structure
 
-```
+```text
 src/
 ├── features/
 │   ├── user/

@@ -43,7 +43,7 @@ Guidelines that can be overridden with appropriate authorization.
 - **Exceptions:** [Any allowed exceptions]
 - **Example:**
 
-  ```
+  ```text
   Valid: [example of valid case]
   Invalid: [example of invalid case]
   ```
@@ -63,7 +63,7 @@ Guidelines that can be overridden with appropriate authorization.
 - **Exceptions:** None
 - **Example:**
 
-  ```
+  ```text
   Valid: user1@example.com (no existing user with this email)
   Invalid: user1@example.com (email already registered)
   ```
@@ -77,7 +77,7 @@ Guidelines that can be overridden with appropriate authorization.
 - **Exceptions:** None
 - **Example:**
 
-  ```
+  ```text
   Valid: MyP@ssw0rd123!
   Invalid: password123
   ```
@@ -95,7 +95,7 @@ Guidelines that can be overridden with appropriate authorization.
 - **Exceptions:** Promotional campaigns may lower minimum
 - **Example:**
 
-  ```
+  ```text
   Valid: Cart total $15.00 → proceed to checkout
   Invalid: Cart total $5.00 → show minimum order message
   ```
@@ -109,7 +109,7 @@ Guidelines that can be overridden with appropriate authorization.
 - **Exceptions:** Pre-order items with expected restock date
 - **Example:**
 
-  ```
+  ```text
   Valid: Order 5 units, 10 in stock → approve
   Invalid: Order 5 units, 3 in stock → reject or partial
   ```

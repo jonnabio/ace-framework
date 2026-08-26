@@ -35,7 +35,7 @@
 
 [Describe what was observed - error messages, unexpected behavior, etc.]
 
-```
+```text
 [Include relevant error messages, logs, or stack traces]
 ```
 

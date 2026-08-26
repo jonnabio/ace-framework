@@ -131,7 +131,7 @@ Error:
 
 ### Resource Collection
 
-```
+```text
 GET    /users           → List users (paginated)
 POST   /users           → Create user
 GET    /users/{id}      → Get single user
@@ -142,7 +142,7 @@ DELETE /users/{id}      → Delete user
 
 ### Nested Resources
 
-```
+```text
 GET    /users/{userId}/orders     → User's orders
 POST   /users/{userId}/orders     → Create order for user
 GET    /users/{userId}/orders/{orderId}  → Specific order
@@ -150,14 +150,14 @@ GET    /users/{userId}/orders/{orderId}  → Specific order
 
 ### Actions (Non-CRUD)
 
-```
+```text
 POST   /users/{id}/activate       → Action on resource
 POST   /orders/{id}/cancel        → Action on resource
 ```
 
 ### Filtering & Search
 
-```
+```text
 GET /users?status=active&role=admin      → Filter
 GET /users?q=john                        → Search
 GET /users?sort=-createdAt               → Sort (- = desc)
@@ -225,7 +225,7 @@ GET /users?fields=id,name,email          → Sparse fields
 | Status | Code | When |
 |--------|------|------|
 
-```
+```text
 
 ---
 

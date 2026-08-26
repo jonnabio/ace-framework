@@ -245,7 +245,7 @@ Create a new user account.
 | 400 | Validation error |
 | 409 | Email already exists |
 
-```
+```text
 
 ---
 
@@ -336,7 +336,7 @@ Create a new user account.
 
 ### Information Density
 
-```
+```text
 Optimal: One concept per section
 Maximum: 500 words per major section
 Headers: Every 100-200 words

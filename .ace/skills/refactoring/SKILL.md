@@ -44,7 +44,7 @@ Enable safe refactoring that:
 
 ## Refactoring Workflow
 
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                 REFACTORING CYCLE                       │
 ├─────────────────────────────────────────────────────────┤
@@ -361,7 +361,7 @@ After refactoring:
 
 ## Commit Message Format
 
-```
+```text
 refactor(scope): description
 
 - Applied [refactoring technique]
@@ -372,7 +372,7 @@ No functional changes.
 
 Example:
 
-```
+```text
 refactor(user-service): extract address handling to separate class
 
 - Applied Extract Class refactoring

@@ -37,7 +37,7 @@ ACE-Framework (AI-assisted Code Engineering) is a structured methodology for wor
 
 Every task follows four phases:
 
-```
+```text
 ┌───────────────────────────────────────────────────────────────────────┐
 │                          BMAD Cycle                                   │
 ├───────────────────────────────────────────────────────────────────────┤
@@ -207,7 +207,7 @@ Check for standards compliance, security issues, and regression guards."
 
 Place your raw transcript (meeting notes, interview recording, etc.) in the input directory:
 
-```
+```text
 docs/inputs/transcripts/2026-05-01-kickoff-meeting.md
 ```
 
@@ -269,7 +269,7 @@ Focus on clean implementation following the approved plan."
 
 Roles follow a natural flow:
 
-```
+```text
 Feature Development:
 Architect → Developer → QA Engineer
 

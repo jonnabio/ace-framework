@@ -98,7 +98,7 @@ Documentation improvements are always welcome:
 
 ### Directory Structure
 
-```
+```text
 ace-framework/
 ├── .ace/                 # Framework core
 ├── docs/                 # Documentation
@@ -151,7 +151,7 @@ Before submitting:
 
 2. **Commit messages:**
 
-   ```
+   ```text
    type(scope): description
 
    - Detail 1
