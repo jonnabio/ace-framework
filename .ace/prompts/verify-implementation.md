@@ -57,6 +57,7 @@ Verify the implementation just completed against project standards.
 
 ```
 
+```markdown
 # Verification Report: [Task Name]
 
 ## Standards Compliance
@@ -104,7 +105,6 @@ Verify the implementation just completed against project standards.
 
 If any issues are found, do not proceed to the next task.
 Fix issues first and re-verify.
-```
 
 ---
 
