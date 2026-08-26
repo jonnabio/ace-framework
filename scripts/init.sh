@@ -113,6 +113,7 @@ init_new_project() {
         cp "$target/.ace-temp/.aiconfig" "$target/" 2>/dev/null || true
         cp "$target/.ace-temp/.cursorrules" "$target/" 2>/dev/null || true
         cp "$target/.ace-temp/.editorconfig" "$target/" 2>/dev/null || true
+        cp "$target/.ace-temp/.markdownlint-cli2.jsonc" "$target/" 2>/dev/null || true
         cp -r "$target/.ace-temp/.vscode" "$target/" 2>/dev/null || true
         cp -r "$target/.ace-temp/.cursor" "$target/" 2>/dev/null || true
 
