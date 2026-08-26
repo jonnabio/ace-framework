@@ -70,11 +70,23 @@ from the full suite, and this makes that more pressing.
 **`9006ed0` is a candidate for `.git-blame-ignore-revs`.** It rewrote 71
 files mechanically. Ignoring whitespace, its real diff is 18 lines.
 
+**The version is pinned, and the pin is what runs.** A root
+`package.json` holds `markdownlint-cli2` at an exact `0.23.2`, with a
+lockfile. CI runs `npm ci` and then `npx markdownlint-cli2` rather than
+`DavidAnson/markdownlint-cli2-action@v16` — the action was doing the right
+thing, but a lockfile cannot pin a version bundled inside an action, so CI
+and local could still have drifted. The package is `private`, and it is not
+in the CLI's copy list, so it never reaches scaffolded projects.
+
+**Scaffolded projects get the config, not just the command.** `.aceconfig`
+is copied into every scaffolded project, so setting `lint_cmd` there set it
+for them too. Without `.markdownlint-cli2.jsonc` alongside it,
+`markdownlint-cli2` prints its help and exits 0 — a gate that cannot fail,
+which is the thing this document was opened about. Both copy paths now ship
+the config.
+
 ## Still open
 
-- No root `package.json`, so the `markdownlint-cli2` version is unpinned.
-  The CLI clones this repository rather than bundling templates, so a
-  breaking release upstream would reach scaffolded projects too.
 - CI still does not run the test suite, and three of its remaining steps
   cannot fail. See findings 1, 2 and 4 in
   [TODO-quality-gates.md](TODO-quality-gates.md).
@@ -82,6 +94,7 @@ files mechanically. Ignoring whitespace, its real diff is 18 lines.
 ## Reproducing
 
 ```bash
+npm ci                       # once
 npx markdownlint-cli2        # expected: Summary: 0 issues in 0 files
 bash .ace/scripts/verify.sh  # expected: VERIFY_RESULT=pass gate=all
 ```
