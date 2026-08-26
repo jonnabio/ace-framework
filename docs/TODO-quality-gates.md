@@ -166,6 +166,27 @@ already acknowledge part of it. Low priority.
 
 - [ ] Anchor the match on a path separator
 
+## 9. Fifteen broken links in `docs/runbooks/`
+
+Surfaced by running the CI link check locally against a clean tree.
+`docs/runbooks/README.md` indexes seven runbooks that were never written
+(`database-issues.md`, `rollback.md`, `deployment.md`, `high-latency.md`,
+`memory-exhaustion.md`, `scale-up.md`, `database-migration.md`), and
+`high-error-rate.md` and `service-down.md` link to the same missing files
+plus literal placeholders (`[link]`, `[link-to-dashboard]`).
+
+```text
+75 Total  64 Unique  60 OK  15 Errors
+```
+
+The Validate Links step is `fail: false`, so this has never been reported.
+Writing the missing runbooks is a content task, not a tooling one, which is
+why it is recorded here rather than fixed alongside the lint work.
+
+- [ ] Write the missing runbooks, or trim the index to what exists
+- [ ] Replace the `[link]` placeholders in the two existing runbooks
+- [ ] Decide whether the link check should gate once the count is zero
+
 ## Verified working
 
 Checked actively; no action needed. Recorded so the next audit can skip them.
