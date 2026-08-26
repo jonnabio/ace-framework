@@ -15,7 +15,7 @@ to ensure code meets all standards and requirements.
 
 ## The Prompt
 
-```markdown
+````markdown
 Verify the implementation just completed against project standards.
 
 ## Verification Steps
@@ -54,8 +54,6 @@ Verify the implementation just completed against project standards.
    - [ ] Coverage acceptable
 
 ## Report Format
-
-```
 
 ```markdown
 # Verification Report: [Task Name]
@@ -105,6 +103,7 @@ Verify the implementation just completed against project standards.
 
 If any issues are found, do not proceed to the next task.
 Fix issues first and re-verify.
+````
 
 ---
 
