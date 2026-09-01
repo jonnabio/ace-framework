@@ -91,6 +91,7 @@ The framework comes with **22 core skills** covering the entire Software Develop
 | `root-cause-analysis` | bug, issue, incident | Running a 5-Whys analysis on production bugs. |
 | `ci-cd-pipeline` | ci, cd, pipeline, deploy | Building GitHub Actions and deployment flows. |
 | `documentation-generation`| documentation, docs, readme | Generating JSDoc, OpenAPI specs, and diagrams. |
+| `phantom-link` | packet | Rebuilding framework files from serialized text packets, for machines with no network access. |
 
 ### Domain Expansion Packs (v2.5.0+)
 
