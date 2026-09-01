@@ -58,11 +58,11 @@ jobs:
         run: npx markdownlint-cli2
 
       - name: Check YAML Syntax
-        run: |
-          echo "Checking YAML files..."
-          for file in $(find . -name "*.yaml" -o -name "*.yml" | grep -v node_modules); do
-            python3 -c "import yaml; yaml.safe_load(open('$file'))" && echo "✓ Valid: $file" || echo "❌ Invalid: $file"
-          done
+        # Was an inline `python3 -c ... && echo ok || echo bad` loop, which
+        # printed failures and still exited 0. The script exits non-zero, and
+        # also covers .aceconfig and .aceconfig-ext, which no *.yml glob
+        # matches and which every agent reads first.
+        run: bash scripts/check-yaml.sh
 
       - name: Validate Links (advisory, does not gate)
         uses: lycheeverse/lychee-action@v2
