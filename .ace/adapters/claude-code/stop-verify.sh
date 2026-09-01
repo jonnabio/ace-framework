@@ -6,6 +6,11 @@
 # gate fails, exit 2 blocks the stop and feeds the failure back to the agent
 # so it keeps working instead of reporting false success.
 #
+# Uses the gate's fast profile (lint + typecheck, no test suite). This runs on
+# every turn, and a suite that takes minutes would make the hook the first
+# thing an adopter disables. The full gate still runs in CI and from the loop
+# runner, which are where a slow, complete check belongs.
+#
 # Guard against infinite loops: Claude Code sets stop_hook_active in the hook
 # JSON when the agent is already continuing due to a Stop hook; we only block
 # once per turn.
@@ -21,7 +26,7 @@ esac
 # Only enforce in projects that configured a verify gate.
 [ -f ".ace/scripts/verify.sh" ] || exit 0
 
-OUTPUT=$(sh .ace/scripts/verify.sh 2>&1)
+OUTPUT=$(sh .ace/scripts/verify.sh --fast 2>&1)
 STATUS=$?
 
 if [ "$STATUS" -ne 0 ]; then

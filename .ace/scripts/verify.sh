@@ -10,12 +10,31 @@
 # Output contract: the final line is always machine-parseable:
 #   VERIFY_RESULT=pass|fail gate=<name>
 #
-# Usage: .ace/scripts/verify.sh [path/to/.aceconfig]
+# Two profiles:
+#   full (default) - test_cmd, lint_cmd, typecheck_cmd; ends gate=all
+#   fast (--fast)  - lint_cmd and typecheck_cmd only; ends gate=fast
+#
+# The fast profile exists for the Claude Code Stop hook, which runs this on
+# every agent turn. A full test suite on every turn is what pushes adopters
+# to disable the hook, and a disabled hook verifies nothing.
+#
+# Usage: .ace/scripts/verify.sh [--fast] [path/to/.aceconfig]
 
 set -u
 
-CONFIG="${1:-.aceconfig}"
+CONFIG=".aceconfig"
+PROFILE="full"
 TAIL_LINES=20
+
+for arg in "$@"; do
+    case "$arg" in
+        --fast) PROFILE="fast" ;;
+        -*)     echo "[!] Unknown option: $arg"
+                echo "    Usage: verify.sh [--fast] [path/to/.aceconfig]"
+                exit 2 ;;
+        *)      CONFIG="$arg" ;;
+    esac
+done
 
 fail() {
     # $1 = gate name, $2 = message
@@ -38,6 +57,14 @@ get_cmd() {
 TEST_CMD="$(get_cmd test_cmd)"
 LINT_CMD="$(get_cmd lint_cmd)"
 TYPECHECK_CMD="$(get_cmd typecheck_cmd)"
+
+# In the fast profile test_cmd is not merely skipped, it is discarded: the
+# unconfigured-gate check below must see what this run will actually execute,
+# so a project whose only configured command is test_cmd fails fast runs
+# rather than passing them vacuously.
+if [ "$PROFILE" = "fast" ]; then
+    TEST_CMD=""
+fi
 
 if [ -z "$TEST_CMD" ] && [ -z "$LINT_CMD" ] && [ -z "$TYPECHECK_CMD" ]; then
     echo "[!] No verification commands configured in $CONFIG."
@@ -67,12 +94,16 @@ run_gate() {
     fi
 }
 
-echo "Running ACE verification gate (config: $CONFIG)..."
+echo "Running ACE verification gate (profile: $PROFILE, config: $CONFIG)..."
 
 run_gate "test" "$TEST_CMD"
 run_gate "lint" "$LINT_CMD"
 run_gate "typecheck" "$TYPECHECK_CMD"
 
 echo "All configured gates passed."
-echo "VERIFY_RESULT=pass gate=all"
+if [ "$PROFILE" = "fast" ]; then
+    echo "VERIFY_RESULT=pass gate=fast"
+else
+    echo "VERIFY_RESULT=pass gate=all"
+fi
 exit 0
