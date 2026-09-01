@@ -57,6 +57,13 @@ jobs:
         # own version, which the lockfile cannot pin.
         run: npx markdownlint-cli2
 
+      - name: Check Encoding
+        # This repository has been corrupted by double-encoded UTF-8 twice,
+        # and both times a human found it rather than CI. 1744 characters
+        # across 15 files (68d0f52), then 12 more in AGENTS.md that the first
+        # sweep missed (7aad699).
+        run: bash scripts/check-encoding.sh
+
       - name: Check YAML Syntax
         # Was an inline `python3 -c ... && echo ok || echo bad` loop, which
         # printed failures and still exited 0. The script exits non-zero, and
