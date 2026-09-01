@@ -14,32 +14,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Validate Structure
-        run: |
-          echo "Validating ACE-Framework structure..."
-
-          # Required directories
-          dirs=(".ace" ".ace/standards" ".ace/skills" ".ace/roles" ".ace/knowledge" "docs" "docs/adr" "docs/context" "docs/rca")
-          for dir in "${dirs[@]}"; do
-            if [ ! -d "$dir" ]; then
-              echo "❌ Missing directory: $dir"
-              exit 1
-            fi
-            echo "✓ Directory exists: $dir"
-          done
-
-          # Required files
-          files=(".aceconfig" "README.md" "ACE-SPEC.md" ".ace/roles/roles.md" "docs/context/ACTIVE_CONTEXT.md")
-          for file in "${files[@]}"; do
-            if [ ! -f "$file" ]; then
-              echo "❌ Missing file: $file"
-              exit 1
-            fi
-            echo "✓ File exists: $file"
-          done
-
-          echo "✅ Framework structure is valid!"
-
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
@@ -49,13 +23,24 @@ jobs:
       - name: Install lint tooling
         run: npm ci
 
-      - name: Validate Markdown
-        # Runs the pinned markdownlint-cli2 from package-lock.json, reading
-        # globs and rules from .markdownlint-cli2.jsonc. Identical to what
-        # `npx markdownlint-cli2` runs locally and to the verify gate's
-        # lint_cmd. The marketplace action was dropped because it bundles its
-        # own version, which the lockfile cannot pin.
-        run: npx markdownlint-cli2
+      - name: Validate Structure
+        # scripts/validate.sh, not an inline copy of part of it. The block
+        # that lived here checked 9 directories and 5 files; the script checks
+        # those plus the standards, skills, templates and task-queue files,
+        # and validates docs/progress/tasks.json against its schema. It runs
+        # after Setup Node because that last check shells out to node.
+        run: bash scripts/validate.sh
+
+      - name: Verify Gate
+        # The same gate the Stop hook and the loop runner use, in its full
+        # profile: the CLI test suite (test_cmd) followed by markdown lint
+        # (lint_cmd), both named in .aceconfig. CI had never run the test
+        # suite at all, and ran lint from a second definition of its own that
+        # was free to drift from the local one.
+        #
+        # markdownlint-cli2 resolves to the version pinned in
+        # package-lock.json because `npm ci` ran above.
+        run: bash .ace/scripts/verify.sh
 
       - name: Check Encoding
         # This repository has been corrupted by double-encoded UTF-8 twice,
