@@ -14,6 +14,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          # Without this the clone is depth 1, HEAD^ does not exist, and the
+          # changelog step below silently falls back to "last 20 commits" on
+          # every release.
+          fetch-depth: 0
 
       - name: Create Release Archive
         run: |
@@ -26,17 +31,34 @@ jobs:
       - name: Generate Changelog
         id: changelog
         run: |
+          set -euo pipefail
           echo "Generating changelog..."
-          # Get commits since last tag
-          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+
+          # `git describe` fails both when there is no earlier tag and when the
+          # clone has no history to search. Those need different handling, so
+          # count the tags rather than swallowing the error with `|| echo ""`.
+          TAG_COUNT=$(git tag --list 'v*' | wc -l | tr -d ' ')
+          PREV_TAG=$(git describe --tags --abbrev=0 --match 'v*' HEAD^ 2>/dev/null || true)
+
           if [ -n "$PREV_TAG" ]; then
-            CHANGELOG=$(git log ${PREV_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges)
+            HEADER="Changes since ${PREV_TAG}:"
+            CHANGELOG=$(git log "${PREV_TAG}..HEAD" --pretty=format:"- %s (%h)" --no-merges)
+          elif [ "$TAG_COUNT" -le 1 ]; then
+            HEADER="First tagged release. Full history:"
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" --no-merges)
           else
-            CHANGELOG=$(git log --pretty=format:"- %s (%h)" --no-merges -20)
+            echo "::error::${TAG_COUNT} tags exist but no previous tag could be resolved from HEAD^."
+            echo "::error::The checkout is probably shallow; the changelog would be wrong."
+            exit 1
           fi
-          echo "changelog<<EOF" >> $GITHUB_OUTPUT
-          echo "$CHANGELOG" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+
+          {
+            echo "changelog<<ACE_EOF"
+            echo "$HEADER"
+            echo ""
+            echo "$CHANGELOG"
+            echo "ACE_EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
