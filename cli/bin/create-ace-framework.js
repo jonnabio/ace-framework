@@ -7,12 +7,16 @@
  *   npx create-ace-framework my-project
  *   npx create-ace-framework .  (current directory)
  *   npx create-ace-framework    (interactive)
+ *   npx create-ace-framework my-project --yes   (unattended)
+ *
+ * Run with --help for the full option list.
  */
 
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
+const { parseArgs, defaultProjectName, USAGE, DEFAULT_TARGET_DIR } = require('../lib/parse-args');
 
 // Colors
 const colors = {
@@ -391,38 +395,47 @@ function updateAceConfigIncludes(targetDir, packName) {
 
 // Main function
 async function main() {
+  const parsed = parseArgs(process.argv.slice(2));
+
+  // --help, --version and argument errors answer before the banner, so
+  // `create-ace-framework --version` prints a version and nothing else.
+  if (parsed.ok && parsed.options.help) {
+    console.log(USAGE);
+    return;
+  }
+
+  if (parsed.ok && parsed.options.version) {
+    console.log(require('../package.json').version);
+    return;
+  }
+
+  if (!parsed.ok) {
+    log.error(parsed.message);
+    console.error(`\n${USAGE}`);
+    process.exit(1);
+  }
+
   printBanner();
 
-  // Parse arguments
-  let targetDir = null;
-  let packName = null;
-  let adapterName = null;
+  const { packName, adapterName, yes } = parsed.options;
+  let targetDir = parsed.options.targetDir;
 
-  for (let i = 2; i < process.argv.length; i++) {
-    const arg = process.argv[i];
-    if (arg === '--pack' && i + 1 < process.argv.length) {
-      packName = process.argv[++i];
-    } else if (arg === '--adapter' && i + 1 < process.argv.length) {
-      adapterName = process.argv[++i];
-    } else if (!arg.startsWith('-') && !targetDir) {
-      targetDir = arg;
+  if (!targetDir) {
+    if (yes) {
+      targetDir = DEFAULT_TARGET_DIR;
+    } else {
+      targetDir = await prompt(`Enter project directory (default: ${DEFAULT_TARGET_DIR}): `);
+      targetDir = targetDir.trim() || DEFAULT_TARGET_DIR;
     }
   }
 
-  if (!targetDir) {
-    targetDir = await prompt('Enter project directory (default: ./ace-project): ');
-    targetDir = targetDir.trim() || './ace-project';
-  }
+  let projectName = defaultProjectName(targetDir, process.cwd());
 
-  // Get project name
-  let projectName = path.basename(path.resolve(targetDir));
-  if (targetDir === '.') {
-    projectName = path.basename(process.cwd());
-  }
-
-  const customName = await prompt(`Project name (default: ${projectName}): `);
-  if (customName.trim()) {
-    projectName = customName.trim();
+  if (!yes) {
+    const customName = await prompt(`Project name (default: ${projectName}): `);
+    if (customName.trim()) {
+      projectName = customName.trim();
+    }
   }
 
   // Create target directory
@@ -430,6 +443,14 @@ async function main() {
     fs.mkdirSync(targetDir, { recursive: true });
     log.success(`Created directory: ${targetDir}`);
   } else if (targetDir !== '.' && fs.readdirSync(targetDir).length > 0) {
+    // Unattended runs refuse rather than assume. Scaffolding writes .ace/,
+    // docs/ and several root files; "accept the defaults" must not silently
+    // mean "write over whatever is already here".
+    if (yes) {
+      log.error(`Directory is not empty: ${targetDir}`);
+      log.error('Refusing to scaffold into it unattended. Use an empty directory, or drop --yes.');
+      process.exit(1);
+    }
     const confirm = await prompt('Directory is not empty. Continue? (y/N): ');
     if (confirm.toLowerCase() !== 'y') {
       log.error('Aborted.');
