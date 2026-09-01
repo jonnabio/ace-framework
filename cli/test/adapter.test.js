@@ -94,6 +94,30 @@ test('guard-check allows (exit 0) an unguarded path', () => {
   assert.strictEqual(result.status, 0, result.stderr);
 });
 
+test('guard-check does not match a partial path segment', () => {
+  // A guard on src/components/UserList.tsx must not block
+  // vendor/NOTsrc/components/UserList.tsx. The match is anchored on a
+  // directory boundary, not a bare suffix.
+  if (!HAS_SH) { console.log('  (skipped: no sh on PATH)'); return; }
+  const dir = makeGuardedProject();
+  const result = runHook('guard-check.sh', hookJson('vendor/NOTsrc/components/UserList.tsx'), dir);
+  assert.strictEqual(result.status, 0, result.stderr);
+});
+
+test('guard-check still blocks an absolute path ending in the guarded path', () => {
+  if (!HAS_SH) { console.log('  (skipped: no sh on PATH)'); return; }
+  const dir = makeGuardedProject();
+  const result = runHook('guard-check.sh', hookJson('/home/me/proj/src/components/UserList.tsx'), dir);
+  assert.strictEqual(result.status, 2, result.stderr);
+});
+
+test('guard-check blocks a path equal to the guarded path', () => {
+  if (!HAS_SH) { console.log('  (skipped: no sh on PATH)'); return; }
+  const dir = makeGuardedProject();
+  const result = runHook('guard-check.sh', hookJson('src/components/UserList.tsx'), dir);
+  assert.strictEqual(result.status, 2, result.stderr);
+});
+
 test('guard-check allows everything when no guards file exists', () => {
   if (!HAS_SH) { console.log('  (skipped: no sh on PATH)'); return; }
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ace-adapter-'));

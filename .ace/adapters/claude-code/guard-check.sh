@@ -9,7 +9,8 @@
 # POSIX sh, grep/sed only - no jq, no yaml parser. Guard paths are collected
 # from every "- <path>" list entry in the guards file that looks like a file
 # path; matching a test path listed under a guard also blocks, which is
-# intentional caution for a reference implementation.
+# intentional caution for a reference implementation. Matching is anchored on
+# a path separator, so a guard on src/x.ts does not block notsrc/x.ts.
 #
 # stdin: Claude Code hook JSON ({"tool_name": ..., "tool_input": {"file_path": ...}})
 
@@ -35,9 +36,13 @@ GUARDED_PATHS=$(sed -n 's/^[[:space:]]*-[[:space:]]*\([^"[:space:]][^[:space:]]*
 
 [ -n "$GUARDED_PATHS" ] || exit 0
 
+# Match on a whole path segment: the guarded path is either the entire
+# file path or a suffix of it starting at a directory boundary. A bare
+# *"$guarded" also matched vendor/NOTsrc/services/user-service.ts against a
+# guard on src/services/user-service.ts.
 for guarded in $GUARDED_PATHS; do
   case "$FILE_PATH" in
-    *"$guarded")
+    "$guarded" | *"/$guarded")
       {
         echo "BLOCKED by ACE regression guard: $FILE_PATH matches guarded path '$guarded'."
         echo "Before modifying this file you must:"
