@@ -43,7 +43,7 @@
 curl -s http://metrics/api/v1/query?query=rate(http_errors_total[5m])
 ```
 
-Dashboard: [Error Rate Dashboard](link-to-dashboard)
+Dashboard: Error Rate Dashboard — fill in your monitoring URL
 
 ### Step 2: Identify Affected Endpoints
 
@@ -196,10 +196,10 @@ If issue persists after 15 minutes:
 
 ## Related
 
-- [Error Rate Dashboard](link)
-- [Application Logs](link)
-- [Rollback Runbook](./rollback.md)
-- [Database Issues Runbook](./database-issues.md)
+- Error Rate Dashboard — fill in your monitoring URL
+- Application Logs — fill in your log aggregator URL
+- [Service Down Runbook](./service-down.md)
+- [Runbook index](./README.md)
 
 ---
 

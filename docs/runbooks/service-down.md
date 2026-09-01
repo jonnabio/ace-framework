@@ -320,9 +320,8 @@ After incident, consider:
 ## Related
 
 - [High Error Rate Runbook](./high-error-rate.md)
-- [Database Issues Runbook](./database-issues.md)
-- [Rollback Runbook](./rollback.md)
-- [Infrastructure Dashboard](link)
+- [Runbook index](./README.md)
+- Infrastructure Dashboard — fill in your monitoring URL
 
 ---
 
