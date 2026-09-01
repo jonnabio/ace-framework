@@ -74,7 +74,7 @@ role_routing:
 # gate must never silently pass.
 verify:
   test_cmd: "cd cli && npm test"
-  lint_cmd: ""
+  lint_cmd: "npx --yes markdownlint-cli2"
   typecheck_cmd: ""
 
 # Validation hooks

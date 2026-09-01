@@ -20,11 +20,13 @@
 ## Tasks
 
 ### Task 1: [Name]
+
 - **Status:** [ ] Pending / [~] In Progress / [x] Completed / [!] Blocked
 - **Started:** [YYYY-MM-DD]
 - **Completed:** [YYYY-MM-DD]
 
 **Subtasks:**
+
 - [ ] [Subtask 1]
 - [ ] [Subtask 2]
 - [ ] Write tests
@@ -36,10 +38,12 @@
 ---
 
 ### Task 2: [Name]
+
 - **Status:** [ ] Pending
 - **Blocked By:** [Task 1 if applicable]
 
 **Subtasks:**
+
 - [ ] [Subtask 1]
 - [ ] [Subtask 2]
 - [ ] Write tests
@@ -50,9 +54,11 @@
 ---
 
 ### Task 3: [Name]
+
 - **Status:** [ ] Pending
 
 **Subtasks:**
+
 - [ ] [Subtask 1]
 - [ ] Write tests
 - [ ] Verify against standards
@@ -72,6 +78,7 @@
 ## Session Log
 
 ### [YYYY-MM-DD]
+
 - **Role:** [Developer]
 - **Worked On:** [Task X]
 - **Completed:** [What was finished]
@@ -92,4 +99,5 @@ Before marking feature complete:
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Task Checklist - ACE-Framework v2.3*

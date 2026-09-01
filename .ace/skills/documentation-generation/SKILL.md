@@ -5,7 +5,7 @@ description: Procedural knowledge for generating and maintaining code documentat
 
 # Skill: Documentation Generation
 
-> Procedural knowledge for generating and maintaining 
+> Procedural knowledge for generating and maintaining
 > code documentation, API specs, and architecture diagrams.
 
 ---
@@ -89,6 +89,7 @@ to add JSDoc comments and generate a Mermaid diagram for this module."
 ```
 
 Or for the full pipeline:
+
 ```markdown
 "Document as per the ACE standard."
 ```

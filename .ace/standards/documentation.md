@@ -8,18 +8,21 @@
 ## Core Principles
 
 ### 1. Machine-Readable First
+
 - Structured formats over prose
 - Consistent patterns for parsing
 - Explicit over implicit
 - Scannable headers and sections
 
 ### 2. Hierarchical Access
+
 - Most important information first
 - Progressive detail disclosure
 - Clear section boundaries
 - Cross-reference links
 
 ### 3. Single Source of Truth
+
 - One canonical location per topic
 - References, not duplicates
 - Version-controlled
@@ -43,6 +46,7 @@
 ## Formatting Rules
 
 ### Headers
+
 ```markdown
 # Document Title (H1 - one per document)
 
@@ -54,6 +58,7 @@
 ```
 
 ### Lists
+
 ```markdown
 Prefer:
 - Bullet points for unordered items
@@ -67,6 +72,7 @@ Avoid:
 ```
 
 ### Code
+
 ````markdown
 Inline: Use `backticks` for code references
 
@@ -82,6 +88,7 @@ Plain text output
 ````
 
 ### Tables
+
 ```markdown
 | Column 1 | Column 2 | Column 3 |
 |----------|----------|----------|
@@ -94,6 +101,7 @@ Use tables for:
 ```
 
 ### Cross-References
+
 ```markdown
 Internal: [See: .ace/standards/security.md]
 Section: [See: Architecture > API Design](#api-design)
@@ -105,6 +113,7 @@ External: [Documentation](https://example.com)
 ## Required Sections by Document Type
 
 ### Specification (PRD/Tech Spec)
+
 ```markdown
 # Feature: [Name]
 
@@ -141,6 +150,7 @@ External: [Documentation](https://example.com)
 ```
 
 ### Architecture Decision Record
+
 ```markdown
 # ADR-###: [Title]
 
@@ -163,6 +173,7 @@ External: [Documentation](https://example.com)
 ```
 
 ### Active Context
+
 ```markdown
 # Active Context: [Task]
 
@@ -190,6 +201,7 @@ External: [Documentation](https://example.com)
 ## API Documentation
 
 ### Endpoint Documentation
+
 ```markdown
 ## POST /api/v1/users
 
@@ -215,6 +227,7 @@ Create a new user account.
 ### Response
 
 **Success (201):**
+
 ```json
 {
   "data": {
@@ -226,11 +239,13 @@ Create a new user account.
 ```
 
 **Errors:**
+
 | Code | Description |
 |------|-------------|
 | 400 | Validation error |
 | 409 | Email already exists |
-```
+
+```text
 
 ---
 
@@ -252,6 +267,7 @@ Create a new user account.
 ```
 
 ### Module/File Header
+
 ```typescript
 /**
  * @module UserService
@@ -301,6 +317,7 @@ Create a new user account.
 ## AI-Specific Guidelines
 
 ### Do
+
 - Use consistent header hierarchy
 - Include explicit cross-references
 - Provide code examples
@@ -309,6 +326,7 @@ Create a new user account.
 - Keep sections focused
 
 ### Don't
+
 - Write long prose paragraphs
 - Use ambiguous language
 - Assume context
@@ -317,7 +335,8 @@ Create a new user account.
 - Leave sections empty
 
 ### Information Density
-```
+
+```text
 Optimal: One concept per section
 Maximum: 500 words per major section
 Headers: Every 100-200 words

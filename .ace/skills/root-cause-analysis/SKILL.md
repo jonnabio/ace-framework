@@ -13,6 +13,7 @@ description: Procedural knowledge for investigating issues, identifying root cau
 ## Purpose
 
 Enable systematic issue investigation that:
+
 - Identifies true root causes, not just symptoms
 - Implements permanent fixes
 - Prevents regressions through guards and tests
@@ -247,6 +248,5 @@ and create a complete RCA document with regression prevention."
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Skill Version: 1.0*
-
-

@@ -1,242 +1,100 @@
-# TODO — Markdown Lint Is Not Enforced
+# Markdown Lint — Resolved
 
-Status: open. Nothing in this document has been applied; the repository is
-unchanged. All numbers below were measured on 2026-08-24 against commit
-`7800f35`.
+Status: **resolved** on 2026-08-26. Markdown lint now runs, is identical
+locally and in CI, reports zero errors, and fails the build on regression.
 
-## Summary
+Originally opened 2026-08-24 against commit `7800f35`.
 
-Markdown linting does not work locally and cannot fail in CI. The documented
-command has never been runnable, and the CI step is marked
-`continue-on-error: true`. As a result no markdown problem in this repository
-has ever produced a failure signal.
+## What was wrong
+
+Three independent gaps meant no markdown problem had ever produced a failure
+signal in this repository:
+
+1. The documented command, `npx markdownlint '**/*.md'`, could not run. The
+   `markdownlint` npm package is a library and ships no binary, so npx
+   resolved it and then failed with `could not determine executable to run`.
+2. CI used a different tool (`markdownlint-cli2`) with different globs, and
+   was marked `continue-on-error: true`, so the job stayed green regardless.
+3. `.aceconfig` had an empty `lint_cmd`, so `verify.sh` skipped lint and
+   `VERIFY_RESULT=pass gate=all` only ever meant the test suite passed.
 
 This is how 1744 mojibake characters survived across 15 files until they were
-found by hand (fixed in commit `68d0f52`).
+found by hand (repaired in `68d0f52`; a further 12 in `AGENTS.md` were found
+during this work and repaired in `7aad699`).
 
-## Problem 1 — The documented command cannot run
+## What was done
 
-`CLAUDE.md:25` and `CONTRIBUTING.md:125` both document:
-
-```bash
-npx markdownlint '**/*.md'
-```
-
-This fails with:
-
-```text
-npm error could not determine executable to run
-```
-
-The `markdownlint` npm package is a library and ships no binary. Verified
-against the registry:
-
-| Package | `bin` field |
-| --- | --- |
-| `markdownlint` | *(none — library only)* |
-| `markdownlint-cli` | `markdownlint` |
-| `markdownlint-cli2` | `markdownlint-cli2` |
-
-The error is not "command not found": npx resolves the package, then finds
-nothing executable inside it.
-
-CI uses a third tool, `DavidAnson/markdownlint-cli2-action@v16`
-(`.github/workflows/validate.yml:44`), which wraps `markdownlint-cli2`. The
-local docs and CI have therefore never referred to the same binary.
-
-There is no `package.json` at the repository root, so no devDependency pins
-which tool or version is correct.
-
-### Fix
-
-Correct both documented commands to match what CI actually runs:
+One config, one command. `.markdownlint-cli2.jsonc` at the repository root
+holds the globs, the ignores and the rules, replacing `.markdownlint.json`.
+The docs, CI and the verify gate all now invoke the same bare command:
 
 ```bash
-npx markdownlint-cli2 '**/*.md'
+npx markdownlint-cli2
 ```
 
-- [ ] Update `CLAUDE.md:25`
-- [ ] Update `CONTRIBUTING.md:125`
-- [ ] Optional: add a root `package.json` with `markdownlint-cli2` as a
-      devDependency and a `lint:md` script, to pin the tool and version
+Two scoping decisions are recorded in that config:
 
-## Problem 2 — CI cannot fail on markdown
+- `.ace/packs/**` is ignored. Those 498 files are vendored third-party
+  skills, not maintained here; reformatting them would diverge from upstream.
+- `MD060` is disabled. It was the largest single rule, and its autofix
+  strips table padding, so tables lose their source alignment while
+  rendering identically.
 
-`.github/workflows/validate.yml:48`:
-
-```yaml
-      - name: Validate Markdown
-        uses: DavidAnson/markdownlint-cli2-action@v16
-        with:
-          globs: '**/*.md'
-          config: '.markdownlint.json'
-        continue-on-error: true
-```
-
-`continue-on-error: true` means the job stays green no matter how many
-violations are reported. Combined with Problem 1, markdown lint is currently
-unenforced everywhere.
-
-Do not remove this flag before the backlog below is cleared — the build would
-break immediately.
-
-- [ ] Remove `continue-on-error: true` **after** the error count is at zero
-
-## Current error count
-
-Measured with `npx markdownlint-cli2 '**/*.md'` and the existing
-`.markdownlint.json`:
-
-**21,699 errors across 582 files.**
-
-Distribution:
-
-| Area | Errors | Share |
+| Step | Commit | Errors after |
 | --- | --- | --- |
-| `.ace/packs/` (vendored third-party skills) | 20,259 | 93% |
-| Framework core (84 files) | 1,440 | 7% |
+| Baseline, all files | — | 21,728 |
+| Ignore packs, disable MD060 | `ac21c3a` | 995 |
+| Autofix (71 files, formatting only) | `9006ed0` | 171 |
+| Repair unbalanced fences | `1399f89` | 163 |
+| Declare a language on 114 fences | `b318b40` | 49 |
+| Real headings, targeted exemptions | `f614029` | **0** |
+| Enforce in CI | `f19448a` | 0 |
+| Wire into the verify gate | `ef2811f` | 0 |
 
-Top rules by volume:
+## Decisions worth carrying forward
 
-```text
-5758  MD060/table-column-style        table column alignment
-4102  MD031/blanks-around-fences      blank line around code fences
-3360  MD032/blanks-around-lists       blank line around lists
-1623  MD022/blanks-around-headings    blank line around headings
-1482  MD040/fenced-code-language      code fence without a language
-1226  MD034/no-bare-urls              URLs not wrapped in < >
-```
+**MD036 was split rather than disabled.** Sixteen `**Step N: ...**` lines in
+`USER_GUIDE.md` really were headings and became level-4 headings. The other
+25 hits are the italic metadata footer every document here ends with
+(`*Skill Version: 1.0*`); turning those into headings would be wrong, so each
+carries a `disable-next-line` comment with its reason. The rule stays live
+for real cases. The two `MD024` hits — deliberately repeated placeholder
+headings in templates — are exempted the same way.
 
-All formatting, no content defects.
+**`lint_cmd` is wired in, and it is not free.** `verify.sh` runs on every
+Stop hook, so lint now runs on every agent turn alongside the 88-test suite.
+Measured at 4.3s for the whole gate here. Finding 7 in
+[TODO-quality-gates.md](TODO-quality-gates.md) tracks splitting a fast gate
+from the full suite, and this makes that more pressing.
 
-## Proposed plan
+**`9006ed0` is a candidate for `.git-blame-ignore-revs`.** It rewrote 71
+files mechanically. Ignoring whitespace, its real diff is 18 lines.
 
-Steps 1 and 2 were implemented and measured, then reverted so the repository
-would stay unchanged. The numbers below are real, not estimates.
+**The version is pinned, and the pin is what runs.** A root
+`package.json` holds `markdownlint-cli2` at an exact `0.23.2`, with a
+lockfile. CI runs `npm ci` and then `npx markdownlint-cli2` rather than
+`DavidAnson/markdownlint-cli2-action@v16` — the action was doing the right
+thing, but a lockfile cannot pin a version bundled inside an action, so CI
+and local could still have drifted. The package is `private`, and it is not
+in the CLI's copy list, so it never reaches scaffolded projects.
 
-### Step 1 — Exclude expansion packs from linting
+**Scaffolded projects get the config, not just the command.** `.aceconfig`
+is copied into every scaffolded project, so setting `lint_cmd` there set it
+for them too. Without `.markdownlint-cli2.jsonc` alongside it,
+`markdownlint-cli2` prints its help and exits 0 — a gate that cannot fail,
+which is the thing this document was opened about. Both copy paths now ship
+the config.
 
-The 498 markdown files under `.ace/packs/` are vendored third-party skills.
-They are not maintained here and cannot be reformatted without diverging from
-upstream.
+## Still open
 
-In `.github/workflows/validate.yml`:
+- CI still does not run the test suite, and three of its remaining steps
+  cannot fail. See findings 1, 2 and 4 in
+  [TODO-quality-gates.md](TODO-quality-gates.md).
 
-```yaml
-        with:
-          globs: |
-            **/*.md
-            !.ace/packs/**
-          config: '.markdownlint.json'
-```
-
-Verified: the workflow still parses as YAML, and the value reaches the action
-as `'**/*.md\n!.ace/packs/**\n'`, the newline-separated form it expects.
-
-Effect: 582 files linted drops to 84.
-
-- [ ] Apply the glob exclusion in `.github/workflows/validate.yml`
-
-### Step 2 — Disable MD060
-
-In `.markdownlint.json`, alongside the rules already disabled:
-
-```json
-"MD060": false,
-```
-
-Two reasons.
-
-First, volume: MD060 alone accounts for 5758 of the 21,699 errors, the single
-largest rule.
-
-Second, and more important, its autofix makes the source worse. It strips
-table padding:
-
-```diff
--| Skill                    | Use For                  |
--| `api-design/SKILL.md`          | Creating REST APIs       |
-+| Skill | Use For |
-+| `api-design/SKILL.md` | Creating REST APIs |
-```
-
-The rendered output is identical, but every table in the documentation stops
-being aligned in the source. Verified that disabling the rule preserves the
-padding: after the change, the autofix diff for the `USER_GUIDE.md` skills
-table is empty.
-
-- [ ] Add `"MD060": false` to `.markdownlint.json`
-
-### Result of steps 1 and 2
-
-**21,699 errors drop to 970** — a 96% reduction with no documentation file
-touched. Configuration only.
-
-### Step 3 — Run the autofix
+## Reproducing
 
 ```bash
-npx markdownlint-cli2 --fix '**/*.md' '!.ace/packs/**'
-```
-
-Resolves 799 of the remaining 970 (82%), leaving 171.
-
-Two cautions.
-
-This still rewrites **70 of 84 files**. The bulk is `MD022`, `MD032` and
-`MD031` — blank lines around headings, lists and fences — spread across the
-whole documentation set. It will be a large, noisy commit and will disturb
-`git blame`.
-
-Verified safe on two counts: the fix does not reintroduce mojibake, and it
-leaves the box-drawing diagrams in `USER_GUIDE.md` intact (12 `│` characters
-before and after).
-
-- [ ] Decide whether the blame churn is acceptable
-- [ ] If yes, apply as its own commit, labelled as a formatting-only change
-
-### Step 4 — Clear the remaining 171 by hand
-
-```text
-117  MD040  code fences with no declared language
- 45  MD036  bold text used as a heading
-  9  MD025, MD024, MD032, MD022
-```
-
-`MD040` is mechanical but not automatable: each fence needs a human to decide
-whether it is `bash`, `yaml`, `json`, `text`, or something else.
-
-- [ ] Resolve or explicitly disable `MD040`
-- [ ] Resolve or explicitly disable `MD036`
-- [ ] Resolve the remaining 9
-
-## Open question
-
-`.aceconfig` currently has an empty `lint_cmd`:
-
-```yaml
-verify:
-  test_cmd: "cd cli && npm test"
-  lint_cmd: ""
-  typecheck_cmd: ""
-```
-
-Markdown lint could be wired in here, which would make it part of the
-framework's own verify gate. That also means a markdown formatting violation
-would block the gate for all work. This is a judgement call and is
-deliberately left undecided.
-
-- [ ] Decide whether `lint_cmd` should run markdown lint
-
-## Reproducing these numbers
-
-```bash
-# Current state
-npx markdownlint-cli2 '**/*.md'
-
-# After steps 1 and 2
-npx markdownlint-cli2 '**/*.md' '!.ace/packs/**'
-
-# Autofix impact, without touching the repository
-rsync -a --exclude='.git' --exclude='.ace/packs' ./ /tmp/repocopy/
-cd /tmp/repocopy && npx markdownlint-cli2 --fix '**/*.md'
+npm ci                       # once
+npx markdownlint-cli2        # expected: Summary: 0 issues in 0 files
+bash .ace/scripts/verify.sh  # expected: VERIFY_RESULT=pass gate=all
 ```

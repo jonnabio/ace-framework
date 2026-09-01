@@ -63,9 +63,11 @@ merge, tag, and npm publish.
 ## Active Constraints
 
 ### Standards
+
 - .ace/standards/harness-engineering.md v2.7.0 (§5.1 rule lifecycle)
 
 ### Plan / ADRs
+
 - docs/planning/implementation_plan_v2.7_loop_engineering.md (all tasks done)
 - ADR-002 (runner interface), ADR-003 (rule promotion)
 

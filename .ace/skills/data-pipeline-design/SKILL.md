@@ -5,7 +5,7 @@ description: Procedural knowledge for designing robust, idempotent, and scalable
 
 # Skill: Data Pipeline Design
 
-> Procedural knowledge for designing robust, idempotent, 
+> Procedural knowledge for designing robust, idempotent,
 > and scalable data pipelines (ETL/ELT).
 
 ---

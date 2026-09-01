@@ -161,4 +161,5 @@ Begin with Task 1. Update ACTIVE_CONTEXT.md with current state."
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 _Track usage and update success rate_

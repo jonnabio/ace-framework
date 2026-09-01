@@ -11,36 +11,44 @@ All commands below are run from the repository root.
 ## Commands
 
 ### Validate framework structure
+
 ```bash
 ./scripts/validate.sh
 ```
 
 ### Test scaffold in a new project
+
 ```bash
 ./scripts/init.sh ../test-project
 ```
 
 ### Lint markdown files
+
 ```bash
-npx markdownlint '**/*.md'
+npm ci                  # once, pins markdownlint-cli2 via package-lock.json
+npx markdownlint-cli2
 ```
 
 ### Run CLI locally
+
 ```bash
 node cli/bin/create-ace-framework.js <target-dir>
 ```
 
 ### Scaffold a new project via npx
+
 ```bash
 npx create-ace-framework my-project
 ```
 
 ### Run the CLI test suite (also the repo's verify gate)
+
 ```bash
 cd cli && npm test
 ```
 
 ### Run the ACE loop (v2.7)
+
 ```bash
 node cli/bin/ace-framework.js loop --dry-run   # preview queue state
 node cli/bin/ace-framework.js loop             # drive docs/progress/tasks.json
@@ -49,6 +57,7 @@ node cli/bin/ace-framework.js curate list      # staged distilled rules
 ```
 
 ### Run the verify gate directly
+
 ```bash
 bash .ace/scripts/verify.sh
 ```
@@ -77,6 +86,7 @@ Every task follows **Analyze → Discuss → Plan → Execute → Verify**:
 ### Key Files to Load at Session Start
 
 Per `.cursorrules`, always read before any task:
+
 1. `.aceconfig` — core rules and skill routing
 2. `.ace/roles/roles.md` — available roles and responsibilities
 3. `docs/context/ACTIVE_CONTEXT.md` — current session state
@@ -112,13 +122,15 @@ Per `.cursorrules`, always read before any task:
 
 ### Third-Party Skills (Claude Code Marketplace)
 
-Because ACE uses the AgentSkills.io standard, you can instantly expand capabilities using Anthropic's native marketplace. 
+Because ACE uses the AgentSkills.io standard, you can instantly expand capabilities using Anthropic's native marketplace.
 
 To give the Architect the ability to parse PDFs, Word docs, and Excel files:
+
 ```bash
 /plugin marketplace add anthropics/skills
 /plugin install document-skills@anthropic-agent-skills
 ```
+
 *Note: This allows you to directly pass binary documents into the `.ace/skills/transcript-analysis/SKILL.md` workflow or analyze-requirements prompt.*
 
 ### Expansion Packs
@@ -126,15 +138,19 @@ To give the Architect the ability to parse PDFs, Word docs, and Excel files:
 To keep the core framework lightweight, large domain-specific skill collections are managed as **Expansion Packs** and are only vendored into a project when requested at scaffold time via the `create-ace-framework` CLI's `--pack` flag.
 
 **Scientific Expansion Pack**: Enables the *Data Scientist*, *AI Expert*, and *Scientific Editor* roles with 135+ scientific skills (e.g., bioinformatics, chemistry, clinical data).
+
 ```bash
 npx create-ace-framework my-project --pack scientific
 ```
+
 *Note: This copies `.ace/packs/scientific/` into the new project and registers `.ace/packs/scientific/.aceconfig-ext` under `includes:` in `.aceconfig`.*
 
 **AI Research Expansion Pack**: Enables the *AI Researcher* and *MLOps Engineer* roles with 98+ AI engineering skills (e.g., vLLM, DeepSpeed, RLHF, Axolotl).
+
 ```bash
 npx create-ace-framework my-project --pack ai-research
 ```
+
 *Note: This copies `.ace/packs/ai-research/` into the new project and registers `.ace/packs/ai-research/.aceconfig-ext` under `includes:` in `.aceconfig`.*
 
 If no `--pack` flag is given, no expansion pack is installed and `includes:` is left empty (`includes: []`).
@@ -157,4 +173,3 @@ Create an ADR (`docs/adr/ADR-###-description.md`) for any significant architectu
 ### Session End
 
 Always update `docs/context/ACTIVE_CONTEXT.md` with completed work, blockers, and next steps (1–3 specific tasks).
-

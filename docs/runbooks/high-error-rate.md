@@ -48,6 +48,7 @@ Dashboard: [Error Rate Dashboard](link-to-dashboard)
 ### Step 2: Identify Affected Endpoints
 
 Check which endpoints are failing:
+
 - Filter logs by status >= 500
 - Check metrics by endpoint label
 - Note: Is it one endpoint or many?
@@ -72,14 +73,18 @@ Check which endpoints are failing:
 ### Scenario A: Recent Deployment Caused Issue
 
 **Indicators:**
+
 - Error rate spike coincides with deployment
 - Errors are from newly changed code
 
 **Steps:**
+
 1. Initiate rollback
+
    ```bash
    ./scripts/rollback.sh production
    ```
+
 2. Verify error rate decreasing
 3. Notify team of rollback
 4. Investigate cause before redeploying
@@ -87,15 +92,19 @@ Check which endpoints are failing:
 ### Scenario B: Database Issues
 
 **Indicators:**
+
 - Database connection errors in logs
 - High database latency
 - Connection pool exhausted
 
 **Steps:**
+
 1. Check database health
+
    ```bash
    ./scripts/check-db-health.sh
    ```
+
 2. If connections exhausted:
    - Restart application pods to reset pools
    - Increase connection pool if needed
@@ -107,10 +116,12 @@ Check which endpoints are failing:
 ### Scenario C: External API Failure
 
 **Indicators:**
+
 - Timeout errors to external service
 - External service returning errors
 
 **Steps:**
+
 1. Check external service status page
 2. If external service is down:
    - Enable circuit breaker if not active
@@ -121,10 +132,12 @@ Check which endpoints are failing:
 ### Scenario D: Application Bug
 
 **Indicators:**
+
 - Specific error message in logs
 - Stack trace pointing to code issue
 
 **Steps:**
+
 1. Identify the bug from logs
 2. If quick fix possible:
    - Hotfix and deploy
@@ -135,15 +148,19 @@ Check which endpoints are failing:
 ### Scenario E: Resource Exhaustion
 
 **Indicators:**
+
 - High CPU/Memory usage
 - Out of memory errors
 - Thread pool exhausted
 
 **Steps:**
+
 1. Scale up instances
+
    ```bash
    kubectl scale deployment app --replicas=N
    ```
+
 2. Identify resource leak
 3. Restart affected pods
 4. Investigate root cause
@@ -160,6 +177,7 @@ If issue persists after 15 minutes:
 4. Engage additional team members
 
 **Escalation contacts:**
+
 - Tech Lead: [contact]
 - Platform Team: [contact]
 - Database Team: [contact]

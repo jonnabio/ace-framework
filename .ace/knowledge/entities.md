@@ -53,12 +53,15 @@
 ### User
 
 #### Description
+
 A person who interacts with the system. Can have various roles and permissions.
 
 #### Type
+
 Aggregate Root
 
 #### Attributes
+
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
 | id | UUID | Yes | Unique identifier |
@@ -72,19 +75,23 @@ Aggregate Root
 | lastLoginAt | DateTime | No | Last successful login |
 
 #### Relationships
+
 - Has many **Sessions**: Active login sessions
 - Has many **Orders**: Orders placed by user
 - Has one **Profile**: Extended user information
 
 #### Invariants
+
 - Email must be unique across all users
 - Password must meet complexity requirements
 - Cannot delete user with pending orders
 
 #### Lifecycle
+
 Created (registration) → Active → Suspended (violation) → Active (reinstated) OR Deleted (request)
 
 #### Business Rules
+
 - [BR-001]: Unique Email
 - [BR-002]: Password Complexity
 
@@ -95,12 +102,15 @@ Created (registration) → Active → Suspended (violation) → Active (reinstat
 ### Address
 
 #### Description
+
 A physical or mailing address. Immutable.
 
 #### Type
+
 Value Object
 
 #### Attributes
+
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
 | street | String | Yes | Street address |
@@ -110,6 +120,7 @@ Value Object
 | country | String | Yes | Country code (ISO) |
 
 #### Validation Rules
+
 - Postal code format must match country
 - Country must be valid ISO code
 
@@ -118,18 +129,22 @@ Value Object
 ### Money
 
 #### Description
+
 A monetary value with currency. Immutable.
 
 #### Type
+
 Value Object
 
 #### Attributes
+
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
 | amount | Decimal | Yes | Numeric value |
 | currency | String | Yes | Currency code (ISO 4217) |
 
 #### Validation Rules
+
 - Amount cannot be negative (use separate type for debits)
 - Currency must be valid ISO 4217 code
 - Operations between different currencies forbidden
@@ -138,7 +153,7 @@ Value Object
 
 ## Entity Relationships Diagram
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────┐
 │                     ENTITY RELATIONSHIPS                     │
 ├──────────────────────────────────────────────────────────────┤
@@ -168,11 +183,13 @@ Value Object
 ## Aggregates
 
 ### User Aggregate
+
 - Root: User
 - Contains: Profile, Sessions
 - Boundary: User data and authentication
 
 ### Order Aggregate
+
 - Root: Order
 - Contains: OrderItems, Payment
 - Boundary: Single order transaction

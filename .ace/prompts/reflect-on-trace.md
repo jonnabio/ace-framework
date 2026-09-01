@@ -27,7 +27,7 @@ Rules:
 
 Respond with EXACTLY this format (two lines, nothing before or after):
 
-```
+```text
 CATEGORY: <OneWord>
 LESSON: <one sentence, generalizable, under 200 characters>
 ```

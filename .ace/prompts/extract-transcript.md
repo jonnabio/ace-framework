@@ -193,4 +193,5 @@ performance constraints]. I think we may have missed some implicit ones."
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Track usage and update success rate*

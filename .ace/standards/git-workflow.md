@@ -20,7 +20,7 @@
 
 ### Branch Flow
 
-```
+```text
 main ─────────────────────────────●─────────────────────●───▶
                                   ▲                     ▲
                                   │ merge               │ merge
@@ -42,25 +42,29 @@ hotfix/456 ───────────────────────
 ### Branch Rules
 
 #### main
+
 - Always deployable
 - Protected: no direct commits
 - Requires PR with approvals
 - All tests must pass
-- Only merge from release/* or hotfix/*
+- Only merge from release/*or hotfix/*
 
 #### develop
+
 - Integration of features
 - Protected: no direct commits
 - Requires PR with approvals
 - Tests should pass
 
 #### feature/*
+
 - Branch from: develop
 - Merge to: develop
 - Delete after merge
 - Keep up-to-date with develop
 
 #### hotfix/*
+
 - Branch from: main
 - Merge to: main AND develop
 - For critical production issues only
@@ -72,7 +76,7 @@ hotfix/456 ───────────────────────
 
 ### Commit Message Format
 
-```
+```text
 <type>(<scope>): <subject>
 
 [optional body]
@@ -97,6 +101,7 @@ hotfix/456 ───────────────────────
 ### Scope
 
 Optional, describes the affected module:
+
 - `api`, `auth`, `db`, `ui`, `core`, etc.
 
 ### Subject
@@ -120,7 +125,7 @@ Optional, describes the affected module:
 
 ### Examples
 
-```
+```text
 feat(auth): add OAuth2 login support
 
 Implement OAuth2 authentication flow with Google and GitHub
@@ -133,7 +138,7 @@ providers. This enables SSO for enterprise users.
 Closes #234
 ```
 
-```
+```text
 fix(api): prevent SQL injection in user search
 
 Apply parameterized queries to user search endpoint.
@@ -143,7 +148,7 @@ Fixes #567
 RCA: docs/rca/RCA-003-sql-injection.md
 ```
 
-```
+```text
 refactor(core): extract validation logic to separate module
 
 No functional changes. Improves testability and reuse.
@@ -195,7 +200,7 @@ No functional changes. Improves testability and reuse.
 
 ### Semantic Versioning
 
-```
+```text
 MAJOR.MINOR.PATCH
 
 MAJOR: Breaking changes
@@ -205,7 +210,7 @@ PATCH: Bug fixes, backward compatible
 
 ### Pre-release Tags
 
-```
+```text
 vX.Y.Z-alpha.N   # Alpha releases
 vX.Y.Z-beta.N    # Beta releases
 vX.Y.Z-rc.N      # Release candidates

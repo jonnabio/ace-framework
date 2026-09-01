@@ -24,12 +24,14 @@ We pledge to make participation in our project a harassment-free experience for 
 ### Our Standards
 
 **Positive behavior includes:**
+
 - Using welcoming and inclusive language
 - Being respectful of differing viewpoints
 - Gracefully accepting constructive criticism
 - Focusing on what is best for the community
 
 **Unacceptable behavior includes:**
+
 - Trolling, insulting comments, and personal attacks
 - Public or private harassment
 - Publishing others' private information
@@ -84,6 +86,7 @@ git remote add upstream https://github.com/jonnabio/ace-framework.git
 ### Contributing Documentation
 
 Documentation improvements are always welcome:
+
 - Fix typos or unclear wording
 - Add examples
 - Improve explanations
@@ -95,7 +98,7 @@ Documentation improvements are always welcome:
 
 ### Directory Structure
 
-```
+```text
 ace-framework/
 ├── .ace/                 # Framework core
 ├── docs/                 # Documentation
@@ -109,11 +112,13 @@ ace-framework/
 Before submitting:
 
 1. **Validate structure:**
+
    ```bash
    ./scripts/validate.sh
    ```
 
 2. **Test in a new project:**
+
    ```bash
    ./scripts/init.sh ../test-project
    cd ../test-project
@@ -121,8 +126,10 @@ Before submitting:
    ```
 
 3. **Check markdown:**
+
    ```bash
-   npx markdownlint '**/*.md'
+   npm ci                  # once, pins markdownlint-cli2 via package-lock.json
+   npx markdownlint-cli2
    ```
 
 ---
@@ -144,7 +151,8 @@ Before submitting:
    - `docs/what-changed`
 
 2. **Commit messages:**
-   ```
+
+   ```text
    type(scope): description
 
    - Detail 1
@@ -199,6 +207,7 @@ Before submitting:
 ## Recognition
 
 Contributors are recognized in:
+
 - CONTRIBUTORS.md file
 - Release notes
 - GitHub contributors page

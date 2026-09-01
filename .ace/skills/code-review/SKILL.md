@@ -13,6 +13,7 @@ description: Procedural knowledge for conducting thorough, constructive code rev
 ## Purpose
 
 Enable effective code reviews that:
+
 - Catch bugs and issues before merge
 - Ensure standards compliance
 - Share knowledge across the team
@@ -33,7 +34,7 @@ Enable effective code reviews that:
 
 ## Review Process
 
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                   CODE REVIEW FLOW                      │
 ├─────────────────────────────────────────────────────────┤
@@ -325,6 +326,5 @@ structured feedback. Check regression guards for modified files."
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Skill Version: 1.0*
-
-

@@ -5,7 +5,7 @@ description: Procedural knowledge for designing autonomous AI agents with tools,
 
 # Skill: Agent Design
 
-> Procedural knowledge for designing autonomous AI agents 
+> Procedural knowledge for designing autonomous AI agents
 > with tools, memory, and reasoning loops.
 
 ---

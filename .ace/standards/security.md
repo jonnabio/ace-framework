@@ -9,7 +9,8 @@
 ## Secrets Management
 
 ### NEVER in Code
-```
+
+```text
 FORBIDDEN:
 - API keys
 - Passwords
@@ -21,7 +22,8 @@ FORBIDDEN:
 ```
 
 ### Required Approach
-```
+
+```text
 - Environment variables for runtime secrets
 - Secret management service (Vault, AWS Secrets Manager, etc.)
 - .env files in .gitignore (never committed)
@@ -29,6 +31,7 @@ FORBIDDEN:
 ```
 
 ### Detection
+
 - Pre-commit hooks must scan for secrets
 - CI pipeline must fail on detected secrets
 - Regular repository audits
@@ -38,7 +41,8 @@ FORBIDDEN:
 ## Input Validation
 
 ### All External Input is Untrusted
-```
+
+```text
 Sources requiring validation:
 - User input (forms, parameters)
 - API request bodies
@@ -50,6 +54,7 @@ Sources requiring validation:
 ```
 
 ### Validation Rules
+
 1. **Whitelist over blacklist** - Define what's allowed
 2. **Validate type, length, format, range**
 3. **Sanitize before use**
@@ -60,7 +65,8 @@ Sources requiring validation:
 ## OWASP Top 10 Protections
 
 ### 1. Injection Prevention
-```
+
+```text
 REQUIRED:
 - Parameterized queries (never string concatenation)
 - ORM with parameterization
@@ -69,7 +75,8 @@ REQUIRED:
 ```
 
 ### 2. Authentication
-```
+
+```text
 REQUIRED:
 - Secure password hashing (bcrypt, Argon2)
 - Multi-factor authentication for sensitive operations
@@ -78,7 +85,8 @@ REQUIRED:
 ```
 
 ### 3. Sensitive Data Exposure
-```
+
+```text
 REQUIRED:
 - HTTPS everywhere
 - Sensitive data encrypted at rest
@@ -87,7 +95,8 @@ REQUIRED:
 ```
 
 ### 4. XML External Entities (XXE)
-```
+
+```text
 REQUIRED:
 - Disable DTD processing
 - Use JSON over XML when possible
@@ -95,7 +104,8 @@ REQUIRED:
 ```
 
 ### 5. Access Control
-```
+
+```text
 REQUIRED:
 - Deny by default
 - Principle of least privilege
@@ -104,7 +114,8 @@ REQUIRED:
 ```
 
 ### 6. Security Misconfiguration
-```
+
+```text
 REQUIRED:
 - Remove default credentials
 - Disable unnecessary features
@@ -113,7 +124,8 @@ REQUIRED:
 ```
 
 ### 7. Cross-Site Scripting (XSS)
-```
+
+```text
 REQUIRED:
 - Output encoding
 - Content Security Policy (CSP)
@@ -122,7 +134,8 @@ REQUIRED:
 ```
 
 ### 8. Insecure Deserialization
-```
+
+```text
 REQUIRED:
 - Validate serialized data
 - Use safe serialization formats
@@ -130,7 +143,8 @@ REQUIRED:
 ```
 
 ### 9. Vulnerable Components
-```
+
+```text
 REQUIRED:
 - Regular dependency updates
 - Vulnerability scanning in CI
@@ -139,7 +153,8 @@ REQUIRED:
 ```
 
 ### 10. Logging & Monitoring
-```
+
+```text
 REQUIRED:
 - Security event logging
 - No sensitive data in logs
@@ -152,16 +167,19 @@ REQUIRED:
 ## API Security
 
 ### Authentication
+
 - Token-based authentication (JWT, OAuth2)
 - API keys for service-to-service
 - Token expiration and refresh
 
 ### Authorization
+
 - Verify permissions on every endpoint
 - Resource-level access control
 - Rate limiting
 
 ### Transport
+
 - TLS 1.2+ required
 - Certificate validation
 - HSTS enabled
@@ -171,7 +189,8 @@ REQUIRED:
 ## File Handling
 
 ### Uploads
-```
+
+```text
 REQUIRED:
 - Validate file type (magic bytes, not extension)
 - Size limits enforced
@@ -181,7 +200,8 @@ REQUIRED:
 ```
 
 ### Downloads
-```
+
+```text
 REQUIRED:
 - Path traversal prevention
 - Access control verification
@@ -193,11 +213,13 @@ REQUIRED:
 ## Database Security
 
 ### Queries
+
 - Parameterized queries only
 - Least privilege database accounts
 - No direct SQL string building
 
 ### Storage
+
 - Encryption at rest for sensitive data
 - Secure connection strings
 - Regular backups (encrypted)
@@ -207,6 +229,7 @@ REQUIRED:
 ## Security Headers
 
 ### Required Headers
+
 ```http
 Strict-Transport-Security: max-age=31536000; includeSubDomains
 Content-Security-Policy: [appropriate policy]

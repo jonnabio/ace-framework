@@ -147,6 +147,7 @@ describe('User Registration Flow', () => {
 ## Test Patterns
 
 ### Test Data Builders
+
 ```typescript
 // Create flexible test data
 const createUser = (overrides = {}) => ({
@@ -163,6 +164,7 @@ const inactiveUser = createUser({ status: 'inactive' });
 ```
 
 ### Test Fixtures
+
 ```typescript
 // Reusable setup
 const fixtures = {
@@ -173,6 +175,7 @@ const fixtures = {
 ```
 
 ### Mocking Strategy
+
 ```markdown
 Mock:
 - External services (APIs, payment processors)
@@ -213,7 +216,7 @@ Don't obsess over:
 
 ## Test Organization
 
-```
+```text
 src/
 ├── features/
 │   └── user/
@@ -272,6 +275,5 @@ coverage at unit, integration, and E2E levels as needed."
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Skill Version: 1.0*
-
-

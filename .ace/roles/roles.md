@@ -232,7 +232,7 @@ into compelling narratives."
 
 ### PLANNING → EXECUTION
 
-```
+```text
 Architect completes → Developer begins
 Handoff: implementation_plan.md and docs/progress/tasks.json approved
 Pre-check: Regression guards reviewed
@@ -241,7 +241,7 @@ Protocol: START A NEW LLM SESSION (Context Flush). Only load the specific task a
 
 ### EXECUTION → VERIFICATION
 
-```
+```text
 Developer completes → QA Engineer begins
 Handoff: Code committed, tests written, task_[ID]_result.md generated
 Pre-check: verify.sh executes successfully
@@ -250,7 +250,7 @@ Protocol: START A NEW LLM SESSION (Context Flush). Do not inherit Developer cont
 
 ### Issue Discovered → INCIDENT
 
-```
+```text
 Any Role → Incident Responder
 Trigger: Bug, failure, or vulnerability discovered
 Output: RCA document with prevention measures
@@ -258,7 +258,7 @@ Output: RCA document with prevention measures
 
 ### INCIDENT → Return to Previous Mode
 
-```
+```text
 Incident Responder completes → Previous Role resumes
 Handoff: RCA closed, guards in place
 Pre-check: Regression tests passing
@@ -266,7 +266,7 @@ Pre-check: Regression tests passing
 
 ### Research Workflow
 
-```
+```text
 AI Expert (theory) → Data Scientist (experiments) → Scientific Editor (publication)
 ```
 
@@ -326,5 +326,5 @@ AI Expert (theory) → Data Scientist (experiments) → Scientific Editor (publi
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 _BMAD Agentic Roles - ACE-Framework v2.1_
-

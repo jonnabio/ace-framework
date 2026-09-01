@@ -102,6 +102,7 @@ function cloneFromGitHub(targetDir) {
       '.aiconfig',
       '.cursorrules',
       '.editorconfig',
+      '.markdownlint-cli2.jsonc',
       'ACE-SPEC.md',
       'USER_GUIDE.md',
     ];

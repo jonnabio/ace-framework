@@ -8,7 +8,7 @@ This document explains how to distribute and deploy ACE-Framework to other devel
 
 ### Method 1: GitHub Template (Recommended)
 
-**For new projects - one click setup**
+For new projects — one click setup.
 
 #### Setup as Template Repository
 
@@ -19,7 +19,7 @@ This document explains how to distribute and deploy ACE-Framework to other devel
 
 #### User Experience
 
-```
+```text
 1. Go to https://github.com/jonnabio/ace-framework
 2. Click "Use this template" → "Create a new repository"
 3. Name your project
@@ -27,6 +27,7 @@ This document explains how to distribute and deploy ACE-Framework to other devel
 ```
 
 #### Pros
+
 - No dependencies required
 - Preserves full structure
 - Works with any tech stack
@@ -36,7 +37,7 @@ This document explains how to distribute and deploy ACE-Framework to other devel
 
 ### Method 2: CLI Tool (npx)
 
-**For developers who prefer command line**
+For developers who prefer command line.
 
 #### Publishing to npm
 
@@ -69,12 +70,13 @@ npx create-ace-framework
 
 ### Method 3: Init Script
 
-**For quick setup in existing projects**
+For quick setup in existing projects.
 
 #### Hosting the Script
 
 Host `scripts/init.sh` at a stable URL:
-```
+
+```text
 https://raw.githubusercontent.com/jonnabio/ace-framework/main/scripts/init.sh
 ```
 
@@ -95,7 +97,7 @@ curl -fsSL https://...init.sh | bash -s -- my-project
 
 ### Method 4: Manual Download
 
-**For offline or restricted environments**
+For offline or restricted environments.
 
 #### Creating Release Archives
 
@@ -159,7 +161,7 @@ When users install the framework, they should customize:
 
 ### Semantic Versioning
 
-```
+```text
 MAJOR.MINOR.PATCH
 
 MAJOR: Breaking changes to framework structure
@@ -181,7 +183,7 @@ The framework is language-agnostic, but users may want language-specific standar
 
 ### Approach 1: Separate Branches
 
-```
+```text
 main           - Generic framework
 typescript     - TypeScript-specific standards
 python         - Python-specific standards
@@ -190,7 +192,7 @@ go             - Go-specific standards
 
 ### Approach 2: Template Variants
 
-```
+```bash
 npx create-ace-framework my-project --template typescript
 npx create-ace-framework my-project --template python
 ```
@@ -289,4 +291,5 @@ When preparing for distribution, update these placeholders:
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Distribution Guide - ACE-Framework v2.5.0*

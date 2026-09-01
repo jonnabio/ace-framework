@@ -22,12 +22,15 @@
 **Role:** [Role that was active]
 
 #### Incident
+
 [Description of what went wrong or could be improved]
 
 #### Root Cause
+
 [Why it happened - prompt issue, missing context, skill gap, etc.]
 
 #### Category
+
 - [ ] Prompt Failure
 - [ ] Skill Gap
 - [ ] Standard Violation
@@ -35,14 +38,18 @@
 - [ ] Other: [specify]
 
 #### Resolution
+
 [What was done to fix the immediate issue]
 
 #### Prevention
+
 [Changes made to prevent recurrence]
+
 - [ ] Updated: [file path]
 - [ ] Created: [file path]
 
 #### Impact
+
 - **Severity:** [Critical | High | Medium | Low]
 - **Time Lost:** [estimate]
 
@@ -70,10 +77,12 @@
 ## Patterns Identified
 
 ### Pattern 1: [Name]
+
 - **Frequency:** [How often]
 - **Trigger:** [What causes it]
 - **Prevention:** [How to avoid]
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Feedback Log - ACE-Framework v2.0*

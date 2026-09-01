@@ -8,6 +8,7 @@
 ## Context
 
 The project requires a structured approach to AI-assisted development to ensure:
+
 - Consistency across different AI agents and sessions
 - Prevention of context drift between sessions
 - Enforcement of coding and security standards
@@ -23,6 +24,7 @@ Without a structured framework, AI-assisted development tends to produce inconsi
 We will adopt the ACE-Framework (AI-assisted Code Engineering) v2.0 as the standard for all AI-assisted development in this project.
 
 This includes:
+
 - Using the `.ace/` directory structure for AI context
 - Following BMAD methodology (Analyze → Plan → Execute → Verify)
 - Maintaining `docs/context/ACTIVE_CONTEXT.md` for session state
@@ -35,19 +37,25 @@ This includes:
 ## Alternatives Considered
 
 ### Alternative 1: No Framework
+
 Using AI assistants ad-hoc without structured methodology.
+
 - **Pros:** Less overhead, faster initial setup
 - **Cons:** Inconsistent results, context loss, conflicting patterns
 - **Why Rejected:** Leads to technical debt and maintenance issues
 
 ### Alternative 2: Custom Minimal Framework
+
 Creating a lighter-weight custom approach.
+
 - **Pros:** Simpler, fewer files
 - **Cons:** Missing important components, would evolve to ACE anyway
 - **Why Rejected:** ACE-Framework already solves the problems comprehensively
 
 ### Alternative 3: IDE-Specific Solutions
+
 Using built-in AI features of specific IDEs only.
+
 - **Pros:** Tighter integration, simpler setup
 - **Cons:** Vendor lock-in, inconsistent across team members
 - **Why Rejected:** Team uses multiple IDEs and AI tools
@@ -57,6 +65,7 @@ Using built-in AI features of specific IDEs only.
 ## Consequences
 
 ### Positive
+
 - Consistent AI-assisted development across the team
 - Context preserved between sessions via ACTIVE_CONTEXT.md
 - Architectural decisions documented and searchable
@@ -64,11 +73,13 @@ Using built-in AI features of specific IDEs only.
 - Standards automatically referenced during development
 
 ### Negative
+
 - Initial learning curve for team members
 - Overhead of maintaining context documents
 - More files to manage in the repository
 
 ### Neutral
+
 - Requires discipline to follow the process
 - ADR count will grow over time
 
@@ -77,6 +88,7 @@ Using built-in AI features of specific IDEs only.
 ## Compliance
 
 Compliance will be verified through:
+
 - Code reviews checking for ADR references on significant decisions
 - Pre-commit hooks validating file structure
 - Session start prompts that reference ACE-Framework
@@ -92,4 +104,5 @@ Compliance will be verified through:
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *First ADR - ACE-Framework v2.3*

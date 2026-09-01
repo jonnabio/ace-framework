@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Validate Structure
         run: |
@@ -40,12 +40,22 @@ jobs:
 
           echo "✅ Framework structure is valid!"
 
-      - name: Validate Markdown
-        uses: DavidAnson/markdownlint-cli2-action@v16
+      - name: Setup Node
+        uses: actions/setup-node@v5
         with:
-          globs: '**/*.md'
-          config: '.markdownlint.json'
-        continue-on-error: true
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install lint tooling
+        run: npm ci
+
+      - name: Validate Markdown
+        # Runs the pinned markdownlint-cli2 from package-lock.json, reading
+        # globs and rules from .markdownlint-cli2.jsonc. Identical to what
+        # `npx markdownlint-cli2` runs locally and to the verify gate's
+        # lint_cmd. The marketplace action was dropped because it bundles its
+        # own version, which the lockfile cannot pin.
+        run: npx markdownlint-cli2
 
       - name: Check YAML Syntax
         run: |
@@ -54,8 +64,16 @@ jobs:
             python3 -c "import yaml; yaml.safe_load(open('$file'))" && echo "✓ Valid: $file" || echo "❌ Invalid: $file"
           done
 
-      - name: Validate Links
-        uses: lycheeverse/lychee-action@v1
+      - name: Validate Links (advisory, does not gate)
+        uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress '**/*.md'
+          # node_modules must be excluded: the lint tooling is installed
+          # before this step, and without it lychee walks every dependency
+          # README. Measured at 3587 links in 9m27s, versus 75 in 0.8s for the
+          # repository's own documents. .ace/packs is vendored and excluded
+          # for the same reason it is excluded from linting.
+          args: >-
+            --verbose --no-progress
+            --exclude-path node_modules --exclude-path .ace/packs
+            '**/*.md'
           fail: false

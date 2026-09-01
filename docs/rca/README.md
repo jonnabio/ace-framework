@@ -7,6 +7,7 @@
 ## Purpose
 
 This directory contains Root Cause Analysis documents that:
+
 1. Document issues when they occur
 2. Analyze the fundamental cause (not just symptoms)
 3. Track fixes and prevention measures
@@ -17,6 +18,7 @@ This directory contains Root Cause Analysis documents that:
 ## When to Create an RCA
 
 Create an RCA for:
+
 - [ ] Any bug that reaches production
 - [ ] Any bug that causes data loss or corruption
 - [ ] Any security vulnerability
@@ -29,22 +31,26 @@ Create an RCA for:
 ## RCA Process
 
 ### 1. Immediate Response
-```
+
+```text
 Issue Detected → Document symptoms → Apply immediate fix
 ```
 
 ### 2. Root Cause Analysis
-```
+
+```text
 Use 5 Whys method → Identify root cause → Document contributing factors
 ```
 
 ### 3. Prevention
-```
+
+```text
 Add tests → Update standards → Create regression guard
 ```
 
 ### 4. Verification
-```
+
+```text
 Verify fix → Verify tests → Verify guards → Close RCA
 ```
 
@@ -62,7 +68,7 @@ Verify fix → Verify tests → Verify guards → Close RCA
 
 ## Naming Convention
 
-```
+```text
 RCA-[NUMBER]-[short-description].md
 
 Examples:
@@ -88,6 +94,7 @@ After every RCA, a regression guard MUST be added to `regression-guards.yaml`.
 ### Using Guards
 
 **Before modifying any file:**
+
 ```markdown
 "Check docs/rca/regression-guards.yaml for guards on [file].
 If guarded, review the associated RCA and ensure changes
@@ -95,6 +102,7 @@ do not violate the invariants."
 ```
 
 **In code review:**
+
 ```markdown
 "This PR modifies guarded files. Verify:
 - [ ] RCA reviewed
@@ -107,16 +115,19 @@ do not violate the invariants."
 ## Integration with Workflow
 
 ### Developer Role
+
 - Check regression guards before modifying files
 - Run regression tests after changes
 - Flag potential guard violations in PRs
 
 ### QA Role
+
 - Verify regression tests in walkthrough
 - Validate guards are properly configured
 - Test edge cases from historical RCAs
 
 ### Architect Role
+
 - Review RCAs for architectural implications
 - Update standards based on RCA findings
 - Create ADRs for significant pattern changes
@@ -144,4 +155,5 @@ Track RCA effectiveness:
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *RCA System - ACE-Framework v2.3*

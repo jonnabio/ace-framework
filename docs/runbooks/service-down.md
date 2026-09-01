@@ -39,7 +39,7 @@
 
 ### Step 1: Acknowledge and Communicate
 
-```
+```text
 1. Acknowledge the alert
 2. Join incident channel
 3. Post initial status:
@@ -114,14 +114,18 @@ kubectl top nodes
 ### Scenario A: Pods in CrashLoopBackOff
 
 **Indicators:**
+
 - `kubectl get pods` shows CrashLoopBackOff
 - Pod restarting repeatedly
 
 **Steps:**
+
 1. Check logs for crash reason
+
    ```bash
    kubectl logs <pod-name> --previous
    ```
+
 2. Common causes:
    - Missing config/secret: Verify configmaps/secrets exist
    - OOM killed: Check memory limits
@@ -129,12 +133,14 @@ kubectl top nodes
    - Application error: Check for exceptions
 
 3. If config issue:
+
    ```bash
    kubectl describe configmap <name>
    kubectl describe secret <name>
    ```
 
 4. If OOM:
+
    ```bash
    kubectl describe pod <name> | grep -A 5 "Last State"
    # Increase memory limit if needed
@@ -143,17 +149,21 @@ kubectl top nodes
 ### Scenario B: No Pods Running
 
 **Indicators:**
+
 - No pods found for the service
 - Deployment has 0 replicas
 
 **Steps:**
+
 1. Check deployment
+
    ```bash
    kubectl get deployment <name>
    kubectl describe deployment <name>
    ```
 
 2. If scaled to 0:
+
    ```bash
    kubectl scale deployment <name> --replicas=3
    ```
@@ -165,16 +175,20 @@ kubectl top nodes
 ### Scenario C: Pods Running but Not Ready
 
 **Indicators:**
+
 - Pods show Running but 0/1 Ready
 - Health checks failing
 
 **Steps:**
+
 1. Check readiness probe
+
    ```bash
    kubectl describe pod <name> | grep -A 10 "Readiness"
    ```
 
 2. Test health endpoint manually
+
    ```bash
    kubectl exec <pod> -- curl localhost:port/health
    ```
@@ -187,22 +201,27 @@ kubectl top nodes
 ### Scenario D: Network Issue
 
 **Indicators:**
+
 - Pods running and ready
 - Cannot reach from outside
 - Service/Ingress misconfigured
 
 **Steps:**
+
 1. Check service configuration
+
    ```bash
    kubectl describe service <name>
    ```
 
 2. Check ingress/load balancer
+
    ```bash
    kubectl describe ingress <name>
    ```
 
 3. Check network policies
+
    ```bash
    kubectl get networkpolicies
    ```
@@ -210,16 +229,20 @@ kubectl top nodes
 ### Scenario E: Recent Deployment Issue
 
 **Indicators:**
+
 - Issue started after deployment
 - New version is faulty
 
 **Steps:**
+
 1. Rollback to previous version
+
    ```bash
    kubectl rollout undo deployment/<name>
    ```
 
 2. Verify rollback
+
    ```bash
    kubectl rollout status deployment/<name>
    ```
@@ -238,6 +261,7 @@ kubectl top nodes
 | 30 min | Consider broader incident response |
 
 **Contacts:**
+
 - Platform Team Lead: [contact]
 - Infrastructure Team: [contact]
 - Management: [contact]
@@ -249,7 +273,8 @@ kubectl top nodes
 ### During Incident
 
 Post updates every 10-15 minutes:
-```
+
+```text
 [INCIDENT UPDATE] [TIME]
 Status: Still investigating / Identified cause / Implementing fix
 Impact: [Current user impact]
@@ -258,7 +283,7 @@ ETA: [Estimated time if known]
 
 ### After Resolution
 
-```
+```text
 [INCIDENT RESOLVED] [TIME]
 Service [name] is restored.
 Duration: [X minutes]
@@ -284,6 +309,7 @@ Next steps: [RCA will be conducted]
 ## Prevention
 
 After incident, consider:
+
 - Were alerts timely?
 - Were runbooks helpful?
 - What monitoring was missing?

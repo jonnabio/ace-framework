@@ -5,7 +5,7 @@ description: Procedural knowledge for orchestrating multi-agent systems and Agen
 
 # Skill: A2A Communication
 
-> Procedural knowledge for orchestrating multi-agent systems 
+> Procedural knowledge for orchestrating multi-agent systems
 > and Agent-to-Agent (A2A) handoffs.
 
 ---

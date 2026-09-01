@@ -5,7 +5,7 @@ description: Procedural knowledge for managing application state, data flow, and
 
 # Skill: State Management
 
-> Procedural knowledge for managing application state, 
+> Procedural knowledge for managing application state,
 > data flow, and avoiding race conditions.
 
 ---

@@ -133,7 +133,7 @@ If conflicts are found:
 
 ## Integration with BMAD
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────┐
 │                  TRANSCRIPT → BMAD PIPELINE                  │
 ├──────────────────────────────────────────────────────────────┤
@@ -200,6 +200,5 @@ Extract all requirements and save to docs/requirements/[OUTPUT_NAME].md."
 
 ---
 
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
 *Skill Version: 1.0*
-
-

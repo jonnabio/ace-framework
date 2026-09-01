@@ -114,7 +114,7 @@ logger.info('Login attempt', {
 
 ### Naming Convention
 
-```
+```text
 [namespace]_[subsystem]_[name]_[unit]
 
 Examples:
@@ -128,7 +128,7 @@ app_queue_messages_pending
 
 #### RED Metrics (Request-focused)
 
-```
+```text
 # Rate - requests per second
 app_http_requests_total{method, path, status}
 
@@ -141,7 +141,7 @@ app_http_request_duration_seconds{method, path}
 
 #### USE Metrics (Resource-focused)
 
-```
+```text
 # Utilization
 app_cpu_usage_percent
 app_memory_usage_bytes
@@ -175,7 +175,7 @@ timestamp: # Always unique
 
 ### Span Naming
 
-```
+```text
 [service].[operation]
 
 Examples:
@@ -285,7 +285,7 @@ annotations:
 
 ### Dashboard Structure
 
-```
+```text
 Row 1: Key metrics (RED)
   - Request rate
   - Error rate
@@ -313,7 +313,7 @@ Row 4: Business metrics
 
 ### Endpoints
 
-```
+```text
 GET /health         # Basic liveness
 GET /health/live    # Detailed liveness
 GET /health/ready   # Readiness check

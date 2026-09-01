@@ -323,4 +323,5 @@ After all tasks complete:
 
 ---
 
-_Implementation Plan — ACE-Framework v2.7 (Approved 2026-07-04)_
+<!-- markdownlint-disable-next-line MD036 -- file footer metadata, not a section heading -->
+*Implementation Plan — ACE-Framework v2.7 (Approved 2026-07-04)*

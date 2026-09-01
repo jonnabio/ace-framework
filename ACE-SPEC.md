@@ -28,7 +28,7 @@
 
 The repository must contain a `.ace/` directory (AI Context Engine). This is the **Shared Brain** of the project.
 
-```
+```text
 /
 ├── .ace/                      # AI Control Center (Knowledge Layer)
 │   ├── adapters/              # Enforced-hooks adapters per agent platform (v2.7)
@@ -123,7 +123,7 @@ The repository must contain a `.ace/` directory (AI Context Engine). This is the
 
 BMAD enforces **Analyze → Plan → Execute → Verify** to prevent premature implementation.
 
-```
+```text
 ┌───────────────────────────────────────────────────────────────────────┐
 │                          BMAD Cycle                                   │
 ├───────────────────────────────────────────────────────────────────────┤
@@ -143,7 +143,7 @@ BMAD enforces **Analyze → Plan → Execute → Verify** to prevent premature i
 
 #### Phase 1: ANALYZE
 
-```
+```text
 Role: Architect
 Input: docs/requirements/*, docs/adr/*, .ace/knowledge/*
 Output: Understanding confirmation with extracted constraints
@@ -158,7 +158,7 @@ Actions:
 
 #### Phase 2: DISCUSS
 
-```
+```text
 Role: Architect
 Input: Analysis output, User preferences
 Output: docs/context/PROJECT_CONTEXT.md
@@ -172,7 +172,7 @@ Actions:
 
 #### Phase 3: PLAN
 
-```
+```text
 Role: Architect
 Input: Analysis output
 Output: docs/planning/implementation_plan.md (requires approval)
@@ -187,7 +187,7 @@ Actions:
 
 #### Phase 4: EXECUTE
 
-```
+```text
 Role: Developer
 Input: Approved plan, relevant .ace/skills/*
 Output: Code in atomic, reviewable increments
@@ -202,7 +202,7 @@ Actions:
 
 #### Phase 5: VERIFY
 
-```
+```text
 Role: QA Engineer
 Input: Completed code, .ace/standards/*, docs/adr/*
 Output: docs/planning/walkthrough.md
@@ -217,7 +217,7 @@ Actions:
 
 #### INCIDENT Mode
 
-```
+```text
 Role: Incident Responder
 Trigger: Issue discovered at any phase
 Output: docs/rca/RCA-XXX.md, regression guard, tests
@@ -274,7 +274,7 @@ Focus on [role's responsibilities]. Follow the mode protocol."
 
 ### Role Transitions
 
-```
+```text
 PLANNING → EXECUTION
   Handoff: implementation_plan.md approved
   Pre-check: Regression guards reviewed
@@ -307,7 +307,7 @@ INCIDENT → Previous Mode
 
 ### Documentation Hierarchy
 
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                  DOCUMENTATION PYRAMID                  │
 ├─────────────────────────────────────────────────────────┤
@@ -460,7 +460,7 @@ Every issue requires RCA with regression prevention. No exceptions.
 
 ### RCA Process
 
-```
+```text
 1. DOCUMENT → Capture symptoms, evidence, timeline
 2. ANALYZE  → 5 Whys to identify root cause
 3. FIX      → Immediate fix + Permanent fix
@@ -502,7 +502,7 @@ guards:
 
 AI context windows are finite. Use tiered loading:
 
-```
+```text
 TIER 1: Always Loaded (~500 tokens)
 ├── .aceconfig (core rules)
 └── Current ACTIVE_CONTEXT.md
@@ -587,7 +587,7 @@ When transitioning between sessions or agents:
 
 ### Sequential Handoff
 
-```
+```text
 Agent A (Architect) → Agent B (Developer) → Agent C (QA)
                    ↓                     ↓
            implementation_plan.md   walkthrough.md
@@ -595,7 +595,7 @@ Agent A (Architect) → Agent B (Developer) → Agent C (QA)
 
 ### Parallel Work
 
-```
+```text
 Coordinator assigns separate features to different agents.
 Each maintains separate ACTIVE_CONTEXT_[feature].md.
 Coordinator reviews before integration.
@@ -685,7 +685,7 @@ Then await further instructions."
 
 ACE defines three nested loops, each with a real gate and a hard stop:
 
-```
+```text
 ┌────────────────────────────────────────────────────────────────────┐
 │ OUTER LOOP — Playbook evolution (Reflector → Curator)              │
 │  ┌──────────────────────────────────────────────────────────────┐  │
@@ -807,5 +807,5 @@ fingerprints — the evidence that the self-improving harness improves.
 
 ---
 
-_ACE-Framework v2.7.0_
-_Treat AI interactions as structured transactions, not casual conversations._
+*ACE-Framework v2.7.0*
+*Treat AI interactions as structured transactions, not casual conversations.*

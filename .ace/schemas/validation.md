@@ -8,6 +8,7 @@
 ## Purpose
 
 Define expected structures for common outputs to:
+
 - Validate AI-generated content
 - Ensure consistency across sessions
 - Catch errors before they propagate
@@ -274,6 +275,7 @@ task_queue:
 ## Validation Commands
 
 ### Validate Implementation Plan
+
 ```markdown
 "Validate IMPLEMENTATION_PLAN.md against the schema in
 .ace/schemas/validation.md#implementation-plan-schema.
@@ -281,12 +283,14 @@ Report any violations."
 ```
 
 ### Validate ADR
+
 ```markdown
 "Validate docs/adr/ADR-###-[name].md against the ADR schema
 in .ace/schemas/validation.md. Report any violations."
 ```
 
 ### Validate Active Context
+
 ```markdown
 "Validate docs/context/ACTIVE_CONTEXT.md against the schema
 in .ace/schemas/validation.md. Report any violations."

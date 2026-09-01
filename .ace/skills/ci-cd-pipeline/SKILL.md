@@ -5,7 +5,7 @@ description: Procedural knowledge for designing and configuring continuous integ
 
 # Skill: CI/CD Pipeline Design
 
-> Procedural knowledge for designing and configuring 
+> Procedural knowledge for designing and configuring
 > continuous integration and deployment pipelines.
 
 ---

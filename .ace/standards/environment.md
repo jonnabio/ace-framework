@@ -18,7 +18,7 @@
 
 ## Configuration Hierarchy
 
-```
+```text
 Priority (highest to lowest):
 1. Environment variables (runtime)
 2. Environment-specific config files
@@ -28,7 +28,7 @@ Priority (highest to lowest):
 
 ### File Structure
 
-```
+```text
 config/
 ├── default.yaml          # Base configuration
 ├── development.yaml      # Dev overrides
@@ -238,7 +238,7 @@ if (features.isEnabled('new_checkout_flow', { userId })) {
 
 ### Startup Sequence
 
-```
+```text
 1. Load default.yaml
 2. Merge environment-specific file
 3. Apply environment variables
