@@ -141,7 +141,7 @@ Because ACE adopted the **AgentSkills.io standard**, you can seamlessly import c
 If you want to pull a skill from a GitHub repository into your project permanently:
 
 ```bash
-npx ace-framework add-skill anthropics/skills/skills/pdf
+npx -p create-ace-framework ace-framework add-skill anthropics/skills/skills/pdf
 ```
 
 This will:

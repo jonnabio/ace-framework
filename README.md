@@ -19,10 +19,16 @@ v2.6 described a self-improving harness; v2.7 makes it executable — three nest
 npx create-ace-framework my-project --adapter claude-code
 cd my-project
 # Architect writes docs/progress/tasks.json from the approved plan, then:
-npx ace-framework loop
-npx ace-framework loop --report
-npx ace-framework curate list
+npx -p create-ace-framework ace-framework loop
+npx -p create-ace-framework ace-framework loop --report
+npx -p create-ace-framework ace-framework curate list
 ```
+
+The `-p create-ace-framework` is not optional. The `ace-framework` binary ships
+inside that package, and `ace-framework` on its own is an unrelated package
+published by someone else — `npx ace-framework loop` would fetch and run
+theirs. Installing the package (`npm i -D create-ace-framework`) lets you drop
+to a plain `npx ace-framework loop`, because npx then resolves the local bin.
 
 Run `npx create-ace-framework --help` for the full option list. Add `--yes` to
 scaffold without prompts, which is what makes it usable from a script or CI.
