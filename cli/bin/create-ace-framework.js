@@ -17,6 +17,7 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 const { parseArgs, defaultProjectName, USAGE, DEFAULT_TARGET_DIR } = require('../lib/parse-args');
+const { scaffoldVerifyBlock } = require('../lib/scaffold-config');
 
 // Colors
 const colors = {
@@ -157,6 +158,10 @@ function customizeProject(targetDir, projectName) {
       /project_name: .*/,
       `project_name: "${projectName}"`
     );
+    // The verify: block in this file describes the ACE-Framework repository.
+    // Copied verbatim it points a new project at a cli/ directory it does not
+    // have, and its gate fails on the first run.
+    content = scaffoldVerifyBlock(content);
     fs.writeFileSync(aceconfigPath, content);
     log.success('Updated .aceconfig');
   }
