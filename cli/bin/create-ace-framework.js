@@ -338,15 +338,20 @@ Next steps:
      - ${colors.cyan}USER_GUIDE.md${colors.reset}  (practical usage)
      - ${colors.cyan}ACE-SPEC.md${colors.reset}    (full specification)
 
-  ${colors.yellow}3.${colors.reset} Customize for your stack:
+  ${colors.yellow}3.${colors.reset} Configure the verify gate:
+     Set ${colors.cyan}verify.test_cmd${colors.reset} in ${colors.cyan}.aceconfig${colors.reset} to this project's test command.
+     Until you do, the gate lints but runs no tests, and both the loop
+     and the Stop hook are only checking your markdown.
+
+  ${colors.yellow}4.${colors.reset} Customize for your stack:
      - Edit ${colors.cyan}.ace/standards/coding.md${colors.reset}
      - Edit ${colors.cyan}.ace/standards/security.md${colors.reset}
 
-  ${colors.yellow}4.${colors.reset} Start your first session:
+  ${colors.yellow}5.${colors.reset} Start your first session:
      Tell your AI assistant:
      ${colors.cyan}"Read .aceconfig and ACTIVE_CONTEXT.md to begin."${colors.reset}
 
-  ${colors.yellow}5.${colors.reset} Create your first ADR:
+  ${colors.yellow}6.${colors.reset} Create your first ADR:
      Copy ${colors.cyan}docs/adr/ADR-000-template.md${colors.reset} to ${colors.cyan}ADR-001-tech-stack.md${colors.reset}
 
 ${colors.blue}Happy coding with ACE-Framework!${colors.reset}
