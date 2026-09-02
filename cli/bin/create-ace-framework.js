@@ -17,7 +17,11 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 const { parseArgs, defaultProjectName, USAGE, DEFAULT_TARGET_DIR } = require('../lib/parse-args');
-const { scaffoldVerifyBlock, scaffoldLintGlobs } = require('../lib/scaffold-config');
+const {
+  scaffoldVerifyBlock,
+  scaffoldLintGlobs,
+  activeContextDocument,
+} = require('../lib/scaffold-config');
 
 // Colors
 const colors = {
@@ -178,48 +182,7 @@ function customizeProject(targetDir, projectName) {
   const contextPath = path.join(targetDir, 'docs', 'context', 'ACTIVE_CONTEXT.md');
   if (fs.existsSync(contextPath)) {
     const today = new Date().toISOString().split('T')[0];
-    const content = `# Active Context: Project Setup
-
-## Session Metadata
-
-- **Last Updated:** ${today}
-- **Active Role:** Architect
-- **Mode:** PLANNING
-
-## Current Objective
-
-Initialize and configure the ACE-Framework for ${projectName}.
-
-## Current State
-
-### Working
-
-- ACE-Framework structure initialized
-
-### In Progress
-
-- Project customization
-
-### Blocked
-
-- None
-
-## Next Steps
-
-1. [ ] Set \`verify.test_cmd\` in .aceconfig to this project's test command
-2. [ ] Customize .ace/standards/ for your tech stack
-3. [ ] Create ADR-001 for tech stack decisions
-4. [ ] Set up first feature specification
-
-## Active Constraints
-
-- .ace/standards/coding.md
-- .ace/standards/security.md
-
-## Session Notes
-
-- Framework initialized via create-ace-framework CLI
-`;
+    const content = activeContextDocument(projectName, today);
     fs.writeFileSync(contextPath, content);
     log.success('Reset ACTIVE_CONTEXT.md');
   }

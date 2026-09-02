@@ -75,4 +75,62 @@ function scaffoldLintGlobs(content) {
   return content.replace(globs, replacement);
 }
 
-module.exports = { scaffoldVerifyBlock, scaffoldLintGlobs, SCAFFOLD_GLOBS };
+/**
+ * The ACTIVE_CONTEXT.md a new project starts with.
+ *
+ * Lives here rather than inline in the bin so its shape can be asserted: the
+ * first version had no blank lines around headings or lists and failed the
+ * framework's own lint rules in 15 places, which only mattered once
+ * scaffolded projects got a working lint gate.
+ */
+function activeContextDocument(projectName, today) {
+  return `# Active Context: Project Setup
+
+## Session Metadata
+
+- **Last Updated:** ${today}
+- **Active Role:** Architect
+- **Mode:** PLANNING
+
+## Current Objective
+
+Initialize and configure the ACE-Framework for ${projectName}.
+
+## Current State
+
+### Working
+
+- ACE-Framework structure initialized
+
+### In Progress
+
+- Project customization
+
+### Blocked
+
+- None
+
+## Next Steps
+
+1. [ ] Set \`verify.test_cmd\` in .aceconfig to this project's test command
+2. [ ] Customize .ace/standards/ for your tech stack
+3. [ ] Create ADR-001 for tech stack decisions
+4. [ ] Set up first feature specification
+
+## Active Constraints
+
+- .ace/standards/coding.md
+- .ace/standards/security.md
+
+## Session Notes
+
+- Framework initialized via create-ace-framework CLI
+`;
+}
+
+module.exports = {
+  scaffoldVerifyBlock,
+  scaffoldLintGlobs,
+  activeContextDocument,
+  SCAFFOLD_GLOBS,
+};
