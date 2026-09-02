@@ -15,7 +15,34 @@ version: "1.0"
 # 3. If guarded, review the RCA and ensure fix is not regressed
 # 4. Run associated tests before committing
 
-guards: []
+guards:
+  - id: RCA-001
+    title: "Scaffolded projects inherit a verify gate that cannot pass"
+    severity: critical
+    created: 2026-09-02
+    rca_file: docs/rca/RCA-001-scaffold-verify-gate.md
+
+    # customizeProject() must keep rewriting the verify: block. Copying
+    # .aceconfig verbatim shipped this repository's own `cd cli && npm test`
+    # to every scaffolded project, whose gate then failed on first run and
+    # blocked the Stop hook on every turn.
+    guarded_files:
+      - cli/lib/scaffold-config.js
+      - cli/bin/create-ace-framework.js
+
+    invariants:
+      - "A scaffolded project's verify gate passes on first run"
+      - "No command in a scaffolded .aceconfig refers to this repository's layout"
+      - "The lint globs shipped to a project cover only the documents ACE ships"
+
+    tests:
+      - cli/test/scaffold-config.test.js
+
+    standard_rule: ".ace/standards/harness-engineering.md section 4 (verify.sh is the source of truth for code health)"
+
+    review_triggers:
+      - "Changes to what create-ace-framework copies or rewrites"
+      - "New keys in .aceconfig's verify: block"
 
 # Example guard entry:
 # - id: RCA-001
