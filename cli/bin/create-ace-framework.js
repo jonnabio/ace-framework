@@ -17,7 +17,7 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 const { parseArgs, defaultProjectName, USAGE, DEFAULT_TARGET_DIR } = require('../lib/parse-args');
-const { scaffoldVerifyBlock } = require('../lib/scaffold-config');
+const { scaffoldVerifyBlock, scaffoldLintGlobs } = require('../lib/scaffold-config');
 
 // Colors
 const colors = {
@@ -164,6 +164,14 @@ function customizeProject(targetDir, projectName) {
     content = scaffoldVerifyBlock(content);
     fs.writeFileSync(aceconfigPath, content);
     log.success('Updated .aceconfig');
+  }
+
+  // Our globs are **/*.md, which would lint the adopter's own markdown too.
+  const lintConfigPath = path.join(targetDir, '.markdownlint-cli2.jsonc');
+  if (fs.existsSync(lintConfigPath)) {
+    const content = scaffoldLintGlobs(fs.readFileSync(lintConfigPath, 'utf8'));
+    fs.writeFileSync(lintConfigPath, content);
+    log.success('Scoped .markdownlint-cli2.jsonc to the framework documents');
   }
 
   // Reset ACTIVE_CONTEXT.md

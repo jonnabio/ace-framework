@@ -25,6 +25,13 @@ const SCAFFOLD_VERIFY_BLOCK = `verify:
   lint_cmd: "npx --yes markdownlint-cli2"
   typecheck_cmd: ""`;
 
+// The framework's own documents, which are lint-clean on a fresh scaffold.
+// The repository's own config uses **/*.md, which is right here and wrong in
+// a project that has markdown of its own: `create-ace-framework .` inside an
+// existing repository would lint every file the adopter already had, and the
+// day-one gate would fail on documents ACE never touched.
+const SCAFFOLD_GLOBS = ['.ace/**/*.md', 'docs/**/*.md', 'ACE-SPEC.md', 'USER_GUIDE.md'];
+
 function usesCrlf(content) {
   return content.includes('\r\n');
 }
@@ -50,4 +57,22 @@ function scaffoldVerifyBlock(content) {
   return content.replace(block, replacement);
 }
 
-module.exports = { scaffoldVerifyBlock };
+/**
+ * Narrow the markdownlint globs to the directories the framework owns.
+ * Returns the content unchanged if there is no globs array to replace.
+ */
+function scaffoldLintGlobs(content) {
+  const globs = /^[ \t]*"globs":[ \t]*\[[^\]]*\],?/m;
+  if (!globs.test(content)) {
+    return content;
+  }
+  const crlf = usesCrlf(content);
+  const list = SCAFFOLD_GLOBS.map((g) => `"${g}"`).join(', ');
+  const replacement = applyEol(`  // Scoped to the documents ACE-Framework ships, which are lint-clean.
+  // Widen this to ["**/*.md"] once your own markdown passes, so the gate
+  // covers it too.
+  "globs": [${list}],`, crlf);
+  return content.replace(globs, replacement);
+}
+
+module.exports = { scaffoldVerifyBlock, scaffoldLintGlobs, SCAFFOLD_GLOBS };
