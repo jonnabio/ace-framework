@@ -119,6 +119,7 @@ Per `.cursorrules`, always read before any task:
 | agent/autonomous | `.ace/skills/agent-design/SKILL.md` |
 | a2a/multi-agent | `.ace/skills/a2a-communication/SKILL.md` |
 | mcp/protocol | `.ace/skills/mcp-implementation/SKILL.md` |
+| packet | `.ace/skills/phantom-link/SKILL.md` |
 
 ### Third-Party Skills (Claude Code Marketplace)
 

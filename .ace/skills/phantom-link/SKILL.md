@@ -1,3 +1,8 @@
+---
+name: phantom-link
+description: Reconstructs ACE framework files from serialized text packets, for environments with no network access.
+---
+
 # Skill: Phantom Link Receiver
 
 - **Version:** 1.0.0
@@ -10,7 +15,7 @@
 When a message begins with `ACE_PACKET_BEGIN`, you must enter **Receiver Mode**.
 
 - Parse the `VERSION`, `ID`, and `CHECKSUM`.
-- Confirm if the version matches the target framework (v2.5.0).
+- Confirm if the version matches the target framework (v2.7.0).
 
 ### 2. File Extraction
 

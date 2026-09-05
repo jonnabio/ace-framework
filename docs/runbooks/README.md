@@ -22,19 +22,23 @@ Runbooks provide:
 | Runbook | Trigger | Severity |
 |---------|---------|----------|
 | [High Error Rate](./high-error-rate.md) | Error rate > threshold | High |
-| [High Latency](./high-latency.md) | p99 latency > threshold | High |
 | [Service Down](./service-down.md) | Health check failing | Critical |
-| [Database Issues](./database-issues.md) | DB connection/performance | Critical |
-| [Memory Exhaustion](./memory-exhaustion.md) | OOM or high memory | High |
 
-### Procedures
+### Suggested additions
 
-| Runbook | Purpose |
-|---------|---------|
-| [Deployment](./deployment.md) | Production deployment |
-| [Rollback](./rollback.md) | Reverting a deployment |
-| [Scale Up](./scale-up.md) | Increasing capacity |
-| [Database Migration](./database-migration.md) | Schema changes |
+Not written yet. They are listed as prompts, not links, so the index never
+promises a document that does not exist:
+
+- High Latency — p99 above threshold
+- Database Issues — connection or performance failures
+- Memory Exhaustion — OOM or sustained high memory
+- Deployment — production deployment procedure
+- Rollback — reverting a deployment
+- Scale Up — increasing capacity
+- Database Migration — schema changes
+
+Use the template below. A runbook is only worth writing against a real stack,
+so these are deliberately left to the adopting project.
 
 ---
 
@@ -86,9 +90,9 @@ If issue persists:
 - [ ] Update runbook if procedures changed
 
 ## Related
-- [Link to dashboard]
-- [Link to documentation]
-- [Link to related runbook]
+- [Dashboard](https://example.com/dashboard)
+- [Documentation](https://example.com/docs)
+- [Related runbook](https://example.com/runbooks/related)
 ```
 
 ---

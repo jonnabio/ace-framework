@@ -1,9 +1,9 @@
-# Active Context: v2.7.0 Loop Engineering — Release Complete
+# Active Context: Quality Gates — Backlog Closed
 
 ## Session Metadata
 
-- **Last Updated:** 2026-07-05
-- **Session ID:** v2.7-loop-engineering
+- **Last Updated:** 2026-08-31
+- **Session ID:** quality-gates
 - **Active Role:** QA Engineer
 - **Mode:** VERIFICATION (complete)
 
@@ -11,9 +11,10 @@
 
 ## Current Objective
 
-v2.7.0 "Loop Engineering" executed end to end: all 10 plan tasks (M1–M4),
-both ADRs, all documentation, and all verification drills. Ready for push,
-merge, tag, and npm publish.
+Close `docs/TODO-quality-gates.md`: nine findings, all of them variations on
+gates that exist but cannot fail. Done — the document is now a resolved
+record, and every CI step either fails on a real defect or declares itself
+advisory in its own name.
 
 ---
 
@@ -21,18 +22,20 @@ merge, tag, and npm publish.
 
 ### Working
 
-- **Branch**: `feature/v2.7-loop-engineering-m1` — one commit per task, all
-  gated by the repo's own verify gate (cli test suite, 89 tests passing).
-- **M1 Honest Gate**: tasks.json schema + validator, real verify.sh, loop guards.
-- **M2 Loop Runner**: `ace-framework loop` orchestrator; claude-code + manual
-  runners (ADR-002); enforced Claude Code hooks (`--adapter claude-code`).
-- **M3 Learning Loop** *(experimental)*: auto-Reflector with strict output
-  contract; Curator staged→promoted|expired lifecycle (ADR-003);
-  `ace-framework curate`; JSONL telemetry + `loop --report`.
-- **M4 Release**: ACE-SPEC §13, USER_GUIDE §13, README, CHANGELOG, CLAUDE.md,
-  version 2.7.0 synced everywhere, validate.sh extended, .gitattributes
-  eol=lf for .sh, walkthrough with drill evidence
-  (docs/planning/v2.7.0_loop_engineering_walkthrough.md).
+- **Branch**: `TODO_quality-gates`, 11 commits, one per finding.
+  Based on `TODO_markdown-lint`, which is unpushed and has no PR yet.
+- **CI** (`validate.yml`) runs `scripts/validate.sh` and
+  `.ace/scripts/verify.sh` instead of keeping inline copies of what they do.
+  The test suite had never run in CI at all.
+- **Two new scripts**: `scripts/check-yaml.sh` (parses every YAML document
+  including `.aceconfig`, exits non-zero) and `scripts/check-encoding.sh`
+  (detects the double-encoded UTF-8 that has reached this repository twice).
+- **Verify gate** has a `--fast` profile (lint + typecheck, 1.2s) used by the
+  Stop hook; the full profile (4.3s) stays on CI and the loop runner.
+- **CLI** takes `--help`, `--version` and `--yes`, and errors on unknown flags
+  instead of discarding them.
+- **Release changelog** no longer silently falls back to "last 20 commits".
+- **Tests**: 112 passing, up from 88.
 
 ### In Progress
 
@@ -46,17 +49,13 @@ merge, tag, and npm publish.
 
 ## Next Steps (human actions)
 
-1. [ ] Review the branch; merge to main; tag `v2.7.0`.
-2. [ ] Publish `create-ace-framework@2.7.0` to npm.
-3. [ ] Post-push smoke test: `npx create-ace-framework tmp --adapter claude-code`
-       then `ace-framework loop --dry-run` in it (scaffolder clones GitHub main,
-       so this only works after the merge).
-
-## v2.8 Candidates
-
-- Parallel Generators (needs a lock protocol; deferred per plan Open Items).
-- Live headless claude-code session in CI.
-- Configurable promotion thresholds/expiry in `.aceconfig` (deferred per ADR-003).
+1. [ ] Decide the merge order: `TODO_markdown-lint` first, or open this PR
+       against that branch. Both are local and unpushed.
+2. [ ] Push and open the PRs. Neither branch has been pushed; `git push` was
+       not run.
+3. [ ] After merge, confirm the scaffold path: `create-ace-framework` clones
+       upstream `main`, so `.markdownlint-cli2.jsonc` only reaches new
+       projects once the lint branch lands.
 
 ---
 
@@ -64,27 +63,35 @@ merge, tag, and npm publish.
 
 ### Standards
 
-- .ace/standards/harness-engineering.md v2.7.0 (§5.1 rule lifecycle)
+- `.ace/standards/harness-engineering.md` v2.7.0 — the verify gate is the
+  source of truth for code health, and an unconfigured gate must fail
 
 ### Plan / ADRs
 
-- docs/planning/implementation_plan_v2.7_loop_engineering.md (all tasks done)
-- ADR-002 (runner interface), ADR-003 (rule promotion)
+- `docs/TODO-quality-gates.md` (resolved), `docs/TODO-markdown-lint.md`
+  (resolved)
+- ADR-002 (runner interface), ADR-003 (rule promotion) — untouched here
 
 ---
 
 ## Session Notes
 
-- The E2E dogfood drill caught a real bug (manual runner hanging on closed
-  stdin → silent exit 0 mid-loop) — fixed and regression-tested. The drill
-  earned its place in the release checklist.
-- The repo now dogfoods its own machinery: verify.sh runs the CLI suite,
-  and every release commit passed through it.
+- Every gate was verified to fail, not only to pass: an invalid YAML file, an
+  injected mojibake sequence, a deleted required file, a failing `lint_cmd`,
+  and a link to a nonexistent document each turn their step non-zero. A gate
+  proven only in the green direction is the exact defect this branch existed
+  to remove.
+- The workflow was executed rather than read: a clean tree via `git archive`,
+  its `run:` steps extracted from the YAML and run in `node:22-bookworm`, and
+  the link steps run from the `lycheeverse/lychee` image. Job exit 0.
+- Finding 3 turned out to be half-done already — the encoding repair had been
+  pushed since the audit. Confirmed by scaffolding a project and running the
+  new check against it, rather than assuming either way.
 
 ---
 
 ## Context Links
 
-- **Walkthrough:** docs/planning/v2.7.0_loop_engineering_walkthrough.md
-- **Plan:** docs/planning/implementation_plan_v2.7_loop_engineering.md
+- **Backlog:** docs/TODO-quality-gates.md (resolved)
+- **Prior branch:** docs/TODO-markdown-lint.md (resolved)
 - **Spec:** ACE-SPEC.md §13 (Loop Engineering)

@@ -57,6 +57,7 @@ skill_triggers:
   agent: .ace/skills/agent-design/SKILL.md
   a2a: .ace/skills/a2a-communication/SKILL.md
   mcp: .ace/skills/mcp-implementation/SKILL.md
+  packet: .ace/skills/phantom-link/SKILL.md
 
 # Role routing based on mode
 role_routing:

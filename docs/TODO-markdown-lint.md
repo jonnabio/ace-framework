@@ -62,10 +62,11 @@ for real cases. The two `MD024` hits — deliberately repeated placeholder
 headings in templates — are exempted the same way.
 
 **`lint_cmd` is wired in, and it is not free.** `verify.sh` runs on every
-Stop hook, so lint now runs on every agent turn alongside the 88-test suite.
+Stop hook, so lint now runs on every agent turn alongside the test suite.
 Measured at 4.3s for the whole gate here. Finding 7 in
-[TODO-quality-gates.md](TODO-quality-gates.md) tracks splitting a fast gate
-from the full suite, and this makes that more pressing.
+[TODO-quality-gates.md](TODO-quality-gates.md) tracked splitting a fast gate
+from the full suite; it has since been done, and the Stop hook now runs
+`verify.sh --fast` — lint without the test suite, 1.2s.
 
 **`9006ed0` is a candidate for `.git-blame-ignore-revs`.** It rewrote 71
 files mechanically. Ignoring whitespace, its real diff is 18 lines.
@@ -87,9 +88,9 @@ the config.
 
 ## Still open
 
-- CI still does not run the test suite, and three of its remaining steps
-  cannot fail. See findings 1, 2 and 4 in
-  [TODO-quality-gates.md](TODO-quality-gates.md).
+Nothing. CI did not run the test suite and three of its steps could not fail
+when this was written; both were closed on the following branch. See
+[TODO-quality-gates.md](TODO-quality-gates.md), also resolved.
 
 ## Reproducing
 

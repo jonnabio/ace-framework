@@ -24,6 +24,9 @@ npx ace-framework loop --report
 npx ace-framework curate list
 ```
 
+Run `npx create-ace-framework --help` for the full option list. Add `--yes` to
+scaffold without prompts, which is what makes it usable from a script or CI.
+
 ## v2.6.2 Features: The Agentic Context Engineering (ACE) Update
 
 - **Context Flushing (Clean Slate)**: Strict protocols to start fresh LLM sessions between roles to prevent context degradation and hallucinations.

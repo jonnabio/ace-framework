@@ -324,6 +324,7 @@ Skills are detailed procedures for specific tasks. They contain:
 | `agent-design/SKILL.md`        | Autonomous AI agents     |
 | `a2a-communication/SKILL.md`   | Multi-agent protocols    |
 | `mcp-implementation/SKILL.md`  | Model Context Protocol   |
+| `phantom-link/SKILL.md`        | Offline file transfer    |
 
 ### Third-Party Skills (Marketplace)
 
@@ -389,6 +390,7 @@ Some keywords automatically suggest skills:
 - "agent", "autonomous", "tools" → `agent-design/SKILL.md`
 - "a2a", "multi-agent", "handoff" → `a2a-communication/SKILL.md`
 - "mcp", "protocol", "server" → `mcp-implementation/SKILL.md`
+- "packet" → `phantom-link/SKILL.md`
 
 ---
 

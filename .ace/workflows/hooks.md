@@ -286,12 +286,32 @@ in an existing project. Two hooks ship:
   `docs/rca/regression-guards.yaml`, feeding the guard entry and RCA pointer
   back to the agent. The edit proceeds only after the agent has engaged with
   the guard context (implements `check_regression_guards` above as a hard gate).
-- **Stop → `stop-verify.sh`**: runs `.ace/scripts/verify.sh` when the agent
-  tries to finish; a failing gate blocks the stop and returns the failure
+- **Stop → `stop-verify.sh`**: runs `.ace/scripts/verify.sh --fast` when the
+  agent tries to finish; a failing gate blocks the stop and returns the failure
   output, so the agent cannot report success over a red build (implements
   `run_tests`/`validate_against_standards` as a hard gate).
 
 Both scripts are POSIX sh with no dependencies beyond grep/sed.
+
+#### Gate profiles, and what the Stop hook costs
+
+`verify.sh` has two profiles. Budget for the fast one running on **every**
+agent turn:
+
+| Profile | Runs | Ends with | Used by |
+| ------- | ---- | --------- | ------- |
+| `--fast` | `lint_cmd`, `typecheck_cmd` | `VERIFY_RESULT=pass gate=fast` | the Stop hook |
+| default | all three, `test_cmd` first | `VERIFY_RESULT=pass gate=all` | CI, the loop runner, manual runs |
+
+The split exists because the full profile's cost scales with your test suite,
+and the Stop hook pays it on every turn. A multi-minute suite there is what
+makes an adopter delete the hook — and a deleted hook verifies nothing, which
+is strictly worse than a fast one. Put the slow, complete check where slowness
+is acceptable: CI and the loop runner, which both use the default profile.
+
+Neither profile can pass vacuously. `--fast` in a project whose only
+configured command is `test_cmd` fails with `gate=unconfigured` rather than
+finding nothing to run and reporting success.
 
 ### Simulated (fallback): For AI Agents without hook support
 
