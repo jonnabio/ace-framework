@@ -169,6 +169,10 @@ check_file_warn ".ace/skills/agent-design/SKILL.md"
 check_file_warn ".ace/skills/a2a-communication/SKILL.md"
 check_file_warn ".ace/skills/mcp-implementation/SKILL.md"
 check_file_warn ".ace/skills/phantom-link/SKILL.md"
+check_file_warn ".ace/skills/az-devops-setup/SKILL.md"
+check_file_warn ".ace/skills/az-create-work-item/SKILL.md"
+check_file_warn ".ace/skills/az-read-work-item/SKILL.md"
+check_file_warn ".ace/skills/az-take-work-item/SKILL.md"
 echo ""
 
 # Templates
