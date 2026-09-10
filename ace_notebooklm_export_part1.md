@@ -793,7 +793,7 @@ All notable changes to the ACE Framework will be documented in this file.
 ### Added
 
 - **Transcript Analysis**: New golden prompt `.ace/prompts/extract-transcript.md` for extracting structured requirements from raw transcripts.
-- **Transcript Analysis Skill**: New skill `.ace/skills/transcript-analysis/SKILL.md` defining the full ingest â†’ extract â†’ validate â†’ iterate procedure.
+- **Transcript Analysis Skill**: New skill `.ace/skills/transcript-analysis/SKILL.md` defining the full ingest → extract → validate → iterate procedure.
 - **Input Directory**: `docs/inputs/transcripts/` as the designated drop zone for raw unstructured data.
 - **Requirements Directory**: `docs/requirements/` replaces `docs/specs/` as the unified home for specifications and extracted requirements.
 
@@ -830,7 +830,7 @@ All notable changes to the ACE Framework will be documented in this file.
 
 ### Added
 
-- **BMAD Methodology**: The core "Analyze â†’ Plan â†’ Execute â†’ Verify" loop.
+- **BMAD Methodology**: The core "Analyze → Plan → Execute → Verify" loop.
 - **Directory Setup**: Standardized `.ace/` directory structure for Agent knowledge.
 - **Agentic Roles**: Definition of 7 key roles (Architect, Developer, QA, etc.).
 - **Active Context**: Protocol for maintaining session state in `ACTIVE_CONTEXT.md`.
@@ -894,15 +894,15 @@ npx create-ace-framework my-project
 
 The `ace_framework` repo is a **documentation + tooling framework**, not a traditional code project. It provides:
 
-- **`.ace/`** â€” The "AI Control Center" (Shared Brain): immutable standards, role definitions, skills, prompts, and schemas loaded by AI agents on demand.
-- **`docs/`** â€” Per-project living documents: ADRs, session context (`ACTIVE_CONTEXT.md`), planning artifacts, RCA records, and specs.
-- **`cli/`** â€” A Node.js CLI (`create-ace-framework`) that scaffolds the `.ace/` + `docs/` structure into any project, either from bundled templates or by cloning from GitHub.
-- **`.aceconfig`** â€” YAML config that defines core rules, skill triggers, role routing, validation hooks, and context paths. This is always loaded first by AI agents.
-- **`.cursorrules`** / **`.aiconfig`** â€” IDE-specific AI behavior configuration files that mirror `.aceconfig` for Cursor and other tools.
+- **`.ace/`** — The "AI Control Center" (Shared Brain): immutable standards, role definitions, skills, prompts, and schemas loaded by AI agents on demand.
+- **`docs/`** — Per-project living documents: ADRs, session context (`ACTIVE_CONTEXT.md`), planning artifacts, RCA records, and specs.
+- **`cli/`** — A Node.js CLI (`create-ace-framework`) that scaffolds the `.ace/` + `docs/` structure into any project, either from bundled templates or by cloning from GitHub.
+- **`.aceconfig`** — YAML config that defines core rules, skill triggers, role routing, validation hooks, and context paths. This is always loaded first by AI agents.
+- **`.cursorrules`** / **`.aiconfig`** — IDE-specific AI behavior configuration files that mirror `.aceconfig` for Cursor and other tools.
 
 ### BMAD Methodology
 
-Every task follows **Analyze â†’ Discuss â†’ Plan â†’ Execute â†’ Verify**:
+Every task follows **Analyze → Discuss → Plan → Execute → Verify**:
 
 - **ANALYZE** (Architect role): Read specs, ADRs, and regression guards; identify constraints; list unknowns.
 - **DISCUSS** (Architect role): Capture user preferences on "gray areas"; update `docs/context/PROJECT_CONTEXT.md`.
@@ -914,10 +914,10 @@ Every task follows **Analyze â†’ Discuss â†’ Plan â†’ Execute â�
 ### Key Files to Load at Session Start
 
 Per `.cursorrules`, always read before any task:
-1. `.aceconfig` â€” core rules and skill routing
-2. `.ace/roles/roles.md` â€” available roles and responsibilities
-3. `docs/context/ACTIVE_CONTEXT.md` â€” current session state
-4. `docs/rca/regression-guards.yaml` â€” protected files and invariants
+1. `.aceconfig` — core rules and skill routing
+2. `.ace/roles/roles.md` — available roles and responsibilities
+3. `docs/context/ACTIVE_CONTEXT.md` — current session state
+4. `docs/rca/regression-guards.yaml` — protected files and invariants
 
 ### Skill-Triggered Loading
 
@@ -983,7 +983,7 @@ Before modifying any file: check `docs/rca/regression-guards.yaml`. If guarded, 
 - Branch naming: `feature/short-description`, `fix/issue-number-description`, `docs/what-changed`
 - Commit format: `type(scope): description` (conventional commits)
 - All code must pass linting before commit
-- Atomic commits â€” one logical change per commit
+- Atomic commits — one logical change per commit
 
 ### ADR Protocol
 
@@ -991,7 +991,7 @@ Create an ADR (`docs/adr/ADR-###-description.md`) for any significant architectu
 
 ### Session End
 
-Always update `docs/context/ACTIVE_CONTEXT.md` with completed work, blockers, and next steps (1â€“3 specific tasks).
+Always update `docs/context/ACTIVE_CONTEXT.md` with completed work, blockers, and next steps (1–3 specific tasks).
 
 
 
@@ -1875,21 +1875,21 @@ ACE-Framework (AI-assisted Code Engineering) is a structured methodology for wor
 Every task follows four phases:
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                          BMAD Cycle                                   â”‚
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚                                                                       â”‚
-â”‚   â”Œâ”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”         â”‚
-â”‚   â”‚ANALYZEâ”‚â”€â”€â”€â–¶â”‚DISCUSSâ”‚â”€â”€â”€â–¶â”‚ PLAN â”‚â”€â”€â”€â–¶â”‚EXECUTEâ”‚â”€â”€â”€â–¶â”‚VERIFYâ”‚         â”‚
-â”‚   â””â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”˜         â”‚
-â”‚       â”‚                                                   â”‚           â”‚
-â”‚       â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â—€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜           â”‚
-â”‚                    (Feedback Loop)                                    â”‚
-â”‚                           â”‚                                           â”‚
-â”‚                    â”Œâ”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”                                    â”‚
-â”‚                    â”‚  INCIDENT   â”‚ (When issues found)                â”‚
-â”‚                    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                                    â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌───────────────────────────────────────────────────────────────────────â”
+│                          BMAD Cycle                                   │
+├───────────────────────────────────────────────────────────────────────┤
+│                                                                       │
+│   ┌───────â”    ┌───────â”    ┌──────â”    ┌───────â”    ┌──────â”         │
+│   │ANALYZE│───â–¶│DISCUSS│───â–¶│ PLAN │───â–¶│EXECUTE│───â–¶│VERIFY│         │
+│   └───────┘    └───────┘    └──────┘    └───────┘    └──────┘         │
+│       │                                                   │           │
+│       └──────────────â—€────────────────────────────────────┘           │
+│                    (Feedback Loop)                                    │
+│                           │                                           │
+│                    ┌──────┴──────â”                                    │
+│                    │  INCIDENT   │ (When issues found)                │
+│                    └─────────────┘                                    │
+└───────────────────────────────────────────────────────────────────────┘
 ```
 
 **Never skip steps.** This prevents costly mistakes and rework.
@@ -2108,13 +2108,13 @@ Roles follow a natural flow:
 
 ```
 Feature Development:
-Architect â†’ Developer â†’ QA Engineer
+Architect → Developer → QA Engineer
 
 Bug Investigation:
-Any Role â†’ Incident Responder â†’ Previous Role
+Any Role → Incident Responder → Previous Role
 
 Research:
-AI Expert â†’ Data Scientist â†’ Scientific Editor
+AI Expert → Data Scientist → Scientific Editor
 ```
 
 **Important:** Complete one role's work before switching. Update `ACTIVE_CONTEXT.md` at transitions.
@@ -2443,39 +2443,39 @@ Analyze trade-offs and create an ADR with the recommendation."
 
 ### Do's
 
-âœ… **Start every session by reading context**
+✅ **Start every session by reading context**
 
 ```markdown
 "Read .aceconfig and ACTIVE_CONTEXT.md before we begin."
 ```
 
-âœ… **Use roles appropriately**
+✅ **Use roles appropriately**
 
 - Architect for planning
 - Developer for coding
 - QA for verification
 
-âœ… **Check guards before modifying files**
+✅ **Check guards before modifying files**
 
 ```markdown
 "Check regression guards for files I'm about to modify."
 ```
 
-âœ… **Update context frequently**
+✅ **Update context frequently**
 
 - After completing tasks
 - When encountering blockers
 - At end of session
 
-âœ… **Create ADRs for decisions**
+✅ **Create ADRs for decisions**
 
 ```markdown
 "Create an ADR for the decision to use [technology/pattern]."
 ```
 
-âœ… **Follow BMAD**
+✅ **Follow BMAD**
 
-- Analyze â†’ Plan â†’ Execute â†’ Verify
+- Analyze → Plan → Execute → Verify
 - Never skip phases
 
 ### Don'ts

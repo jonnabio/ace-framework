@@ -71,12 +71,18 @@ test('the rewrite is a no-op when there is no verify block', () => {
 // --- lint globs ---
 
 test('the scaffolded lint config only covers the framework documents', () => {
-  const out = scaffoldLintGlobs(repoFile('.markdownlint-cli2.jsonc'));
-  const parsed = JSON.parse(out.replace(/^\s*\/\/.*$/gm, ''));
+  const strip = (text) => JSON.parse(text.replace(/^\s*\/\/.*$/gm, ''));
+  const source = repoFile('.markdownlint-cli2.jsonc');
+  const parsed = strip(scaffoldLintGlobs(source));
+
   assert.deepStrictEqual(parsed.globs, SCAFFOLD_GLOBS);
   assert.ok(!parsed.globs.includes('**/*.md'), 'must not lint the adopter\'s own markdown');
-  assert.deepStrictEqual(parsed.ignores, ['.ace/packs/**', '**/node_modules/**'], 'ignores untouched');
-  assert.strictEqual(parsed.config.MD060, false, 'rules untouched');
+  // Everything except globs carries across untouched. Compared against the
+  // source rather than a literal, so adding an ignore or a rule to the
+  // repository's config does not fail this test for the wrong reason.
+  const before = strip(source);
+  assert.deepStrictEqual(parsed.ignores, before.ignores, 'ignores untouched');
+  assert.deepStrictEqual(parsed.config, before.config, 'rules untouched');
 });
 
 test('the glob rewrite is a no-op when there are no globs', () => {
