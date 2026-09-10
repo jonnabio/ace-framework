@@ -8,7 +8,15 @@
 
   // .ace/packs/** is vendored third-party skills, not maintained in this
   // repository. Reformatting it would diverge from upstream.
-  "ignores": [".ace/packs/**", "**/node_modules/**"],
+  // ace_notebooklm_export_part*.md are build artifacts: export_for_notebooklm.ps1
+  // concatenates every file in the repository into chunked markdown for
+  // NotebookLM. Linting them means linting the same content twice, and their
+  // formatting is decided by the generator, not by an author.
+  "ignores": [
+    ".ace/packs/**",
+    "**/node_modules/**",
+    "ace_notebooklm_export_part*.md"
+  ],
 
   "config": {
     "default": true,

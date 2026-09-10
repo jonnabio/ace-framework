@@ -17,6 +17,11 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 const { parseArgs, defaultProjectName, USAGE, DEFAULT_TARGET_DIR } = require('../lib/parse-args');
+const {
+  scaffoldVerifyBlock,
+  scaffoldLintGlobs,
+  activeContextDocument,
+} = require('../lib/scaffold-config');
 
 // Colors
 const colors = {
@@ -157,47 +162,27 @@ function customizeProject(targetDir, projectName) {
       /project_name: .*/,
       `project_name: "${projectName}"`
     );
+    // The verify: block in this file describes the ACE-Framework repository.
+    // Copied verbatim it points a new project at a cli/ directory it does not
+    // have, and its gate fails on the first run.
+    content = scaffoldVerifyBlock(content);
     fs.writeFileSync(aceconfigPath, content);
     log.success('Updated .aceconfig');
+  }
+
+  // Our globs are **/*.md, which would lint the adopter's own markdown too.
+  const lintConfigPath = path.join(targetDir, '.markdownlint-cli2.jsonc');
+  if (fs.existsSync(lintConfigPath)) {
+    const content = scaffoldLintGlobs(fs.readFileSync(lintConfigPath, 'utf8'));
+    fs.writeFileSync(lintConfigPath, content);
+    log.success('Scoped .markdownlint-cli2.jsonc to the framework documents');
   }
 
   // Reset ACTIVE_CONTEXT.md
   const contextPath = path.join(targetDir, 'docs', 'context', 'ACTIVE_CONTEXT.md');
   if (fs.existsSync(contextPath)) {
     const today = new Date().toISOString().split('T')[0];
-    const content = `# Active Context: Project Setup
-
-## Session Metadata
-- **Last Updated:** ${today}
-- **Active Role:** Architect
-- **Mode:** PLANNING
-
-## Current Objective
-Initialize and configure the ACE-Framework for ${projectName}.
-
-## Current State
-
-### Working
-- ACE-Framework structure initialized
-
-### In Progress
-- Project customization
-
-### Blocked
-- None
-
-## Next Steps
-1. [ ] Customize .ace/standards/ for your tech stack
-2. [ ] Create ADR-001 for tech stack decisions
-3. [ ] Set up first feature specification
-
-## Active Constraints
-- .ace/standards/coding.md
-- .ace/standards/security.md
-
-## Session Notes
-- Framework initialized via create-ace-framework CLI
-`;
+    const content = activeContextDocument(projectName, today);
     fs.writeFileSync(contextPath, content);
     log.success('Reset ACTIVE_CONTEXT.md');
   }
@@ -316,15 +301,20 @@ Next steps:
      - ${colors.cyan}USER_GUIDE.md${colors.reset}  (practical usage)
      - ${colors.cyan}ACE-SPEC.md${colors.reset}    (full specification)
 
-  ${colors.yellow}3.${colors.reset} Customize for your stack:
+  ${colors.yellow}3.${colors.reset} Configure the verify gate:
+     Set ${colors.cyan}verify.test_cmd${colors.reset} in ${colors.cyan}.aceconfig${colors.reset} to this project's test command.
+     Until you do, the gate lints but runs no tests, and both the loop
+     and the Stop hook are only checking your markdown.
+
+  ${colors.yellow}4.${colors.reset} Customize for your stack:
      - Edit ${colors.cyan}.ace/standards/coding.md${colors.reset}
      - Edit ${colors.cyan}.ace/standards/security.md${colors.reset}
 
-  ${colors.yellow}4.${colors.reset} Start your first session:
+  ${colors.yellow}5.${colors.reset} Start your first session:
      Tell your AI assistant:
      ${colors.cyan}"Read .aceconfig and ACTIVE_CONTEXT.md to begin."${colors.reset}
 
-  ${colors.yellow}5.${colors.reset} Create your first ADR:
+  ${colors.yellow}6.${colors.reset} Create your first ADR:
      Copy ${colors.cyan}docs/adr/ADR-000-template.md${colors.reset} to ${colors.cyan}ADR-001-tech-stack.md${colors.reset}
 
 ${colors.blue}Happy coding with ACE-Framework!${colors.reset}

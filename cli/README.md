@@ -23,7 +23,7 @@ Once a project is scaffolded, you can use the companion `ace-framework` CLI to i
 
 ```bash
 # Import the PDF parsing skill from Anthropic
-npx ace-framework add-skill anthropics/skills/skills/pdf
+npx -p create-ace-framework ace-framework add-skill anthropics/skills/skills/pdf
 ```
 
 ### Skill Expansion Kits

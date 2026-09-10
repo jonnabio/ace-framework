@@ -96,6 +96,15 @@ run_gate() {
 
 echo "Running ACE verification gate (profile: $PROFILE, config: $CONFIG)..."
 
+# A block with some commands configured and no test_cmd passes without running
+# a single test. The all-empty case already fails loudly; this one cannot, or
+# a freshly scaffolded project could never finish a turn. Say it out loud
+# instead, on every full run, until someone fills it in.
+if [ "$PROFILE" = "full" ] && [ -z "$TEST_CMD" ]; then
+    echo "[warn] test_cmd is not configured. This gate is not running any tests."
+    echo "       Set verify.test_cmd in $CONFIG to this project's test command."
+fi
+
 run_gate "test" "$TEST_CMD"
 run_gate "lint" "$LINT_CMD"
 run_gate "typecheck" "$TYPECHECK_CMD"

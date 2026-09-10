@@ -181,6 +181,11 @@ PATCH: Bug fixes, documentation updates
 
 The framework is language-agnostic, but users may want language-specific standards.
 
+> **None of the three approaches below is implemented.** They are options under
+> consideration, and the commands shown are illustrative — there is no
+> `--template` flag and no `add` subcommand. The CLI's actual commands are
+> `add-skill`, `loop` and `curate`.
+
 ### Approach 1: Separate Branches
 
 ```text
@@ -203,8 +208,8 @@ npx create-ace-framework my-project --template python
 # Base framework
 npx create-ace-framework my-project
 
-# Add language pack
-npx ace-framework add typescript
+# Add language pack (illustrative; no such subcommand exists)
+ace-framework add typescript
 ```
 
 ---

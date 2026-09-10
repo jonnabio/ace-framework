@@ -334,7 +334,7 @@ ACE Framework uses the **AgentSkills.io** standard, which means you can install 
 You can easily import any skill from a GitHub repository directly into your project using the ACE CLI:
 
 ```bash
-npx ace-framework add-skill anthropics/skills/skills/pdf
+npx -p create-ace-framework ace-framework add-skill anthropics/skills/skills/pdf
 ```
 
 This command will:
@@ -853,9 +853,15 @@ Which skill in .ace/skills/ would help with this?"
 3. Preview, then run:
 
    ```bash
-   npx ace-framework loop --dry-run     # shows queue state and next task
-   npx ace-framework loop               # runs until done or blocked
+   npx -p create-ace-framework ace-framework loop --dry-run   # queue state, next task
+   npx -p create-ace-framework ace-framework loop             # until done or blocked
    ```
+
+   Keep the `-p create-ace-framework`. The `ace-framework` binary lives inside
+   that package; `ace-framework` alone is an unrelated package on npm
+   published by someone else, so `npx ace-framework loop` fetches and runs
+   theirs. After `npm i -D create-ace-framework` you can use the short
+   `npx ace-framework loop`, because npx resolves the local bin first.
 
    Useful flags: `--runner manual` (any agent tool, zero lock-in),
    `--max-iterations 3` (bounded experiment), `--no-reflect` (skip the
@@ -873,10 +879,10 @@ loop.
 ### Reviewing what the loop learned (experimental)
 
 ```bash
-npx ace-framework curate list                                  # staged rules + eligibility
-npx ace-framework curate promote RULE-xxxx --to .ace/standards/coding.md
-npx ace-framework curate expire                                # archive stale rules
-npx ace-framework loop --report                                # first-pass rate, repeat failures
+npx -p create-ace-framework ace-framework curate list       # staged rules + eligibility
+npx -p create-ace-framework ace-framework curate promote RULE-xxxx --to .ace/standards/coding.md
+npx -p create-ace-framework ace-framework curate expire     # archive stale rules
+npx -p create-ace-framework ace-framework loop --report     # first-pass rate, repeat failures
 ```
 
 Promotion is append-only and human-confirmed (ADR-003). A rising first-pass
