@@ -68,9 +68,19 @@ jobs:
           # before this step, and without it lychee walks every dependency
           # README. .ace/packs is vendored and excluded for the same reason it
           # is excluded from linting.
+          #
+          # The NotebookLM exports are excluded because they inline the packs'
+          # own documents, whose relative links resolve against the directory
+          # they came from and not the repository root. Checking them reports
+          # links that are correct where they actually live.
           args: >-
             --offline --verbose --no-progress
             --exclude-path node_modules --exclude-path .ace/packs
+            --exclude-path ace_notebooklm_export_part1.md
+            --exclude-path ace_notebooklm_export_part2.md
+            --exclude-path ace_notebooklm_export_part3.md
+            --exclude-path ace_notebooklm_export_part4.md
+            --exclude-path ace_notebooklm_export_part5.md
             '**/*.md'
           fail: true
 
@@ -84,5 +94,10 @@ jobs:
           args: >-
             --verbose --no-progress
             --exclude-path node_modules --exclude-path .ace/packs
+            --exclude-path ace_notebooklm_export_part1.md
+            --exclude-path ace_notebooklm_export_part2.md
+            --exclude-path ace_notebooklm_export_part3.md
+            --exclude-path ace_notebooklm_export_part4.md
+            --exclude-path ace_notebooklm_export_part5.md
             '**/*.md'
           fail: false
