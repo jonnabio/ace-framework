@@ -120,6 +120,26 @@ Per `.cursorrules`, always read before any task:
 | a2a/multi-agent | `.ace/skills/a2a-communication/SKILL.md` |
 | mcp/protocol | `.ace/skills/mcp-implementation/SKILL.md` |
 | packet | `.ace/skills/phantom-link/SKILL.md` |
+| azure/ado | `.ace/skills/az-devops-setup/SKILL.md` |
+| workitem | `.ace/skills/az-create-work-item/SKILL.md` |
+| backlog/board | `.ace/skills/az-read-work-item/SKILL.md` |
+| take/assign | `.ace/skills/az-take-work-item/SKILL.md` |
+
+### Azure DevOps Skills
+
+Four skills cover the board end to end. All of them read every constant — organization,
+project, area path, work item types, required fields, states — from `azure-devops.config.json`
+at the repository root, and refuse to run when it is missing or still holds `<PLACEHOLDER>`
+values.
+
+| Skill | Writes? | What it does |
+|-------|---------|--------------|
+| `az-devops-setup` | files only | Discovers the live org/project/area/process and writes `azure-devops.config.json`, `.mcp.json` and `docs/AZURE_DEVOPS_MCP_SETUP.md` |
+| `az-read-work-item` | no | Lists the board with filters; fetches one item in full (description, acceptance criteria, relations, HTML→markdown) |
+| `az-create-work-item` | board | Structured interview + 9-check validation (4 blocking) before creating |
+| `az-take-work-item` | board + git | Assigns, moves to the type's in-progress state, branches from `origin/<defaultBranch>`, drafts a PRD |
+
+Authentication is the Azure CLI session (`az login`) — no PAT is ever written to a file.
 
 ### Third-Party Skills (Claude Code Marketplace)
 

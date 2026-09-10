@@ -58,6 +58,11 @@ skill_triggers:
   a2a: .ace/skills/a2a-communication/SKILL.md
   mcp: .ace/skills/mcp-implementation/SKILL.md
   packet: .ace/skills/phantom-link/SKILL.md
+  azure: .ace/skills/az-devops-setup/SKILL.md
+  ado: .ace/skills/az-devops-setup/SKILL.md
+  workitem: .ace/skills/az-create-work-item/SKILL.md
+  backlog: .ace/skills/az-read-work-item/SKILL.md
+  board: .ace/skills/az-read-work-item/SKILL.md
 
 # Role routing based on mode
 role_routing:
