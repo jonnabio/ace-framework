@@ -61,6 +61,11 @@ If any exists, **read it and show the user what it contains before touching it.*
 whether to update in place or leave it. Never overwrite a populated config silently — it may
 carry field values discovered by hand that no API returns cleanly.
 
+**`.mcp.json` is shared with every other MCP server the project uses.** Treat an existing one
+as owned by the team, not by this skill: it commonly registers servers this setup knows
+nothing about, and replacing it with the template silently disconnects all of them. Merge, as
+described in §3.
+
 ---
 
 ## 2. Discovery
@@ -145,9 +150,45 @@ see what it carries.
 
 Copy each template from `templates/`, substitute every placeholder, and write:
 
-- `azure-devops.config.json` → repo root
-- `.mcp.json` → repo root
-- `docs/AZURE_DEVOPS_MCP_SETUP.md` → `docs/`
+| File | If it does not exist | If it exists |
+|---|---|---|
+| `azure-devops.config.json` | Write the filled template | Update only the keys that changed; keep values already discovered by hand. Show a diff first |
+| `.mcp.json` | Write the filled template | **Merge — see below.** Never overwrite |
+| `docs/AZURE_DEVOPS_MCP_SETUP.md` | Write the filled template | Ask before replacing; the team may have added notes worth keeping |
+
+### Merging into an existing `.mcp.json`
+
+Parse the file, add one key under `mcpServers`, write the whole object back. Everything else
+in the file — other servers, `env` blocks, client-specific keys, ordering — is preserved
+verbatim.
+
+```json
+{
+  "mcpServers": {
+    "<servers already there — untouched>": {},
+    "azure-devops": {
+      "command": "npx",
+      "args": ["-y", "@azure-devops/mcp@<version>", "<org>", "-d", "core", "work", "work-items"]
+    }
+  }
+}
+```
+
+- **An `azure-devops` key already present is a conflict, not a free overwrite.** Show the
+  existing entry next to the new one and ask which to keep. A different organization there
+  means the repository is already pointed somewhere else — stop and resolve that with the user
+  before writing anything.
+- Preserve the file's formatting: indentation width, key order, trailing newline. A reformat
+  turns a one-line change into an unreviewable diff.
+- If the existing file is invalid JSON or carries comments (JSONC), **do not attempt a
+  rewrite.** Show the user the exact block to paste and let them place it.
+- Confirm the merge parsed: re-read the file and check that every server present before is
+  still there.
+
+The same rule applies to any client-specific config that may hold the server instead —
+`.vscode/mcp.json`, `.cursor/mcp.json`, a user-level `~/.claude.json`. If the project registers
+its MCP servers somewhere other than `.mcp.json`, add the entry there and say which file was
+touched.
 
 Rules:
 
@@ -163,8 +204,8 @@ Rules:
 - **Never write a PAT, token or password into any of the three files.** Authentication is the
   Azure CLI session. If the user offers a PAT, decline and point at `az login`.
 
-Then tell the user, in one line each: the three paths written, and that `.mcp.json` requires
-restarting the editor before the tools appear.
+Then tell the user, in one line each: which files were written and which were merged, and
+that `.mcp.json` requires restarting the editor before the tools appear.
 
 ---
 
@@ -213,6 +254,9 @@ established, say the setup is **unverified** — do not describe it as complete.
 - **Guessing an area path from the project name.** List them. Every time.
 - **Copying another project's config.** Custom fields, picklists and states do not transfer.
 - **Leaving `<PLACEHOLDER>` strings in a written file.** The next skill reads them as data.
+- **Overwriting an existing `.mcp.json` with the template.** Every other MCP server the
+  project registered disappears, and the breakage surfaces later as missing tools, not as an
+  error here.
 - **Assuming `New` and `In Progress` exist on every type.** They frequently do not.
 - **Writing a PAT into `.mcp.json`.** There is no reason to; `az login` covers it.
 - **Declaring success on a zero-row query.** That is the signature of a wrong area path, not

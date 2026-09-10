@@ -78,6 +78,12 @@ tenant, Entra and Azure DevOps commands are unaffected.
 - Pinning `@<VERSION>` keeps every machine on the same tool surface. Drop the pin to track
   latest, and expect tool names to move under you when it changes.
 
+`mcpServers` holds one key per server. If the file already registers others, **add the
+`azure-devops` key alongside them** — replacing the file disconnects every other server, and
+that surfaces later as missing tools rather than as an error. Some clients read a different
+file instead (`.vscode/mcp.json`, `.cursor/mcp.json`, a user-level `~/.claude.json`); the
+entry is the same wherever it lands.
+
 `.mcp.json` is developer tooling, not application code. Decide as a team whether to commit
 it or add it to `.gitignore` — it contains no secrets either way.
 
