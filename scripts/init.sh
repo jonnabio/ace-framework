@@ -27,7 +27,7 @@ print_banner() {
     echo " / ___ \ |___| |___  |  _|| | | (_| | | | | | |  __/\ V  V / (_) | |  |   < "
     echo "/_/   \_\____|_____| |_|  |_|  \__,_|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\\"
     echo -e "${NC}"
-    echo -e "${GREEN}AI-assisted Code Engineering Framework v2.7.0${NC}"
+    echo -e "${GREEN}AI-assisted Code Engineering Framework v2.8.0${NC}"
     echo ""
 }
 
@@ -100,6 +100,11 @@ init_new_project() {
         fi
     else
         mkdir -p "$target"
+    fi
+
+    if [ -f "$target/.aceconfig" ]; then
+        print_error "Existing .aceconfig must be migrated explicitly; refusing overwrite"
+        exit 1
     fi
 
     # Clone or download
@@ -299,6 +304,7 @@ main() {
         init_new_project "$TARGET_DIR"
     fi
 
+    (cd "$TARGET_DIR" && bash .ace/scripts/configure-scaffold.sh && rm -rf .ace/packs)
     customize_project "$TARGET_DIR"
     create_gitignore "$TARGET_DIR"
     print_next_steps "$TARGET_DIR"

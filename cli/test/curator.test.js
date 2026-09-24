@@ -75,6 +75,7 @@ test('promote appends to the target standard without touching existing content',
   assert.ok(target.includes('**Distilled Rule [2026-07-06] - Category: State:**'));
   assert.ok(target.includes(LESSON.lesson));
   assert.ok(target.includes(`promoted from staging: ${id}, hit_count 2`));
+  assert.ok(target.includes(`> *(promoted from staging: ${id}`), 'provenance obeys Markdown emphasis style');
 
   const rule = curator.listRules(p.staging).find((r) => r.id === id);
   assert.strictEqual(rule.status, 'promoted');

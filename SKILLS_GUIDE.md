@@ -50,7 +50,8 @@ The framework comes with **22 core skills** covering the entire Software Develop
 | Skill | Trigger Keywords | Description |
 |-------|------------------|-------------|
 | `api-design` | api, endpoint, REST | Designing robust, RESTful API endpoints. |
-| `database-operations` | database, schema, migration | Modifying schemas, writing complex queries safely. |
+| `database-operations` | database, schema, migration | Modifying schemas with tool-appropriate recovery. |
+| `database-documentation` | schema-docs, data-dictionary | Catalog-sourced reference, authored intent, classification and drift gates. |
 | `migration-logic` | migration | Orchestrating zero-downtime data migrations. |
 | `state-management` | state, redux, context | Managing complex UI or backend state securely. |
 
@@ -101,6 +102,29 @@ Expansion Packs provide massive collections of specialized skills for specific f
 |------|-------------|-------------|
 | **Scientific Pack** | 135+ | Bioinformatics (Scanpy), Chemistry (RDKit), Clinical Data, Statsmodels. |
 | **AI Research Pack**| 98+ | LLM Lifecycles, vLLM, DeepSpeed, Axolotl, TRL, Transformers. |
+| **PostgreSQL Pack** | 1 | Comment/RLS/routine lint, tbls reference and Git drift checks. |
+| **Supabase Pack** | 1 (+ PostgreSQL) | Role/RLS intent, platform inventory, local type drift and operational runbooks. |
+
+### Database documentation as code
+
+Invoke `.ace/skills/database-documentation/SKILL.md` for schema reference or
+data-dictionary work. Physical facts come from migration-managed catalog
+comments and generated artifacts under `docs/database/reference/`; authored
+documents explain domain and security intent and link to those artifacts.
+Generated files are never hand-edited.
+
+Install an engine pack when scaffolding:
+
+```bash
+npx create-ace-framework my-project --pack postgres
+npx create-ace-framework my-project --pack supabase
+```
+
+Supabase installs PostgreSQL as a dependency. Installation leaves the optional
+full-profile `docs_cmd` empty. Configure explicit scope, runtime credentials,
+tools and a committed generated baseline before activating it. Pack scripts
+fail when prerequisites are missing and Supabase agent operations are limited
+to local stacks or explicitly attested preview branches.
 
 ---
 

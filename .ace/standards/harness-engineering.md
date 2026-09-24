@@ -81,3 +81,8 @@ an explicit lifecycle: **staged → promoted | expired**.
 
 This closes the outer loop with evidence: a rule earns permanence by
 preventing repeat failures, not by existing.
+
+---
+> **Distilled Rule [2026-09-23] - Category: Scaffolding:**
+> Fresh scaffolds must reference only shipped verification tools and must pass their real full and fast gates before adopter customization.
+> *(promoted from staging: RULE-f078a328817f, hit_count 1, sources: T014)*

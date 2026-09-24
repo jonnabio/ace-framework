@@ -1,0 +1,9 @@
+{
+  "connection_env": "ACE_DB_CONNECTION",
+  "owned_schemas": [],
+  "exposed_schemas": [],
+  "excluded_schemas": [],
+  "output": "docs/database/reference",
+  "types_output": "docs/database/database.types.ts",
+  "target": { "kind": "local" }
+}

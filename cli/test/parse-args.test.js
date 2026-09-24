@@ -133,4 +133,7 @@ test('--yes reaches the download step without prompting', () => {
   assert.strictEqual(result.status, 1, 'clone cannot succeed with an empty PATH');
 });
 
+test('accepts PostgreSQL and Supabase pack requests', () => {
+  for (const pack of ['postgres', 'supabase']) assert.strictEqual(ok(['--pack', pack]).packName, pack);
+});
 module.exports = run;

@@ -40,6 +40,20 @@ npx create-ace-framework my-project --pack scientific
 npx create-ace-framework my-project --pack ai-research
 ```
 
+```bash
+# PostgreSQL documentation as code
+npx create-ace-framework my-project --pack postgres
+
+# Supabase specialization (installs PostgreSQL too)
+npx create-ace-framework my-project --pack supabase
+```
+
+Database packs install documentation skills and scripts but do not activate a
+database connection. Their scaffolded `docs_cmd` stays empty, so first-run
+verification needs no database tools. Configure explicit schema scope,
+runtime-only connection values and a committed generated baseline before
+enabling the command documented in the installed pack README.
+
 ### Global Installation
 
 ```bash

@@ -11,7 +11,7 @@
 #   VERIFY_RESULT=pass|fail gate=<name>
 #
 # Two profiles:
-#   full (default) - test_cmd, lint_cmd, typecheck_cmd; ends gate=all
+#   full (default) - test_cmd, lint_cmd, typecheck_cmd, docs_cmd; ends gate=all
 #   fast (--fast)  - lint_cmd and typecheck_cmd only; ends gate=fast
 #
 # The fast profile exists for the Claude Code Stop hook, which runs this on
@@ -57,6 +57,7 @@ get_cmd() {
 TEST_CMD="$(get_cmd test_cmd)"
 LINT_CMD="$(get_cmd lint_cmd)"
 TYPECHECK_CMD="$(get_cmd typecheck_cmd)"
+DOCS_CMD="$(get_cmd docs_cmd)"
 
 # In the fast profile test_cmd is not merely skipped, it is discarded: the
 # unconfigured-gate check below must see what this run will actually execute,
@@ -64,12 +65,13 @@ TYPECHECK_CMD="$(get_cmd typecheck_cmd)"
 # rather than passing them vacuously.
 if [ "$PROFILE" = "fast" ]; then
     TEST_CMD=""
+    DOCS_CMD=""
 fi
 
-if [ -z "$TEST_CMD" ] && [ -z "$LINT_CMD" ] && [ -z "$TYPECHECK_CMD" ]; then
+if [ -z "$TEST_CMD" ] && [ -z "$LINT_CMD" ] && [ -z "$TYPECHECK_CMD" ] && [ -z "$DOCS_CMD" ]; then
     echo "[!] No verification commands configured in $CONFIG."
     echo "    Add a verify: block with at least one of test_cmd, lint_cmd,"
-    echo "    typecheck_cmd as flat key: \"command\" lines. Example:"
+    echo "    typecheck_cmd or docs_cmd as flat key: \"command\" lines. Example:"
     echo "        verify:"
     echo "          test_cmd: \"npm test\""
     fail "unconfigured" "An unconfigured gate must not pass."
@@ -99,6 +101,7 @@ echo "Running ACE verification gate (profile: $PROFILE, config: $CONFIG)..."
 run_gate "test" "$TEST_CMD"
 run_gate "lint" "$LINT_CMD"
 run_gate "typecheck" "$TYPECHECK_CMD"
+run_gate "docs" "$DOCS_CMD"
 
 echo "All configured gates passed."
 if [ "$PROFILE" = "fast" ]; then

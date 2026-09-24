@@ -1,0 +1,6 @@
+# Requires the postgres pack; resolved by the scaffold CLI.
+triggers:
+  supabase-docs: .ace/packs/supabase/supabase-documentation/SKILL.md
+roles_augmented:
+  - Developer
+  - QA Engineer

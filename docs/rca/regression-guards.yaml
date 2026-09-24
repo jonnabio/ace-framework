@@ -15,7 +15,42 @@ version: "1.0"
 # 3. If guarded, review the RCA and ensure fix is not regressed
 # 4. Run associated tests before committing
 
-guards: []
+guards:
+  - id: RCA-001
+    title: "Fresh scaffolds verify without repository-only tooling"
+    severity: high
+    created: 2026-09-23
+    rca_file: docs/rca/RCA-001-scaffold-verification-defaults.md
+    guarded_files:
+      - .aceconfig
+      - .ace/scripts/verify.sh
+      - .ace/scripts/verify-scaffold.sh
+      - .ace/scripts/configure-scaffold.sh
+      - cli/bin/create-ace-framework.js
+      - cli/lib/scaffold-config.js
+      - cli/lib/pack-registry.js
+      - scripts/init.sh
+    invariants:
+      - "First-run full and fast gates pass without database tools for every pack mode"
+      - "Scaffolded docs_cmd is empty; existing adopter commands are preserved"
+      - "No active framework release task queue is installed"
+    tests:
+      - cli/test/scaffold-config.test.js
+      - cli/test/scaffold-verify.test.js
+    standard_rule: "ADR-004 scaffold bootstrap contract; prevention promotion in T014"
+  - id: RCA-002
+    title: "Generated transport bundles are not authored documents"
+    severity: medium
+    created: 2026-09-23
+    rca_file: docs/rca/RCA-002-generated-export-lint.md
+    guarded_files:
+      - .markdownlint-cli2.jsonc
+    invariants:
+      - "Maintained source documents and first-party packs remain linted"
+      - "Generated NotebookLM bundles are excluded instead of hand-edited"
+    tests:
+      - cli/test/lint-scope.test.js
+    standard_rule: "ADR-004 generated artifact ownership in documentation.md"
 
 # Example guard entry:
 # - id: RCA-001

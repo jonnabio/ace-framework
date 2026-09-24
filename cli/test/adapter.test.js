@@ -37,8 +37,8 @@ function runVerify(args, config) {
   return spawnSync('sh', [VERIFY_SH, ...args], { cwd: dir, encoding: 'utf8' });
 }
 
-function verifyConfig({ test = '', lint = '', typecheck = '' }) {
-  return `verify:\n  test_cmd: "${test}"\n  lint_cmd: "${lint}"\n  typecheck_cmd: "${typecheck}"\n`;
+function verifyConfig({ test = '', lint = '', typecheck = '', docs = '' }) {
+  return `verify:\n  test_cmd: "${test}"\n  lint_cmd: "${lint}"\n  typecheck_cmd: "${typecheck}"\n  docs_cmd: "${docs}"\n`;
 }
 
 function makeGuardedProject() {
@@ -210,4 +210,32 @@ test('stop-verify never blocks twice in one turn (stop_hook_active)', () => {
   assert.strictEqual(result.status, 0, result.stderr);
 });
 
+test('full docs-only gate passes, failures identify docs and missing docs stays optional', () => {
+  for (const [config, status, final] of [
+    [verifyConfig({docs: 'true'}), 0, 'VERIFY_RESULT=pass gate=all'],
+    [verifyConfig({docs: 'exit 9'}), 1, 'VERIFY_RESULT=fail gate=docs'],
+    [verifyConfig({}), 1, 'VERIFY_RESULT=fail gate=unconfigured'],
+    ['verify:\n  lint_cmd: "true"\n', 0, 'VERIFY_RESULT=pass gate=all'],
+  ]) {
+    const r = runVerify([], config);
+    assert.strictEqual(r.status, status, r.stdout + r.stderr);
+    assert.ok(r.stdout.trim().endsWith(final), r.stdout);
+  }
+});
+test('fast discards docs before checking configuration and never invokes it', () => {
+  let r = runVerify(['--fast'], verifyConfig({docs: 'exit 9', lint: 'true'}));
+  assert.strictEqual(r.status, 0, r.stdout);
+  assert.ok(!r.stdout.includes("Gate 'docs'"));
+  r = runVerify(['--fast'], verifyConfig({docs: 'true'}));
+  assert.strictEqual(r.status, 1);
+  assert.ok(r.stdout.trim().endsWith('VERIFY_RESULT=fail gate=unconfigured'));
+});
+test('docs gate parses CRLF and alternate config path', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ace-docs-'));
+  const config = path.join(dir, 'alternate');
+  fs.writeFileSync(config, verifyConfig({docs:'true'}).replace(/\n/g, '\r\n'));
+  const r = spawnSync('bash', [VERIFY_SH, config], {cwd:dir, encoding:'utf8'});
+  assert.strictEqual(r.status, 0, r.stdout + r.stderr);
+  fs.rmSync(dir, {recursive:true, force:true});
+});
 module.exports = run;

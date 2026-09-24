@@ -1,7 +1,20 @@
-# ACE Framework v2.7.0
+# ACE Framework v2.8.0
 
 > **AI-assisted Code Engineering Framework**
 > A rigorous, IDE-agnostic standard for professional development teams using AI agents. Treats AI interactions as structured transactions, not casual conversations.
+
+## v2.8.0 Features: Database Documentation as Code
+
+- Catalog comments are the source of truth for generated physical schema
+  reference; authored documents cover domain and security intent.
+- The optional full-profile `docs_cmd` proves completeness and drift while
+  remaining empty in fresh scaffolds.
+- `--pack postgres` adds comment/classification, RLS and privileged-routine
+  checks, deterministic tbls reference and Git drift detection.
+- `--pack supabase` installs PostgreSQL too, then adds the Supabase role model,
+  platform inventory, local type drift and backup/key-rotation templates.
+- Fresh no-pack, PostgreSQL and Supabase scaffolds pass real full and fast
+  verification before application or database configuration.
 
 ## v2.7.0 Features: The Loop Engineering Update
 

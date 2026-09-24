@@ -4,7 +4,7 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 
 ## Primary Project
 
-The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.7.0).
+The main codebase lives at `~/code_projects/ace_framework/` — an IDE-agnostic framework for structured AI-human collaboration in software development (ACE-Framework v2.8.0).
 
 ## Commands
 
@@ -96,6 +96,7 @@ Per `.cursorrules`, always read before any task:
 | Keyword | Skill file |
 |---------|-----------|
 | database | `.ace/skills/database-operations/SKILL.md` |
+| schema-docs/data-dictionary | `.ace/skills/database-documentation/SKILL.md` |
 | api | `.ace/skills/api-design/SKILL.md` |
 | testing | `.ace/skills/testing-strategy/SKILL.md` |
 | migration | `.ace/skills/migration-logic/SKILL.md` |
@@ -152,6 +153,14 @@ npx create-ace-framework my-project --pack ai-research
 *Note: This copies `.ace/packs/ai-research/` into the new project and registers `.ace/packs/ai-research/.aceconfig-ext` under `includes:` in `.aceconfig`.*
 
 If no `--pack` flag is given, no expansion pack is installed and `includes:` is left empty (`includes: []`).
+
+**PostgreSQL Documentation Pack**: `--pack postgres` adds catalog comment,
+classification, RLS/routine and generated-reference drift checks.
+
+**Supabase Documentation Pack**: `--pack supabase` installs PostgreSQL too and
+adds the Supabase role model, platform inventory, local type drift and
+human-operated backup/key-rotation templates. Database gates remain inactive
+until an adopter configures scope, runtime credentials and `docs_cmd`.
 
 ### Regression Guard Protocol
 

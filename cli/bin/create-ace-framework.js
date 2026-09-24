@@ -16,6 +16,8 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
+const { configureFresh, updateIncludes } = require('../lib/scaffold-config');
+const { resolvePacks, installPacks } = require('../lib/pack-registry');
 const { parseArgs, defaultProjectName, USAGE, DEFAULT_TARGET_DIR } = require('../lib/parse-args');
 
 // Colors
@@ -44,7 +46,7 @@ ${colors.cyan}    _    ____ _____   _____                                       
  / ___ \\ |___| |___  |  _|| | | (_| | | | | | |  __/\\ V  V / (_) | |  |   <
 /_/   \\_\\____|_____| |_|  |_|  \\__,_|_| |_| |_|\\___| \\_/\\_/ \\___/|_|  |_|\\_\\
 ${colors.reset}
-${colors.green}AI-assisted Code Engineering Framework v2.7.0${colors.reset}
+${colors.green}AI-assisted Code Engineering Framework v2.8.0${colors.reset}
 `);
 }
 
@@ -92,7 +94,11 @@ function copyDir(src, dest) {
 
 // Clone from GitHub
 function cloneFromGitHub(targetDir) {
-  const repoUrl = 'https://github.com/jonnabio/ace-framework.git';
+  // A local mirror may be supplied for offline/air-gapped scaffolding and
+  // deterministic integration tests. It is a source location, never copied
+  // into the generated project configuration.
+  const repoUrl = process.env.ACE_FRAMEWORK_SOURCE
+    || 'https://github.com/jonnabio/ace-framework.git';
   const tempDir = path.join(targetDir, '.ace-temp');
 
   try {
@@ -331,68 +337,6 @@ ${colors.blue}Happy coding with ACE-Framework!${colors.reset}
 `);
 }
 
-// Keep only the requested expansion pack (if any) out of the packs bundled/cloned into targetDir
-function pruneExpansionPacks(targetDir, packName) {
-  const packsDir = path.join(targetDir, '.ace', 'packs');
-  if (!fs.existsSync(packsDir)) {
-    return null;
-  }
-
-  const available = fs
-    .readdirSync(packsDir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name);
-
-  let installed = null;
-  if (packName) {
-    const normalized = packName.toLowerCase();
-    if (available.includes(normalized)) {
-      installed = normalized;
-    } else {
-      log.warn(`Unknown expansion pack "${packName}". Available packs: ${available.join(', ')}`);
-    }
-  }
-
-  for (const pack of available) {
-    if (pack !== installed) {
-      fs.rmSync(path.join(packsDir, pack), { recursive: true, force: true });
-    }
-  }
-
-  if (!installed) {
-    fs.rmSync(packsDir, { recursive: true, force: true });
-  }
-
-  return installed;
-}
-
-// Reconcile .aceconfig's `includes:` list with the expansion pack actually installed
-function updateAceConfigIncludes(targetDir, packName) {
-  const aceconfigPath = path.join(targetDir, '.aceconfig');
-  if (!fs.existsSync(aceconfigPath)) {
-    return;
-  }
-
-  let content = fs.readFileSync(aceconfigPath, 'utf8');
-  const usesCrlf = content.includes('\r\n');
-  const includesBlock = /includes:\r?\n(?:[ \t]*-[ \t]+.*\r?\n)*/;
-
-  if (!includesBlock.test(content)) {
-    return;
-  }
-
-  let replacement = packName
-    ? `includes:\n  - .ace/packs/${packName}/.aceconfig-ext\n`
-    : 'includes: []\n';
-  if (usesCrlf) {
-    replacement = replacement.replace(/\n/g, '\r\n');
-  }
-
-  content = content.replace(includesBlock, replacement);
-
-  fs.writeFileSync(aceconfigPath, content);
-}
-
 // Main function
 async function main() {
   const parsed = parseArgs(process.argv.slice(2));
@@ -418,6 +362,7 @@ async function main() {
   printBanner();
 
   const { packName, adapterName, yes } = parsed.options;
+  resolvePacks(packName);
   let targetDir = parsed.options.targetDir;
 
   if (!targetDir) {
@@ -458,6 +403,10 @@ async function main() {
     }
   }
 
+  if (fs.existsSync(path.join(targetDir, '.aceconfig'))) {
+    throw new Error('An existing .aceconfig must be migrated explicitly; refusing to overwrite it.');
+  }
+
   // Check for bundled templates or download
   const templateDir = getTemplateDir();
   if (templateDir) {
@@ -472,6 +421,8 @@ async function main() {
     log.success('Framework files downloaded');
   }
 
+  configureFresh(targetDir);
+
   // Customize project
   customizeProject(targetDir, projectName);
 
@@ -485,11 +436,9 @@ async function main() {
   createGitignore(targetDir);
 
   // Keep only the requested expansion pack and reconcile .aceconfig
-  const installedPack = pruneExpansionPacks(targetDir, packName);
-  updateAceConfigIncludes(targetDir, installedPack);
-  if (installedPack) {
-    log.success(`Installed "${installedPack}" expansion pack`);
-  }
+  const installedPacks = installPacks(targetDir, packName);
+  updateIncludes(targetDir, installedPacks);
+  for (const pack of installedPacks) log.success(`Installed "${pack}" expansion pack`);
 
   // Print next steps
   printNextSteps(targetDir, projectName);

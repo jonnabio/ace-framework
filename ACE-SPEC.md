@@ -1,4 +1,4 @@
-# ACE-Framework v2.7.0
+# ACE-Framework v2.8.0
 
 ## AI-assisted Code Engineering
 
@@ -21,6 +21,7 @@
 11. [Validation & Schemas](#11-validation--schemas)
 12. [Getting Started](#12-getting-started)
 13. [Loop Engineering](#13-loop-engineering)
+14. [Database Documentation as Code](#14-database-documentation-as-code)
 
 ---
 
@@ -752,6 +753,41 @@ fingerprints — the evidence that the self-improving harness improves.
 
 ---
 
+## 14. Database Documentation as Code
+
+> Introduced in v2.8. Physical database facts are generated from
+> migration-managed catalog comments; authored documents explain intent.
+
+The engine-agnostic workflow lives in
+`.ace/skills/database-documentation/SKILL.md`. Generated artifacts under
+`docs/database/reference/` are marked generated and never hand-edited.
+Domain narrative, security-model intent and human-operated runbooks live in
+authored `docs/database/` documents and link to generated facts.
+
+The flat `verify:` block accepts optional `docs_cmd: ""`. It runs after test,
+lint and typecheck in the full profile only and uses the same nonzero failure
+and `VERIFY_RESULT=pass|fail gate=<name>` contract. Fresh scaffolds leave it
+empty and run a shipped structural bootstrap check; installation alone does
+not claim database compliance.
+
+The PostgreSQL expansion pack provides explicit-scope catalog completeness,
+column classification, exposed-table RLS, SECURITY DEFINER search-path,
+deterministic tbls/catalog reference and Git drift checks. The Supabase pack
+depends on PostgreSQL and adds its anon/authenticated/service-role model,
+platform-owned exclusions and inventory, local generated-type drift and
+backup/PITR and key-rotation templates. Supabase agent operations are limited
+to local stacks or explicitly attested preview branches; production
+operations remain human-owned.
+
+Select them at scaffold time with `--pack postgres` or `--pack supabase`.
+
+Reversible migration tools retain tested DOWN migrations. Forward-only tools
+require a documented and tested compensating migration without rewriting
+applied history. No pack ships connection values or application schema names;
+missing configuration or tools fail clearly once the docs gate is activated.
+
+---
+
 ## Appendix A: File Quick Reference
 
 | Need To...                    | Look In...                             |
@@ -807,5 +843,5 @@ fingerprints — the evidence that the self-improving harness improves.
 
 ---
 
-*ACE-Framework v2.7.0*
+*ACE-Framework v2.8.0*
 *Treat AI interactions as structured transactions, not casual conversations.*

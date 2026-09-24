@@ -59,7 +59,12 @@ Step 1: Context Aggregation
 - Read `docs/context/ACTIVE_CONTEXT.md` to understand the completed task.
 - Ingest relevant raw outputs, logs, or Jupyter notebooks generated during EXECUTION.
 
-Step 2: Scientific Translation (Requires Scientific Expansion Pack)
+Step 2: Route by documentation type
+- Schema documentation: apply `.ace/skills/database-documentation/SKILL.md`.
+- Regenerate schema reference, update authored intent and pass the docs gate.
+- This branch does not require the Scientific Expansion Pack; continue at Step 5.
+
+Scientific Translation (for scientific results; requires Scientific Expansion Pack)
 - Activate the *Scientific Editor* role.
 - Convert raw experimental results into academic-toned, publication-ready text.
 - If external citations are needed, invoke `Paper Lookup` and `Citation Management` skills to find and properly format references.

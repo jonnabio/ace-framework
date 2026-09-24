@@ -1,4 +1,4 @@
-﻿---
+---
 name: database-operations
 description: Procedural knowledge for database-related tasks including migrations, schema changes, and data operations.
 ---
@@ -38,20 +38,20 @@ Step 1: Generate migration file
 Step 2: Write UP migration
 - Add new tables/columns/indexes
 - Use explicit types, not defaults
-- Add comments for non-obvious columns
+- Add catalog comments for every scoped object and classification/PII tags for columns
 
-Step 3: Write DOWN migration
-- Reverse all UP changes
-- Ensure data preservation where possible
-- Test rollback works correctly
+Step 3: Choose recovery for the migration tool
+- Reversible tools: write and test a DOWN migration
+- Forward-only tools (including Supabase CLI): document and test a compensating migration
+- Preserve applied history and document irreversible data-loss limitations
 
 Step 4: Test migration
 - Run on empty database
-- Run on copy of production data
-- Verify rollback works
+- Run on representative synthetic data in a local or approved preview environment
+- Verify the selected DOWN or compensating migration works
 
 Step 5: Document
-- Update .ace/knowledge/entities.md if schema changed
+- Regenerate schema reference and pass the docs gate using database-documentation
 - Create ADR if significant change
 ```
 
@@ -61,7 +61,7 @@ Step 5: Document
 Before making schema changes:
 - [ ] Impact assessment on existing queries
 - [ ] Backup strategy confirmed
-- [ ] Rollback plan documented
+- [ ] Tool-appropriate DOWN or compensating migration documented
 - [ ] Index analysis for new columns
 - [ ] Foreign key implications understood
 - [ ] Default values for existing rows
@@ -74,7 +74,7 @@ During migration:
 After migration:
 - [ ] Verify data integrity
 - [ ] Check query performance
-- [ ] Update entity documentation
+- [ ] Regenerate schema reference and pass the docs gate
 ```
 
 ### 3. Query Optimization
@@ -145,17 +145,17 @@ ALTER TABLE users DROP COLUMN deprecated_field;
 After applying this skill, verify:
 
 - [ ] Migration runs without error
-- [ ] Rollback works correctly
+- [ ] Selected DOWN or compensating migration works correctly
 - [ ] No data loss occurred
 - [ ] Performance is acceptable
 - [ ] Related queries still work
-- [ ] Documentation updated
+- [ ] Schema reference regenerated and docs gate passes
 
 ---
 
 ## Common Pitfalls
 
-1. **No rollback tested** - Always test DOWN migration
+1. **Recovery untested** - Test DOWN for reversible tools or a compensating migration for forward-only tools
 2. **Missing indexes** - New columns queried need indexes
 3. **Lock contention** - Large tables need careful migration
 4. **Default values** - Forgetting defaults for NOT NULL columns

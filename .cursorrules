@@ -3,7 +3,7 @@
 
 ## Project Context
 
-This project uses the ACE-Framework (AI-assisted Code Engineering) v2.7.0.
+This project uses the ACE-Framework (AI-assisted Code Engineering) v2.8.0.
 All AI interactions should follow the BMAD methodology: Analyze → Discuss → Plan → Execute → Verify.
 
 ## Required Reading on Session Start
@@ -48,12 +48,14 @@ Activate appropriate role for the task:
 ## Expansion Packs
 
 Expansion Packs are selected at scaffold time by the `create-ace-framework`
-CLI via the `--pack` flag. The scaffolder keeps only the selected pack under
-`.ace/packs/<name>/`, prunes the rest, and rewrites `includes:` in `.aceconfig`
-to `.ace/packs/<name>/.aceconfig-ext`. With no `--pack`, `includes:` is `[]`.
+CLI via the `--pack` flag. The scaffolder keeps the selected pack and its
+declared dependencies, prunes the rest, and rewrites `includes:` in
+`.aceconfig`. With no `--pack`, `includes:` is `[]`.
 
 1. **Scientific Expansion Pack**: Enables the **Data Scientist**, **AI Expert**, and **Scientific Editor** roles. Install using: `npx create-ace-framework my-project --pack scientific`.
 2. **AI Research Expansion Pack**: Enables the **AI Researcher** and **MLOps Engineer** roles with 98+ AI engineering skills. Install using: `npx create-ace-framework my-project --pack ai-research`.
+3. **PostgreSQL Expansion Pack**: Adds catalog-sourced schema reference and completeness/drift gates. Install using: `npx create-ace-framework my-project --pack postgres`.
+4. **Supabase Expansion Pack**: Adds Supabase roles, inventory, local type drift and runbook templates; installs PostgreSQL too. Install using: `npx create-ace-framework my-project --pack supabase`.
 
 Packs are installed only at scaffold time. Do not run any other install command
 to add them; if a pack is missing, re-scaffold or copy `.ace/packs/<name>/` in
@@ -64,6 +66,7 @@ and add its `.aceconfig-ext` to `includes:` manually.
 For specialized tasks, apply relevant skill:
 - .ace/skills/api-design/SKILL.md
 - .ace/skills/database-operations/SKILL.md
+- .ace/skills/database-documentation/SKILL.md
 - .ace/skills/migration-logic/SKILL.md
 - .ace/skills/refactoring/SKILL.md
 - .ace/skills/root-cause-analysis/SKILL.md

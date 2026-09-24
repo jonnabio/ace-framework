@@ -40,6 +40,7 @@
 | Standard | `.ace/standards/` | Markdown | Enforce rules |
 | Skill | `.ace/skills/` | Markdown | Task procedures |
 | Knowledge | `.ace/knowledge/` | Markdown | Domain context |
+| Database documentation | `docs/database/` | Generated reference + authored Markdown | Catalog reference, intent and security model |
 
 ---
 
@@ -363,3 +364,7 @@ Before committing documentation:
 
 *Last Updated: [DATE]*
 *Requires ADR to modify*
+
+---
+> **Distilled Rule [2026-09-23] - Category: Documentation:**
+> ADR-004: Database catalog comments are the source of truth for generated reference under docs/database/. Mark generated artifacts as generated and never edit them manually; update migration-managed comments and regenerate. Authored documents cover intent and link to generated facts. The activated docs gate must prove completeness and absence of drift. Generated transport bundles are validated through their maintained sources (RCA-002).

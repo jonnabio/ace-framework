@@ -2,6 +2,34 @@
 
 All notable changes to the ACE Framework will be documented in this file.
 
+## [v2.8.0] - 2026-09-23
+
+### Added — Database Documentation as Code
+
+- Engine-agnostic `database-documentation` skill with catalog comments as the
+  physical-schema source of truth, classification tags, authored security
+  intent and generated-reference drift checking.
+- Optional flat `docs_cmd` verification key, executed in the full profile only.
+- PostgreSQL expansion pack with explicit-scope catalog lint, RLS and
+  SECURITY DEFINER checks, deterministic tbls/catalog reference and Git drift.
+- Supabase expansion pack, including its PostgreSQL dependency, role/exposure
+  guidance, platform inventory, local generated-type drift and human-operated
+  backup/PITR and key-rotation templates.
+- Zero-dependency scaffold, pack, configuration and documentation contract
+  tests, plus disposable local integration coverage.
+- ADR-004 and RCA-001/RCA-002 regression prevention records.
+
+### Changed
+
+- Fresh scaffold verification uses only shipped structural tooling; no-pack,
+  PostgreSQL and Supabase scaffolds pass before database configuration.
+- Migration recovery now follows tool capability: tested DOWN migrations for
+  reversible tools and tested compensating migrations for forward-only tools.
+- Entity knowledge records domain narrative and links to generated reference
+  rather than duplicating physical columns.
+- Version surfaces synchronized to 2.8.0; historical release records and
+  independently versioned standards retain their original versions.
+
 ## [v2.7.0] - 2026-07-05
 
 ### Added — The Loop Engineering Update

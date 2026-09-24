@@ -14,4 +14,15 @@
 > hand — use the tooling so identity and provenance stay consistent.
 
 <!-- BEGIN STAGED RULES -->
+
+## RULE-f078a328817f [promoted 2026-09-23 → harness-engineering.md]
+
+- **category:** Scaffolding
+- **hit_count:** 1
+- **first_seen:** 2026-09-23
+- **last_seen:** 2026-09-23
+- **source:** T014 fp:4ddbc590d3e0a1f2 trace:docs/rca/RCA-001-scaffold-verification-defaults.md
+
+> Fresh scaffolds must reference only shipped verification tools and must pass their real full and fast gates before adopter customization.
+
 <!-- END STAGED RULES -->

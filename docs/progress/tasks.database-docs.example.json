@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "plan_ref": "docs/planning/implementation_plan_database_docs.md",
+  "created": "2026-09-23T00:00:00Z",
+  "updated": "2026-09-23T00:00:00Z",
+  "defaults": {
+    "runner": "manual",
+    "max_attempts": 3,
+    "verify_cmd": "bash .ace/scripts/verify.sh"
+  },
+  "tasks": [
+    {
+      "id": "T001",
+      "name": "Document migration intent",
+      "objective": "Apply reviewed forward-only migrations locally, including catalog comments, classification and RLS, and document compensation.",
+      "status": "pending",
+      "attempts": 0,
+      "depends_on": [],
+      "complexity": "S",
+      "acceptance_cmd": "bash .ace/packs/postgres/scripts/doc-lint.sh",
+      "notes": "Requires installed Supabase/PostgreSQL packs, explicit local config, tools, migrated local stack and an adopter-approved plan. Activate docs_cmd before running the final task."
+    },
+    {
+      "id": "T002",
+      "name": "Regenerate reference and types",
+      "objective": "Generate, review and commit the schema reference and local types; authored documentation covers security intent only.",
+      "status": "pending",
+      "attempts": 0,
+      "depends_on": [
+        "T001"
+      ],
+      "complexity": "S",
+      "acceptance_cmd": "bash .ace/packs/supabase/scripts/check-docs.sh",
+      "notes": "Requires installed Supabase/PostgreSQL packs, explicit local config, tools, migrated local stack and an adopter-approved plan. Activate docs_cmd before running the final task."
+    },
+    {
+      "id": "T003",
+      "name": "Verify database documentation",
+      "objective": "Run the full gate with the Supabase docs_cmd explicitly configured and record the verification evidence.",
+      "status": "pending",
+      "attempts": 0,
+      "depends_on": [
+        "T002"
+      ],
+      "complexity": "S",
+      "acceptance_cmd": "bash .ace/scripts/verify.sh",
+      "notes": "Requires installed Supabase/PostgreSQL packs, explicit local config, tools, migrated local stack and an adopter-approved plan. Activate docs_cmd before running the final task."
+    }
+  ]
+}

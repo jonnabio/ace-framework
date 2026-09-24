@@ -2,7 +2,7 @@
 # Works with various AI assistants
 
 framework: ace
-version: "2.7.0"
+version: "2.8.0"
 
 # Context files to always include
 context:
@@ -35,6 +35,8 @@ roles:
 # Skill triggers
 skills:
   database: .ace/skills/database-operations/SKILL.md
+  schema-docs: .ace/skills/database-documentation/SKILL.md
+  data-dictionary: .ace/skills/database-documentation/SKILL.md
   api: .ace/skills/api-design/SKILL.md
   testing: .ace/skills/testing-strategy/SKILL.md
   migration: .ace/skills/migration-logic/SKILL.md

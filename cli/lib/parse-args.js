@@ -23,7 +23,7 @@ const USAGE = `Usage: create-ace-framework [directory] [options]
 Scaffolds the ACE-Framework (.ace/ + docs/) into a project.
 
 Options:
-  --pack <name>       Install an expansion pack (scientific, ai-research)
+  --pack <name>       Install an expansion pack (scientific, ai-research, postgres, supabase)
   --adapter <name>    Install an enforced-hooks adapter (claude-code)
   -y, --yes           Accept every default; never prompt. The project name
                       becomes the target directory's basename, and a

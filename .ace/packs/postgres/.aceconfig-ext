@@ -1,0 +1,6 @@
+# PostgreSQL documentation expansion pack
+triggers:
+  postgres-docs: .ace/packs/postgres/postgres-documentation/SKILL.md
+roles_augmented:
+  - Developer
+  - QA Engineer

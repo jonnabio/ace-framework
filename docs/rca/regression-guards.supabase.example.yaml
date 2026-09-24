@@ -1,0 +1,18 @@
+# Example only: adopt into the registry after supplying a real RCA and evidence.
+# The current edit hook matches literal paths, not ** globs. This is a
+# procedural review scope; the configured docs gate enforces catalog invariants.
+version: "1.0"
+guards:
+  - id: RCA-XXX
+    title: "Supabase migration comments and row-level security"
+    severity: high
+    rca_file: docs/rca/RCA-XXX-migration-documentation.md
+    guarded_files:
+      - supabase/migrations/**
+    invariants:
+      - "Every new owned table and policy has a catalog comment"
+      - "Every new owned table and every policy parent table has RLS enabled"
+      - "Columns have classification and PII tags; reference and local types have no drift"
+    tests:
+      - .ace/packs/supabase/scripts/check-docs.sh
+    standard_rule: "ADR-004 generated reference ownership and full-profile docs gate"

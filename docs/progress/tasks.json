@@ -1,0 +1,503 @@
+{
+  "version": "1.0",
+  "plan_ref": "docs/planning/implementation_plan_v2.8_db_docs_as_code.md",
+  "created": "2026-09-23T00:00:00Z",
+  "updated": "2026-09-23T00:00:00Z",
+  "defaults": {
+    "max_attempts": 3,
+    "runner": "manual",
+    "verify_cmd": "bash .ace/scripts/verify.sh"
+  },
+  "tasks": [
+    {
+      "id": "T001",
+      "name": "Record final plan approval",
+      "objective": "Record final approval of the revised plan and accept ADR-004 before implementation. Q1-Q3 are resolved: repair the current checkout, permit the single standards table row, and require the agreed catalog coverage and local integration.",
+      "status": "verified",
+      "role": "Architect",
+      "files": {
+        "create": [],
+        "modify": [
+          "docs/planning/implementation_plan_v2.8_db_docs_as_code.md",
+          "docs/adr/ADR-004-documentation-as-code-gate.md"
+        ]
+      },
+      "depends_on": [],
+      "complexity": "S",
+      "acceptance_cmd": "node -e \"const fs=require('fs'),a=fs.readFileSync('docs/adr/ADR-004-documentation-as-code-gate.md','utf8'),p=fs.readFileSync('docs/planning/implementation_plan_v2.8_db_docs_as_code.md','utf8'); if(!/## Status\\s+Accepted/.test(a)||!p.includes('Approval recorded: yes')) process.exit(1);\"",
+      "attempts": 1,
+      "notes": "Design decisions Q1-Q3 were approved by the user. The revised plan includes scaffold repair in T005 and regression closure in T014. Do not ask again for those decisions or fabricate historical RCA evidence. Start implementation only after the planning-only boundary is lifted and the existing lint baseline blocker is addressed.",
+      "result_file": "docs/progress/task_T001_result.md"
+    },
+    {
+      "id": "T002",
+      "name": "Define core documentation workflow",
+      "objective": "Add the engine-agnostic database-documentation skill, two triggers, schema pipeline routing, conditional migration recovery, and narrative-only entities guidance.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          ".ace/skills/database-documentation/SKILL.md",
+          "cli/test/database-docs-contract.test.js"
+        ],
+        "modify": [
+          ".aceconfig",
+          ".ace/skills/database-operations/SKILL.md",
+          ".ace/skills/documentation-generation/SKILL.md",
+          ".ace/knowledge/entities.md"
+        ]
+      },
+      "depends_on": [
+        "T001"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/database-docs-contract.test.js')('database-docs-contract')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Test frontmatter, trigger resolution, pipeline routing, both recovery branches and reference links. Review every rollback mention, including checklist, validation and pitfalls; no remaining unconditional DOWN requirement.",
+      "result_file": "docs/progress/task_T002_result.md"
+    },
+    {
+      "id": "T003",
+      "name": "Extend documentation standard safely",
+      "objective": "Append the generated-artifact rule with update_harness.sh under accepted ADR-004; insert exactly the approved database document-types row.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          "cli/test/documentation-standard.test.js"
+        ],
+        "modify": [
+          ".ace/standards/documentation.md"
+        ]
+      },
+      "depends_on": [
+        "T001",
+        "T002"
+      ],
+      "complexity": "S",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/documentation-standard.test.js')('documentation-standard')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Assert the original file is preserved except the approved single row and appended rule. Rule names catalog provenance, generated marker, no manual edits and docs/database/. No bulk rewrite; retain evidence of updater invocation.",
+      "result_file": "docs/progress/task_T003_result.md"
+    },
+    {
+      "id": "T004",
+      "name": "Add optional full-profile docs gate",
+      "objective": "Add flat docs_cmd parsing and execution to verify.sh; root configuration ships empty docs_cmd and existing gates retain behavior.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [],
+        "modify": [
+          ".ace/scripts/verify.sh",
+          ".aceconfig",
+          "cli/test/adapter.test.js"
+        ]
+      },
+      "depends_on": [
+        "T001"
+      ],
+      "complexity": "S",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/adapter.test.js')('adapter')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Full docs-only success passes; docs failure ends VERIFY_RESULT=fail gate=docs. Empty/missing docs skips. Fast discards docs before empty-gate check, never invokes it. All-empty still fails. Cover LF/CRLF and alternate config path.",
+      "result_file": "docs/progress/task_T004_result.md"
+    },
+    {
+      "id": "T005",
+      "name": "Provide scaffold-safe verification defaults",
+      "objective": "Repair scaffold verification on this checkout: create scaffold-config.js and a shipped structural check, use it for fresh lint_cmd, clear repository-only test_cmd/typecheck_cmd, and keep docs_cmd empty. Reproduce and document the defect as RCA-001, register its guard, and exclude the framework release tasks.json from fresh adopter queues.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          "cli/lib/scaffold-config.js",
+          ".ace/scripts/verify-scaffold.sh",
+          "cli/test/scaffold-config.test.js",
+          "docs/rca/RCA-001-scaffold-verification-defaults.md",
+          ".ace/scripts/configure-scaffold.sh"
+        ],
+        "modify": [
+          "cli/bin/create-ace-framework.js",
+          "scripts/init.sh",
+          "docs/rca/regression-guards.yaml"
+        ]
+      },
+      "depends_on": [
+        "T001",
+        "T004"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/scaffold-config.test.js')('scaffold-config')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Capture a failing fresh-scaffold reproduction before fixing, with commands, actual output, five whys and dated evidence; RCA-001 records this investigation, not a recovered historical incident. Register exact guarded paths for .aceconfig, verify.sh, verify-scaffold.sh, both scaffold entry points, scaffold-config.js and pack-registry.js; reference scaffold-config.test.js and the planned scaffold-verify.test.js. Fresh full and fast gates then pass without cli/, npm installs, network, Git initialization or database tools; deleting a required core file fails. Preserve repository gates and existing adopters' configured commands. Keep RCA open until T014 proves all three modes and promotes the prevention rule.",
+      "result_file": "docs/progress/task_T005_result.md"
+    },
+    {
+      "id": "T006",
+      "name": "Define PostgreSQL pack contract",
+      "objective": "Add PostgreSQL pack extension, skill, README, non-secret config template and shared validated configuration loader.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          ".ace/packs/postgres/.aceconfig-ext",
+          ".ace/packs/postgres/postgres-documentation/SKILL.md",
+          ".ace/packs/postgres/README.md",
+          ".ace/packs/postgres/config.example.json",
+          ".ace/packs/postgres/scripts/config.js",
+          "cli/test/postgres-config.test.js"
+        ],
+        "modify": []
+      },
+      "depends_on": [
+        "T002"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/postgres-config.test.js')('postgres-config')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Explicit owned/exposed arrays; owned nonempty, exposed explicitly allowed empty. Runtime-only connection environment variable; malformed/missing configuration fails before tool invocation. Reject unsafe output paths and conflicting exclusions. No default application schemas or connection literals.",
+      "result_file": "docs/progress/task_T006_result.md"
+    },
+    {
+      "id": "T007",
+      "name": "Implement PostgreSQL catalog lint",
+      "objective": "Add read-only SQL and wrapper for comment completeness, column classification, exposed-table RLS and pinned SECURITY DEFINER search_path.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          ".ace/packs/postgres/sql/doc-lint.sql",
+          ".ace/packs/postgres/scripts/doc-lint.sh",
+          "cli/test/postgres-lint.test.js",
+          ".ace/packs/postgres/sql/catalog.sql",
+          ".ace/packs/postgres/sql/reference.sql",
+          ".ace/packs/postgres/scripts/catalog.js"
+        ],
+        "modify": []
+      },
+      "depends_on": [
+        "T006"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/postgres-lint.test.js')('postgres-lint')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Mock wrapper errors/findings/missing psql, safe schema parameter binding and redaction. SQL covers the documented object matrix, whitespace comments, dropped columns and extension exclusions. Findings and SQL/connection failures return nonzero. Real catalog validation is mandatory in T017.",
+      "result_file": "docs/progress/task_T007_result.md"
+    },
+    {
+      "id": "T008",
+      "name": "Generate complete schema reference",
+      "objective": "Generate deterministic tbls relation documentation plus catalog supplement for policies, routines and other covered objects; mark all outputs generated.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          ".ace/packs/postgres/scripts/generate-reference.sh",
+          "cli/test/postgres-reference.test.js",
+          ".ace/packs/postgres/scripts/reference.js"
+        ],
+        "modify": []
+      },
+      "depends_on": [
+        "T006",
+        "T007"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/postgres-reference.test.js')('postgres-reference')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Use a fresh temporary output tree, scoped metadata-only reads and canonical ordering. No tbls comment overrides, DSNs, timestamps, data rows or secret-bearing function bodies in output. Supplement closes tbls coverage gaps. Missing/failing tools do not replace existing output. Real tbls validation follows in T017.",
+      "result_file": "docs/progress/task_T008_result.md"
+    },
+    {
+      "id": "T009",
+      "name": "Enforce reference drift gate",
+      "objective": "Compose lint and regeneration with scoped git diff --exit-code against HEAD and explicit untracked/ignored artifact detection.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          ".ace/packs/postgres/scripts/check-docs.sh",
+          "cli/test/postgres-drift.test.js",
+          ".ace/packs/postgres/scripts/drift.js"
+        ],
+        "modify": []
+      },
+      "depends_on": [
+        "T007",
+        "T008"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/postgres-drift.test.js')('postgres-drift')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Temporary Git tests prove additions, removals, staged edits, unstaged edits, untracked outputs and stale files fail; identical regeneration passes. Missing Git/HEAD and ignored output fail clearly. Do not stage, reset, stash or alter authored docs; preserve dirty generated work by failing before replacement.",
+      "result_file": "docs/progress/task_T009_result.md"
+    },
+    {
+      "id": "T010",
+      "name": "Document Supabase specialization and runbooks",
+      "objective": "Add dependent Supabase pack, skill, README, security-model and inventory templates, backup/PITR and key-rotation runbooks.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          ".ace/packs/supabase/.aceconfig-ext",
+          ".ace/packs/supabase/supabase-documentation/SKILL.md",
+          ".ace/packs/supabase/README.md",
+          ".ace/packs/supabase/templates/security-model.md",
+          ".ace/packs/supabase/templates/inventory.md",
+          ".ace/packs/supabase/templates/backup-pitr.md",
+          ".ace/packs/supabase/templates/key-rotation.md",
+          "cli/test/supabase-contract.test.js"
+        ],
+        "modify": []
+      },
+      "depends_on": [
+        "T002",
+        "T006"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/supabase-contract.test.js')('supabase-contract')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Cover roles, exclusions, forward-only compensation, inventory, local/preview safety and human-owned operational runbooks. No production execution instructions for agents, embedded credentials or project-specific values. Distinguish database recovery from Storage object recovery and key types without assuming a platform plan.",
+      "result_file": "docs/progress/task_T010_result.md"
+    },
+    {
+      "id": "T011",
+      "name": "Check Supabase local type drift",
+      "objective": "Generate types with supabase gen types --local to a temporary file, compare configured tracked artifact, and compose the Supabase docs gate with PostgreSQL checks.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          ".ace/packs/supabase/scripts/check-types.sh",
+          ".ace/packs/supabase/scripts/check-docs.sh",
+          "cli/test/supabase-types.test.js",
+          ".ace/packs/supabase/scripts/types.js",
+          ".ace/packs/supabase/scripts/docs.js",
+          ".ace/packs/supabase/scripts/generate-types.sh"
+        ],
+        "modify": [
+          ".ace/packs/supabase/README.md"
+        ]
+      },
+      "depends_on": [
+        "T009",
+        "T010"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/supabase-types.test.js')('supabase-types')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Assert --local is mandatory, explicit schemas are forwarded safely, production/linked flags are rejected, partial output cannot overwrite baseline, missing tool/stack/target fails, matching types pass and changed types fail. PostgreSQL checks enforce local target or explicitly attested preview target; type drift remains local-only.",
+      "result_file": "docs/progress/task_T011_result.md"
+    },
+    {
+      "id": "T012",
+      "name": "Supply reusable guard and task examples",
+      "objective": "Add an inactive migration guard example and schema-valid database documentation task example with explicit dependencies and real pack commands.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          "docs/rca/regression-guards.supabase.example.yaml",
+          "docs/progress/tasks.database-docs.example.json",
+          "cli/test/database-docs-examples.test.js"
+        ],
+        "modify": []
+      },
+      "depends_on": [
+        "T009",
+        "T011"
+      ],
+      "complexity": "S",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/database-docs-examples.test.js')('database-docs-examples')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\" && node cli/lib/validate-tasks.js docs/progress/tasks.database-docs.example.json",
+      "attempts": 1,
+      "notes": "Invariant: every new table and policy has a catalog comment; each new table and each policy's parent table has RLS enabled. The example guards supabase/migrations/**, stays inactive until adopted, and distinguishes procedural glob review from current hook capabilities. Generic workflow points to an adopter-created plan, never the framework release queue.",
+      "result_file": "docs/progress/task_T012_result.md"
+    },
+    {
+      "id": "T013",
+      "name": "Resolve and install pack dependencies",
+      "objective": "Support postgres and supabase using a deterministic dependency closure; Supabase retains PostgreSQL and writes both includes exactly once.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          "cli/lib/pack-registry.js",
+          "cli/test/packs.test.js"
+        ],
+        "modify": [
+          "cli/bin/create-ace-framework.js",
+          "cli/lib/scaffold-config.js",
+          "cli/lib/parse-args.js",
+          "cli/test/parse-args.test.js",
+          ".ace/scripts/configure-scaffold.sh",
+          "scripts/init.sh"
+        ]
+      },
+      "depends_on": [
+        "T005",
+        "T006",
+        "T010"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/packs.test.js')('packs')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\" && node -e \"Promise.resolve(require('./cli/test/parse-args.test.js')('parse-args')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Keep scientific/ai-research/no-pack behavior. Reject unknown packs and missing dependencies before pruning. Cover case normalization, LF/CRLF, includes: [], repeated reconciliation, dependency ordering and path traversal. CLI runtime dependency count remains zero.",
+      "result_file": "docs/progress/task_T013_result.md"
+    },
+    {
+      "id": "T014",
+      "name": "Prove first-run scaffold invariant",
+      "objective": "Add offline end-to-end fresh scaffold matrix for no pack, postgres and supabase through bundled and clone acquisition paths. Close RCA-001 only after the matrix passes and its prevention rule is staged and explicitly promoted through update_harness.sh.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          "cli/test/scaffold-verify.test.js"
+        ],
+        "modify": [
+          "docs/rca/RCA-001-scaffold-verification-defaults.md",
+          "docs/rca/regression-guards.yaml",
+          ".ace/standards/distilled-staging.md",
+          ".ace/standards/harness-engineering.md",
+          "cli/lib/curator.js",
+          "cli/test/curator.test.js",
+          "cli/bin/create-ace-framework.js"
+        ]
+      },
+      "depends_on": [
+        "T004",
+        "T005",
+        "T012",
+        "T013"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/scaffold-verify.test.js')('scaffold-verify')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Use isolated CLI copies and a local source fixture for clone transport. Run the actual scaffolded full/fast gates without editing generated config; assert docs_cmd empty and no database tool called. Verify includes and pack files. Delete a required file and require failure. Assert framework release tasks.json is not installed as an active adopter queue. Assert the active RCA-001 guard names the protected paths and actual regression tests. Stage the evidence-backed rule that scaffolds may reference only shipped tools and must pass real first-run verification. Promote with update_harness.sh --from-staging using human-confirmed approval under ADR-003; do not fabricate recurrence counts or use auto-promotion. Preserve the original harness standard byte-for-byte as a prefix, record promotion provenance in the RCA, and test that the appended rule is present before closure.",
+      "result_file": "docs/progress/task_T014_result.md"
+    },
+    {
+      "id": "T015",
+      "name": "Publish generic usage and routing guidance",
+      "objective": "Update skills/user/CLI guides, specification and IDE routing for opt-in database docs, setup, recovery, generated/authored ownership and both new packs.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          "cli/test/database-docs-guides.test.js"
+        ],
+        "modify": [
+          "SKILLS_GUIDE.md",
+          "USER_GUIDE.md",
+          "ACE-SPEC.md",
+          "README.md",
+          "cli/README.md",
+          ".aiconfig",
+          ".cursorrules",
+          "AGENTS.md",
+          "CLAUDE.md",
+          ".markdownlint-cli2.jsonc"
+        ]
+      },
+      "depends_on": [
+        "T003",
+        "T011",
+        "T012",
+        "T013"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/database-docs-guides.test.js')('database-docs-guides')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\" && npx --no-install markdownlint-cli2",
+      "attempts": 1,
+      "notes": "New first-party pack Markdown must be linted using repository rules; narrow the current blanket pack ignore while retaining third-party exclusions. Document first-run structural coverage versus activated database coverage. Examples use variable names and placeholders only; include correct full-only docs_cmd activation. Contract tests assert guide coverage, trigger paths, dependency instructions, activation commands and local-only examples; verify referenced shipped scripts exist.",
+      "result_file": "docs/progress/task_T015_result.md"
+    },
+    {
+      "id": "T016",
+      "name": "Synchronize v2.8.0 release metadata",
+      "objective": "Bump active release version/config/banner references and add an accurate changelog entry without rewriting historical release records or immutable standards.",
+      "status": "verified",
+      "role": "Developer",
+      "files": {
+        "create": [
+          "cli/test/release-version.test.js"
+        ],
+        "modify": [
+          "cli/package.json",
+          ".aceconfig",
+          ".aiconfig",
+          ".cursorrules",
+          "cli/bin/create-ace-framework.js",
+          "scripts/init.sh",
+          "ACE-SPEC.md",
+          "README.md",
+          "USER_GUIDE.md",
+          "AGENTS.md",
+          "CLAUDE.md",
+          "CHANGELOG.md"
+        ]
+      },
+      "depends_on": [
+        "T015"
+      ],
+      "complexity": "S",
+      "acceptance_cmd": "node -e \"Promise.resolve(require('./cli/test/release-version.test.js')('release-version')).then(n => process.exit(n ? 1 : 0)).catch(e => { console.error(e); process.exit(1); })\"",
+      "attempts": 1,
+      "notes": "Assert all listed active version surfaces agree on 2.8.0 and CLI --version matches. Keep task schema version 1.0, historical changelog versions and independently versioned standards unchanged. No new CLI dependencies or lockfile churn.",
+      "result_file": "docs/progress/task_T016_result.md"
+    },
+    {
+      "id": "T017",
+      "name": "Validate actual database and generator behavior",
+      "objective": "Run integration fixtures against a disposable local PostgreSQL database and local Supabase stack with installed psql, tbls and Supabase CLI.",
+      "status": "verified",
+      "role": "QA Engineer",
+      "files": {
+        "create": [
+          "cli/test/integration/database-docs.js"
+        ],
+        "modify": [
+          ".ace/packs/postgres/scripts/reference.js"
+        ]
+      },
+      "depends_on": [
+        "T007",
+        "T008",
+        "T009",
+        "T011",
+        "T014"
+      ],
+      "complexity": "M",
+      "acceptance_cmd": "node cli/test/integration/database-docs.js",
+      "attempts": 1,
+      "notes": "Runner fails clearly if tools/environment are missing; never silently skips. Create randomized parameterized fixture identifiers at runtime, apply comments/RLS/functions/policies, prove each violation fails and repairs pass. Verify tbls coverage, stable second generation, type drift and no connection-value leakage. No remote production access. Record versions and evidence.",
+      "result_file": "docs/progress/task_T017_result.md"
+    },
+    {
+      "id": "T018",
+      "name": "Run final verification and write handoff",
+      "objective": "Verify all acceptance results, full repository gate, structure and new pack Markdown; write walkthrough and session handoff after successful checks.",
+      "status": "verified",
+      "role": "QA Engineer",
+      "files": {
+        "create": [
+          "docs/planning/walkthrough_v2.8_db_docs_as_code.md"
+        ],
+        "modify": [
+          "docs/context/ACTIVE_CONTEXT.md"
+        ]
+      },
+      "depends_on": [
+        "T014",
+        "T016",
+        "T017"
+      ],
+      "complexity": "S",
+      "acceptance_cmd": "bash scripts/validate.sh && node cli/lib/validate-tasks.js docs/progress/tasks.json && bash .ace/scripts/verify.sh",
+      "attempts": 1,
+      "notes": "Full verify is the final command and must end VERIFY_RESULT=pass gate=all. Walkthrough includes actual integration evidence and three fresh-scaffold results; no assertion of database validation based only on mocks. Publication, deployment and remote pushes remain outside scope.",
+      "result_file": "docs/progress/task_T018_result.md"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-# ACE-Framework User Guide v2.7.0
+# ACE-Framework User Guide v2.8.0
 
 > A practical guide to using the AI-assisted Code Engineering Framework.
 
@@ -304,6 +304,7 @@ Skills are detailed procedures for specific tasks. They contain:
 | ------------------------ | ------------------------ |
 | `api-design/SKILL.md`          | Creating REST APIs       |
 | `database-operations/SKILL.md` | Schema changes, queries  |
+| `database-documentation/SKILL.md` | Generated schema reference and drift gates |
 | `migration-logic/SKILL.md`     | Data/schema migrations   |
 | `refactoring/SKILL.md`         | Improving code structure |
 | `root-cause-analysis/SKILL.md` | Investigating issues     |
@@ -371,6 +372,7 @@ Follow the pre-migration checklist and create a rollback plan."
 Some keywords automatically suggest skills:
 
 - "database", "migration", "schema" → `database-operations/SKILL.md`
+- "schema-docs", "data-dictionary" → `database-documentation/SKILL.md`
 - "api", "endpoint", "REST" → `api-design/SKILL.md`
 - "test", "coverage" → `testing-strategy/SKILL.md`
 - "bug", "issue", "incident" → `root-cause-analysis/SKILL.md`
@@ -391,6 +393,34 @@ Some keywords automatically suggest skills:
 - "a2a", "multi-agent", "handoff" → `a2a-communication/SKILL.md`
 - "mcp", "protocol", "server" → `mcp-implementation/SKILL.md`
 - "packet" → `phantom-link/SKILL.md`
+
+### Database documentation as code
+
+ACE separates generated physical reference from authored intent. Database
+comments maintained through migrations describe and classify objects; the
+generated reference under `docs/database/reference/` mirrors those facts.
+Use authored `docs/database/` documents for domain meaning, access-model
+intent and operational decisions, with links to generated pages.
+
+Choose an expansion pack at scaffold time:
+
+```bash
+npx create-ace-framework my-project --pack postgres
+npx create-ace-framework my-project --pack supabase
+```
+
+The Supabase option installs PostgreSQL too. Both scaffold modes pass their
+initial structural verification without database tools and leave `docs_cmd`
+empty. Follow the installed pack README to configure explicit schema scope,
+runtime-only credentials, required tools and the first committed baseline.
+Then set the flat `docs_cmd` key to the pack check script. The command runs in
+the full profile only; the fast profile remains a local structural/code check.
+
+Use a DOWN migration only when the migration tool supports reversal. For
+forward-only history, including Supabase CLI migrations, write and test a
+compensating migration and document data-recovery limits. Agents may use only
+local Supabase stacks or explicitly attested preview branches; production
+restore and key rotation remain human-operated runbook activities.
 
 ---
 
@@ -912,5 +942,5 @@ rate across features is the signal that the playbook is actually working.
 
 ---
 
-*ACE-Framework User Guide v2.7.0*
+*ACE-Framework User Guide v2.8.0*
 *Treat AI interactions as structured transactions, not casual conversations.*

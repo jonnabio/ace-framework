@@ -6,9 +6,9 @@
   // Globs and rules live here so those three can never drift apart.
   "globs": ["**/*.md"],
 
-  // .ace/packs/** is vendored third-party skills, not maintained in this
-  // repository. Reformatting it would diverge from upstream.
-  "ignores": [".ace/packs/**", "**/node_modules/**"],
+  // Third-party packs retain upstream formatting. First-party packs are linted.
+  // NotebookLM bundles concatenate complete documents; lint their sources instead.
+  "ignores": [".ace/packs/scientific/**", ".ace/packs/ai-research/**", "ace_notebooklm_export_part*.md", "**/node_modules/**"],
 
   "config": {
     "default": true,

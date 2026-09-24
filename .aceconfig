@@ -1,7 +1,7 @@
 # .aceconfig - ACE Framework Configuration
-# Version: 2.7.0
+# Version: 2.8.0
 
-version: "2.7.0"
+version: "2.8.0"
 project_name: "ACE Framework Project"
 
 # Expansion Packs (Modular config loading)
@@ -34,6 +34,8 @@ core_rules:
 # Task-to-skill mapping (auto-load relevant skill)
 skill_triggers:
   database: .ace/skills/database-operations/SKILL.md
+  schema-docs: .ace/skills/database-documentation/SKILL.md
+  data-dictionary: .ace/skills/database-documentation/SKILL.md
   api: .ace/skills/api-design/SKILL.md
   testing: .ace/skills/testing-strategy/SKILL.md
   migration: .ace/skills/migration-logic/SKILL.md
@@ -77,6 +79,7 @@ verify:
   test_cmd: "cd cli && npm test"
   lint_cmd: "npx --yes markdownlint-cli2"
   typecheck_cmd: ""
+  docs_cmd: ""
 
 # Validation hooks
 hooks:

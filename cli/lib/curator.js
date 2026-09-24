@@ -205,7 +205,7 @@ function promote(filePath, id, targetFile, opts) {
     '---',
     `> **Distilled Rule [${today}] - Category: ${rule.category}:**`,
     `> ${rule.lesson}`,
-    `> _(promoted from staging: ${rule.id}, hit_count ${rule.hit_count}, sources: ${rule.sources.map((s) => s.split(' ')[0]).join(', ')})_`,
+    `> *(promoted from staging: ${rule.id}, hit_count ${rule.hit_count}, sources: ${rule.sources.map((s) => s.split(' ')[0]).join(', ')})*`,
     '',
   ].join('\n');
   fs.appendFileSync(targetFile, appendix);
