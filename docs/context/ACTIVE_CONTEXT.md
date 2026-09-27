@@ -1,97 +1,39 @@
-# Active Context: Quality Gates — Backlog Closed
+# Active Context: Session Handoff
 
-## Session Metadata
+**Last Updated:** 2026-09-27
+**Session Focus:** v2.8 release status, candidate review, and repository synchronization
 
-- **Last Updated:** 2026-08-31
-- **Session ID:** quality-gates
-- **Active Role:** QA Engineer
-- **Mode:** VERIFICATION (complete)
+## Completed
 
----
-
-## Current Objective
-
-Close `docs/TODO-quality-gates.md`: nine findings, all of them variations on
-gates that exist but cannot fail. Done — the document is now a resolved
-record, and every CI step either fails on a real defect or declares itself
-advisory in its own name.
-
----
+- Confirmed `create-ace-framework@2.7.0` is the published package; v2.8 is not yet an active implementation or planned release.
+- Reviewed the v2.8 candidates: Parallel Generators, a live headless Claude Code CI session, and configurable Curator thresholds/expiry.
+- Fast-forwarded local `main` to the fetched `origin/main` tip (`52ef0fe`); it was 54 commits behind and is now synchronized.
+- Preserved the existing quality-gates handoff: its backlog is closed, and current CI runs Node 22, `npm ci`, the framework validation and verify gates, encoding/YAML checks, and internal-link validation.
+- No application source code or tests were changed in this session.
 
 ## Current State
 
-### Working
+- Published/current release is v2.7.0. No v2.8 plan, acceptance criteria, or implementation work exists yet.
+- The current `main` includes the quality-gates work, including CLI tests through `.ace/scripts/verify.sh`; live Claude Code execution remains untested in CI.
+- Retain unmerged remote feature branches `feature/azure-devops-skills` and `feature/database-docs-as-code` until their work is integrated or explicitly abandoned.
 
-- **Branch**: `TODO_quality-gates`, 11 commits, one per finding.
-  Based on `TODO_markdown-lint`, which is unpushed and has no PR yet.
-- **CI** (`validate.yml`) runs `scripts/validate.sh` and
-  `.ace/scripts/verify.sh` instead of keeping inline copies of what they do.
-  The test suite had never run in CI at all.
-- **Two new scripts**: `scripts/check-yaml.sh` (parses every YAML document
-  including `.aceconfig`, exits non-zero) and `scripts/check-encoding.sh`
-  (detects the double-encoded UTF-8 that has reached this repository twice).
-- **Verify gate** has a `--fast` profile (lint + typecheck, 1.2s) used by the
-  Stop hook; the full profile (4.3s) stays on CI and the loop runner.
-- **CLI** takes `--help`, `--version` and `--yes`, and errors on unknown flags
-  instead of discarding them.
-- **Release changelog** no longer silently falls back to "last 20 commits".
-- **Tests**: 112 passing, up from 88.
+## Next Steps
 
-### In Progress
+1. When v2.8 work begins, choose the release scope and create acceptance criteria plus an implementation plan before implementation.
+2. If Parallel Generators are selected, define queue locking, stale-claim recovery, workspace isolation, and merge/conflict behavior in an ADR before coding.
+3. If a live Claude Code CI test is selected, define credential handling, fixture isolation, cost/time limits, and trace-retention policy.
 
-- None.
+## Blockers/Issues
 
-### Blocked
+- No immediate blocker; v2.8 remains a set of candidates.
+- Parallel execution is incompatible with the current single-`in_progress` queue invariant without a lock/claim protocol and isolated workspaces.
+- A live headless runner test needs a protected credential strategy, isolated fixture, explicit time/cost limits, and a trace artifact policy.
+- Configurable Curator thresholds were intentionally deferred by ADR-003. Expiry already has a `--days` override; decide whether demand justifies config and define validation/precedence.
+- The CLI filters eligible rules for auto-promotion, but `curator.promote(..., { auto: true })` does not enforce the threshold itself. Add a focused regression test and enforce the policy centrally if Curator work resumes.
 
-- None.
+## Notes
 
----
-
-## Next Steps (human actions)
-
-1. [ ] Decide the merge order: `TODO_markdown-lint` first, or open this PR
-       against that branch. Both are local and unpushed.
-2. [ ] Push and open the PRs. Neither branch has been pushed; `git push` was
-       not run.
-3. [ ] After merge, confirm the scaffold path: `create-ace-framework` clones
-       upstream `main`, so `.markdownlint-cli2.jsonc` only reaches new
-       projects once the lint branch lands.
-
----
-
-## Active Constraints
-
-### Standards
-
-- `.ace/standards/harness-engineering.md` v2.7.0 — the verify gate is the
-  source of truth for code health, and an unconfigured gate must fail
-
-### Plan / ADRs
-
-- `docs/TODO-quality-gates.md` (resolved), `docs/TODO-markdown-lint.md`
-  (resolved)
-- ADR-002 (runner interface), ADR-003 (rule promotion) — untouched here
-
----
-
-## Session Notes
-
-- Every gate was verified to fail, not only to pass: an invalid YAML file, an
-  injected mojibake sequence, a deleted required file, a failing `lint_cmd`,
-  and a link to a nonexistent document each turn their step non-zero. A gate
-  proven only in the green direction is the exact defect this branch existed
-  to remove.
-- The workflow was executed rather than read: a clean tree via `git archive`,
-  its `run:` steps extracted from the YAML and run in `node:22-bookworm`, and
-  the link steps run from the `lycheeverse/lychee` image. Job exit 0.
-- Finding 3 turned out to be half-done already — the encoding repair had been
-  pushed since the audit. Confirmed by scaffolding a project and running the
-  new check against it, rather than assuming either way.
-
----
-
-## Context Links
-
-- **Backlog:** docs/TODO-quality-gates.md (resolved)
-- **Prior branch:** docs/TODO-markdown-lint.md (resolved)
-- **Spec:** ACE-SPEC.md §13 (Loop Engineering)
+- CI currently runs the CLI tests through the configured verify gate; the earlier observation that tests were absent from CI was made before synchronizing with current `main` and is superseded.
+- Relevant references: `.github/workflows/validate.yml`, `docs/adr/ADR-002-runner-adapter-interface.md`, `docs/adr/ADR-003-rule-promotion-policy.md`, `ACE-SPEC.md` sections 10 and 13, and `docs/planning/v2.7.0_loop_engineering_walkthrough.md`.
+- Validation: markdown lint passed; with Git Bash on PATH, the CLI suite had 123 passing tests and one failure in the existing CRLF-preservation test for `cli/lib/scaffold-config.js`. The implementation matches `origin/main`; that unrelated behavior was not changed.
+- The full `.ace/scripts/verify.sh` entry point could not run directly because `/bin/bash` is unavailable in this Windows environment.
