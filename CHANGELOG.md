@@ -2,6 +2,16 @@
 
 All notable changes to the ACE Framework will be documented in this file.
 
+## [Unreleased]
+
+### Added — Azure DevOps skills
+
+- `.ace/skills/az-devops-setup/`: discovers the live organization, project, area path, work item types, required fields and per-type states, then writes `azure-devops.config.json`, `.mcp.json` and `docs/AZURE_DEVOPS_MCP_SETUP.md` from the bundled templates. Every value is discovered from the API, never guessed; no `<PLACEHOLDER>` may survive into a written file and no PAT is ever written.
+- `.ace/skills/az-read-work-item/`: read-only board access — filtered listing and full single-item fetch with relations and HTML→markdown conversion.
+- `.ace/skills/az-create-work-item/`: structured interview plus a nine-check validation gate (title, why, boundaries and required fields are blocking) before any create call.
+- `.ace/skills/az-take-work-item/`: assigns to the signed-in Azure CLI user, transitions to the type's own in-progress state, branches from `origin/<defaultBranch>` and drafts a PRD from the item.
+- Registered under `skill_triggers` in `.aceconfig` (`azure`, `ado`, `workitem`, `backlog`, `board`) and checked by `scripts/validate.sh`.
+
 ## [v2.7.0] - 2026-07-05
 
 ### Added — The Loop Engineering Update

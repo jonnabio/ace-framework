@@ -1,0 +1,48 @@
+{
+  "$comment": "Azure DevOps coordinates for this project. Read by skills, scripts and tooling so org, project, area path and process constants are not hardcoded in each one. Contains no secrets - authentication is via 'az login'. Every <PLACEHOLDER> below must be replaced with a value discovered from the live organization, never guessed. See docs/AZURE_DEVOPS_MCP_SETUP.md.",
+
+  "organization": "https://dev.azure.com/<ORG_NAME>",
+  "organizationName": "<ORG_NAME>",
+  "project": "<PROJECT_NAME>",
+  "projectId": "<PROJECT_GUID>",
+  "repository": "<REPO_NAME>",
+  "areaPath": "<PROJECT_NAME>\\<AREA_PATH>",
+  "iterationPath": "<PROJECT_NAME>",
+  "defaultBranch": "<DEFAULT_BRANCH>",
+
+  "apiVersion": "7.1",
+  "azureDevOpsResourceId": "499b84ac-1321-427f-aa17-267ca6975798",
+
+  "paths": {
+    "$comment": "Where the read/take skills write derived documents. Leave prdDir empty to disable PRD drafting in az-take-work-item.",
+    "prdDir": "docs/requirements/",
+    "prdTemplate": "docs/requirements/PRD-template.md"
+  },
+
+  "workItems": {
+    "defaultType": "<DEFAULT_WORK_ITEM_TYPE>",
+    "requiredFields": [
+      "System.Title"
+    ],
+    "picklists": {
+      "$comment": "One entry per picklist field the process template enforces, with its allowed values read from the process API. Delete this comment key once filled."
+    },
+    "parentRelation": "System.LinkTypes.Hierarchy-Reverse",
+
+    "states": {
+      "$comment": "States are per work item type - workflows do not share a vocabulary. A state valid on one type is rejected on another, so always pick the list matching the type being written. Fill one block per type in use, from 'az boards work-item ... ' / the process API, never from memory.",
+
+      "<WORK_ITEM_TYPE>": {
+        "default": "<INITIAL_STATE>",
+        "order": [],
+        "open": [],
+        "closed": []
+      }
+    }
+  },
+
+  "wiql": {
+    "$comment": "The CONTAINS operator is rejected on area-path fields - use UNDER. Do not substitute the @project macro here: it resolves through the REST/MCP path but returns zero rows under 'az boards query', so the project name is spelled out.",
+    "byArea": "SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = '<PROJECT_NAME>' AND [System.AreaPath] UNDER '<PROJECT_NAME>\\<AREA_PATH>'"
+  }
+}
