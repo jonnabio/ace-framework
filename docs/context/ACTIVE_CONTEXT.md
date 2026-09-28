@@ -1,97 +1,42 @@
-# Active Context: Quality Gates — Backlog Closed
+# Active Context: Session Handoff
 
-## Session Metadata
+**Last Updated:** 2026-09-27
+**Session Focus:** Repository synchronization and review of Azure DevOps skills PR #6
 
-- **Last Updated:** 2026-08-31
-- **Session ID:** quality-gates
-- **Active Role:** QA Engineer
-- **Mode:** VERIFICATION (complete)
+## Completed
 
----
-
-## Current Objective
-
-Close `docs/TODO-quality-gates.md`: nine findings, all of them variations on
-gates that exist but cannot fail. Done — the document is now a resolved
-record, and every CI step either fails on a real defect or declares itself
-advisory in its own name.
-
----
+- Confirmed v2.7.0 remains the published package version; v2.8 is not an active implementation.
+- Reviewed the v2.8 candidates: Parallel Generators, a live Claude Code CI session, and configurable Curator thresholds/expiry.
+- Updated and pushed the handoff on `main` as commit `d71a2eb`, fast-forwarding local `main` to `origin/main` first.
+- Removed the merged `feature/v2.7-loop-engineering-m1` branch locally and remotely; retained unmerged work branches.
+- Reviewed PR #6 (`feat(skills): add Azure DevOps board skills`): its page reported 1/1 checks passing, and a local merge-tree check found no conflicts with current `main`.
+- No PR approval or merge was submitted, and no PR implementation files were changed during review.
 
 ## Current State
 
-### Working
+- Current checkout: `feature/azure-devops-skills`, tracking the PR branch; latest commit `53dabe7` fixes merging into an existing `.mcp.json`.
+- PR #6 remains open and requests review from `jonnabio`.
+- One review issue remains: `.aceconfig` adds `azure`, `ado`, `workitem`, `backlog`, and `board` triggers but omits `take`/`assign`; `CLAUDE.md` includes those terms for `az-take-work-item`, leaving shared routing incomplete.
+- GitHub was signed out in the browser and no authenticated `gh` CLI was available, so formal approval and merging were not possible.
+- Local validation performed for PR review: `git diff --check` passed; merge-tree showed no conflict. The PR page reported its single check passing. No local PR test suite was run.
 
-- **Branch**: `TODO_quality-gates`, 11 commits, one per finding.
-  Based on `TODO_markdown-lint`, which is unpushed and has no PR yet.
-- **CI** (`validate.yml`) runs `scripts/validate.sh` and
-  `.ace/scripts/verify.sh` instead of keeping inline copies of what they do.
-  The test suite had never run in CI at all.
-- **Two new scripts**: `scripts/check-yaml.sh` (parses every YAML document
-  including `.aceconfig`, exits non-zero) and `scripts/check-encoding.sh`
-  (detects the double-encoded UTF-8 that has reached this repository twice).
-- **Verify gate** has a `--fast` profile (lint + typecheck, 1.2s) used by the
-  Stop hook; the full profile (4.3s) stays on CI and the loop runner.
-- **CLI** takes `--help`, `--version` and `--yes`, and errors on unknown flags
-  instead of discarding them.
-- **Release changelog** no longer silently falls back to "last 20 commits".
-- **Tests**: 112 passing, up from 88.
+## Next Steps
 
-### In Progress
+1. Add `take` and `assign` mappings in `.aceconfig` to `.ace/skills/az-take-work-item/SKILL.md` and push the update to PR #6.
+2. Rerun the PR validation checks and confirm the updated PR is still mergeable.
+3. Authenticate to GitHub, submit the requested review, and merge PR #6 only after the routing fix and checks are complete.
+4. After merging, sync local `main` and remove the merged PR branch if it is no longer needed.
 
-- None.
+## Blockers/Issues
 
-### Blocked
+- PR approval/merge is blocked by the missing authenticated GitHub session; do not ask the user to expose credentials in chat.
+- Shared ACE skill routing for take/assign is incomplete pending the PR update.
+- Parallel Generators still require a lock/claim, stale-lock recovery, isolated-workspace, and merge/conflict design before implementation.
+- A live Claude Code CI test still needs credential handling, fixture isolation, cost/time limits, and trace-retention policy.
+- Configurable Curator thresholds were intentionally deferred by ADR-003; revisit only if demonstrated demand justifies configuration.
 
-- None.
+## Notes
 
----
-
-## Next Steps (human actions)
-
-1. [ ] Decide the merge order: `TODO_markdown-lint` first, or open this PR
-       against that branch. Both are local and unpushed.
-2. [ ] Push and open the PRs. Neither branch has been pushed; `git push` was
-       not run.
-3. [ ] After merge, confirm the scaffold path: `create-ace-framework` clones
-       upstream `main`, so `.markdownlint-cli2.jsonc` only reaches new
-       projects once the lint branch lands.
-
----
-
-## Active Constraints
-
-### Standards
-
-- `.ace/standards/harness-engineering.md` v2.7.0 — the verify gate is the
-  source of truth for code health, and an unconfigured gate must fail
-
-### Plan / ADRs
-
-- `docs/TODO-quality-gates.md` (resolved), `docs/TODO-markdown-lint.md`
-  (resolved)
-- ADR-002 (runner interface), ADR-003 (rule promotion) — untouched here
-
----
-
-## Session Notes
-
-- Every gate was verified to fail, not only to pass: an invalid YAML file, an
-  injected mojibake sequence, a deleted required file, a failing `lint_cmd`,
-  and a link to a nonexistent document each turn their step non-zero. A gate
-  proven only in the green direction is the exact defect this branch existed
-  to remove.
-- The workflow was executed rather than read: a clean tree via `git archive`,
-  its `run:` steps extracted from the YAML and run in `node:22-bookworm`, and
-  the link steps run from the `lycheeverse/lychee` image. Job exit 0.
-- Finding 3 turned out to be half-done already — the encoding repair had been
-  pushed since the audit. Confirmed by scaffolding a project and running the
-  new check against it, rather than assuming either way.
-
----
-
-## Context Links
-
-- **Backlog:** docs/TODO-quality-gates.md (resolved)
-- **Prior branch:** docs/TODO-markdown-lint.md (resolved)
-- **Spec:** ACE-SPEC.md §13 (Loop Engineering)
+- The prior main-branch sync commit is `d71a2eb`; the `main` pointer was pushed to `origin/main` before this checkout changed to the PR branch.
+- A previous Windows validation run found 123 CLI tests passing and one existing CRLF-preservation test failing in `cli/test/scaffold-config.test.js`; Git Bash was required for shell-based tests. No source fix was made.
+- References: `.aceconfig`, `CLAUDE.md`, `.github/workflows/validate.yml`, `docs/adr/ADR-002-runner-adapter-interface.md`, `docs/adr/ADR-003-rule-promotion-policy.md`, and `docs/planning/v2.7.0_loop_engineering_walkthrough.md`.
